@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserDAO">
+
+	<insert id="joinUser">
+		INSERT INTO users
+		values(#{user_id},#{user_name},#{user_pw},#{user_addr1},
+		#{user_addr2},#{user_addr3},#{user_addr4},#{user_tel},
+		#{user_email},default,default,#{user_cate},default)
+	</insert>
+	<update id="updatePW">
+		UPDATE USERS set user_pw = #{user_pw} where user_id =
+		#{user_id}
+	</update>
+	<select id="getUser" resultType="users">
+		SELECT * FROM users
+		WHERE
+		user_id=#{user_id} and user_pw=#{user_pw}
+	</select>
+
+	<select id="kakaoUser" resultType="users">
+		SELECT * FROM users
+		WHERE
+		user_email = #{user_email}
+	</select>
+	<select id="viewUser" resultType="users">
+		SELECT * FROM users WHERE
+		user_id = #{user_id}
+	</select>
+
+	<select id="viewMail" resultType="users">
+		SELECT * FROM users WHERE
+		user_email = #{user_email}
+	</select>
+	<select id="getUserList" resultType="users">
+		SELECT * FROM users where
+		user_id
+		like concat('%',?,'%') order by user_id
+	</select>
+
+	<select id="findUser" resultType="users">
+		SELECT * FROM users where
+		user_tel = #{user_tel}
+	</select>
+
+
+
+
+
+
+	<!-- 소연누나부분 -->
+	<select id="getUserSY" resultType="users">
+		SELECT * FROM users
+		WHERE
+		user_id=#{user_id}
+	</select>
+
+	<select id="getUserListSY" resultType="users">
+		SELECT * FROM users
+		WHERE
+		1=1
+		ORDER BY user_date DESC
+	</select>
+
+	<select id="getUserListPostSearch" resultType="users">
+		SELECT * FROM users
+		WHERE 1=1
+		<if test="user_condition == 'user_id' ">AND USER_ID LIKE CONCAT('%', #{user_search}, '%')</if>
+		<if test="user_condition == 'user_name' ">AND USER_NAME LIKE CONCAT('%', #{user_search}, '%')</if>
+	</select>
+
+
+
+
+
+	<!-- 상현이부분 -->
+	<select id="pointSelect" resultType="_int">
+		select user_point from users
+		where user_id=#{user_id}
+	</select>
+
+	<update id="updateUser">
+		update users
+		set user_pw=#{user_pw},
+		user_addr1=#{user_addr1},
+		user_addr2=#{user_addr2},
+		user_addr3=#{user_addr3},
+		user_addr4=#{user_addr4}
+		where
+		user_id=#{user_id}
+	</update>
+
+	<select id="selectName" resultType="users">
+		select * from users
+		where
+		user_id=#{user_id}
+	</select>
+
+	<update id="pointTake">
+		update users set user_point = 0 where user_id =
+		#{user_id}
+	</update>
+
+	<update id="deleteUser">
+		update users set user_id = concat(#{user_id},
+		'(탈퇴회원)'), user_role = 4 where user_id = #{user_id}
+	</update>
+
+
+</mapper>
+
+

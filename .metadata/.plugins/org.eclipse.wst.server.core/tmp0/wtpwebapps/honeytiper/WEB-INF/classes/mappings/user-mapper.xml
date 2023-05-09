@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserDAO">
+
+	<insert id="joinUser">
+		INSERT INTO users values(#{user_id},#{user_name},#{user_pw},#{user_addr1}, #{user_addr2},#{user_addr3},#{user_addr4},#{user_tel},
+		#{user_email},default,default,#{user_cate},default)
+	</insert>
+	<update id="updatePW">
+		UPDATE USERS set user_pw = #{user_pw} where user_id = #{user_id}
+	</update>
+	<select id="getUser" resultType="users">
+		SELECT * FROM users
+		WHERE
+		user_id=#{user_id} and user_pw=#{user_pw}
+	</select>
+	
+	<select id="kakaoUser" resultType="users">
+		SELECT * FROM users
+		WHERE
+		user_email = #{user_email}
+	</select>
+	<select id="viewUser" resultType="users">
+		SELECT * FROM users WHERE user_id = #{user_id}
+	</select>
+	
+	<select id="viewMail" resultType="users">
+		SELECT * FROM users WHERE user_email = #{user_email}
+	</select>
+	<select id="getUserList" resultType="users">
+		SELECT * FROM users where user_id
+		like concat('%',?,'%') order by user_id
+	</select>
+	
+	<select id="findUser" resultType="users">
+		SELECT * FROM users where user_tel = #{user_tel} and user_name=#{user_name}
+	</select>
+	
+	<select id="findUserPW" resultType="users">
+		SELECT * FROM users where user_tel = #{user_tel} and user_id=#{user_id}
+	</select>
+	
+	
+	
+	
+	
+	
+<!-- 	소연누나부분 -->
+	<select id="getUserSY" resultType="users">
+		SELECT * FROM users
+		WHERE
+		user_id=#{user_id}
+	</select>
+
+	<select id="getUserListSY" resultType="users">
+		SELECT * FROM users
+		WHERE 1=1
+		ORDER BY user_date DESC
+	</select>
+
+<select id="getUserListPostSearch" resultType="users">
+		SELECT * FROM users
+		WHERE 1=1
+		<if test="user_condition == 'user_id' ">AND USER_ID LIKE CONCAT('%', #{user_search}, '%')</if>
+		<if test="user_condition == 'user_name' ">AND USER_NAME LIKE CONCAT('%', #{user_search}, '%')</if>
+	</select>
+	
+	
+	
+	
+	
+<!-- 	상현이부분 -->
+		<select id="pointSelect" resultType="_int">
+		select user_point from users
+		where user_id=#{user_id}
+	</select>
+	
+		<update id="updateUser">
+		update users
+		set user_name = #{user_name},
+		user_pw=#{user_pw}, user_addr1=#{user_addr1},
+		user_addr2=#{user_addr2}, user_addr3=#{user_addr3},
+		user_addr4=#{user_addr4}, user_tel=#{user_tel},
+		user_email=#{user_email}
+		where user_id=#{user_id}
+	</update>
+	
+		<select id="selectName" resultType="users">
+		select * from users
+		where
+		user_id=#{user_id}
+	</select>
+	
+		<update id="pointTake">
+		update users set user_point = 0 where user_id =
+		#{user_id}
+	</update>
+	
+		<update id="deleteUser">
+		update users set user_id = concat(#{user_id},
+		'(탈퇴회원)'), user_role = 4 where user_id = #{user_id}
+	</update>
+	
+	
+	<!-- ========================================== -->
+<!-- 정성현 : 블랙리스트, 승급관리===================== -->
+
+<select id="getPotentialTiperList" resultType="users">
+		SELECT a.USER_ID,
+		b.TIPER_IMG, a.USER_NAME, b.TIPER_DATE, b.TIPER_CATE1 FROM USERS a
+		INNER JOIN TIPER b ON a.USER_ID = b.TIPER_USER_ID WHERE TIPER_AGREE=0;
+	</select>
+
+	<select id="searchPotentialTiperList" resultType="users">
+		SELECT a.USER_ID, b.TIPER_IMG, a.USER_NAME, b.TIPER_DATE,
+		b.TIPER_CATE1 FROM USERS a INNER JOIN TIPER b ON a.USER_ID =
+		b.TIPER_USER_ID WHERE TIPER_AGREE=0
+		<if test="search_condition == 'user_id' "> AND USER_ID LIKE CONCAT('%', #{search_keyword}, '%')</if>
+		<if test="search_condition == 'user_name' "> AND USER_NAME LIKE CONCAT('%', #{search_keyword}, '%')
+		</if>
+	</select>
+
+	<update id="updateTiperAgree">
+		UPDATE TIPER a INNER JOIN USERS b ON a.TIPER_USER_ID
+		= b.USER_ID SET a.TIPER_AGREE = 1 WHERE b.USER_ID = #{user_id};
+	</update>
+
+	<update id="updateTiperReject">
+		UPDATE TIPER a INNER JOIN USERS b ON a.TIPER_USER_ID
+		= b.USER_ID SET a.TIPER_AGREE = 2 WHERE b.USER_ID = #{user_id};
+	</update>
+
+	<select id="getReportList" resultType="report">
+		SELECT R.*, (SELECT
+		U.USER_ID FROM users U WHERE U.USER_ID = (SELECT T.TIPER_USER_ID FROM
+		TIPER T WHERE T.TIPER_CODE = (SELECT L.LESSON_TIPER_CODE FROM LESSON L
+		WHERE L.LESSON_NUM = R.REPORT_LESSON_NUM))) AS
+		"REPORT_REPORTED_ID",(SELECT
+		U.USER_NAME FROM users U WHERE U.USER_ID =
+		(SELECT T.TIPER_USER_ID FROM
+		TIPER T WHERE T.TIPER_CODE = (SELECT
+		L.LESSON_TIPER_CODE FROM LESSON L
+		WHERE L.LESSON_NUM =
+		R.REPORT_LESSON_NUM))) AS "REPORT_REPORTED_NAME" FROM
+		report R WHERE
+		R.REPORT_STATUS = 0;
+	</select>
+
+	<update id="updateReportStatus">
+		UPDATE REPORT SET REPORT_STATUS = 2 WHERE REPORT_NUM
+		= #{report_num};
+	</update>
+
+	<update id="updateReportStatus01">
+		UPDATE REPORT SET REPORT_STATUS = 1 WHERE REPORT_NUM
+		= #{report_num};
+	</update>
+
+	<update id="updateReportStatus23">
+		UPDATE REPORT SET REPORT_STATUS = 3 WHERE REPORT_NUM
+		= #{report_num};
+	</update>
+
+	<update id="updateReportUserRole03">
+		UPDATE USERS SET USER_ROLE = 3 WHERE USER_ID =
+		#{user_id}
+	</update>
+
+	<update id="updateReportUserRole30">
+		UPDATE USERS SET USER_ROLE = 0 WHERE USER_ID =
+		#{user_id}
+	</update>
+
+	<update id="updateLessonOnoff">
+		UPDATE LESSON SET LESSON_ONOFF = 0 WHERE
+		LESSON_TIPER_CODE = (SELECT T.TIPER_CODE FROM tiper T INNER JOIN
+		lesson L ON T.TIPER_CODE=L.LESSON_TIPER_CODE WHERE L.LESSON_NUM =
+		#{report_lesson_num});
+	</update>
+
+	<select id="checkUserRole" resultType="_int">
+		SELECT USER_ROLE FROM
+		USERS WHERE USER_ID=#{user_id}
+	</select>
+
+	<select id="getBlackList" resultType="users">
+		SELECT U.USER_NAME,
+		U.USER_ID, R.REPORT_NUM, R.REPORT_CONT, R.REPORT_DATE,
+		R.REPORT_LESSON_NUM FROM
+		users U INNER JOIN tiper
+		T ON U.USER_ID =
+		T.TIPER_USER_ID INNER JOIN
+		lesson L ON
+		L.LESSON_TIPER_CODE=T.TIPER_CODE
+		INNER JOIN report R ON
+		R.REPORT_LESSON_NUM = L.LESSON_NUM WHERE
+		R.REPORT_STATUS=2;
+	</select>
+
+	<select id="searchBlackList" resultType="users">
+			SELECT U.USER_NAME,
+		U.USER_ID, R.REPORT_NUM, R.REPORT_CONT, R.REPORT_DATE,
+		R.REPORT_LESSON_NUM FROM
+		users U INNER JOIN tiper
+		T ON U.USER_ID =
+		T.TIPER_USER_ID INNER JOIN
+		lesson L ON
+		L.LESSON_TIPER_CODE=T.TIPER_CODE
+		INNER JOIN report R ON
+		R.REPORT_LESSON_NUM = L.LESSON_NUM WHERE
+		R.REPORT_STATUS=2
+		<if test="search_condition == 'user_id' "> AND USER_ID LIKE CONCAT('%', #{search_keyword}, '%')</if>
+		<if test="search_condition == 'user_name' "> AND USER_NAME LIKE CONCAT('%', #{search_keyword}, '%')
+		</if>
+	</select>
+	
+</mapper>
+
+

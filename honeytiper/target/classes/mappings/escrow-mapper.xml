@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EscrowDAO">
+
+	<resultMap type="com.ggul.zip.escrow.EscrowVO" id="escrowMap">
+		<result property="escrow_user_id" column="escrow_user_id"/>
+		<result property="escrow_tiper_code" column="escrow_tiper_code"/>
+		<result property="escrow_lesson_num" column="escrow_lesson_num"/>
+		<result property="escrow_status" column="escrow_status"/>
+		<result property="escrow_price" column="escrow_price"/>
+		<result property="escrow_start" column="escrow_start"/>
+		<result property="escrow_end" column="escrow_end"/>
+		<result property="tiper_user_id" column="tiper_user_id"/>
+    <result property="lesson_title" column="lesson_title"/>
+	</resultMap>
+
+	<select id="getEscrowList" parameterType="escrow" resultMap="escrowMap">
+    <![CDATA[
+    SELECT escrow.*, tiper.tiper_user_id AS tiper_user_id, 
+       lesson.lesson_title AS lesson_title
+FROM escrow
+LEFT JOIN tiper ON escrow.escrow_tiper_code = tiper.tiper_code
+LEFT JOIN lesson ON escrow.escrow_lesson_num = lesson.lesson_num
+WHERE 1 = 1
+    ]]>
+  <if test="startDate != null and startDate != ''">
+        <![CDATA[ AND escrow_start >= ]]>#{startDate}
+    </if>
+    <if test="endDate != null and endDate != ''">
+        <![CDATA[ AND escrow_start <= ]]>DATE_ADD(#{endDate}, INTERVAL 1 DAY)
+    </if>
+    ORDER BY escrow_start DESC
+</select>
+
+
+<select id="getEscrowListByStatus" parameterType="escrow" resultMap="escrowMap">
+  <![CDATA[
+ SELECT escrow.*, tiper.tiper_user_id AS tiper_user_id, lesson.lesson_title AS lesson_title
+FROM escrow
+LEFT JOIN tiper ON escrow.escrow_tiper_code = tiper.tiper_code
+LEFT JOIN lesson ON escrow.escrow_lesson_num = lesson.lesson_num
+WHERE escrow_status =#{escrow_status}
+ORDER BY escrow_start DESC;
+  ]]>
+</select>
+
+</mapper>
