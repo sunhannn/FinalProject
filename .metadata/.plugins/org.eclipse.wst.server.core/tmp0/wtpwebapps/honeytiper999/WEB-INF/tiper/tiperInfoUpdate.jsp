@@ -41,6 +41,12 @@ body {
 	#tipup_td2 {
 		
 	}
+	#tipup_info1{
+	border: 0;
+	width: 100%;
+	
+	}
+	
 	#tipup_info1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
@@ -78,6 +84,11 @@ body {
 		border: 0;
 		width: 120px;
 		height: 30px;
+	}
+	#tiperpreview {
+		width: 180px;
+		height: 180px;
+		border-radius: 10%;
 	}
 }
 
@@ -147,6 +158,11 @@ body {
 		width: 200px;
 		height: 55px;
 	}
+	#tiperpreview {
+		width: 240px;
+		height: 240px;
+		border-radius: 10%;
+	}
 }
 </style>
 </head>
@@ -163,7 +179,9 @@ body {
 
 				<tr id="tipup_tr1">
 					<td id="tipup_td1"><input type="file" name="tiper_img"
-						placeholder="강사에 대한 img 수정" accept=".jpg,.jpeg,.png" id="tipimg"></td>
+						placeholder="강사에 대한 img 수정" accept=".jpg,.jpeg,.png" id="tipimg"
+						onchange="previewImage(event)"> <img id="tiperpreview"
+						src="#" alt="강의사진을 올려주세요"></td>
 
 					<td id="tipup_td2"><textarea name="tiper_info"
 							placeholder="TIPer소개를 수정해 주세요 (경력, 수상내역, 취득자격증,등등..)"
@@ -221,6 +239,22 @@ body {
 		   });
 		});
 
+	
+	function previewImage(event) {
+		var reader = new FileReader();
+		reader.onload = function() {
+			var output = document.getElementById('tiperpreview');
+			output.src = reader.result;
+		}
+		reader.readAsDataURL(event.target.files[0]);
+		// 파일 선택 후 input 요소 숨기기
+		var input = document.getElementById('tipimg');
+		input.style.display = 'none';
+		
+	}
+	
+	
+	
 </script>
 </body>
 </html>

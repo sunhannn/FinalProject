@@ -85,6 +85,7 @@ body {
 		border-radius: 10%;
 		width: 170px;
 		height: 40px;
+		    margin-left: 160px;
 	}
 }
 
@@ -161,6 +162,7 @@ body {
 		border-radius: 10%;
 		width: 250px;
 		height: 50px;
+		margin-left: 600px;
 	}
 }
 </style>

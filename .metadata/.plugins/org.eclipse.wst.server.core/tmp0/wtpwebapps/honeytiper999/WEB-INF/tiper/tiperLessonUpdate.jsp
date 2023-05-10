@@ -230,7 +230,18 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		   });
 		});
 	
-	
+	function previewImage(event) {
+		var reader = new FileReader();
+		reader.onload = function() {
+			var output = document.getElementById('tiperpreview');
+			output.src = reader.result;
+		}
+		reader.readAsDataURL(event.target.files[0]);
+		// 파일 선택 후 input 요소 숨기기
+		var input = document.getElementById('tipimg');
+		input.style.display = 'none';
+		
+	}
 	
 	
 	

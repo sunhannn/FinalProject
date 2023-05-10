@@ -2,9 +2,9 @@ package com.ggul.zip.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -171,11 +171,9 @@ public class TiperController {
 	}
 
 	// 강사신청 액션
-	@ResponseBody
 	@RequestMapping(value = "/tiperSignUp")
 	public String tiperSignUp(HttpServletRequest req, HttpServletResponse res, HttpSession session, UserVO vo,
 			TiperVO tiperVO) {
-		String msg = "";
 		String userId = (String) session.getAttribute("user_id");
 		tiperVO.setTiper_user_id(userId);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -185,8 +183,7 @@ public class TiperController {
 		tiperVO.setTiper_date(strToday);
 		System.out.println(tiperVO.getTiper_img());
 		tiperService.insertTiper(tiperVO);
-		msg = "<script>location.href='userMyPageGo';</script>";
-		return msg;
+		return "redirect:userMyPageGo";
 	}
 
 	// 강의 정보 수정 액션

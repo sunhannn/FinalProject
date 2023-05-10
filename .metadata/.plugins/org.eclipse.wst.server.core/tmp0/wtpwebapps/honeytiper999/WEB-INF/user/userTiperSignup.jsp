@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+int check = (int) request.getAttribute("tiperCheck");
+
+if (check == 1) {
+	out.println("<script>");
+	out.println("alert('승인 대기중입니다!')");
+	out.println("location.href='../index';");
+	out.println("</script>");
+
+}
+%>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -29,13 +41,18 @@ body {
 	#sin_sub2 {
 		font-size: 20px;
 	}
+	#sin_div1 {
+		width: 200px;
+		height: 200px;
+	}
 	#sin_img1 {
 		width: 80px;
 		height: 80px;
 	}
 	#sin_info1 {
 		width: 95%;
-		height:
+		border: 0;
+		
 	}
 	#sin_info1:focus {
 		border: 3px solid #FFD400;
@@ -63,6 +80,11 @@ body {
 	#div_btn1 {
 		text-align: center;
 	}
+	
+	#tiperUppreview {
+		width: 200px;
+		height: 200px;
+	}
 }
 
 @media ( min-width : 769px) {
@@ -80,6 +102,10 @@ body {
 	#sin_img1 {
 		width: 300px;
 		height: 80px;
+	}
+	#sin_div1 {
+		width: 300px;
+		height: 300px;
 	}
 	#sin_img1 {
 		width: 300px;
@@ -131,6 +157,10 @@ body {
 		border: 3px solid #FFD400;
 		outline: none;
 	}
+	#tiperUppreview {
+		width: 250px;
+		height: 250px;
+	}
 }
 </style>
 </head>
@@ -143,9 +173,11 @@ body {
 	</div>
 	<form action="tiperSignUp" enctype="multipart/form-data">
 		<div class="container">
-			<div id="sin_img1">
+			<div id="sin_div1">
 				<input type="file" id="sin_img1" accept=".jpg,.jpeg,.png"
-					placeholder="눌러서 강사에 대한 img등록" name="tiper_img" required="required">
+					placeholder="눌러서 강사에 대한 img등록" name="tiper_img" required="required"
+					onchange="previewImage(event)"> <img id="tiperUppreview"
+					src="#" alt="강의사진을 올려주세요">
 			</div>
 
 
@@ -242,6 +274,22 @@ body {
       });
    });
 });
+	
+	function previewImage(event) {
+		var reader = new FileReader();
+		reader.onload = function() {
+			var output = document.getElementById('tiperUppreview');
+			output.src = reader.result;
+		}
+		reader.readAsDataURL(event.target.files[0]);
+		// 파일 선택 후 input 요소 숨기기
+		var input = document.getElementById('sin_img1');
+		input.style.display = 'none';
+		
+	}
+	
+	
+	
 	</script>
 
 </body>
