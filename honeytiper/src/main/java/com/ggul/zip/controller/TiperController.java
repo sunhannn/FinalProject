@@ -82,19 +82,18 @@ public class TiperController {
 
 	}
 
-	// 강사 정보 수정 페이지 이동
+	// 강사 정보 수정 페이지 이동(수정함)
 	@RequestMapping(value = "/tiperUpdateGo")
-	public String tiperUpdateGo(HttpServletRequest request, HttpSession session, LessonVO lessonVO, TiperVO tiperVO,
-			UserVO vo) {
+	public String tiperUpdateGo(Model model, HttpSession session, LessonVO lessonVO, TiperVO tiperVO, UserVO vo) {
 		String userId = (String) session.getAttribute("user_id");
 		vo.setUser_id(userId);
 		vo = userService.selectName(vo);
-		System.out.println(vo.getUser_name());
-		request.setAttribute("user_name", vo.getUser_name());
+		model.addAttribute("user_name", vo.getUser_name());
 		tiperVO.setTiper_user_id(userId);
 		tiperVO = tiperService.selectTiperInfo(tiperVO);
+		model.addAttribute("tiperVO", tiperVO);
 		lessonVO.setLesson_tiper_code(tiperVO.getTiper_code());
-		request.setAttribute("lessonTiper", lessonService.selectLessonName(lessonVO));
+		model.addAttribute("lessonTiper", lessonService.selectLessonName(lessonVO));
 		return "tiper/tiperInfoUpdate";
 
 	}

@@ -37,6 +37,7 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		width: 300px;
 		height: 40px;
 		margin-left: 2px;
+		border: 0;
 	}
 	#lesup_input1:focus {
 		border: 3px solid #FFD400;
@@ -54,6 +55,8 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 	#lesup_info1 {
 		margin-left: 2px;
 		width: 350px;
+		border: 0;
+		resize: none;
 	}
 	#lesup_info1:focus {
 		border: 3px solid #FFD400;
@@ -78,9 +81,19 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 	#lesup_btn1 {
 		background-color: #FFD400;
 		border: 0;
-		border-radius: 10%;
+		border-radius: 10px;
 		width: 200px;
 		height: 40px;
+		color: white;
+	}
+	input[type=file]::file-selector-button {
+		width: 150px;
+		height: 30px;
+		background: #FFD400;
+		border: 0;
+		border-radius: 10px;
+		cursor: pointer;
+		color: white;
 	}
 }
 
@@ -101,9 +114,10 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		text-decoration-color: #FFD400;
 	}
 	#lesup_input1 {
-		width: 400px;
+		width: 450px;
 		height: 50px;
 		margin-left: 2px;
+		border: 0;
 	}
 	#lesup_input1:focus {
 		border: 3px solid #FFD400;
@@ -121,6 +135,8 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 	#lesup_info1 {
 		margin-left: 2px;
 		width: 450px;
+		resize: none;
+		border: 0;
 	}
 	#lesup_info1:focus {
 		border: 3px solid #FFD400;
@@ -145,9 +161,19 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 	#lesup_btn1 {
 		background-color: #FFD400;
 		border: 0;
-		border-radius: 10%;
+		border-radius: 10px;
 		width: 200px;
 		height: 40px;
+		color: white;
+	}
+	input[type=file]::file-selector-button {
+		width: 150px;
+		height: 30px;
+		background: #FFD400;
+		border: 0;
+		border-radius: 10px;
+		cursor: pointer;
+		color: white;
 	}
 }
 </style>

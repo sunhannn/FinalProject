@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.ggul.zip.user.UserVO"%>
+<%@page import="com.ggul.zip.tiper.TiperVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<%
+TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
+%>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -41,12 +45,11 @@ body {
 	#tipup_td2 {
 		
 	}
-	#tipup_info1{
-	border: 0;
-	width: 100%;
-	
+	#tipup_info1 {
+		border: 0;
+		width: 100%;
+		resize: none;
 	}
-	
 	#tipup_info1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
@@ -90,6 +93,15 @@ body {
 		height: 180px;
 		border-radius: 10%;
 	}
+	input[type=file]::file-selector-button {
+		width: 150px;
+		height: 30px;
+		background: #FFD400;
+		border: 0;
+		border-radius: 10px;
+		cursor: pointer;
+		color: white;
+	}
 }
 
 @media ( min-width : 769px) {
@@ -120,6 +132,8 @@ body {
 	}
 	#tipup_info1 {
 		width: 450px;
+		border: 0;
+		resize: none;
 	}
 	#tipup_sub3 {
 		font-size: 22px;
@@ -163,6 +177,16 @@ body {
 		height: 240px;
 		border-radius: 10%;
 	}
+	input[type=file]::file-selector-button {
+		width: 150px;
+		height: 30px;
+		background: #FFD400;
+		border: 0;
+		border-radius: 10px;
+		cursor: pointer;
+		color: white;
+	}
+}
 }
 </style>
 </head>
@@ -181,7 +205,7 @@ body {
 					<td id="tipup_td1"><input type="file" name="tiper_img"
 						placeholder="강사에 대한 img 수정" accept=".jpg,.jpeg,.png" id="tipimg"
 						onchange="previewImage(event)"> <img id="tiperpreview"
-						src="#" alt="강의사진을 올려주세요"></td>
+						src="front/<%=tiperVO.getTiper_img()%>" alt="강의사진을 올려주세요"></td>
 
 					<td id="tipup_td2"><textarea name="tiper_info"
 							placeholder="TIPer소개를 수정해 주세요 (경력, 수상내역, 취득자격증,등등..)"

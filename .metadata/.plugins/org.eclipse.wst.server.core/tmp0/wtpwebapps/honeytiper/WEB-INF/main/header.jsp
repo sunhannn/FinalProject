@@ -194,7 +194,7 @@ body {
    }
    
    .msg_reload{
-   	  margin-right: 20px;
+        margin-right: 20px;
    }
 }
 
@@ -398,11 +398,11 @@ body {
                         test='${user_id ne NULL}'>
                         <c:choose>
                            <c:when test='${unread == 0}'>
-                        	 <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
+                            <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
                              <img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/message.png">
                            </c:when>
                            <c:otherwise>
-                           	  <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
+                                <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
                               <img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/on-message.png">
                            </c:otherwise>
                         </c:choose>
@@ -455,14 +455,14 @@ body {
                            <c:choose>
                               <c:when test='${unread == 0}'>
                                  <li style="padding: 0px;">
-                                 	<img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/message.png">
-                           			<img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
+                                    <img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/message.png">
+                                    <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
                                  </li>
                               </c:when>
                               <c:otherwise>
                                  <li style="padding: 0px;">
-                                	 <img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/on-message.png">
-                                	 <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
+                                    <img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/on-message.png">
+                                    <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
                                  </li>
                               </c:otherwise>
                            </c:choose>
@@ -495,7 +495,8 @@ body {
                               <ul class="dropdown-menu">
                                  <li><a href="goMyHoneypay">허니페이</a></li>
                                  <li><a href="userUpdateGo">회원정보수정</a></li>
-                                 <li><a href="tiperMypage">마이페이지</a></li>
+                                 <li><a href="userMyPageGo">회원마이페이지</a></li>
+                                 <li><a href="tiperMypage">TIPer마이페이지</a></li>
                                  <li><a href="tiperUpdateGo">TIPer관리</a></li>
                                  <li>---------------------------</li>
                                  <li><a href="logOut">로그아웃</a></li>
@@ -546,7 +547,8 @@ body {
          <c:if test="${user_id ne NULL and user_role == 1}">
             <a href="goMyHoneypay">허니페이</a>
             <a href="userUpdateGo">회원정보수정</a>
-            <a href="tiperMypage">마이페이지</a>
+            <a href="userMypageGo">회원마이페이지</a>
+            <a href="tiperMypage">TIPer마이페이지</a>
             <a href="tiperUpdateGo">TIPer관리</a>
             <br>
             <a href="#portfolio">꿀TIPer</a>
@@ -632,8 +634,8 @@ function openNav() {
             });
        
             $('.msg_reload').on('click', function(){
-				Message_chk();
-			});
+            Message_chk();
+         });
             
    </script>
 
