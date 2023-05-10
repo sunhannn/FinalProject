@@ -64,4 +64,11 @@ public class LessonServiceImpl implements LessonService {
 	public ArrayList<LessonVO> getLessonListPostSearch(HashMap<String,Object> map){
 		return (ArrayList<LessonVO>) lessonDAO.getLessonListPostSearch(map);
 	}
+	
+	
+	//정성현 : 마이페이지
+	@Override
+	public List<LessonVO> getCompletedLessonList(LessonVO vo) {
+		return lessonDAO.getCompletedLessonList(vo);
+	}
 }

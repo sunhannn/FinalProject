@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ggul.zip.review.ReviewService;
-import com.ggul.zip.review.ReviewVO;
+import com.ggul.zip.lesson.ReviewVO;
 
 @Service("reviewService")
 public class ReviewServiceImpl implements ReviewService {
@@ -13,7 +13,7 @@ public class ReviewServiceImpl implements ReviewService {
 	ReviewDAO reviewDAO;
 
 	@Override
-	public int ReviewInsert(ReviewVO reviewVO) {
+	public int reviewInsert(ReviewVO reviewVO) {
 		return reviewDAO.reviewInsert(reviewVO);
 	}
 }

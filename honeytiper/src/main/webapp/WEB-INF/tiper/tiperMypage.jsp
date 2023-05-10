@@ -72,6 +72,20 @@ body {
 		border: 0;
 		border-radius: 10%;
 	}
+	#mytip_btn2 {
+		background-color: #FFD400;
+		border: 0;
+		border-radius: 10%;
+		width: 170px;
+		height: 40px;
+	}
+	#mytip_btn3 {
+		background-color: #FFD400;
+		border: 0;
+		border-radius: 10%;
+		width: 170px;
+		height: 40px;
+	}
 }
 
 @media ( min-width : 769px) {
@@ -134,6 +148,20 @@ body {
 		border: 0;
 		border-radius: 10%;
 	}
+	#mytip_btn2 {
+		background-color: #FFD400;
+		border: 0;
+		border-radius: 10%;
+		width: 250px;
+		height: 50px;
+	}
+	#mytip_btn3 {
+		background-color: #FFD400;
+		border: 0;
+		border-radius: 10%;
+		width: 250px;
+		height: 50px;
+	}
 }
 </style>
 <body>
@@ -161,8 +189,7 @@ body {
 					<td class="mytip_td2">
 						<div>회원ID: ${lesson.lesson_info}</div>
 					</td>
-					<td class="mytip_td3"><div>
-							<span>${lesson.lesson_title}</span></td>
+					<td class="mytip_td3"><span>${lesson.lesson_title}</span></td>
 					<td class="mytip_td4"><button type="button" onclick=""
 							class="mytip_btn1">수강완료</button></td>
 					<td><img src="front/siren.png" alt="신고"
@@ -173,13 +200,10 @@ body {
 
 		</table>
 		<br> <br>
-		<button type="button" onclick="location.href='tiperUpdateGo'">강사정보
-			수정하기</button>
-		<button type="button" onclick="location.href='honeyTake'">허니페이
-			정산하기</button>
-		<button type="button" onclick="location.href='lessonMakeGo'">강의등록하기</button>
-
-
+		<button type="button" onclick="location.href='honeyTake'"
+			id="mytip_btn2">허니페이 정산하기</button>
+		<button type="button" onclick="location.href='lessonMakeGo'"
+			id="mytip_btn3">강의등록하기</button>
 	</div>
 
 

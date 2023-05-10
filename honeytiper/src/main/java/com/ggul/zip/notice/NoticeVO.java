@@ -11,6 +11,21 @@ public class NoticeVO {
 	private String notice_search;
 	private String notice_condition;
 	
+	private String notice_start;
+	private String notice_end;
+	
+	public String getNotice_start() {
+		return notice_start;
+	}
+	public void setNotice_start(String notice_start) {
+		this.notice_start = notice_start;
+	}
+	public String getNotice_end() {
+		return notice_end;
+	}
+	public void setNotice_end(String notice_end) {
+		this.notice_end = notice_end;
+	}
 	public String getNotice_condition() {
 		return notice_condition;
 	}

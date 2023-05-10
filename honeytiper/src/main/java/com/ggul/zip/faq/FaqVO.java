@@ -5,7 +5,14 @@ public class FaqVO {
 	private String faq_question;
 	private String faq_answer;
 	
+	private String faq_search;
 	
+	public String getFaq_search() {
+		return faq_search;
+	}
+	public void setFaq_search(String faq_search) {
+		this.faq_search = faq_search;
+	}
 	public int getFaq_question_num() {
 		return faq_question_num;
 	}

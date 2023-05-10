@@ -5,35 +5,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script>
+//리스트 프로필 모달
+// $('.list_img').click(function(event){
+//     event.stopPropagation();
+//     $(this).siblings("div").toggle();
+// });
 
-$('.list_img').click(function(event){
-    event.stopPropagation();
-    $(this).siblings("div").toggle();
-});
-
-$(document).click(function(){
-	$('.list_img').siblings("div").hide();
-});
-
+// $(document).click(function(){
+// 	$('.list_img').siblings("div").hide();
+// });
 </script>
+<script src="front/message_ajax_list.js"></script>
+
 <c:forEach var="tmp" items="${list }">
 	<div class="chat_list_box${tmp.message_room } chat_list_box">
-		<div type="button" class="chat_list" message_room="${tmp.message_room }" other-user_id="${tmp.other_user_id }">
+		<div type="button" class="chat_list" message_room="${tmp.message_room }" other-user_id="${tmp.other_user_id }" user_role="${tmp.user_role }">
 			<!-- active-chat -->
 			<div class="chat_people">
 				<div class="chat_img">
 					 <c:choose>
-					 	<c:when test="${tmp.other_user_id eq '여왕벌'}">
-						 	<a href="#modal" rel="modal:open">
+					 	<c:when test="${tmp.other_user_id eq 'admin'}">
 							 	<img class="list_img" src="front/profile/admin.png" alt="관리자">
-						 	</a>
-<!-- 							<div id="modal" class="modal"> -->
-<!-- 							  <img src="front/profile/admin.png" alt="관리자"> -->
-<!-- 							</div> -->
 						</c:when>
 					 	<c:otherwise>
 							<div class="chat_img_div">
-<!-- 					 		<a href="#${tmp.other_user_id }" rel="modal:open"> -->
 						 		<img class="list_img" src="front/profile/${tmp.tiper_img}" alt="${tmp.other_user_id }">
 <!-- 							 	</a> -->
 								<div id="${tmp.other_user_id }" class="modal">
@@ -63,7 +58,3 @@ $(document).click(function(){
 		</div>
 	</div>
 </c:forEach>
-
-<%-- <div id="${tmp.other_user_id }" class="modal"> --%>
-<%-- 								  <img src="front/profile/${tmp.tiper_img}" alt="${tmp.other_user_id }"> --%>
-<!-- 								</div> -->

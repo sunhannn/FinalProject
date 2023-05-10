@@ -20,6 +20,7 @@ public class MessageDAO {
 	public int message_unread(MessageTO to) {
 		int unread = sqlSession.selectOne("main_count_unread",to);
 //		to.setUnread(unread);
+		System.out.println("unreadunreadunread"+unread);
 		return unread;
 		
 	}
@@ -32,6 +33,8 @@ public class MessageDAO {
 
 		// 메세지 리스트에 나타낼 것들 가져오기 - 가장 최근 메세지, 보낸사람 profile 사진, 보낸사람 nick
 		ArrayList<MessageTO> list = (ArrayList) sqlSession.selectList("message_list", to);
+		System.out.println("아이디가없음?"+user_id);
+//		System.out.println("for문 돌리기전 list??"+list);
 		for (MessageTO mto : list) {
 			mto.setUser_id(user_id);
 			
@@ -53,7 +56,9 @@ public class MessageDAO {
 			} else {
 				mto.setOther_user_id(mto.getMessage_send_id());
 			}
+//			System.out.println("mtomto:::===:::"+mto);
 		}
+//		System.out.println("mto list"+list);
 		return list;
 	}
 
@@ -96,10 +101,13 @@ public class MessageDAO {
 	}
 
 	public void messageSendChk(MessageTO to) {
+		System.out.println("룸넘버***"+to.getMessage_room());
+		System.out.println("exist_chat***"+to.getExist_chat());
 		// 메세지리스트에서 보낸건지 프로필에서 보낸건지 구분하기 위함
 		if (to.getMessage_room() == 0) { // room이 0이라면 프로필에서 보냄
 			int exist_chat = sqlSession.selectOne("exist_chat", to);
 			to.setExist_chat(exist_chat);
+			System.out.println("exist_chat셋팅값"+exist_chat);
 			// 프로필에서 보낸것중 메세지 내역이없어서 첫메세지가 될경우를 구분하기 위함
 			if (exist_chat == 0) { // 메세지 내역이 없어서 0이면 message 테이블의 room 최댓값을 구해서 to에 set 한다.
 				int max_room = sqlSession.selectOne("max_room", to);
@@ -113,6 +121,8 @@ public class MessageDAO {
 				to.setMessage_room(room);
 			}
 		}
+		System.out.println("끝날때 룸넘버"+to.getMessage_room());
+		System.out.println("끝날때 exist_chat***"+to.getExist_chat());
 	}
 	
 

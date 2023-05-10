@@ -26,4 +26,8 @@ public interface LessonService {
 
 
 	ArrayList<LessonVO> getLessonListPostSearch(HashMap<String, Object> map);
+	
+	
+	//정성현 : 마이페이지
+	List<LessonVO> getCompletedLessonList(LessonVO lessonVO);
 }

@@ -1,5 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+int check = (int) request.getAttribute("tiperCheck");
+
+if (check == 1) {
+	out.println("<script>");
+	out.println("alert('승인 대기중입니다!')");
+	out.println("location.href='../index';");
+	out.println("</script>");
+
+}
+%>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -28,13 +41,18 @@ body {
 	#sin_sub2 {
 		font-size: 20px;
 	}
+	#sin_div1 {
+		width: 200px;
+		height: 200px;
+	}
 	#sin_img1 {
 		width: 80px;
 		height: 80px;
 	}
 	#sin_info1 {
 		width: 95%;
-		height:
+		border: 0;
+		
 	}
 	#sin_info1:focus {
 		border: 3px solid #FFD400;
@@ -62,6 +80,11 @@ body {
 	#div_btn1 {
 		text-align: center;
 	}
+	
+	#tiperUppreview {
+		width: 200px;
+		height: 200px;
+	}
 }
 
 @media ( min-width : 769px) {
@@ -79,6 +102,10 @@ body {
 	#sin_img1 {
 		width: 300px;
 		height: 80px;
+	}
+	#sin_div1 {
+		width: 300px;
+		height: 300px;
 	}
 	#sin_img1 {
 		width: 300px;
@@ -130,20 +157,27 @@ body {
 		border: 3px solid #FFD400;
 		outline: none;
 	}
+	#tiperUppreview {
+		width: 250px;
+		height: 250px;
+	}
 }
 </style>
 </head>
 <body>
 	<div class="container">
-		<span id="sin_sub1">TIPer 신청</span> <br> <br> <span id="sin_sub2">카테고리 심사 후 TIPer 등록이 완료됩니다</span> <br>
+		<span id="sin_sub1">TIPer 신청</span> <br> <br> <span
+			id="sin_sub2">카테고리 심사 후 TIPer 등록이 완료됩니다</span> <br>
 		<hr>
 
 	</div>
-	<form action="tiperSignUp">
+	<form action="tiperSignUp" enctype="multipart/form-data">
 		<div class="container">
-			<div id="sin_img1">
+			<div id="sin_div1">
 				<input type="file" id="sin_img1" accept=".jpg,.jpeg,.png"
-					placeholder="눌러서 강사에 대한 img등록" name="tiper_img" required="required">
+					placeholder="눌러서 강사에 대한 img등록" name="tiper_img" required="required"
+					onchange="previewImage(event)"> <img id="tiperUppreview"
+					src="#" alt="강의사진을 올려주세요">
 			</div>
 
 
@@ -216,32 +250,46 @@ body {
 
 
 	<script type="text/javascript">
-		// 		$('#tiper_img1').on('click touchstart', function() {
-		// 			$(this).val('');
-		// 		});
+		
 
-		// 		//Trigger now when you have selected any file 
-		// 		$("#tiper_img1").change(function(e) {
-		// 			location.href = 'downloadGo';
-		// 			history.back();
-		// 		});
-
-				$(()=>{
-				   $("#tiper_img1").change(function(){
-				      $.ajax({
-				         url : "downloadGo",   //컨트롤러 주소래
-				         type : "post",   //form태그의 method랑 같은거
-				         data : { tiper_img: $("#tiper_img1").val() },  
-				         cache : false,   //기존 ajax 기록삭제, 캐쉬에
-				         success : function(tiper_img1){   //아약스처리가 잘됫을때 나타날곳
-				            console.log('success');
-				         },
-				         error : function(){   //아약스처리 실패시 나타날곳
-				            alert('error');
-				         }
-				      });            
-				   });
-				});
+	$(() => {
+   $("#sin_img1 input[type=file]").change(function(){
+      console.log($('#sin_img1 input[type=file]')[0].files);
+      
+      let formData = new FormData();
+      formData.append('tiper_img', $('#sin_img1 input[type=file]')[0].files[0]);
+      $.ajax({
+         url : "/upload",
+         type : "post",
+         data : formData,
+         contentType: false,
+         processData: false,
+         cache : false,
+         success : function(sin_img1){
+            console.log('success');
+         },
+         error : function(){
+            alert('error');
+         }
+      });
+   });
+});
+	
+	function previewImage(event) {
+		var reader = new FileReader();
+		reader.onload = function() {
+			var output = document.getElementById('tiperUppreview');
+			output.src = reader.result;
+		}
+		reader.readAsDataURL(event.target.files[0]);
+		// 파일 선택 후 input 요소 숨기기
+		var input = document.getElementById('sin_img1');
+		input.style.display = 'none';
+		
+	}
+	
+	
+	
 	</script>
 
 </body>

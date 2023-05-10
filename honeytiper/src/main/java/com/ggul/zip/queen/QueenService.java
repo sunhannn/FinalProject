@@ -2,6 +2,8 @@ package com.ggul.zip.queen;
 
 import java.util.List;
 
+import com.ggul.zip.user.UserVO;
+
 
 public interface QueenService {
 	
@@ -22,4 +24,13 @@ public interface QueenService {
 	//한달간의 총매출
 	String monthTotal();
 	
+	
+	
+	
+	
+	//소연
+	public UserVO updateAdmin(UserVO vo);
+
+	public String hashedChk(String password);
+
 }

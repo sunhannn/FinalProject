@@ -49,4 +49,9 @@ public class NoticeDAO {
 	public List<NoticeVO> getNoticeList(NoticeVO vo){
 		return mybatis.selectList("NoticeDAO.getNoticeList", vo);
 	}
+	
+	//관리자 공지사항 조회
+	public List<NoticeVO> adminNoticeList(NoticeVO vo){
+		return mybatis.selectList("NoticeDAO.adminNoticeList", vo);
+	}
 }

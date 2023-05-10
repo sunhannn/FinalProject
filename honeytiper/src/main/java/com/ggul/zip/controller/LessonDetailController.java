@@ -1,31 +1,22 @@
 package com.ggul.zip.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.ggul.zip.escrow.EscrowService;
+import com.ggul.zip.escrow.EscrowVO;
 import com.ggul.zip.lesson.LessonDetailService;
 import com.ggul.zip.lesson.LessonDetailVO;
-import com.ggul.zip.lesson.LessonVO;
 import com.ggul.zip.lesson.ReviewVO;
-import com.ggul.zip.user.UserService;
-import com.ggul.zip.user.UserVO;
-import com.google.gson.Gson;
 
 @Controller
 @SessionAttributes("lesson")
@@ -33,6 +24,9 @@ public class LessonDetailController {
 
 	@Autowired
 	private LessonDetailService lessonDetailService;
+	
+	@Autowired
+	private EscrowService escrowService;
 
 
 	// 강의 상세 조회
@@ -81,6 +75,16 @@ public class LessonDetailController {
 		return totalReviewList;
 	}
 
+	@RequestMapping("/insertEscrow")
+	public String insertEscrow(EscrowVO evo, Model model) {
+
+		System.out.println("============================ctrl진입! " + evo);
+
+		escrowService.insertEscrow(evo);
+//		model.addAttribute("lessonList", lessonDetailService.getLessonList(ldvo));
+
+		return "redirect:allSearch";
+	}
 
 	
 }

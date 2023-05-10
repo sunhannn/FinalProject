@@ -12,6 +12,7 @@
 	
 	<select id="getFaqList" resultType="faq">
 		select * from faq where 1=1 
+		<if test="faq_search != null and faq_search !='' "> and FAQ_QUESTION like concat('%', #{faq_search}, '%')</if>
 		order by faq_question_num
 	</select>
 	

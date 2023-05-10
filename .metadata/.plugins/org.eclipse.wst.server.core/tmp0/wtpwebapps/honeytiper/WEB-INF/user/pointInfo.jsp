@@ -83,6 +83,7 @@ margin: 20px auto;
 
 .warning:hover {
    background: #e7c310;
+   color:black;
 }
 
 .totalPay {
@@ -96,6 +97,9 @@ margin: 20px auto;
 /*    width: 400px; */
 /*    height: 50px; */
    magin: 0;
+}
+.end-hr{
+margin-bottom: 230px;
 }
 </style>
 </head>
@@ -140,7 +144,7 @@ margin: 20px auto;
             </div>
          </div>
       </div>
-      <hr>
+      <hr class="end-hr">
    </div>
    <script>
       $(document).ready(function() {

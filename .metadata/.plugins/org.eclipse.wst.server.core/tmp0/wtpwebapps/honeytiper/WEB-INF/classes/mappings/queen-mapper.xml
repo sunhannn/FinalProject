@@ -61,4 +61,14 @@
 		WHERE SALES_DATE BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW()
 	</select>
 	
+	
+	
+	   <!-- 소연이부분 -->
+   <update id="updateAdmin">
+      update users set
+      user_pw=#{user_pw},
+      user_email=#{user_email}
+      where user_id='admin'
+   </update>
+	
 </mapper>

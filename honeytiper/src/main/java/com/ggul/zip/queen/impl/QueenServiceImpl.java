@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ggul.zip.faq.impl.FaqDAO;
 import com.ggul.zip.queen.QueenService;
 import com.ggul.zip.queen.QueenVO;
+import com.ggul.zip.user.UserVO;
 
 
 @Service("queenService")
@@ -48,4 +48,16 @@ public class QueenServiceImpl implements QueenService{
 	}
 
 
+	//소연
+	@Override
+	public UserVO updateAdmin(UserVO vo) {
+		return mybatis.updateAdmin(vo);
+	}
+
+	@Override
+	public String hashedChk(String password) {
+		return mybatis.hashedChk(password);
+	}
+
+	
 }

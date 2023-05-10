@@ -1,31 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.ggul.zip.notice.NoticeVO, java.util.*" %>
+<%@ include file="../main/header.jsp"%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <title>부트스트랩 이용했음</title>
         <link rel="shortcut icon" href="data:image/x-icon" type="image/x-icon">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/front/bootstrap.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/front/notice.css">
     </head>
-    <%
-    if(request.getParameter("suc")!=null){
-    	out.print("<script>");
-    	out.print("alert('수정이 완료되었습니다.');");
-    	out.print("</script>");
-    }
-    
-    if(request.getParameter("del")!=null){
-    	out.print("<script>");
-    	out.print("alert('삭제가 완료되었습니다.');");
-    	out.print("</script>");
-    }
-    
-    %>
+
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.2/jquery.min.js"></script> -->
 <script src="${pageContext.request.contextPath}/front/jquery.js"></script>
-
+<%-- <jsp:include page="../main/header.jsp" /> --%>
 <style>
 #btnSearch{
 	border:0;
@@ -65,17 +53,18 @@ ul li.on {
 ul li.on a {
     color: #fff;
 }
+
+th, td{
+	padding: 10px 0px;
+}
 </style>
 
+<%--         <link rel="stylesheet" href="${pageContext.request.contextPath}/front/bootstrap.css"> --%>
 
 
 
 
 <script>
-function addNotice(){
-	location.href = "insertMovenotice";
-}
-
 
 function selTr(val){
 	location.href="getnotice?notice_num="+val;
@@ -211,7 +200,7 @@ function paging(totalData, dataPerPage, pageCount, currentPage) {
 </script>
 <body>
 
-        <a href="/"><img src="${pageContext.request.contextPath}/front/LOGO.png" alt="로고이미지" title="로고이미지" id="logo"></a>
+<%--         <a href="/"><img src="${pageContext.request.contextPath}/front/LOGO.png" alt="로고이미지" title="로고이미지" id="logo"></a> --%>
         <div class="container">
             <hr class="hrFirst">
             <div class="divLeft">
@@ -233,12 +222,11 @@ function paging(totalData, dataPerPage, pageCount, currentPage) {
             </div>
 				<br>
             <hr class="hrFirst">
-            <button type="button" onclick="addNotice()">공지사항 등록</button>
             <span id="displayCount"></span>
-            <table>
+            <table style="width:100%; font-size:15pt;">
 	            <thead>
 	                <tr>
-	                    <th style="width:10%">글번호</th> <th style="width:75%">제목</th> <th style="width:10%">등록일</th>
+	                    <th style="width:10% ">글번호</th> <th style="width:75%">제목</th> <th style="width:15%">등록일</th>
 	                </tr>
 	            </thead>
 	            <tbody id="dataTableBody"></tbody>

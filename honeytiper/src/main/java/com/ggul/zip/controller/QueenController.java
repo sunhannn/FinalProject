@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ggul.zip.escrow.EscrowService;
+import com.ggul.zip.escrow.EscrowVO;
 import com.ggul.zip.lesson.LessonDetailVO;
 import com.ggul.zip.lesson.LessonService;
 import com.ggul.zip.lesson.LessonVO;
@@ -37,6 +39,9 @@ public class QueenController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private EscrowService escrowService;
 	
 	/*------------------------------------구글차트----------------------------------------*/
 	//차트보기 아약스
@@ -141,6 +146,39 @@ public String adminLoginBtn() {
 		model.addAttribute("lessonList", lessonService.getLessonList(vo));
 		return "queen/adminTiperList";
 	}
+	
+	// 관리자 정보 수정하기
+	@RequestMapping(value = "/adminUpdateAction")
+	public String adminUpdateAction(UserVO vo){
+		String hashedPw = userService.hashedChk(vo.getUser_pw());
+		vo.setUser_pw(hashedPw);
+		queenService.updateAdmin(vo);
+	
+		return "queen/adminInfoUpdate";
+	}
+
+	// 관리자정보수정 페이지 이동
+	@RequestMapping(value = "/adminUpdateGo")
+	public String userUpdateGo() {
+		return "queen/adminInfoUpdate";
+	}
+	
+	// 브랜드소개 페이지 이동
+    @RequestMapping(value = "/getBrand")
+    public String getBrand() {
+       return "queen/getBrand";
+    }
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	//===================================================================================
 		// 정성현 - 블랙리스트 관리, 승급관리 ========================================================
@@ -288,5 +326,28 @@ public String adminLoginBtn() {
 			return searchBlackList;
 		}
 
+		//분쟁해결관리- 전체리스트 가져오기 상태가 0또는 1만 가져옴
+		@RequestMapping("/getDisputeResolutionList")
+		public String getDisputeResolutionList(EscrowVO vo, Model model) {
+			model.addAttribute("DisputeResolution", escrowService.getDisputeResolutionList(vo));
+			String disputeListtJSON = new Gson().toJson(escrowService.getDisputeResolutionList(vo));
+			model.addAttribute("DisputeListtJSON", disputeListtJSON);
+			
+			return "/escrow/disputeResolution";
+		}
+//분쟁해결관리- 검색결과 가져오기
+		@RequestMapping("/searchDispute")
+		@ResponseBody
+	public ArrayList<EscrowVO> searchDispute(@RequestParam("search_condition") String search_condition,	
+			@RequestParam(value = "search_keyword", required = false) String search_keyword) {
+			System.out.println("검색결과받아오기");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search_condition", search_condition);
+		map.put("search_keyword", search_keyword);				
+		ArrayList<EscrowVO>searchDispute=escrowService.searchDispute((HashMap<String, Object>) map);
+		return searchDispute;
+		}
+		
+		
 	
 }

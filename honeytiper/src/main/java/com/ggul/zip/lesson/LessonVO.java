@@ -15,7 +15,7 @@ public class LessonVO {
 	private String lesson_cate;
 	private String lesson_img;
 	private int lesson_onoff;
-	private Date lesson_date;
+	private String lesson_date;
 
 
 
@@ -212,11 +212,11 @@ public class LessonVO {
 		this.lesson_onoff = lesson_onoff;
 	}
 
-	public Date getLesson_date() {
+	public String getLesson_date() {
 		return lesson_date;
 	}
 
-	public void setLesson_date(Date lesson_date) {
+	public void setLesson_date(String lesson_date) {
 		this.lesson_date = lesson_date;
 	}
 	

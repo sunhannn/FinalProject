@@ -28,28 +28,25 @@
 	</select>
 
 
-	<select id="getLessonList" resultType="lesson">
-		SELECT l.lesson_title,
-		l.lesson_date, l.lesson_info, t.tiper_user_id, t.tiper_info,
-		r.review_sugar
-		FROM review r inner join lesson l on r.review_lesson_num=l.lesson_num
-		inner join tiper t on l.lesson_tiper_code = t.tiper_code
-		ORDER BY
-		l.lesson_date DESC
-	</select>
+<select id="getLessonList" resultType="lesson">
+      SELECT l.lesson_title,
+      l.lesson_date, l.lesson_info, t.tiper_user_id, t.tiper_info
+      FROM lesson l inner join tiper t on l.lesson_tiper_code = t.tiper_code
+      ORDER BY
+      l.lesson_date DESC
+   </select>
 
 
-	<select id="getLessonListPostSearch" resultType="lesson">
-		<!-- 동적 쿼리문 -->
-		SELECT l.lesson_title, l.lesson_date, l.lesson_info, t.tiper_user_id,
-		t.tiper_info, r.review_sugar
-		FROM review r inner join lesson l on r.review_lesson_num=l.lesson_num
-		inner join tiper t on l.lesson_tiper_code = t.tiper_code
-		<if test="lesson_condition == 'lesson_title' ">AND LESSON_TITLE LIKE CONCAT('%', #{lesson_search}, '%')
-		</if>
-		<if test="lesson_condition == 'tiper_user_id' ">AND TIPER_USER_ID LIKE CONCAT('%', #{lesson_search}, '%')
-		</if>
-	</select>
+   <select id="getLessonListPostSearch" resultType="lesson">
+      <!-- 동적 쿼리문 -->
+      SELECT l.lesson_title,
+      l.lesson_date, l.lesson_info, t.tiper_user_id, t.tiper_info
+      FROM lesson l inner join tiper t on l.lesson_tiper_code = t.tiper_code
+      <if test="lesson_condition == 'lesson_title' ">AND LESSON_TITLE LIKE CONCAT('%', #{lesson_search}, '%')
+      </if>
+      <if test="lesson_condition == 'tiper_user_id' ">AND TIPER_USER_ID LIKE CONCAT('%', #{lesson_search}, '%')
+      </if>
+   </select>
 
 
 	<!-- 상현이부분 -->
@@ -61,20 +58,6 @@
 		WHERE #{lesson_tiper_code} =
 		escrow.ESCROW_tiper_code AND lesson.LESSON_NUM =
 		escrow.ESCROW_LESSON_NUM
-	</select>
-
-	<select id="getUserLessonList" resultType="lesson">
-		select
-		lesson.LESSON_TITLE, lesson.LESSON_USER_NAME,
-		escrow.ESCROW_LESSON_NUM
-		as lesson_num,lesson.LESSON_IMG
-		from lesson, escrow
-		where (select
-		user_id from users WHERE user_id =#{lesson_info}) =
-		escrow.ESCROW_USER_ID
-		AND (SELECT escrow_lesson_num WHERE
-		escrow_user_id = #{lesson_info}) =
-		lesson.LESSON_NUM
 	</select>
 
 	<select id="selectLessonNum" resultType="lesson">
@@ -97,7 +80,35 @@
 	<insert id="makeLesson">
 		insert into lesson(lesson_tiper_code, lesson_title,
 		lesson_info,
-		lesson_cate, lesson_img) values(#{lesson_tiper_code},
-		#{lesson_title}, #{lesson_info}, #{lesson_cate}, #{lesson_img})
+		lesson_cate, lesson_img, lesson_user_name) values(#{lesson_tiper_code},
+		#{lesson_title}, #{lesson_info}, #{lesson_cate}, #{lesson_img}, #{lesson_user_name})
 	</insert>
+	
+	
+	<!-- 	정성현 : 마이페이지======================================== -->
+		<select id="getUserLessonList" resultType="lesson">
+		select
+		lesson.LESSON_TITLE, lesson.LESSON_USER_NAME, lesson.LESSON_CATE,
+		escrow.ESCROW_LESSON_NUM, escrow.ESCROW_START,lesson.LESSON_IMG, lesson.LESSON_NUM, lesson.LESSON_USER_NAME
+		from lesson, escrow
+		where (select
+		user_id from users WHERE user_id =#{lesson_info}) =
+		escrow.ESCROW_USER_ID
+		AND (SELECT escrow_lesson_num WHERE
+		escrow_user_id = #{lesson_info}) =
+		lesson.LESSON_NUM AND escrow.ESCROW_STATUS = 1
+	</select>
+	
+		<select id="getCompletedLessonList" resultType="lesson">
+		select
+		lesson.LESSON_TITLE, lesson.LESSON_USER_NAME, lesson.LESSON_CATE,
+		escrow.ESCROW_LESSON_NUM, escrow.ESCROW_START, escrow.ESCROW_USER_ID, lesson.LESSON_IMG, lesson.LESSON_NUM, lesson.LESSON_USER_NAME
+		from lesson, escrow
+		where (select
+		user_id from users WHERE user_id =#{lesson_info}) =
+		escrow.ESCROW_USER_ID
+		AND (SELECT escrow_lesson_num WHERE
+		escrow_user_id = #{lesson_info}) =
+		lesson.LESSON_NUM AND escrow.ESCROW_STATUS = 2
+	</select>
 </mapper>

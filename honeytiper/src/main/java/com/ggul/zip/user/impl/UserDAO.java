@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 
 import com.ggul.zip.user.ReportVO;
 import com.ggul.zip.user.UserVO;
@@ -64,16 +65,26 @@ public class UserDAO {
 			return (UserVO) model.addAttribute("user", mybatis.selectOne("UserDAO.viewUser", vo));
 	}
 	
-	//카카오 로그인 실행
-	public UserVO getUSerByEmail(UserVO vo) {
-		UserVO user = mybatis.selectOne("UserDAO.kakaoUser", vo);
-		
-		if( user != null) {
-			return user;
-		} else {
+	//카카오 회원가입
+		public UserVO joinKakaoUser(UserVO vo) {
+			int insert = mybatis.insert("UserDAO.joinKakaoUser", vo);
+			if(insert < 1) {
+				System.out.println("회원가입 안됐음");
+			}
+			return vo;
 		}
-		return user;
-	}
+		
+		//카카오 로그인 실행
+		public UserVO getUserByKakaoAccount(UserVO vo) {
+			UserVO user = mybatis.selectOne("UserDAO.kakaoUser", vo);
+			
+			if( user != null) {
+				System.out.println("db에 있음");
+			} else {
+				System.out.println("db에 없음");
+			}
+			return user;
+		}
 	
 	//sms 전송
 	public void smsSend(UserVO vo, Model model) {
@@ -130,16 +141,6 @@ public class UserDAO {
 		String num = Integer.toString(checkNum);
 		model.addAttribute("sendNum", num);
 	}
-	
-	//메일 중복확인
-	public UserVO chkMail(UserVO vo, Model model) {
-			vo =  mybatis.selectOne("UserDAO.viewMail", vo);
-			if(vo == null) {
-			} else {
-			}
-			return vo;
-	}
-	
 	
 	//비밀번호 암호화
 	String hashedChk(String password) {
@@ -327,10 +328,33 @@ public class UserDAO {
 				return mybatis.selectList("UserDAO.getBlackList", vo);
 			}
 
+			
+			
 			// 블랙리스트 관리 : 조건에 따른 검색
 			public List<UserVO> searchBlackList(HashMap<String, Object> map) {
 				System.out.println("===>mybatis로 searchBlackList() 기능처리");
 
 				return mybatis.selectList("UserDAO.searchBlackList", map);
+			}
+			
+			//정성현 : 마이페이지
+			public int isDupReport(ReportVO vo) {
+				System.out.println("===>mybatis로 isDupReport() 기능처리");
+				
+				Object result = mybatis.selectList("UserDAO.isDupReport", vo);
+				
+				if(ObjectUtils.isEmpty(result) == false){
+					return 1;
+				} else { 
+								
+					return 0;
+				}
+			}
+			
+			// TIPER_AGREE를 1로 업데이트
+			public void reportLessonNum(ReportVO vo) {
+				System.out.println("===>mybatis로 reportLessonNum() 기능처리");
+
+				mybatis.update("UserDAO.reportLessonNum", vo);
 			}
 }

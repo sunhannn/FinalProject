@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ggul.zip.tiper.TiperService;
 import com.ggul.zip.tiper.TiperVO;
 import com.ggul.zip.user.UserService;
 import com.ggul.zip.user.UserVO;
@@ -29,6 +30,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private TiperService tiperService;
 
 	@Autowired
 	JavaMailSender mailsender;
@@ -65,21 +69,6 @@ public class UserController {
 
 	}
 
-	//이메일 중복확인
-	@RequestMapping("/mailCheck")
-	@ResponseBody
-	public Object mailChk(UserVO vo, Model model) {
-		UserVO usermail = userService.chkMail(vo, model);
-
-		Map<String, String> chkVal = new HashMap<String, String>();
-		if (usermail != null) {
-			chkVal.put("check", "success");
-		} else {
-			chkVal.put("check", "failed");
-		}
-		return chkVal;
-	}
-
 
 	// 인증번호 확인
 	@RequestMapping("/confirmNum")
@@ -107,25 +96,42 @@ public class UserController {
 	}
 
 	//카카오 로그인 : 로그인하기
-	@ResponseBody
-	@RequestMapping("/loginByKakao")
-	public Object loginByKakao(UserVO vo, HttpSession session) {
+		@ResponseBody
+		@RequestMapping("/loginByKakao")
+		public Object loginByKakao(UserVO vo, HttpSession session) {
+			Map<String, String> chkVal = new HashMap<String, String>();
 
-		String user_email = vo.getUser_email();
+			UserVO user = userService.getUserByKakaoAccount(vo);
 
-		Map<String, String> chkVal = new HashMap<String, String>();
-
-		UserVO user = userService.getUSerByEmail(vo);
-
-		if (user != null) {
-			session.setAttribute("user_id", user.getUser_id());
-			session.setAttribute("user_name", user.getUser_name());
-			chkVal.put("check", "success");
-		} else {
-			chkVal.put("check", "failed");
+			if (user != null) {
+				session.setAttribute("user_id", user.getUser_id());
+				session.setAttribute("user_name", user.getUser_name());
+				chkVal.put("check", "success");
+			} else {
+				chkVal.put("check", "failed");
+			}
+			return chkVal;
 		}
-		return chkVal;
-	}
+		
+		//카카오 회원가입
+		@ResponseBody
+		@RequestMapping("/joinByKakao")
+		public String joinByKakao(UserVO vo, HttpSession session) {
+			
+			if(vo.getUser_id() != null) {
+				
+				String hashedPw = userService.hashedChk(vo.getUser_pw());
+				vo.setUser_pw(hashedPw);
+				UserVO user = userService.joinKakaoUser(vo);
+				
+				session.setAttribute("user_id", user.getUser_id());
+				session.setAttribute("user_name", user.getUser_name());
+				return "success";
+			}else {
+				return "failed";
+			}
+			
+		}
 
 	//로그인으로이동
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -336,15 +342,18 @@ public class UserController {
 		
 		// 강사 신청 창이동
 		@RequestMapping(value = "/tiperSignUpMove")
-		public String tiperSignUp(HttpServletRequest request, HttpSession session, UserVO vo, TiperVO tiperVO) {
+		public String tiperSignUp(HttpSession session, Model model, UserVO vo, TiperVO tiperVO) {
 
 			vo.setUser_id((String) session.getAttribute("user_id"));
 			tiperVO.setTiper_user_id(vo.getUser_id());
 			vo = userService.selectName(vo);
-			request.setAttribute("user_name", vo.getUser_name());
+			model.addAttribute("user_name", vo.getUser_name());
+			int check = tiperService.selecTiperCount(tiperVO);
+			System.out.println(check);
+			model.addAttribute("tiperCheck", check);
+
 			return "user/userTiperSignup";
 
 		}
-		
 		
 }

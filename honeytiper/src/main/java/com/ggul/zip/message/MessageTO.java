@@ -28,7 +28,17 @@ public class MessageTO {
 	
 	private int send_btn;
 	
+	private int user_role;
 	
+	
+	public int getUser_role() {
+		return user_role;
+	}
+
+	public void setUser_role(int user_role) {
+		this.user_role = user_role;
+	}
+
 	public int getExist_chat() {
 		return exist_chat;
 	}
@@ -46,14 +56,6 @@ public class MessageTO {
 		return this.send_btn = send_btn;
 	}
 	
-//	public String getSearch_id() {
-//		return search_id;
-//	}
-//	public void setSearch_id(String search_id) {
-//		this.search_id = search_id;
-//	}
-	
-	
 	public int getUnread() {
 		return unread;
 	}
@@ -66,14 +68,6 @@ public class MessageTO {
 	public void setOther_user_id(String other_user_id) {
 		this.other_user_id = other_user_id;
 	}
-	
-	//프로필이미지
-//	public String getProfile() {
-//		return profile;
-//	}
-//	public void setProfile(String profile) {
-//		this.profile = profile;
-//	}
 	
 	public String getTiper_img() {
 		return tiper_img;

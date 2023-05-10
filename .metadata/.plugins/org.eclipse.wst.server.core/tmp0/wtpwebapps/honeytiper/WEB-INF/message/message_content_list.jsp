@@ -1,16 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script>
-$('.content_img').click(function(event){
-    event.stopPropagation();
-    $(this).siblings("div").toggle();
-});
-
-$(document).click(function(){
-	$('.content_img').siblings("div").hide();
-});
-</script>
+<script src="front/message_content_list.js"></script>
 <c:forEach var="tmp" items="${clist }">
 	<c:choose>
 		<c:when test="${sessionScope.user_id ne tmp.message_send_id }">
@@ -18,13 +9,8 @@ $(document).click(function(){
 		<div class="incoming_msg">
 			<div class="incoming_msg_img">
 					 <c:choose>
-					 	<c:when test="${tmp.message_send_id eq '여왕벌'}">
-					 		<a href="#modal1" rel="modal:open">
+					 	<c:when test="${tmp.message_send_id eq 'admin'}">
 						 		<img class="content_img" src="front/profile/admin.png" alt="관리자" >
-						 	</a>
-						 	<div id="modal1" class="modal">
-						 		<img src="front/profile/admin.png" alt="관리자" >
-						 	</div>
 						</c:when>
 					 	<c:otherwise>
 					 	<div class="chat_img_div">
@@ -59,6 +45,8 @@ $(document).click(function(){
 		</div>
 		</c:otherwise>
 	</c:choose>
-
-
 </c:forEach>
+		
+	<c:forEach var="lesson" items="${list }">
+		<option class="select_option" value="${lesson.escrow_lesson_num}"><p style="display: none" class="lesson_title">${lesson.lesson_title}</p></option><input class="tiper_code" value="${lesson.escrow_tiper_code }" style="display: none;">
+	</c:forEach>

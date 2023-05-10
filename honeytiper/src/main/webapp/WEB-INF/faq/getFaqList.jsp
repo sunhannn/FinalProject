@@ -8,50 +8,88 @@
 </head>
 <%@include file="../main/header.jsp"%>
 <style>
-	#spnTitl{
+	#spnTitle{
 		font-weight: bolder;
-		font-size: 18pt;
+		font-size: 24px;
+		text-align: center;
+		padding: 20px 0;
+		background-color: #f5f5f5;
+		border-radius: 10px;
+		margin: 30px auto;
+		width: 60%;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 	}
-	
+
+	.tblFaq{
+		margin: 0 auto;
+		width: 80%;
+		border-collapse: collapse;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	}
+
+	.tblFaq th{
+		padding: 10px;
+		background-color: #f5f5f5;
+		border-bottom: 1px solid #ddd;
+		text-align: left;
+	}
+
+	.tblFaq td{
+		padding: 10px;
+		border-bottom: 1px solid #ddd;
+		text-align: left;
+	}
+
 	.tdRight{
 		text-align: right;
-		
 	}
-	
-	.tblFaq{
-		margin:0 auto;
-		width:80%;
-	}
-	
-	#tdAnswer{
-		font-weight: border;
-		color:blue;
-		border-bottom: 3px solid #000;
-	}
-	
+
 	#tdQuestion{
-		font-weight: border;
+		font-weight: bold;
 		padding-top: 10px;
 		color: red;
 	}
+
+	#tdAnswer{
+		font-weight: bold;
+		color: blue;
+		border-bottom: 3px solid #000;
+	}
+
+	.btnAddFaq{
+		background-color: #4CAF50;
+		color: white;
+		padding: 10px 20px;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+
+	.btnDeleteFaq{
+		color: red;
+		cursor: pointer;
+	}
+
+	.btnUpdateFaq{
+		background-color: #007bff;
+		color: white;
+		padding: 5px 10px;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		margin-right: 10px;
+	}
 </style>
-<script>
-	function addFaq(){
-		location.href="insertMoveFaq";
-	}
-</script>
-<%
-	if(request.getAttribute("update")!=null){
-		out.print("<script>");
-		out.print("alert('업데이트되었습니다.')");
-		out.print("</script>");
-	}
-%>
+<!-- <script> -->
+<!--  	function addFaq(){ -->
+<!--  		location.href="insertMoveFaq"; -->
+<!--  	} -->
+<!-- </script> -->
+
 <body>
-<br><br><br><br><br><br><br><br>
 	<span id="spnTitle">자주묻는질문</span>
 	<hr>
-	<button type="button" onclick="addFaq()">자묻질 등록</button>
+<!-- 	<button type="button" onclick="addFaq()">자묻질 등록</button> -->
 	<table class="tblFaq">
 	    <c:forEach items="${faqList}" var="faq">
 			<tr>
@@ -64,7 +102,6 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<%@include file="../main/footer.jsp"%>
 </body>
 </html>

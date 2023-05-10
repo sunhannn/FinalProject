@@ -6,15 +6,18 @@
 
 <!-- 메세지 리스트 가져오기 -->
 <select id="message_list" parameterType="com.ggul.zip.message.MessageTO" resultType="com.ggul.zip.message.MessageTO">
-    select 		MESSAGE_NUM, 
-    			MESSAGE_ROOM, 
-    			MESSAGE_SEND_ID, 
-    			MESSAGE_RECV_ID, 
-    			date_format(MESSAGE_SEND_TIME, '%Y-%m-%d %H:%i') MESSAGE_SEND_TIME, 
-    			MESSAGE_READ_TIME, 
-    			ifnull(MESSAGE_CONT,'') AS MESSAGE_CONT, 
-    			MESSAGE_READ_CHK
-    from 		message
+    select 		m.MESSAGE_NUM, 
+    			m.MESSAGE_ROOM, 
+    			m.MESSAGE_SEND_ID, 
+    			m.MESSAGE_RECV_ID, 
+    			date_format(m.MESSAGE_SEND_TIME, '%Y-%m-%d %H:%i') AS MESSAGE_SEND_TIME, 
+    			m.MESSAGE_READ_TIME, 
+    			ifnull(m.MESSAGE_CONT,'') AS MESSAGE_CONT, 
+    			m.MESSAGE_READ_CHK,
+    			(SELECT u.user_role FROM USERS u WHERE u.user_id = #{user_id}) AS USER_ROLE
+    from 		message m
+    left outer join users u
+    ON m.MESSAGE_SEND_ID = u.USER_ID
     where 		1 = 1 and
     <choose>
         <when test="send_btn == 1">
@@ -120,7 +123,7 @@
 
 <!-- room 번호 최댓값 구하기 -->
 <select id="max_room"  parameterType="com.ggul.zip.message.MessageTO" resultType="Int">
-    select max(MESSAGE_ROOM) from message
+     SELECT IFNULL(max(MESSAGE_ROOM),0) from message
 </select>
 
 

@@ -12,18 +12,21 @@
 <!-- Bootstrap CDN -->
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
-   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css" />
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
 
 <!--  메세지관련 css파일 -->
-<link href="front/message_list.css" rel="stylesheet">
+<link href="front/message.css" rel="stylesheet">
 
 <!-- 부가적인 테마 -->
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" />
+<link rel="stylesheet"
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="script.js"></script>
+
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script
@@ -45,7 +48,7 @@ body {
    margin-bottom: 0;
    background-color: #fff;
    transition: all 0.2s ease-out;
-   /*    display: contents; */
+   display: contents;
 }
 
 .navbar-container {
@@ -58,7 +61,7 @@ body {
 }
 
 .navbar .navbar-nav li a {
-   font-size: 14px;
+   font-size: 18px;
    text-transform: uppercase;
    color: #2e1c05;
    transition: all 0.2s ease-out;
@@ -82,15 +85,6 @@ body {
    display: none;
 }
 
-/*헤더 넓이 조정 css*/
-/* @media (min-width: 1300px) {
-  .navbar-container {
-    margin:0 auto;
-    width:100%;
-    max-width:1300px;
-  }
-  
-}  */
 @media ( min-width : 1500px) {
    .navbar-container {
       width: 100%;
@@ -100,16 +94,26 @@ body {
 }
 
 @media ( min-width : 768px) {
+
    #open {
       opacity: 0;
    }
+   
+   .navbar .navbar-nav li a {
+    font-weight: bolder;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #2e1c05;
+    transition: all 0.2s ease-out;
+   }
+   
    .navbar {
       height: 120px;
    }
    .navbar-nav>li>a {
       padding: 0;
       margin-top: 35px;
-      margin-left: 50px;
+      margin-left: 30px;
       line-height: 70px;
    }
    .navbar-brand {
@@ -138,11 +142,6 @@ body {
       padding: 0;
       margin-top: 0;
    }
-}
-
-/* # Hover Link Effect
-================================ */
-@media ( min-width : 768px) {
    .navbar-nav>li>a::after {
       text-decoration: none;
       position: absolute;
@@ -150,11 +149,11 @@ body {
       left: 0;
       width: 100%;
       height: 1px;
-      background: #2e1c05;
+      background: #FFDF48;
       content: "";
       opacity: 0;
       transition: height 0.3s, opacity 0.3s, transform 0.3s;
-      transform: translateY(-10px);
+      transform: translateY(-);
    }
    .navbar-nav>li>a:hover::after, .navbar-nav>li>a:focus::after {
       text-decoration: none;
@@ -167,25 +166,51 @@ body {
       opacity: 0;
    }
    .main {
-      display: none;
+      display: block;
    }
    #nav1 {
       display: none;
    }
+   #send_msgImg {
+      display: none;
+   }
+
 }
 
-@media ( min-width : 1000px) {
+@media ( max-width : 767px) {
+   #send_msgImg {
+      float: right;
+      margin-right: 60px;
+      margin-top: 10px;
+   }
    .main {
-      display: block;
+      display: none;
+   }
+   
+   #send_msgImg {
+      float: right;
+      margin-right: 80px;
+      margin-top: 8px;
+   }
+   
+   .msg_reload{
+   	  margin-right: 20px;
    }
 }
+
+@media ( max-width : 995px) {
+   .main{
+      display: none;
+   }
+}
+
 /* # Social menu
 ================================ */
 #top-social-menu {
    position: absolute;
    top: 7px;
    right: 0;
-   font-size: 12px;
+   font-size: 13px;
    z-index: 101;
    padding-right: 0px;
    list-style: none;
@@ -242,20 +267,21 @@ body {
    width: 0%;
    overflow-x: hidden;
    height: 100vh;
-   z-index: 1;
+   z-index: 99999;
    position: fixed;
    background: #eee;
    transition: 0.3s;
+   font-size: 20px;
 }
 
 .nav1 a {
-   color: black;
-   font-size: 1rem;
+   color: #696969;
+   font-size: 30px;
    text-decoration: none;
    display: block;
-   padding: 20px;
    transition: 0.3s;
    clear: both;
+   padding: 10px;
 }
 
 .close {
@@ -285,7 +311,7 @@ body {
 }
 
 .main form>:nth-child(1)>:nth-child(1) {
-   margin-right: 10px;;
+   margin-left: 150px;
 }
 /* Bootstrap 4 text input with search icon */
 .has-search .form-control {
@@ -313,13 +339,45 @@ body {
 }
 
 /*로고 위치 수정하기*/
-.navbar-left>:nth-child(1) img {
-   transform: translateY(-10px);
-   width: 150px;
+ .navbar-left>:nth-child(1) img { 
+    transform: translate(40px, -10px); 
+    width: 150px; */
+ }
+
+.search-container {
+   position: relative;
+   display: inline-block;
+   border-radius: 20px;
+   overflow: hidden;
 }
 
-#lesson_search {
+.search-input:active, .search-input:focus {
+   border: 2px solid #FFDF48;
+}
+
+.search-input {
+   padding: 10px;
+   border: 2px solid gray;
+   border-radius: 20px;
+   outline: none;
+   width: 300px;
+   position: relative;
+}
+
+.search-button {
+   position: absolute;
+   top: 50%;
+   right: 10px;
+   transform: translateY(-50%);
    padding: 5px;
+   background-color: transparent;
+   border: none;
+   outline: none;
+   cursor: pointer;
+}
+
+.search-button i {
+   font-size: 20px;
 }
 </style>
 </head>
@@ -336,15 +394,27 @@ body {
                <div class="navbar-header">
                   <a class="navbar-brand" href="/"><img
                      src="${pageContext.request.contextPath}/front/ggultiperLogo.png"
-                     alt="" title="Logo"></a> <span id="open" class="open1"
-                     onclick="openNav()">≡</span>
+                     alt="" title="Logo"></a> <span id="send_msgImg"> <c:if
+                        test='${user_id ne NULL}'>
+                        <c:choose>
+                           <c:when test='${unread == 0}'>
+                        	 <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
+                             <img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/message.png">
+                           </c:when>
+                           <c:otherwise>
+                           	  <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
+                              <img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/on-message.png">
+                           </c:otherwise>
+                        </c:choose>
+                     </c:if>
+                  </span> <span id="open" class="open1" onclick="openNav()">≡</span>
                </div>
                <div id="navbar" class="navbar-collapse collapse">
                   <ul class="nav navbar-nav navbar-left">
                      <li><a href="/"><img
                            src="${pageContext.request.contextPath}/front/ggultiperLogo.png"
                            alt="" title="Logo"></a></li>
-                     <li class="dropdown"><a href="#" class=""
+                     <li class="dropdown" style="margin-left:30px;"><a href="#" class=""
                         data-toggle="dropdown" role="button" aria-haspopup="true"
                         aria-expanded="false">전체 카테고리<span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -356,7 +426,7 @@ body {
                            <li><a href="cateSearch?lesson_search=기타">기타</a></li>
 
                         </ul></li>
-                     <li><a href="#portfolio">꿀TIPer</a></li>
+                     <li><a href="getBrand">꿀TIPer란?</a></li>
                      <li><a href="allSearch">클래스</a></li>
                      <li><a href="listnotice">공지사항</a></li>
                      <li><a href="faqList">FAQ</a></li>
@@ -365,10 +435,13 @@ body {
                      <li>
                         <div class="main">
                            <form action="selectSearch" method="post" name="lesson_search">
-                              <div>
+                              <div class="search-container">
                                  <input type="text" name="lesson_search" id="lesson_search"
-                                    placeholder="키워드를 입력해주세요" /> <input type="submit"
-                                    value="검색" />
+                                    class="search-input" placeholder="키워드를 입력해주세요" />
+                                 <button type="submit" class="search-button"
+                                    onclick="document.lesson_search.submit();">
+                                    <i class="fas fa-search"></i>
+                                 </button>
                               </div>
                            </form>
                         </div>
@@ -379,15 +452,21 @@ body {
                   <ul id="top-social-menu">
                      <c:choose>
                         <c:when test='${user_id ne NULL}'>
-                           <li><a href="logOut">로그아웃</a></li>
                            <c:choose>
                               <c:when test='${unread == 0}'>
-                                 <li><img class="send_msg" src="front/message.png"></li>
+                                 <li style="padding: 0px;">
+                                 	<img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/message.png">
+                           			<img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
+                                 </li>
                               </c:when>
                               <c:otherwise>
-                                 <li><img class="send_msg" src="front/on-message.png"></li>
+                                 <li style="padding: 0px;">
+                                	 <img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/on-message.png">
+                                	 <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
+                                 </li>
                               </c:otherwise>
                            </c:choose>
+                           <li><a href="logOut">로그아웃</a></li>
                         </c:when>
                         <c:otherwise>
                            <li><a href="loginBtn">로그인</a></li>
@@ -416,8 +495,8 @@ body {
                               <ul class="dropdown-menu">
                                  <li><a href="goMyHoneypay">허니페이</a></li>
                                  <li><a href="userUpdateGo">회원정보수정</a></li>
-                                 <li><a href="userMyPageGo">마이페이지</a></li>
-                                 <li><a href="tiperMypage">TIPer관리</a></li>
+                                 <li><a href="tiperMypage">마이페이지</a></li>
+                                 <li><a href="tiperUpdateGo">TIPer관리</a></li>
                                  <li>---------------------------</li>
                                  <li><a href="logOut">로그아웃</a></li>
                               </ul></li>
@@ -456,25 +535,25 @@ body {
             <a href="userUpdateGo">회원정보수정</a>
             <a href="userMyPageGo">마이페이지</a>
             <a href="tiperSignUpMove">TIPer신청</a>
-            <a>-------------------------</a>
+            <br>
             <a href="#portfolio">꿀TIPer</a>
             <a href="allSearch">클래스</a>
             <a href="listnotice">공지사항</a>
             <a href="faqList">FAQ</a>
-            <a>-------------------------</a>
+            <br>
             <a href="logOut">로그아웃</a>
          </c:if>
          <c:if test="${user_id ne NULL and user_role == 1}">
             <a href="goMyHoneypay">허니페이</a>
             <a href="userUpdateGo">회원정보수정</a>
             <a href="tiperMypage">마이페이지</a>
-            <a href="#">TIPer관리</a>
-            <a>-------------------------</a>
+            <a href="tiperUpdateGo">TIPer관리</a>
+            <br>
             <a href="#portfolio">꿀TIPer</a>
             <a href="allSearch">클래스</a>
             <a href="listnotice">공지사항</a>
             <a href="faqList">FAQ</a>
-            <a>-------------------------</a>
+            <br>
             <a href="logOut">로그아웃</a>
          </c:if>
          <c:if test="${user_id eq NULL}">
@@ -482,7 +561,7 @@ body {
             <a href="allSearch">클래스</a>
             <a href="listnotice">공지사항</a>
             <a href="faqList">FAQ</a>
-            <a>-------------------------</a>
+            <br>
             <a href="loginBtn">로그인</a>
          </c:if>
       </nav>
@@ -502,10 +581,10 @@ function openNav() {
 
          // 메세지 전체리스트창 팝업창 띄우기
          $('.send_msg').on('click', function(){
-             popupWindow = window.open("message_list.do?send_btn=0", "_blank", "width=940, height=610, resizeable")
+             popupWindow = window.open("message_list?send_btn=0", "_blank", "width=940, height=620, resizeable")
              //팝업창 리사이즈 방지
              popupWindow.onresize = (_=>{
-                popupWindow.resizeTo(940,680);
+                popupWindow.resizeTo(940,690);
             });
              
              popupWindow.onload = function (){
@@ -515,28 +594,6 @@ function openNav() {
           
           var parent_value;
           
-             // 메세지 팝업창 띄우기 함수 (강사에게 직접 보내기)
-             function open_popup(){
-                 popupWindow = window.open('message_list.do?send_btn=1', '_blank', 'width=940, height=610, resizeable');
-                  //팝업창 리사이즈 방지 함수
-                 popupWindow.onresize = (_=>{
-                     popupWindow.resizeTo(940,680);
-                  });
-                 
-                 popupWindow.onload = function (){
-                    call_chlid();
-                 }
-             }
-
-            // 강사에게 직접 보낼때 호출하는 함수
-             function call_chlid(){  //부모창에서 자식창에 값 전달
-                 try{
-                     popup.child_value_id = "test2"; // 현재 강의글에 있는 강사아이디값을 넣어야하는 곳
-                     popup.child_value_room = 0; // 방번호를 보내야할 곳
-                     popup.child_value_send_btn = 1;
-                     popup.child_function(); // 자식창 함수 호출
-                 }catch(e){} // 부모 자식간의 연결이 끊어졌을 경우 처리할게 있으면 기술
-             }
           
           // 전체 메세지리스트 실행할때 호출
           function call_chlid2(){  //부모창에서 자식창에 값 전달
@@ -552,7 +609,7 @@ function openNav() {
           const Message_chk = function(){
                
                   $.ajax({
-                     url:"message_chk_on.do",
+                     url:"message_chk_on",
                      method:"GET",
                      success:function(data){
                         console.log("메세지 체크 하기");
@@ -574,9 +631,11 @@ function openNav() {
                Message_chk();
             });
        
-           
+            $('.msg_reload').on('click', function(){
+				Message_chk();
+			});
             
    </script>
-   
+
 </body>
 </html>

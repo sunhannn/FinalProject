@@ -34,6 +34,7 @@
 		<mapper resource="mappings/tiper-mapper.xml" />
 		<mapper resource="mappings/point-mapper.xml" />
 		<mapper resource="mappings/escrow-mapper.xml" />
+		<mapper resource="mappings/review-mapper.xml" />
 	</mappers>
 
 </configuration>

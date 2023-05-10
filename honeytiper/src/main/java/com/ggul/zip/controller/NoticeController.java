@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ggul.zip.escrow.EscrowVO;
 import com.ggul.zip.notice.NoticeService;
 import com.ggul.zip.notice.NoticeVO;
 
@@ -41,14 +42,14 @@ public class NoticeController {
 	@RequestMapping("/insertnotice")
 	public String insertNotice(NoticeVO vo) {
 		noticeService.insertNotice(vo);
-		return "redirect:listnotice";
+		return "redirect:adminNoticeList";
 	}
 	
 	//공지사항수정
 	@RequestMapping("/updateNotice")
 	public String updateNotice(NoticeVO vo) {
 		noticeService.updateNotice(vo);
-		return "redirect:listnotice?suc=1";
+		return "redirect:adminNoticeList?suc=1";
 	}
 	
 	//공지사항수정이동
@@ -62,7 +63,7 @@ public class NoticeController {
 	@RequestMapping("/deleteNotice")
 	public String deleteNotice(NoticeVO vo) {
 		noticeService.deleteNotice(vo);
-		return "redirect:listnotice?del=1";
+		return "redirect:adminNoticeList?del=1";
 	}
 	
 	//공지사항상세보기
@@ -72,5 +73,20 @@ public class NoticeController {
 		return "notice/getNotice";
 	}
 
+	
+	
+	//관리자 공지사항리스트페이지 이동
+    @RequestMapping(value = "/adminNoticeList", method=RequestMethod.GET)
+    public String adminNoticeList(){
+       return "queen/adminNoticeList";
+    }
+    
+    //관리자 공지사항리스트
+    @RequestMapping(value = "/adminNoticeList", method=RequestMethod.POST)
+    @ResponseBody
+    public List<NoticeVO> adminNoticeList(NoticeVO vo){
+       return noticeService.adminNoticeList(vo);
+    }
+    
 	
 }

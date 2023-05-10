@@ -48,15 +48,6 @@ public class UserServeImpl implements UserService {
 		return userDAO.hashedChk(password);
 	}
 
-	@Override
-	public UserVO chkMail(UserVO vo, Model model) {
-		return userDAO.chkMail(vo, model);
-	}
-
-	@Override
-	public UserVO getUSerByEmail(UserVO vo) {
-		return userDAO.getUSerByEmail(vo);
-	}
 
 	@Override
 	public void smsSend(UserVO vo, Model model) {
@@ -78,6 +69,16 @@ public class UserServeImpl implements UserService {
 	public boolean findUserPW(UserVO vo) {
 		return userDAO.findUserPW(vo);
 		
+	}
+	
+	@Override
+	public UserVO joinKakaoUser(UserVO vo) {
+		return userDAO.joinKakaoUser(vo);
+	}
+
+	@Override
+	public UserVO getUserByKakaoAccount(UserVO vo) {
+		return userDAO.getUserByKakaoAccount(vo);
 	}
 
 	
@@ -224,5 +225,16 @@ public class UserServeImpl implements UserService {
 	}
 	
 	
-	
+	//정성현 마이페이지 ======================================================
+		@Override
+		public void reportLessonNum(ReportVO rvo){
+			userDAO.reportLessonNum(rvo);
+		}
+		
+		@Override
+		public int isDupReport(ReportVO rvo){
+			int result = userDAO.isDupReport(rvo);
+			System.out.println(result + "===============================");
+			return result;
+		}
 }

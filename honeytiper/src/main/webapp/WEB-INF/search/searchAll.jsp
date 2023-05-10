@@ -45,7 +45,7 @@
 
 	<c:forEach items="${searchAll}" var="search">
 		<tr>
-			<td><img src="${pageContext.request.contextPath}/front/${search.lesson_img}" alt="" title="${search.lesson_img}" width="150px" height="150px"></td>
+			<td><img src="${pageContext.request.contextPath}/front/lesson/${search.lesson_img}" alt="" title="${search.lesson_img}" width="150px" height="150px"></td>
 			<td>${search.lesson_cate}</td>
 			<td>${search.lesson_title}</td>
 			<td>${search.lesson_user_name}</td>

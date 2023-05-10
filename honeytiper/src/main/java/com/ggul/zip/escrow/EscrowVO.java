@@ -18,7 +18,24 @@ public class EscrowVO {
     private String tiper_user_id;
     private String lesson_title;
     
+    private String search_condition;
+    private String search_keyword;
     
+    
+    
+    
+	public String getSearch_condition() {
+		return search_condition;
+	}
+	public void setSearch_condition(String search_condition) {
+		this.search_condition = search_condition;
+	}
+	public String getSearch_keyword() {
+		return search_keyword;
+	}
+	public void setSearch_keyword(String search_keyword) {
+		this.search_keyword = search_keyword;
+	}
 	public String getTiper_user_id() {
 		return tiper_user_id;
 	}

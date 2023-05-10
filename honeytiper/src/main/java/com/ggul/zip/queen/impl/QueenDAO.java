@@ -2,11 +2,13 @@ package com.ggul.zip.queen.impl;
 
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ggul.zip.queen.QueenVO;
+import com.ggul.zip.user.UserVO;
 
 
 @Repository
@@ -51,4 +53,29 @@ public class QueenDAO {
 	}
 	
 
+	
+	//소연
+	public UserVO updateAdmin(UserVO vo) {
+		mybatis.update("QueenDAO.updateAdmin", vo);
+		return vo;
+	}
+	
+		
+	//비밀번호 암호화
+	String hashedChk(String password) {
+		
+		String passwordHashed = BCrypt.hashpw(password, BCrypt.gensalt());
+		boolean isValidPassword = BCrypt.checkpw(password, passwordHashed);
+		
+		if (isValidPassword) {
+			return passwordHashed;
+		} else {
+			return null;
+		}
+		
+	}
+
+	
+	
+	
 }

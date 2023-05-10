@@ -20,15 +20,12 @@
 	<select id="kakaoUser" resultType="users">
 		SELECT * FROM users
 		WHERE
-		user_email = #{user_email}
+		user_email = #{user_email} user_id = #{user_id}
 	</select>
 	<select id="viewUser" resultType="users">
 		SELECT * FROM users WHERE user_id = #{user_id}
 	</select>
 	
-	<select id="viewMail" resultType="users">
-		SELECT * FROM users WHERE user_email = #{user_email}
-	</select>
 	<select id="getUserList" resultType="users">
 		SELECT * FROM users where user_id
 		like concat('%',?,'%') order by user_id
@@ -41,6 +38,11 @@
 	<select id="findUserPW" resultType="users">
 		SELECT * FROM users where user_tel = #{user_tel} and user_id=#{user_id}
 	</select>
+	
+	<insert id="joinKakaoUser">
+		INSERT INTO users (user_id, user_name, user_pw, user_email, user_date, user_role, user_point) 
+		values(#{user_id},#{user_name},#{user_pw},#{user_email}, default, default, default)
+	</insert>
 	
 	
 	
@@ -214,6 +216,14 @@
 		<if test="search_condition == 'user_id' "> AND USER_ID LIKE CONCAT('%', #{search_keyword}, '%')</if>
 		<if test="search_condition == 'user_name' "> AND USER_NAME LIKE CONCAT('%', #{search_keyword}, '%')
 		</if>
+	</select>
+	
+	<insert id="reportLessonNum">
+		INSERT INTO REPORT (REPORT_LESSON_NUM, REPORT_USER_ID, REPORT_CONT) VALUES (#{report_lesson_num}, #{report_user_id} ,#{report_cont});
+	</insert>
+	
+	<select id="isDupReport" resultType="users">
+		SELECT REPORT_NUM FROM REPORT WHERE REPORT_USER_ID = #{report_user_id} AND REPORT_LESSON_NUM = #{report_lesson_num}
 	</select>
 	
 </mapper>

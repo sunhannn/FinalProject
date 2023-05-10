@@ -38,6 +38,11 @@ import com.ggul.zip.notice.NoticeVO;
 		public List<NoticeVO> getNoticeList(NoticeVO vo) {
 			return mybatis.getNoticeList(vo);
 		}
+		
+		@Override
+		public List<NoticeVO> adminNoticeList(NoticeVO vo) {
+			return mybatis.adminNoticeList(vo);
+		}
 	
 	
 }

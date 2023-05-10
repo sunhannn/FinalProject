@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+*{
+		box-sizing: border-box;
+	}
+	
+	html, body {
+		height: 100%;
+		margin: 0px;
+	}
+	
+	.contents_join {
+		width: 768px;
+		margin: 0 auto;
+	}
+	
+	.form_section_join {
+		width: 100%;
+		margin: 0 auto;
+	}
+	
+	.form_section_join input {
+		height: 35px;
+	    width: 300px;
+	    border: none;
+	    padding: 0 10px;
+	}
+	
+	.form_section_join input:focus {
+		border:none;
+		outline:none;
+		border: 2px solid #ffd400;
+		border-radius: 3px;		
+	}
+	
+	.form_section_join .join_radio input {
+		height: 15px;
+		width: 15px;
+	}
+	
+	.form_section_join button {
+	    width: 120px;
+	    height: 40px;
+	    border: none;
+	    border-radius: 3px;
+	    font-weight: bolder;
+		color: #382407;
+	    
+	}
+	
+	.join_info_table button {
+		background-color: #ffd400;
+	}
+	
+	.join_info_table {
+		border-spacing: 0 5px;
+	}
+	
+	.join_info_table .td_left {
+		text-align: left;
+		padding: 10px 30px;
+		width: 180px;
+		background-color: #efefef;
+		border-radius: 5px;
+		font-weight: bolder;
+		color: #382407;
+	}
+	
+	.join_info_table .td_right p {
+		color: red;
+		font-size: 12px;
+		margin: 7px 0;
+	}
+	
+	.join_info_table .td_right {
+		padding: 10px 30px;
+		border-bottom: 2px solid #efefef;
+	}
+	
+	.join_info_table .td_right input {
+		margin: 5px;
+	}
+	
+	.form_section_join #commandCell {
+		text-align: center;
+	}

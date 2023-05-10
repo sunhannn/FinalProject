@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ggul.zip.faq.FaqService;
 import com.ggul.zip.faq.FaqVO;
+import com.ggul.zip.notice.NoticeVO;
 
 @Controller
 public class FaqController {
@@ -35,29 +38,29 @@ public class FaqController {
 	@RequestMapping("/insertFaq")
 	public String insertFaq(FaqVO vo) {
 		faqService.insertFaq(vo);
-		return "redirect:faqList";
+		return "redirect:adminFaqList";
 	}
 	
 	//자묻질 등록 이동
 	@RequestMapping("/insertMoveFaq")
 	public String insertMoveFaq(FaqVO vo) {
-		return "faq/insertFaq";
+		return "queen/insertFaq";
 	}
 	
 	//자묻질 삭제
 	@RequestMapping("/deleteFaq")
 	public String deleteFaq(FaqVO vo) {
 		faqService.deleteFaq(vo);
-		return "redirect:faqList";
+		return "redirect:adminFaqList";
 	}
 	
 	//자묻질 수정
 	@RequestMapping("/updateFaq")
 	public String updateFaq(FaqVO vo) {
 		faqService.updateFaq(vo);
-		
-		return "redirect:faqList?update=1";
+		return "redirect:adminFaqUpdate?update=1";
 	}
+	
 	
 	//자묻질 수정 이동
 	@RequestMapping("/updateMoveFaq")
@@ -65,5 +68,27 @@ public class FaqController {
 		model.addAttribute("faq",faqService.getFaq(vo));
 		return "faq/updateFaq";
 	}
+	
+	
+	//관리자 질문과답변페이지 이동
+    @RequestMapping(value = "/adminFaqList", method=RequestMethod.GET)
+    public String adminFaqList(){
+       return "queen/adminFaqList";
+    }
+    
+    //관리자 질문과답변
+    @RequestMapping(value = "/adminFaqList", method=RequestMethod.POST)
+    @ResponseBody
+    public List<FaqVO> adminFaqList(FaqVO vo){
+       return faqService.getFaqList(vo);
+    }
+	
+    
+    //관리자 질문과답변페이지 이동
+    @RequestMapping(value = "/adminFaqUpdate", method=RequestMethod.GET)
+    public String adminFaqUpdate(FaqVO vo, Model model){
+    	model.addAttribute("faqUpdate",faqService.getFaq(vo));
+    	return "queen/adminFaqUpdate";
+    }
 	
 }

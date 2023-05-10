@@ -6,39 +6,108 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/front/bootstrap.css">
+<style>
+body {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the title */
+#noticeName {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px;
+}
+
+/* Style the table */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+table textarea {
+  width: 100%;
+  height: 70px;
+  font-size: 14pt;
+}
+#contSpace{
+  width: 100%;
+  height: 600px;
+}
+
+/* Style the buttons */
+button {
+  background-color: #FFD400;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  float:right;
+}
+
+button:hover {
+  background-color: #DBB600;
+}
+
+/* Style the radio buttons */
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+/* Style the form */
+form {
+  margin: 10px;
+}
+
+</style>
 <script>
 	function btnDelete(){
 		location.href="deleteNotice?notice_num="+${getNotice.notice_num}
 	}
 </script>
 <body>
+<div class="container">
 <span id="noticeName">공지사항</span>
-	<button type="button" onclick="location.href='listnotice'">목록가기</button>
+	<button type="button" onclick="location.href='listnotice'">목록(사용자) 가기</button>
+	<button type="button" onclick="location.href='adminNoticeList'">목록(관리자) 가기</button>
 	<form action="updateNotice?notice_num=+${getNotice.notice_num}" method="post">
 		<table>
 			<tr>
-				<td><input type="text" name="notice_title" value="${getNotice.notice_title}"></td>
+				<td style="font-size: 14pt;">${getNotice.notice_date }</td>
+			</tr>
+			<tr>
+				<td><textarea name="notice_title" >${getNotice.notice_title}</textarea></td>
 			</tr>
 			
 			<tr>
-				<td>${getNotice.notice_date }</td>
-			</tr>
-			
-			<tr>
-				<td><input type="text" name="notice_cont" value="${getNotice.notice_cont }"></td>
+				<td><textarea name="notice_cont" id="contSpace">${getNotice.notice_cont }</textarea></td>
 			</tr>
 			<tr>
-				<td>
-				고정여부
-				</td>
-				<td>
-					<input type="radio" name="notice_pin" value="1">고정
-					<input type="radio" name="notice_pin" value="0" checked>일반
+				<td style="text-align: right; font-size:13pt;">
+				고정여부&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="notice_pin" value="1" id="pin1"><label for="pin1">고정</label>&nbsp;&nbsp;
+					<input type="radio" name="notice_pin" value="0" id="pin0" checked><label for="pin0">일반</label>
 				</td>
 			</tr>
 		</table>
 	<button type="submit">수정하기</button>
 	<button type="button" onclick="btnDelete()">삭제하기</button>
 	</form>
+	</div>
 </body>
 </html>

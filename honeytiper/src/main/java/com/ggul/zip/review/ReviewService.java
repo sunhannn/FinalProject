@@ -1,7 +1,9 @@
 package com.ggul.zip.review;
 
+import com.ggul.zip.lesson.ReviewVO;
+
 public interface ReviewService {
 
-	int ReviewInsert(ReviewVO reviewVO);
+	int reviewInsert(ReviewVO reviewVO);
 
 }

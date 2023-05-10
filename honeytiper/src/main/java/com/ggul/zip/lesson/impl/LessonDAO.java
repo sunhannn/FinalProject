@@ -17,10 +17,6 @@ public class LessonDAO {
 
 	
 	//상현이부분
-	List<LessonVO> getUserLessonList(LessonVO lessonVO) {
-		return mybatis.selectList("lessonDAO.getUserLessonList", lessonVO);
-	}
-
 	List<LessonVO> selectselectLessonTiper(LessonVO lessonVO) {
 		return mybatis.selectList("lessonDAO.selectLessonTiper", lessonVO);
 	}
@@ -61,5 +57,16 @@ public class LessonDAO {
 	public List<LessonVO> getLessonListPostSearch(HashMap<String, Object> map){
 		return  mybatis.selectList("lessonDAO.getLessonListPostSearch", map);
 	}
+	
+	
+	//정성현: 마이페이지
+	// 마이페이지 : 완료된 강의 내역
+	public List<LessonVO> getUserLessonList(LessonVO lessonVO) {
+		return mybatis.selectList("lessonDAO.getUserLessonList", lessonVO);
+	}	
+	
+	public List<LessonVO> getCompletedLessonList(LessonVO vo) {
+			return mybatis.selectList("lessonDAO.getCompletedLessonList", vo);
+		}
 
 }

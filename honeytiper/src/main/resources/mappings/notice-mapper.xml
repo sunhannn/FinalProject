@@ -21,6 +21,23 @@
 		order by NOTICE_PIN desc, notice_num desc
 	</select>
 	
+	
+		<select id="adminNoticeList" resultType="notice">
+			select * from notice where 1=1 
+		 	<if test="notice_start != null and notice_start !='' ">
+        		<![CDATA[ AND notice_date >= ]]>#{notice_start}
+    		</if>
+    		<if test="notice_end != null and notice_end !='' ">
+       			<![CDATA[ AND notice_date <= ]]>DATE_ADD(#{notice_end}, INTERVAL 1 DAY)
+    		</if>
+			<if test="notice_search != null and notice_search !='' ">and NOTICE_TITLE like concat('%', #{notice_search}, '%') </if>
+			order by NOTICE_PIN desc, notice_num desc
+	</select>
+	
+	
+	
+	
+	
 
 	<insert id="insertNotice">
 		insert into notice values(

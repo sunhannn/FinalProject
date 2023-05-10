@@ -20,10 +20,6 @@ public interface UserService {
 	
 	public String hashedChk(String password);
 	
-	public UserVO chkMail(UserVO vo, Model model);
-	
-	public UserVO getUSerByEmail(UserVO vo);
-	
 	public void smsSend(UserVO vo, Model model);
 	
 	public boolean findUserPW(UserVO vo);
@@ -31,6 +27,10 @@ public interface UserService {
 	public void findUser(UserVO vo, Model model);
 	
 	public boolean updatePW(UserVO vo);
+	
+	public UserVO getUserByKakaoAccount(UserVO vo);
+	
+	public UserVO joinKakaoUser(UserVO vo);
 	
 	
 	
@@ -104,6 +104,10 @@ public interface UserService {
 	
 	List<UserVO> getBlackList(UserVO vo);
 	ArrayList<UserVO> searchBlackList(HashMap<String, Object> map);
+	
+	//정성현 마이페이지 =======
+	void reportLessonNum(ReportVO rvo);
+	int isDupReport(ReportVO rvo);
 	
 	
 }

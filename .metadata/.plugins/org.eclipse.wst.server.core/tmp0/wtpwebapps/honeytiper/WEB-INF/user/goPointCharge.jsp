@@ -1,22 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <title>아임포트결제창</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<title>아임포트결제창</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!-- jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
     <!-- iamport.payment.js -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <!-- modal -->
-<!--   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script> -->
-    
-    <script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
     //<<<<<<<<<<<<<<아임포트결제코드>>>>>>>>>>>>>>>
     function requestPay() {
        var amount = $("#amount").val();
@@ -71,66 +71,93 @@
         }
     
     </script>
-   <style>
-  
-   .warning {
-   background-color: #ffd400;
-   border: none; 
-   border-radius:4px;
-  color: white; 
-  padding: 12px 15px; 
-  cursor: pointer; 
+    <script>
+ // Get the modal
+ var modal = document.getElementById('id01');
+
+ // When the user clicks anywhere outside of the modal, close it
+ window.onclick = function(event) {
+   if (event.target == modal) {
+     modal.style.display = "none";
    }
-   .warning:hover {background: #e7c310;}
-   input[type="number"]::-webkit-outer-spin-button,
-   input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+ }
+ 
+</script>
+<style>
+.warning {
+	background-color: #ffd400;
+	border: none;
+	border-radius: 4px;
+	color: white;
+	padding: 12px 15px;
+	cursor: pointer;
 }
- .modal-content{
- padding: 35px;}
- 
- 
- 
-   </style>
+.info-button{
+background-color: #a3a3a3;
+	border: none;
+	border-radius: 4px;
+	color: white;
+	padding: 12px 15px;
+	cursor: pointer;
+}
+.warning:hover {
+	background-color: #e7c310;
+	color:black;
+}
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
+	{
+	-webkit-appearance: none;
+	margin: 0;
+}
+.w3-modal {
+  z-index: 9999;
+}
+.w3-container{
+margin:40px 40px;
+
+}
+.w3-modal-content.w3-card-4 {
+    width: 35%;
+    border-radius: 4px;
+}
+@media (max-width: 768px) {
+  #amount {
+    width: 90%;
+    padding: 10px;
+  }
+  .warning {
+    display: block;
+    margin: 10px auto 0;
+  }
+}
+@media(min-width: 768px){
+#amount{
+width: 50%; padding: 10px;
+}}
+.end-hr{
+margin-bottom: 230px;
+}
+</style>
 </head>
 <body>
-<%@include file="../main/header.jsp" %>
-<div class="container">
-  <h2 style="margin:140px 0px 70px 0px;">마이페이지</h2>
-  <h4>허니페이 충전하기</h4> <button type="button" class="btn" data-toggle="modal" data-target="#myModal">허니페이란</button>
-   <hr>
-   <br><br>
-<br>
-  <div class="form-group">
-<label  class="col-sm-4 control-label"style="font-size:25px; text-align:right;">충전 금액:</label>
-<div class="col-sm-8" >
-<input type="number" id="amount" name="amount" class="payfull-input" placeholder="결제할 금액을 입력해주세요" style="width: 50%; padding:10px;">
-  <button class="warning" onclick="requestPay()">결제하기</button>
-</div>
-</div>
-<br><br>
-<br>
-<hr>
-
-<!-- 허니페이설명 모달 -->
-
-  
-</div>
-<div class="container">
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">티퍼와의 거래문제를 예방하는 허니페이의 안전결제</h4>
-        </div>
-        <div class="modal-body">
-        </div>
-
-<h4><b>허니페이 안전결제는 </b></h4>
+	<%@include file="../main/header.jsp"%>
+	<div class="container">
+		<h2 style="margin: 140px 0px 70px 0px;">마이페이지</h2>
+		<p style="font-size:23px;">허니페이 충전하기</p>
+		<br>
+		<button onclick="document.getElementById('id01').style.display='block'" class="info-button">허니페이란</button>
+		
+<div class="w3-container">
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4">
+      <header class="container teal" style="background-color:#ffd400;"> 
+        <span onclick="document.getElementById('id01').style.display='none'" 
+        class="w3-button w3-display-topright">&times;</span>
+        
+      </header>
+      <div class="w3-container">
+        <h4><b>허니페이 안전결제는 </b></h4>
 <h4><b>티퍼와 고객 간 거래시 사용하는 결제수단입니다</b></h4>
 <br>
 <h5><b>결제금액 안전하게 보호</b></h5>
@@ -155,13 +182,29 @@
 <h5><b>거래확정</b></h5>
 <p>서비스가 모두 종료되어 거래를 확정한 상태로, </p>
 <p>티퍼에게 서비스 대금이 최종적으로 지급됩니다.</p>
-
-<br><br>
-        </div>
       </div>
-      
+      <footer class="w3-container w3-teal">
+      </footer>
     </div>
   </div>
-  <%@include file="../main/footer.jsp"%>
+</div>
+
+		<hr>
+		<br><br>
+		<div class="form-group">
+			<label class="col-sm-4 control-label"
+				style="font-size: 25px; text-align: right;">충전 금액:</label>
+			<div class="col-sm-8">
+				<input type="number" id="amount" name="amount" class="payfull-input"
+					placeholder="결제할 금액을 입력해주세요" >
+				<button class="warning" onclick="requestPay()">결제하기</button>
+			</div>
+		</div>
+		<br>
+		<br> <br>
+		<hr class="end-hr">
+	</div>
+<%@include file="../main/footer.jsp"%>
+
 </body>
 </html>

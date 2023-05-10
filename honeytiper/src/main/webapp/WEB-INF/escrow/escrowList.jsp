@@ -10,15 +10,14 @@
 <meta charset="UTF-8">
 <title>안전결제 내역</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- <link rel="stylesheet" -->
-<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <%
 Date today = new Date();
 String formattedDate = String.format("%tF", today);
 %>
 <style>
 .container {
-  width: 70%;
+  width: 65%;
   margin: 0 auto;
 }
 /* 나머지 요소들은 기본값인 z-index: 1로 설정 */
@@ -32,7 +31,7 @@ th, td {
   text-align: center;
   vertical-align: middle;
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 12px;
   z-index: 1;
 }
 
@@ -47,9 +46,9 @@ th {
   background-color: #FFD400;
   font-size: 12pt;
   padding: 5px;
-  margin: 5px;
   cursor: pointer;
   color: white;
+  font-weight: bold;
 }
 
 #view-all-button:hover, #search-button:hover {
@@ -88,6 +87,11 @@ th {
   background-color: #FFD400;
   color: #fff;
 }
+ input[type=date] {
+    width: 170px;
+   height: 25px;
+    text-align: center;
+  }
 </style>
 </head>
 <body>
@@ -224,7 +228,9 @@ for (var i = startPage; i < endPage; i++) {
 	    "</td><td>" + (dataList[i].lesson_title || "") +
 	 "</td><td>" + (dataList[i].escrow_status === 0 ? "신청중" :
          						dataList[i].escrow_status === 1 ? "진행중" :
-             					dataList[i].escrow_status === 2 ? "완료" : "") +
+         						dataList[i].escrow_status === 2 ? "완료" :
+         						dataList[i].escrow_status === 3 ? "강제완료" :
+             					dataList[i].escrow_status === 4 ? "취소" : "") +
 	 "</td><td>" + (dataList[i].escrow_end ? formatDate(new Date(dataList[i].escrow_end)) : "") +
 	 "</td><td>" + (dataList[i].escrow_price || "").toLocaleString()+ "</td></tr>";
  }
@@ -297,16 +303,14 @@ $("#pagingul li a").click(function () {
 <div class="container">
 <h2 style="margin:40px 0px;">안전결제내역</h2>
 
-		
 <button id="view-all-button" onclick="viewAllFnc()">전체목록보기</button>
-<br>
+<br><br>
 <label for="start-date">기간선택</label>
 <input type="date" id="start-date" name="startDate" >
-
 <label for="end-date">~</label>
 <input type="date" id="end-date" name="endDate" >
-<button id="search-button"  onclick="btnSFnc()">검색</button>
-
+<button id="search-button"  onclick="btnSFnc()"><i style='font-size:19px; color:white;' class='fas'>&#xf002;</i></button>
+<br><br><br>
 <label for="status-0">신청중</label>
 <input type="radio" id="status-0" name="escrow_status" value="0">
 <label for="status-1">진행중</label>
@@ -315,6 +319,7 @@ $("#pagingul li a").click(function () {
 <input type="radio" id="status-2" name="escrow_status" value="2">
 				<br>
             <hr class="hrFirst">
+            <br>
             <span id="displayCount"></span>
             <table class="table table-bordered">
 	            <thead>
