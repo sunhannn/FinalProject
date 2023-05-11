@@ -13,8 +13,8 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>tiper 강의수정</title>
 
-<link rel="stylesheet" href="front/common.css">
-<link rel="stylesheet" href="front/bootstrap.css">
+<!-- <link rel="stylesheet" href="front/common.css"> -->
+<!-- <link rel="stylesheet" href="front/bootstrap.css"> -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.js"></script>
 <style type="text/css">
 @media ( max-width : 768px) {
@@ -28,10 +28,17 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		width: 100%;
 	}
 	#lesup_td1 {
-		font-size: 24px;
+		width: 300px;
+		font-size: 18px;
 		height: 70px;
-		text-decoration-line: underline;
-		text-decoration-color: #FFD400;
+	}
+	#lesup_td3 {
+		width: 300px;
+		font-size: 18px;
+	}
+	#lesup_td5 {
+		width: 300px;
+		tex
 	}
 	#lesup_input1 {
 		width: 300px;
@@ -42,38 +49,39 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 	#lesup_input1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
+		border-radius: 10px;
 	}
 	#lesup_tr2 {
 		height: 70px;
 	}
 	#lesup_tr3 {
-		font-size: 24px;
+		font-size: 19px;
 		height: 70px;
-		text-decoration-line: underline;
-		text-decoration-color: #FFD400;
 	}
 	#lesup_info1 {
 		margin-left: 2px;
-		width: 350px;
+		width: 300px;
 		border: 0;
 		resize: none;
 	}
 	#lesup_info1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
+		border-radius: 10px;
 	}
 	#lesup_img1 {
 		width: 200px;
 		height: 200px;
 	}
-	#lesup_tr5 {
-		height: 300px;
+	#lesup_imgg {
+		width: 200px;
+		height: 200px;
 	}
 	#lesup_td5 {
-		font-size: 24px;
+		font-size: 20px;
 	}
-	#lesup_tr6 {
-		height: 70px;
+	#lesup_td6 {
+		text-align: center;
 	}
 	#lesup_div3 {
 		text-align: center;
@@ -94,6 +102,12 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		border-radius: 10px;
 		cursor: pointer;
 		color: white;
+	}
+	.lesup_span {
+		font-size: 22px;
+		text-decoration-line: underline;
+		text-decoration-color: #FFD400;
+		text-decoration-line: underline;
 	}
 }
 
@@ -108,10 +122,13 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		width: 100%;
 	}
 	#lesup_td1 {
-		font-size: 30px;
+		font-size: 20px;
 		height: 80px;
-		text-decoration-line: underline;
-		text-decoration-color: #FFD400;
+		vertical-align: top;
+		width: 45%;
+	}
+	#lesup_td2 {
+		vertical-align: top;
 	}
 	#lesup_input1 {
 		width: 450px;
@@ -122,15 +139,14 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 	#lesup_input1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
+		border-radius: 10px;
 	}
 	#lesup_tr2 {
 		height: 70px;
 	}
 	#lesup_tr3 {
-		font-size: 30px;
+		font-size: 20px;
 		height: 80px;
-		text-decoration-line: underline;
-		text-decoration-color: #FFD400;
 	}
 	#lesup_info1 {
 		margin-left: 2px;
@@ -141,19 +157,29 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 	#lesup_info1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
+		border-radius: 10px;
 	}
 	#lesup_img1 {
 		width: 300px;
 		height: 300px;
+		border-radius: 10px;
 	}
-	#lesup_tr5 {
-		height: 400px;
+	#lesup_imgg {
+		width: 300px;
+		height: 300px;
+		border-radius: 10px;
+	}
+	#lesup_td3 {
+		font-size: 20px;
+		vertical-align: top;
 	}
 	#lesup_td5 {
-		font-size: 24px;
+		font-size: 20px;
+		height: 300px;
+		vertical-align: top;
 	}
-	#lesup_tr6 {
-		height: 70px;
+	#lesup_td6 {
+		vertical-align: top;
 	}
 	#lesup_div3 {
 		text-align: center;
@@ -175,13 +201,17 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		cursor: pointer;
 		color: white;
 	}
+	.lesup_span {
+		text-decoration-line: underline;
+		text-decoration-color: #FFD400;
+	}
 }
 </style>
 
 
 </head>
 <body>
-
+	<%@include file="../main/header.jsp"%>
 	<div class="container">
 		<span id="lesup_sub1">TIPer 강의 수정하기</span> <br>
 		<hr>
@@ -192,35 +222,32 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 			<table id="lesup_tab1">
 
 				<tr id="lesup_tr1">
-					<td id="lesup_td1">원래 강의 제목 : <%=vo.getLesson_title()%> <br>
-					</td>
-				</tr>
-
-				<tr id="lesup_tr2">
+					<td id="lesup_td1"><span class="lesup_span">원래 강의 제목</span> :
+						<%=vo.getLesson_title()%> <br></td>
 					<td id="lesup_td2"><input type="text" placeholder="수정할 강의 제목"
 						name="lesson_title" id="lesup_input1"></td>
 				</tr>
-				<tr id="lesup_tr3">
-					<td id="lesup_td3">원래 강의 내용 : <%=vo.getLesson_info()%>
 
-					</td>
-				</tr>
-				<tr id="lesup_tr4">
+				<tr id="lesup_tr2">
+
+					<td id="lesup_td3"><span class="lesup_span">원래 강의 내용</span> :
+						<%=vo.getLesson_info()%>
 					<td id="lesup_td4"><textarea name="lesson_info"
 							id="lesup_info1" cols="30" rows="10" placeholder="수정할 강의 내용"></textarea></td>
 
+
 				</tr>
-
-
-				<tr id="lesup_tr5">
-					<td id="lesup_td5">원래 이미지 : <img
-						src="front/<%=vo.getLesson_img()%>" alt="강의 사진" id="lesup_img1">
+				<tr id="lesup_tr3">
+					<td id="lesup_td5"><span class="lesup_span">원래 이미지 :</span> <img
+						src="front/<%=vo.getLesson_img()%>" alt="강의 사진" id="lesup_imgg">
 					</td>
+
+					<td id="lesup_td6"><input type="file" placeholder="수정할 사진"
+						name="lesson_img" accept=".jpg,.jpeg,.png" id="lesup_img"
+						onchange="previewImage(event);"> <img
+						src="front/lessonimg.png" alt="강의 사진" id="lesup_img1"></td>
 				</tr>
-				<tr id="lesup_tr6">
-					<td><input type="file" placeholder="수정할 사진" name="lesson_img"
-						accept=".jpg,.jpeg,.png" id="lesup_img"></td>
-				</tr>
+
 			</table>
 			<br> <br>
 			<div id="lesup_div3">
@@ -230,7 +257,9 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 
 	</div>
 
-
+	<br>
+	<br>
+	<br>
 
 	<script type="text/javascript">
 	$(() => {
@@ -259,12 +288,12 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 	function previewImage(event) {
 		var reader = new FileReader();
 		reader.onload = function() {
-			var output = document.getElementById('tiperpreview');
+			var output = document.getElementById('lesup_img1');
 			output.src = reader.result;
 		}
 		reader.readAsDataURL(event.target.files[0]);
 		// 파일 선택 후 input 요소 숨기기
-		var input = document.getElementById('tipimg');
+		var input = document.getElementById('lesup_img');
 		input.style.display = 'none';
 		
 	}
@@ -279,7 +308,7 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 
 
 
-
+	<%@include file="../main/footer.jsp"%>
 
 </body>
 </html>

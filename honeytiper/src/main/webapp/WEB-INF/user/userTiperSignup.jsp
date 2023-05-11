@@ -19,8 +19,8 @@ if (check == 1) {
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tiper신청</title>
-<link rel="stylesheet" href="front/common.css">
-<link rel="stylesheet" href="front/bootstrap.css">
+<!-- <link rel="stylesheet" href="front/common.css"> -->
+<!-- <link rel="stylesheet" href="front/bootstrap.css"> -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.js"></script>
 
 <style type="text/css">
@@ -30,9 +30,6 @@ body {
 }
 
 @media ( max-width : 768px) {
-	.container {
-		width: 100%;
-	}
 	#sin_sub1 {
 		font-size: 28px;
 		background-color: #FFD400;
@@ -52,7 +49,6 @@ body {
 	#sin_info1 {
 		width: 95%;
 		border: 0;
-		
 	}
 	#sin_info1:focus {
 		border: 3px solid #FFD400;
@@ -75,12 +71,11 @@ body {
 		border: 0;
 		width: 200px;
 		height: 30px;
-		border-radius: 10%;
+		border-radius: 10px;
 	}
 	#div_btn1 {
 		text-align: center;
 	}
-	
 	#tiperUppreview {
 		width: 200px;
 		height: 200px;
@@ -88,9 +83,6 @@ body {
 }
 
 @media ( min-width : 769px) {
-	.container {
-		width: 100%;
-	}
 	#sin_sub1 {
 		font-size: 38px;
 		background-color: #FFD400;
@@ -112,36 +104,41 @@ body {
 		height: 50px;
 	}
 	#sin_info1 {
-		width: 95%;
-		height:
+		width: 65%;
+		height: 250px;
+		resize: none;
+		border: 0;
 	}
 	#sin_info1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		font-size: 20px;
 	}
 	#sin_cate1, #sin_cate2, #sin_cate3 {
 		width: 180px;
 		height: 40px;
+		border: 0;
 	}
 	#sin_cate1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
+		border-radius: 10px;
 	}
 	#sin_cate2:focus {
 		border: 3px solid #FFD400;
 		outline: none;
+		border-radius: 10px;
 	}
 	#sin_cate3:focus {
 		border: 3px solid #FFD400;
 		outline: none;
+		border-radius: 10px;
 	}
 	#sin_btn1 {
 		background-color: #FFD400;
 		border: 0;
 		width: 300px;
 		height: 50px;
-		border-radius: 10%;
+		border-radius: 10px;
 	}
 	#div_btn1 {
 		text-align: center;
@@ -152,19 +149,32 @@ body {
 	#sin_addr1 {
 		width: 300px;
 		height: 40px;
+		border: 0;
 	}
 	#sin_addr1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
+		border-radius: 10px
 	}
 	#tiperUppreview {
 		width: 250px;
 		height: 250px;
+		border-radius: 10px;
+	}
+	input[type=file]::file-selector-button {
+		width: 150px;
+		height: 30px;
+		background: #FFD400;
+		border: 0;
+		border-radius: 10px;
+		cursor: pointer;
+		color: white;
 	}
 }
 </style>
 </head>
 <body>
+	<%@include file="../main/header.jsp"%>
 	<div class="container">
 		<span id="sin_sub1">TIPer 신청</span> <br> <br> <span
 			id="sin_sub2">카테고리 심사 후 TIPer 등록이 완료됩니다</span> <br>
@@ -177,10 +187,10 @@ body {
 				<input type="file" id="sin_img1" accept=".jpg,.jpeg,.png"
 					placeholder="눌러서 강사에 대한 img등록" name="tiper_img" required="required"
 					onchange="previewImage(event)"> <img id="tiperUppreview"
-					src="#" alt="강의사진을 올려주세요">
+					src="front/lessonimg.png" alt="강의사진을 올려주세요">
 			</div>
 
-
+			<br>
 			<textarea name="tiper_info" id="sin_info1" cols="30" rows="10"
 				placeholder="TIPer소개를 작성해주세요 (경력, 수상내역, 취득자격증 등등)"
 				required="required"></textarea>
@@ -206,16 +216,18 @@ body {
 						<option value="라이프스타일">라이프스타일</option>
 						<option value="IT">IT</option>
 						<option value="기타">기타</option>
-				</select>&nbsp; <select name="tiper_cate2" id="sin_cate2">
+				</select>&nbsp;&nbsp;&nbsp; <select name="tiper_cate2" id="sin_cate2">
 						<option selected disabled hidden>두번째 카테고리</option>
+						<option value="">선택안함</option>
 						<option value="예체능">예체능</option>
 						<option value="공예">공예</option>
 						<option value="사무">사무</option>
 						<option value="라이프스타일">라이프스타일</option>
 						<option value="IT">IT</option>
 						<option value="기타">기타</option>
-				</select>&nbsp; <select name="tiper_cate3" id="sin_cate3">
+				</select>&nbsp;&nbsp;&nbsp; <select name="tiper_cate3" id="sin_cate3">
 						<option selected disabled hidden>세번째 카테고리</option>
+						<option value="">선택안함</option>
 						<option value="예체능">예체능</option>
 						<option value="공예">공예</option>
 						<option value="사무">사무</option>
@@ -245,9 +257,10 @@ body {
 			<button type="submit" id="sin_btn1">TIPer등록 신청하기</button>
 		</div>
 
-
+<br>
+<br>
 	</form>
-
+	<%@include file="../main/footer.jsp"%>
 
 	<script type="text/javascript">
 		
@@ -265,7 +278,7 @@ body {
          contentType: false,
          processData: false,
          cache : false,
-         success : function(sin_img1){
+         success : function(){
             console.log('success');
          },
          error : function(){

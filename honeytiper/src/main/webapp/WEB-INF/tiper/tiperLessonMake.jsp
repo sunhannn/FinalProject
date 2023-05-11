@@ -34,8 +34,8 @@ if (cateCheck2 == false) {
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>강의 등록</title>
-<link rel="stylesheet" href="front/common.css">
-<link rel="stylesheet" href="front/bootstrap.css">
+<!-- <link rel="stylesheet" href="front/common.css"> -->
+<!-- <link rel="stylesheet" href="front/bootstrap.css"> -->
 <style type="text/css">
 @media ( max-width : 768px) {
 	#lesmake_sub1 {
@@ -94,19 +94,29 @@ if (cateCheck2 == false) {
 	}
 	#lesmake_btn1 {
 		background-color: #FFD400;
-		border-radius: 10%;
+		border-radius: 10px;
 		border: 0;
 		width: 200px;
 		height: 55px;
+		color: white;
 	}
 	#lesmake_div2 {
 		text-align: center;
+	}
+	input[type=file]::file-selector-button {
+		width: 150px;
+		height: 30px;
+		background: #FFD400;
+		border: 0;
+		border-radius: 10px;
+		cursor: pointer;
+		color: white;
 	}
 }
 
 @media ( min-width : 769px) {
 	#lesmake_sub1 {
-		font-size: 30px;
+		font-size: 35px;
 		background-color: #FFD400;
 		border-radius: 10%;
 	}
@@ -133,46 +143,72 @@ if (cateCheck2 == false) {
 		vertical-align: middle;
 		width: 300px;
 		height: 300px;
+		resize: none;
 	}
 	#lesmake_info:focus {
 		border: 3px solid #FFD400;
 		outline: none;
+		border-radius: 10px;
 	}
 	#lesmake_title {
 		width: 300px;
-		height: 35px;
+		height: 45px;
 		border: 0;
 	}
 	#lesmake_title:focus {
 		border: 3px solid #FFD400;
 		outline: none;
+		border-radius: 10px;
 	}
 	.lesmake_td1 {
-		font-size: 20px;
+		font-size: 25px;
 		text-decoration: underline;
 		text-decoration-color: #FFD400;
-		width: 150px;
+		width: 20s0px;
+	}
+	.lesmake_td2 {
+		width: 500px;
+		text-align: center;
 	}
 	#lesmake_cate {
 		height: 40px;
 		border: 0;
-		width: 200px;
+		width: 300px;
 		margin-left: 20px;
+	}
+	#lesmake_cate:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
 	}
 	#lesmake_btn1 {
 		background-color: #FFD400;
-		border-radius: 10%;
+		border-radius: 10px;
 		border: 0;
 		width: 200px;
 		height: 55px;
+		color: white;
 	}
 	#lesmake_div2 {
 		text-align: center;
+	}
+	input[type=file]::file-selector-button {
+		width: 150px;
+		height: 30px;
+		background: #FFD400;
+		border: 0;
+		border-radius: 10px;
+		cursor: pointer;
+		color: white;
+	}
+	#lesmake_divimg2 {
+		text-align: right;
 	}
 }
 </style>
 </head>
 <body>
+	<%@include file="../main/header.jsp"%>
 	<div class="container">
 		<span id="lesmake_sub1">TIPer 강의 등록</span> <br>
 		<hr>
@@ -182,9 +218,13 @@ if (cateCheck2 == false) {
 
 		<form action="lessonMakeAction">
 			<div id="lesmake_imgdiv">
-				<input type="file" accept=".jpg,.jpeg,.png" name="lesson_img"
-					id="lesmake_img" onchange="previewImage(event)"> <img
-					id="preview" src="#" alt="강의사진을 올려주세요">
+				<div id="lesmake_divimg1">
+					<input type="file" accept=".jpg,.jpeg,.png" name="lesson_img"
+						id="lesmake_img" onchange="previewImage(event)">
+				</div>
+				<div id="lesmake_divimg2">
+					<img id="preview" src="front/lessonimg.png" alt="강의사진을 올려주세요">
+				</div>
 			</div>
 			<table id="lesmake_tab1">
 				<tr class="lesmake_tr">
@@ -218,6 +258,7 @@ if (cateCheck2 == false) {
 		</form>
 
 	</div>
+	<br>
 	<script type="text/javascript">
 		function previewImage(event) {
 			var reader = new FileReader();
@@ -229,9 +270,9 @@ if (cateCheck2 == false) {
 			// 파일 선택 후 input 요소 숨기기
 			var input = document.getElementById('lesmake_img');
 			input.style.display = 'none';
-			
+
 		}
 	</script>
-
+	<%@include file="../main/footer.jsp"%>
 </body>
 </html>

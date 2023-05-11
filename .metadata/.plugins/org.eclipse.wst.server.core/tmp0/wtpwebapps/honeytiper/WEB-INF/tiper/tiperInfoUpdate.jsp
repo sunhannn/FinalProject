@@ -14,15 +14,10 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>강사 정보 수정</title>
 
-<link rel="stylesheet" href="front/common.css">
-<link rel="stylesheet" href="front/bootstrap.css">
+<!-- <link rel="stylesheet" href="front/common.css"> -->
+<!-- <link rel="stylesheet" href="front/bootstrap.css"> -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.js"></script>
 <style type="text/css">
-body {
-	padding: 0;
-	margin: 0 auto;
-}
-
 @media ( max-width : 768px) {
 	#tipup_sub1 {
 		font-size: 27px;
@@ -73,20 +68,22 @@ body {
 	}
 	#tipup_btn1 {
 		background-color: #FFD400;
-		border-radius: 10%;
+		border-radius: 10px;
 		border: 0;
 		width: 120px;
 		height: 30px;
+		color: white;
 	}
 	#tipup_btn_div1 {
 		text-align: center;
 	}
 	#tipup_btn2 {
 		background-color: #FFD400;
-		border-radius: 10%;
+		border-radius: 10px;
 		border: 0;
 		width: 120px;
 		height: 30px;
+		color: white;
 	}
 	#tiperpreview {
 		width: 180px;
@@ -157,20 +154,22 @@ body {
 	}
 	#tipup_btn1 {
 		background-color: #FFD400;
-		border-radius: 10%;
+		border-radius: 10px;
 		border: 0;
 		width: 180px;
 		height: 50px;
+		color: white;
 	}
 	#tipup_btn_div1 {
 		text-align: center;
 	}
 	#tipup_btn2 {
 		background-color: #FFD400;
-		border-radius: 10%;
+		border-radius: 10px;
 		border: 0;
 		width: 200px;
 		height: 55px;
+		color: white;
 	}
 	#tiperpreview {
 		width: 240px;
@@ -187,10 +186,10 @@ body {
 		color: white;
 	}
 }
-}
 </style>
 </head>
 <body>
+	<%@include file="../main/header.jsp"%>
 	<div class="container">
 		<span id="tipup_sub1">TIPer 정보 수정</span>
 		<hr>
@@ -280,5 +279,6 @@ body {
 	
 	
 </script>
+	<%@include file="../main/footer.jsp"%>
 </body>
 </html>

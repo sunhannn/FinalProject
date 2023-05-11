@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -59,19 +60,21 @@ public class TiperController {
 	@Autowired
 	private EscrowService escrowService;
 
+	@Autowired
+	private ServletContext servletContext;
 	// 상현이부분
 
 	// 강사 마이페이지 이동
 	@RequestMapping(value = "/tiperMypage")
-	public String tiperMypage(HttpServletRequest request, HttpSession session, UserVO vo, TiperVO tiperVO,
-			LessonVO lessonVO) {
+	public String tiperMypage(Model model, HttpSession session, UserVO vo, TiperVO tiperVO, LessonVO lessonVO) {
 		tiperVO.setTiper_user_id((String) session.getAttribute("user_id"));
 		vo.setUser_id((String) session.getAttribute("user_id"));
 		vo.setUser_point(userService.pointSelect(vo));
-		session.setAttribute("user_point", vo.getUser_point());
+		model.addAttribute("user_point", vo.getUser_point());
 		tiperVO = tiperService.selectTiperInfo(tiperVO);
+		model.addAttribute("tiperVO",tiperVO);
 		lessonVO.setLesson_tiper_code(tiperVO.getTiper_code());
-		request.setAttribute("lessonTiper", lessonService.selectLessonTiper(lessonVO));
+		model.addAttribute("lessonTiper", lessonService.selectLessonTiper(lessonVO));
 		return "tiper/tiperMypage";
 	}
 
@@ -318,7 +321,7 @@ public class TiperController {
 		try {
 			String fileName = file.getOriginalFilename();
 			model.addAttribute("filename", fileName);
-			String savePath = "C:\\Springwork\\honeytiper999\\src\\main\\webapp\\resources\\img\\";
+			String savePath = servletContext.getRealPath("/resources/img/");
 			String filePath = savePath + fileName;
 			model.addAttribute("filename", fileName);
 			File saveDir = new File(savePath);
@@ -335,5 +338,29 @@ public class TiperController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file");
 		}
 	}
+
+//	@PostMapping("/upload")
+//	public ResponseEntity<String> uploadFile(@RequestParam("tiper_img") MultipartFile file, Model model) {
+//		// 파일 저장
+//		try {
+//			String fileName = file.getOriginalFilename();
+//			model.addAttribute("filename", fileName);
+//			String savePath = "C:\\Springwork\\honeytiper999\\src\\main\\webapp\\resources\\img\\";
+//			String filePath = savePath + fileName;
+//			model.addAttribute("filename", fileName);
+//			File saveDir = new File(savePath);
+//			if (!saveDir.exists()) {
+//				saveDir.mkdirs();
+//			}
+//
+//			File saveFile = new File(filePath);
+//			file.transferTo(saveFile);
+//			System.out.println(fileName);
+//			return ResponseEntity.ok().body("File uploaded successfully");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file");
+//		}
+//	}
 
 }
