@@ -168,7 +168,7 @@ body {
 		border: 0;
 		border-radius: 10px;
 		cursor: pointer;
-		color: white;
+		font-weight: bold;
 	}
 }
 </style>
@@ -257,52 +257,45 @@ body {
 			<button type="submit" id="sin_btn1">TIPer등록 신청하기</button>
 		</div>
 
-<br>
-<br>
+		<br> <br>
 	</form>
 	<%@include file="../main/footer.jsp"%>
 
 	<script type="text/javascript">
-		
+		function hsh(fparam) {
 
-	$(() => {
-   $("#sin_img1 input[type=file]").change(function(){
-      console.log($('#sin_img1 input[type=file]')[0].files);
-      
-      let formData = new FormData();
-      formData.append('tiper_img', $('#sin_img1 input[type=file]')[0].files[0]);
-      $.ajax({
-         url : "/upload",
-         type : "post",
-         data : formData,
-         contentType: false,
-         processData: false,
-         cache : false,
-         success : function(){
-            console.log('success');
-         },
-         error : function(){
-            alert('error');
-         }
-      });
-   });
-});
-	
-	function previewImage(event) {
-		var reader = new FileReader();
-		reader.onload = function() {
-			var output = document.getElementById('tiperUppreview');
-			output.src = reader.result;
+			console.log($('#sin_img1 input[type=file]'), fparam);
+
+			let formData = new FormData();
+			formData.append('tiper_img', fparam);
+			$.ajax({
+				url : "/upload",
+				type : "post",
+				data : formData,
+				contentType : false,
+				processData : false,
+				cache : false,
+				success : function() {
+					console.log('success');
+				},
+				error : function() {
+					alert('error');
+				}
+			});
 		}
-		reader.readAsDataURL(event.target.files[0]);
-		// 파일 선택 후 input 요소 숨기기
-		var input = document.getElementById('sin_img1');
-		input.style.display = 'none';
-		
-	}
-	
-	
-	
+
+		function previewImage(event) {
+			var reader = new FileReader();
+			reader.onload = function() {
+				var output = document.getElementById('tiperUppreview');
+				output.src = reader.result;
+			}
+			reader.readAsDataURL(event.target.files[0]);
+			// 파일 선택 후 input 요소 숨기기
+			var input = document.getElementById('sin_img1');
+			input.style.display = 'none';
+			hsh(event.target.files[0]);
+		}
 	</script>
 
 </body>

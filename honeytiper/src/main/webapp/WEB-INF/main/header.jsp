@@ -25,7 +25,6 @@
 <link rel="stylesheet"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src="script.js"></script>
 
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->

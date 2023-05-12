@@ -20,14 +20,14 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 <style type="text/css">
 @media ( max-width : 768px) {
 	#tipup_sub1 {
-		font-size: 27px;
+		font-size: 23px;
 		background-color: #FFD400;
 		border: 0;
 		border-radius: 10%;
 		font-weight: bolder;
 	}
 	#tipup_sub2 {
-		font-size: 22px;
+		font-size: 20px;
 		text-decoration-line: underline;
 		text-decoration-color: #FFD400;
 	}
@@ -35,44 +35,46 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		width: 100%;
 	}
 	#tipup_td1 {
-		width: 200px;
+		width: 50%;
+		border-right: 1px solid #d8dee5;
 	}
 	#tipup_td2 {
-		
+		text-align: right;
+		width: 50%;
 	}
 	#tipup_info1 {
 		border: 0;
-		width: 100%;
+		width: 80%;
 		resize: none;
 	}
 	#tipup_info1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
+		border-radius: 20px;
 	}
 	#tipup_sub3 {
-		font-size: 22px;
+		font-size: 18px;
 		text-decoration-line: underline;
 		text-decoration-color: #FFD400;
+		font-weight: bold;
 	}
 	#tipup_tab2 {
 		width: 100%;
 	}
-	#tipup_tr2 {
+	.tipup_tr2 {
 		height: 100px;
 		border-bottom: 2px solid #d8dee5;
 	}
-	#tipup_td4 {
-		font-size: 19px;
-		text-decoration-line: underline;
-		text-decoration-color: #FFD400;
+	.tipup_td4 {
+		font-size: 17px;
 	}
-	#tipup_btn1 {
+	.tipup_btn1 {
 		background-color: #FFD400;
 		border-radius: 10px;
 		border: 0;
 		width: 120px;
 		height: 30px;
-		color: white;
+		font-weight: bold;
 	}
 	#tipup_btn_div1 {
 		text-align: center;
@@ -83,7 +85,94 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		border: 0;
 		width: 120px;
 		height: 30px;
-		color: white;
+		font-weight: bold;
+	}
+	#tiperpreview {
+		width: 150px;
+		height: 150px;
+		border-radius: 10%;
+	}
+	input[type=file]::file-selector-button {
+		width: 150px;
+		height: 30px;
+		background: #FFD400;
+		border: 0;
+		border-radius: 10px;
+		cursor: pointer;
+		font-weight: bold;
+	}
+}
+
+@media ( min-width : 769px) {
+	#tipup_sub1 {
+		font-size: 27px;
+		border: 0;
+		font-weight: bolder;
+	}
+	#tipup_sub2 {
+		font-size: 24px;
+		text-decoration-line: underline;
+		text-decoration-color: #FFD400;
+	}
+	#tipup_tab1 {
+		width: 100%;
+	}
+	#tipup_td1 {
+		text-align: center;
+		width: 600px;
+		border-right: 2px solid #d8dee5;
+	}
+	#tipup_td2 {
+		text-align: center;
+		width: 800px;
+	}
+	#tipup_info1:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 20px;
+	}
+	#tipup_info1 {
+		width: 500px;
+		border: 0;
+		resize: none;
+	}
+	#tipup_sub3 {
+		font-size: 22px;
+		text-decoration-line: underline;
+		text-decoration-color: #FFD400;
+	}
+	#tipup_tab2 {
+		width: 100%;
+	}
+	.tipup_tr2 {
+		height: 100px;
+		border-bottom: 1px solid #d8dee5;
+	}
+	.tipup_td4 {
+		font-size: 17px;
+	}
+	.tipup_td5 {
+		text-align: center;
+	}
+	.tipup_btn1 {
+		background-color: #FFD400;
+		border-radius: 10px;
+		border: 0;
+		width: 180px;
+		height: 50px;
+		font-weight: bold;
+	}
+	#tipup_btn_div1 {
+		text-align: center;
+	}
+	#tipup_btn2 {
+		background-color: #FFD400;
+		border-radius: 10px;
+		border: 0;
+		width: 200px;
+		height: 55px;
+		font-weight: bold;
+		margin-right: 240px;
 	}
 	#tiperpreview {
 		width: 180px;
@@ -97,93 +186,7 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		border: 0;
 		border-radius: 10px;
 		cursor: pointer;
-		color: white;
-	}
-}
-
-@media ( min-width : 769px) {
-	#tipup_sub1 {
-		font-size: 40px;
-		background-color: #FFD400;
-		border: 0;
-		border-radius: 10%;
-		font-weight: bolder;
-	}
-	#tipup_sub2 {
-		font-size: 30px;
-		text-decoration-line: underline;
-		text-decoration-color: #FFD400;
-	}
-	#tipup_tab1 {
-		width: 100%;
-	}
-	#tipup_td1 {
-		width: 200px;
-	}
-	#tipup_td2 {
-		text-align: center;
-	}
-	#tipup_info1:focus {
-		border: 3px solid #FFD400;
-		outline: none;
-	}
-	#tipup_info1 {
-		width: 450px;
-		border: 0;
-		resize: none;
-	}
-	#tipup_sub3 {
-		font-size: 22px;
-		text-decoration-line: underline;
-		text-decoration-color: #FFD400;
-	}
-	#tipup_tab2 {
-		width: 100%;
-	}
-	#tipup_tr2 {
-		height: 100px;
-		border-bottom: 2px solid #d8dee5;
-	}
-	#tipup_td4 {
-		font-size: 19px;
-		text-decoration-line: underline;
-		text-decoration-color: #FFD400;
-	}
-	#tipup_td5 {
-		text-align: center;
-	}
-	#tipup_btn1 {
-		background-color: #FFD400;
-		border-radius: 10px;
-		border: 0;
-		width: 180px;
-		height: 50px;
-		color: white;
-	}
-	#tipup_btn_div1 {
-		text-align: center;
-	}
-	#tipup_btn2 {
-		background-color: #FFD400;
-		border-radius: 10px;
-		border: 0;
-		width: 200px;
-		height: 55px;
-		color: white;
-	}
-	#tiperpreview {
-		width: 240px;
-		height: 240px;
-		border-radius: 10%;
-	}
-	input[type=file]::file-selector-button {
-		width: 150px;
-		height: 30px;
-		background: #FFD400;
-		border: 0;
-		border-radius: 10px;
-		cursor: pointer;
-		color: white;
+		font-weight: bold;
 	}
 }
 </style>
@@ -197,31 +200,37 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 	</div>
 	<form action="tiperUpdateAction" method="post">
 		<div class="container">
-			<span id="tipup_sub2">프로필 수정</span>
+			<span id="tipup_sub2">프로필 수정</span> <br> <br>
 			<table id="tipup_tab1">
 
 				<tr id="tipup_tr1">
 					<td id="tipup_td1"><input type="file" name="tiper_img"
-						placeholder="강사에 대한 img 수정" accept=".jpg,.jpeg,.png" id="tipimg"
-						onchange="previewImage(event)"> <img id="tiperpreview"
-						src="front/<%=tiperVO.getTiper_img()%>" alt="강의사진을 올려주세요"></td>
+						placeholder="<%=tiperVO.getTiper_img()%>" accept=".jpg,.jpeg,.png"
+						id="tipimg" onchange="previewImage(event)"> <img
+						id="tiperpreview" src="front/<%=tiperVO.getTiper_img()%>"
+						alt="프로필사진 없음"></td>
 
 					<td id="tipup_td2"><textarea name="tiper_info"
-							placeholder="TIPer소개를 수정해 주세요 (경력, 수상내역, 취득자격증,등등..)"
-							id="tipup_info1" cols="30" rows="10"></textarea></td>
+							placeholder="<%=tiperVO.getTiper_info()%>" id="tipup_info1"
+							cols="30" rows="10"></textarea></td>
 				</tr>
 
 
 			</table>
+			<br>
+			<div id="tipup_btn_div1">
+				<button type="submit" id="tipup_btn2">수정완료</button>
+			</div>
 			<hr>
 		</div>
 		<div class="container">
 			<span id="tipup_sub3">강의 목록 보기</span> <br> <br>
 			<table id="tipup_tab2">
 				<c:forEach items="${lessonTiper}" var="lesson">
-					<tr id="tipup_tr2">
-						<td id="tipup_td4">${lesson.lesson_title }</td>
-						<td id="tipup_td5"><button type="button" id="tipup_btn1"
+					<tr class="tipup_tr2">
+						<td class="tipup_td4">강의명 : ${lesson.lesson_title }</td>
+						<td class="tipup_td5"><button type="button"
+								class="tipup_btn1"
 								onclick="location.href='lessonUpdateGo?lesson_num=${lesson.lesson_num}'">강의수정하기</button></td>
 
 
@@ -230,55 +239,46 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 
 			</table>
 			<br> <br>
-			<div id="tipup_btn_div1">
-				<button type="submit" id="tipup_btn2">수정완료</button>
-			</div>
-		</div>
 
+		</div>
+		<br> <br> <br>
 	</form>
 	<script type="text/javascript">
+		function hsh(fparam) {
 
+			console.log($('#tipimg input[type=file]'), fparam);
 
-	$(() => {
-		   $("#tipimg input[type=file]").change(function(){
-		      console.log($('#tipimg input[type=file]')[0].files);
-		      
-		      let formData = new FormData();
-		      formData.append('tiper_img', $('#tipimg input[type=file]')[0].files[0]);
-		      $.ajax({
-		         url : "/upload",
-		         type : "post",
-		         data : formData,
-		         contentType: false,
-		         processData: false,
-		         cache : false,
-		         success : function(){
-		            console.log('success');
-		         },
-		         error : function(){
-		            alert('error');
-		         }
-		      });
-		   });
-		});
-
-	
-	function previewImage(event) {
-		var reader = new FileReader();
-		reader.onload = function() {
-			var output = document.getElementById('tiperpreview');
-			output.src = reader.result;
+			let formData = new FormData();
+			formData.append('tiper_img', fparam);
+			$.ajax({
+				url : "/upload",
+				type : "post",
+				data : formData,
+				contentType : false,
+				processData : false,
+				cache : false,
+				success : function() {
+					console.log('success');
+				},
+				error : function() {
+					alert('error');
+				}
+			});
 		}
-		reader.readAsDataURL(event.target.files[0]);
-		// 파일 선택 후 input 요소 숨기기
-		var input = document.getElementById('tipimg');
-		input.style.display = 'none';
-		
-	}
-	
-	
-	
-</script>
+
+		function previewImage(event) {
+			var reader = new FileReader();
+			reader.onload = function() {
+				var output = document.getElementById('tiperpreview');
+				output.src = reader.result;
+			}
+			reader.readAsDataURL(event.target.files[0]);
+			// 파일 선택 후 input 요소 숨기기
+			var input = document.getElementById('tipimg');
+			input.style.display = 'none';
+			hsh(event.target.files[0]);
+		}
+	</script>
 	<%@include file="../main/footer.jsp"%>
 </body>
 </html>

@@ -1,3 +1,6 @@
 
 5월 09, 2023 20:51:11.103 NEW SESSION
 5월 09, 2023 20:51:11.103 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+
+5월 12, 2023 11:07:00.139 NEW SESSION
+5월 12, 2023 11:07:00.139 [10608:11440:0512/110700.116:ERROR:interface_endpoint_client.cc(696)] Message 1 rejected by interface blink.mojom.WidgetHost

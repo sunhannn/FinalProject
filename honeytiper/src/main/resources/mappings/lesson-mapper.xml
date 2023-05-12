@@ -56,7 +56,7 @@
 	<select id="selectLessonTiper" resultType="lesson">
 		select
 		lesson.LESSON_DATE, lesson.LESSON_TITLE, escrow.ESCROW_USER_ID as
-		lesson_info, escrow.ESCROW_PRICE AS lesson_onoff
+		lesson_info, escrow.ESCROW_PRICE AS lesson_onoff, lesson.lesson_num
 		FROM escrow, lesson
 		WHERE #{lesson_tiper_code} =
 		escrow.ESCROW_tiper_code AND

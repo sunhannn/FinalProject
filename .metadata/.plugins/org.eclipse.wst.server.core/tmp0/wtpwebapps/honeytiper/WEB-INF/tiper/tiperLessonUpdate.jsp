@@ -19,9 +19,7 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 <style type="text/css">
 @media ( max-width : 768px) {
 	#lesup_sub1 {
-		font-size: 29px;
-		background-color: #FFD400;
-		border-radius: 10%;
+		font-size: 24px;
 		font-weight: bold;
 	}
 	#lesup_tab1 {
@@ -113,9 +111,7 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 
 @media ( min-width : 769px) {
 	#lesup_sub1 {
-		font-size: 40px;
-		background-color: #FFD400;
-		border-radius: 10%;
+		font-size: 27px;
 		font-weight: bold;
 	}
 	#lesup_tab1 {
@@ -125,7 +121,7 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		font-size: 20px;
 		height: 80px;
 		vertical-align: top;
-		width: 45%;
+		width: 300px;
 	}
 	#lesup_td2 {
 		vertical-align: top;
@@ -190,7 +186,7 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		border-radius: 10px;
 		width: 200px;
 		height: 40px;
-		color: white;
+		font-weight: bold;
 	}
 	input[type=file]::file-selector-button {
 		width: 150px;
@@ -199,7 +195,7 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		border: 0;
 		border-radius: 10px;
 		cursor: pointer;
-		color: white;
+		font-weight: bold;
 	}
 	.lesup_span {
 		text-decoration-line: underline;
@@ -222,25 +218,22 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 			<table id="lesup_tab1">
 
 				<tr id="lesup_tr1">
-					<td id="lesup_td1"><span class="lesup_span">원래 강의 제목</span> :
-						<%=vo.getLesson_title()%> <br></td>
+					<td id="lesup_td1"><span class="lesup_span">수정할 강의 제목</span> :<br></td>
 					<td id="lesup_td2"><input type="text" placeholder="수정할 강의 제목"
 						name="lesson_title" id="lesup_input1"></td>
 				</tr>
 
 				<tr id="lesup_tr2">
 
-					<td id="lesup_td3"><span class="lesup_span">원래 강의 내용</span> :
-						<%=vo.getLesson_info()%>
+					<td id="lesup_td3"><span class="lesup_span">수정할 강의 내용</span> :
+					
 					<td id="lesup_td4"><textarea name="lesson_info"
 							id="lesup_info1" cols="30" rows="10" placeholder="수정할 강의 내용"></textarea></td>
 
 
 				</tr>
 				<tr id="lesup_tr3">
-					<td id="lesup_td5"><span class="lesup_span">원래 이미지 :</span> <img
-						src="front/<%=vo.getLesson_img()%>" alt="강의 사진" id="lesup_imgg">
-					</td>
+					<td id="lesup_td5"><span class="lesup_span">수정할 이미지 :</span></td>
 
 					<td id="lesup_td6"><input type="file" placeholder="수정할 사진"
 						name="lesson_img" accept=".jpg,.jpeg,.png" id="lesup_img"

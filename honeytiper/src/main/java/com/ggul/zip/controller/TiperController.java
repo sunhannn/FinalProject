@@ -72,7 +72,7 @@ public class TiperController {
 		vo.setUser_point(userService.pointSelect(vo));
 		model.addAttribute("user_point", vo.getUser_point());
 		tiperVO = tiperService.selectTiperInfo(tiperVO);
-		model.addAttribute("tiperVO",tiperVO);
+		model.addAttribute("tiperVO", tiperVO);
 		lessonVO.setLesson_tiper_code(tiperVO.getTiper_code());
 		model.addAttribute("lessonTiper", lessonService.selectLessonTiper(lessonVO));
 		return "tiper/tiperMypage";
@@ -314,6 +314,28 @@ public class TiperController {
 
 	}
 
+	// 강사 마이페이지 : 강의신고 - 중복된 신고 있는지 확인 후 신고.
+	@RequestMapping(value = "/tiperReportLessonNum", method = RequestMethod.POST)
+	public void tiperReportLessonNum(ReportVO vo, HttpServletResponse response) throws Exception {
+
+		int result = userService.isDupReport(vo);
+		if (result == 0) {
+			userService.reportLessonNum(vo);
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println(
+					"<script type='text/javascript'>alert('신고가 접수되었습니다.');location.href='/tiperMypage';</script>");
+			writer.flush();
+		} else if (result == 1) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println(
+					"<script type='text/javascript'>alert('이미 신고한 강의입니다.');location.href='/tiperMypage';</script>");
+			writer.flush();
+		} 
+
+	}
+
 	// 파일 업로드
 	@PostMapping("/upload")
 	public ResponseEntity<String> uploadFile(@RequestParam("tiper_img") MultipartFile file, Model model) {
@@ -321,7 +343,7 @@ public class TiperController {
 		try {
 			String fileName = file.getOriginalFilename();
 			model.addAttribute("filename", fileName);
-			String savePath = servletContext.getRealPath("/resources/img/");
+			String savePath = servletContext.getRealPath("resources/img/profile");
 			String filePath = savePath + fileName;
 			model.addAttribute("filename", fileName);
 			File saveDir = new File(savePath);
@@ -331,7 +353,7 @@ public class TiperController {
 
 			File saveFile = new File(filePath);
 			file.transferTo(saveFile);
-			System.out.println(fileName);
+			System.out.println(fileName+"코코마데");
 			return ResponseEntity.ok().body("File uploaded successfully");
 		} catch (IOException e) {
 			e.printStackTrace();
