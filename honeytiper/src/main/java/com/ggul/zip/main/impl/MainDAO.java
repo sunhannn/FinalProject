@@ -12,19 +12,26 @@ import com.ggul.zip.lesson.LessonVO;
 @Repository
 public class MainDAO {
 
-	@Autowired
-	private SqlSessionTemplate mybatis;
-	
-	public List<LessonVO> getMainRecm(LessonVO vo){
-		return mybatis.selectList("MainDAO.getMainRecm", vo);
-	}
-	
-	public List<LessonVO> getMainPop(LessonVO vo){
-		return mybatis.selectList("MainDAO.getMainPop", vo);
-	}
-	
-	public List<LessonVO> getMainNew(LessonVO vo){
-		return mybatis.selectList("MainDAO.getMainNew", vo);
-	}
-	
+   @Autowired
+   private SqlSessionTemplate mybatis;
+   
+   public List<LessonVO> getMainRecm(LessonVO vo){
+      return mybatis.selectList("MainDAO.getMainRecm", vo);
+   }
+   
+   public List<LessonVO> getMainRecm2(LessonVO vo){
+      return mybatis.selectList("MainDAO.getMainRecm2", vo);
+   }
+   
+   public List<LessonVO> getMainPop(LessonVO vo){
+      return mybatis.selectList("MainDAO.getMainPop", vo);
+   }
+   
+   public List<LessonVO> getMainNew(LessonVO vo){
+      return mybatis.selectList("MainDAO.getMainNew", vo);
+   }
+   
+   public List<LessonVO> getMainNew2(LessonVO vo){
+      return mybatis.selectList("MainDAO.getMainNew2", vo);
+   }
 }

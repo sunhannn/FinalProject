@@ -54,8 +54,7 @@ ul li.on a{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	margin-left: 200px;
-	margin-top: 120px;
+	margin-top: 100px;
 }
 
 
@@ -176,6 +175,31 @@ ul li.on a{
 
 #paging_wrapper{
 	margin: 0 auto;
+}
+
+#pagingul {
+  margin-top: 20px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+#pagingul li {
+  margin-right: 5px;
+}
+
+#pagingul li a {
+  display: block;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #333;
+  text-decoration: none;
+}
+
+#pagingul li.on a {
+  background-color: #FFD400;
+  color: #fff;
 }
 
 @media ( min-width : 768px) {		/*=======================================================*/

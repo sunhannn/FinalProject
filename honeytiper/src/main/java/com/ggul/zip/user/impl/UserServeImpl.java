@@ -226,6 +226,8 @@ public class UserServeImpl implements UserService {
 	
 	
 	//정성현 마이페이지 ======================================================
+		
+		
 		@Override
 		public void reportLessonNum(ReportVO rvo){
 			userDAO.reportLessonNum(rvo);
@@ -234,7 +236,16 @@ public class UserServeImpl implements UserService {
 		@Override
 		public int isDupReport(ReportVO rvo){
 			int result = userDAO.isDupReport(rvo);
-			System.out.println(result + "===============================");
 			return result;
+		}
+
+		@Override
+		public List<UserVO> getUserInfoMypage(UserVO vo){
+			return userDAO.getUserInfoMypage(vo);
+		}
+		
+		@Override
+		public void updateUserRole01(UserVO vo){
+			userDAO.updateUserRole01(vo);
 		}
 }

@@ -1,17 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-   <%@ include file="../main/header.jsp"%>
+   <%@include file="../main/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
    src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-   <link rel="stylesheet" href="front/userJoin.css">
+   <link rel="stylesheet" media="screen and (min-width:769px)" href="front/user.css">
+   <link rel="stylesheet" media="screen and (max-width:768px)" href="front/userJoinMobile.css">
 </head>
 <body>
    <script>
@@ -65,7 +67,7 @@
       }
 
       window.onload = function() {
-         $("p").hide();
+         $("#info_ptag").hide();
       }
       function idCheck() {
 
@@ -109,10 +111,10 @@
                <tr>
                   <td class="td_left"><label for="user_id">아이디</label></td>
                   <td class="td_right">
-                     <input type="text" name="user_id" id="user_id" class="check" placeholder="아이디를 입력해주세요." required>
+                     <input type="text" name="user_id" id="user_id" class="check join_id_input" placeholder="아이디를 입력해주세요." required>
                      <button type="button" onclick="idCheck()">아이디 중복체크</button>
                      <input type="hidden" id="checkBoxId" value="">
-                     <p></p>
+                     <p id="info_ptag"></p>
                   </td>
                </tr>
 
@@ -120,7 +122,7 @@
                   <td class="td_left"><label for="user_pw">비밀번호</label></td>
                   <td class="td_right">
                      <input name="user_pw" type="password" id="user_pw" class="check" placeholder="비밀번호를 입력해주세요." required>
-                     <p></p>
+                     <p id="info_ptag"></p>
                   </td>
                </tr>
 
@@ -128,7 +130,7 @@
                   <td class="td_left"><label for="user_pw2">비밀번호 확인</label></td>
                   <td class="td_right">
                      <input name="user_pw2" type="password" id="user_pw2" class="check" placeholder="비밀번호를 다시 입력해주세요." required>
-                     <p></p>
+                     <p id="info_ptag"></p>
                   </td>
                </tr>
 
@@ -136,14 +138,14 @@
                   <td class="td_left"><label for="user_name">이름</label></td>
                   <td class="td_right">
                      <input name="user_name" type="text" id="user_name" class="check" placeholder="이름을 입력해주세요." required>
-                     <p></p>
+                     <p id="info_ptag"></p>
                   </td>
                </tr>
 
                <tr>
                   <td class="td_left"><label for="user_addr">주소</label></td>
                   <td class="td_right">
-                     <input type="text" id="sample6_postcode" name="user_addr1" placeholder="우편번호" required>
+                     <input type="text" id="sample6_postcode" name="user_addr1" placeholder="우편번호" class="join_id_input" required>
                      <button type="button" style="border-radius: 3px; margin: auto;" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">우편번호찾기</button>
                      <input type="text" id="sample6_address" name="user_addr2" placeholder="주소" required><br> 
                      <input type="text" id="sample6_detailAddress" name="user_addr3" placeholder="상세주소">
@@ -154,13 +156,13 @@
                <tr>
                   <td class="td_left"><label for="user_tel">전화번호</label></td>
                   <td class="td_right">
-                     <input name="user_tel" type="text" id="user_tel" placeholder="(- 제외)숫자만 입력해주세요" class="check" required>
+                     <input name="user_tel" type="text" id="user_tel" placeholder="(- 제외)숫자만 입력해주세요" class="check join_id_input" required>
                      <button type="button" id="telCheck" onclick="smsSend()" disabled>인증번호받기</button>
-                     <p></p>
+                     <p id="info_ptag"></p>
                      <div>
-                     <input type="text" id="certificationTel" name="certificationTel" class="check" placeholder="인증번호" readonly required>
+                     <input type="text" id="certificationTel" name="certificationTel" class="check join_id_input" placeholder="인증번호" readonly required>
                         <button type="button" id="telConfirmBtn" onclick="smsConfirm()">인증하기</button>
-                     <p></p>
+                     <p id="info_ptag"></p>
                      </div>
                   </td>
                </tr>
@@ -170,7 +172,7 @@
                   </td>
                   <td class="td_right">
                      <input name="user_email" type="text" id="emailText" placeholder="(@)포함 주소" class="check" required>
-                     <p></p>
+                     <p id="info_ptag"></p>
                   </td>
                </tr>
                <tr>
@@ -189,13 +191,9 @@
             <br> <br>
 
             <section id="commandCell">
-               <button style="border-radius: 3px; margin: auto;" type="reset"
-                  value="다시쓰기">다시쓰기</button>
-               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               <button style="border-radius: 3px; margin: auto;" value="회원가입">회원가입</button>
-               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               <button style="border-radius: 3px; margin: auto;" type="button"
-                  onclick="javascript:history.go(-1)">취소</button>
+               <button value="다시쓰기">다시쓰기</button>
+               <button value="회원가입">회원가입</button>
+               <button type="button" onclick="javascript:history.go(-1)">취소</button>
 
             </section>
 
@@ -215,7 +213,7 @@
                   
                   if($("#submitCode").val() != ""){
                      console.log("p태그 값 출력 : " , $("p").text());
-                     if( $("p").text() == "" ){
+                     if( $("#info_ptag").text() == "" ){
                         console.log("p태그 값 없음");
                         if( $("#checkBoxId").val() != "") {
                            console.log("submit");
@@ -340,15 +338,15 @@
                         
                  }
                  if(checkText != ""){
-                     $(this).siblings("p").html(checkText);
-                     $(this).siblings("p").addClass("vali");
-                     $(this).siblings("p").slideDown();
+                     $(this).siblings("#info_ptag").html(checkText);
+                     $(this).siblings("#info_ptag").addClass("vali");
+                     $(this).siblings("#info_ptag").slideDown();
                       $(this).css({
                          "borderColor":"red"
                       });
                  } else {
-                     $(this).siblings("p").slideUp();
-                      $(this).siblings("p").empty();
+                     $(this).siblings("#info_ptag").slideUp();
+                      $(this).siblings("#info_ptag").empty();
                       $(this).removeClass("vali");
                       if($(this).val() != $("#user_id").val()){
                          $(this).css({
@@ -363,6 +361,7 @@
                   }
             });
          </script>
-<%-- <%@include file="../main/footer.jsp"%> --%>
+         <br><br><br><br>
+      <%@include file="../main/footer.jsp"%>
 </body>
 </html>

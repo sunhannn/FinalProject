@@ -60,5 +60,11 @@
 	<insert id="insertEscrow">
 		INSERT INTO ESCROW (ESCROW_USER_ID, ESCROW_TIPER_CODE, ESCROW_LESSON_NUM) VALUES ('csBae', #{tiper_code} ,#{lesson_num});
 	</insert>
+	
+	<select id="isDupEscrowLesson" resultType="escrow">
+		SELECT ESCROW_NUM FROM
+		ESCROW WHERE ESCROW_USER_ID = #{escrow_user_id} AND ESCROW_LESSON_NUM
+		= #{escrow_lesson_num}
+	</select>
 
 </mapper>

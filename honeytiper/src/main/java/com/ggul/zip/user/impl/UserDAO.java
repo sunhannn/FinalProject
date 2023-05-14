@@ -338,23 +338,39 @@ public class UserDAO {
 			}
 			
 			//정성현 : 마이페이지
+			
+			
+			// 중복된 신고 있는지 확인
 			public int isDupReport(ReportVO vo) {
 				System.out.println("===>mybatis로 isDupReport() 기능처리");
-				
+
 				Object result = mybatis.selectList("UserDAO.isDupReport", vo);
-				
-				if(ObjectUtils.isEmpty(result) == false){
+
+				if (ObjectUtils.isEmpty(result) == false) {
 					return 1;
-				} else { 
-								
+				} else {
+
 					return 0;
 				}
 			}
-			
-			// TIPER_AGREE를 1로 업데이트
+
+			// 강의를 신고
 			public void reportLessonNum(ReportVO vo) {
 				System.out.println("===>mybatis로 reportLessonNum() 기능처리");
 
 				mybatis.update("UserDAO.reportLessonNum", vo);
+			}
+
+			// 마이페이지에 유저정보 가져오기
+			public List<UserVO> getUserInfoMypage(UserVO vo) {
+				System.out.println("===>mybatis로 getUserInfoMypage() 기능처리");
+				return mybatis.selectList("UserDAO.getUserInfoMypage", vo);
+			}
+			
+			// USER_ROLE을 1로 update
+			public void updateUserRole01(UserVO vo) {
+				System.out.println("===>mybatis로 updateUserRole01() 기능처리");
+
+				mybatis.update("UserDAO.updateUserRole01", vo);
 			}
 }

@@ -48,7 +48,13 @@
 		FROM users u
 		WHERE u.user_id = #{point_id};
 	</insert>
-
+	<insert id="honeyTakePoint">
+	INSERT INTO point (point_id, point_price, point_history, point_time)
+		SELECT #{point_id}, (-1 *u.user_point),CONCAT('정산계좌 :  ', #{point_history}), SYSDATE()
+		FROM users u
+		WHERE u.user_id = #{point_id};
+	
+	</insert>
 
 
 </mapper>

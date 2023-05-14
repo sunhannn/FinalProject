@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -84,31 +84,40 @@
  
 </script>
 <style>
+.container {
+position: relative; /*이만큼이 전체사이즈이다 알려주려고 넣은것*/ */
+}
 .warning {
-	background-color: #ffd400;
-	border: none;
-	border-radius: 4px;
-	color: white;
-	padding: 12px 15px;
-	cursor: pointer;
+   background-color: #ffd400;
+   border: none;
+   border-radius: 4px;
+   padding: 12px 15px;
+   cursor: pointer;
+   border-radius: 4px;
+   color: #5c3b0c;
+   cursor: pointer;
+   font-size:17px;
+   font-weight:bold;
 }
 .info-button{
-background-color: #a3a3a3;
-	border: none;
-	border-radius: 4px;
-	color: white;
-	padding: 12px 15px;
-	cursor: pointer;
+background-color: #ffd400;
+   border: none;
+   border-radius: 4px;
+   color: #5c3b0c;
+   cursor: pointer;
+   font-size:17px;
+   font-weight:bold;
+   padding: 12px 15px;
 }
 .warning:hover {
-	background-color: #e7c310;
-	color:black;
+   background-color: #e7c310;
+   color:black;
 }
 
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
-	{
-	-webkit-appearance: none;
-	margin: 0;
+   {
+   -webkit-appearance: none;
+   margin: 0;
 }
 .w3-modal {
   z-index: 9999;
@@ -141,13 +150,12 @@ margin-bottom: 230px;
 </style>
 </head>
 <body>
-	<%@include file="../main/header.jsp"%>
-	<div class="container">
-		<h2 style="margin: 140px 0px 70px 0px;">마이페이지</h2>
-		<p style="font-size:23px;">허니페이 충전하기</p>
-		<br>
-		<button onclick="document.getElementById('id01').style.display='block'" class="info-button">허니페이란</button>
-		
+   <%@include file="../main/header.jsp"%>
+   <div class="container">
+      <p style="font-size:27px; margin:50px 0px 50px 0px; font-weight:bold;">허니페이 충전하기</p>
+      <br>
+      <button onclick="document.getElementById('id01').style.display='block'" class="info-button">허니페이란</button>
+      
 <div class="w3-container">
   <div id="id01" class="w3-modal">
     <div class="w3-modal-content w3-card-4">
@@ -189,22 +197,21 @@ margin-bottom: 230px;
   </div>
 </div>
 
-		<hr>
-		<br><br>
-		<div class="form-group">
-			<label class="col-sm-4 control-label"
-				style="font-size: 25px; text-align: right;">충전 금액:</label>
-			<div class="col-sm-8">
-				<input type="number" id="amount" name="amount" class="payfull-input"
-					placeholder="결제할 금액을 입력해주세요" >
-				<button class="warning" onclick="requestPay()">결제하기</button>
-			</div>
-		</div>
-		<br>
-		<br> <br>
-		<hr class="end-hr">
-	</div>
+      <hr>
+      <br><br>
+      <div class="form-group">
+         <label class="col-sm-4 control-label"
+            style="font-size: 25px; text-align: right;">충전 금액:</label>
+         <div class="col-sm-8">
+            <input type="number" id="amount" name="amount" class="payfull-input"
+               placeholder="결제할 금액을 입력해주세요" >
+            <button class="warning" onclick="requestPay()">결제하기</button>
+         </div>
+      </div>
+      <br>
+      <br> <br>
+      <hr class="end-hr">
+   </div>
 <%@include file="../main/footer.jsp"%>
 
 </body>
-</html>

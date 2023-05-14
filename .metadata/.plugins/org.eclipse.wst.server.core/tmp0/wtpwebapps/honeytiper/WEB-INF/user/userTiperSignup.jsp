@@ -1,16 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <%
 int check = (int) request.getAttribute("tiperCheck");
-
 if (check == 1) {
 	out.println("<script>");
 	out.println("alert('승인 대기중입니다!')");
 	out.println("location.href='../index';");
 	out.println("</script>");
-
 }
 %>
 <html lang="ko">
@@ -22,13 +19,11 @@ if (check == 1) {
 <!-- <link rel="stylesheet" href="front/common.css"> -->
 <!-- <link rel="stylesheet" href="front/bootstrap.css"> -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.js"></script>
-
 <style type="text/css">
 body {
 	padding: 0;
 	margin: 0 auto;
 }
-
 @media ( max-width : 768px) {
 	#sin_sub1 {
 		font-size: 28px;
@@ -81,7 +76,6 @@ body {
 		height: 200px;
 	}
 }
-
 @media ( min-width : 769px) {
 	#sin_sub1 {
 		font-size: 38px;
@@ -168,7 +162,7 @@ body {
 		border: 0;
 		border-radius: 10px;
 		cursor: pointer;
-		font-weight: bold;
+		color: white;
 	}
 }
 </style>
@@ -179,7 +173,6 @@ body {
 		<span id="sin_sub1">TIPer 신청</span> <br> <br> <span
 			id="sin_sub2">카테고리 심사 후 TIPer 등록이 완료됩니다</span> <br>
 		<hr>
-
 	</div>
 	<form action="tiperSignUp" enctype="multipart/form-data">
 		<div class="container">
@@ -189,19 +182,13 @@ body {
 					onchange="previewImage(event)"> <img id="tiperUppreview"
 					src="front/lessonimg.png" alt="강의사진을 올려주세요">
 			</div>
-
 			<br>
 			<textarea name="tiper_info" id="sin_info1" cols="30" rows="10"
 				placeholder="TIPer소개를 작성해주세요 (경력, 수상내역, 취득자격증 등등)"
 				required="required"></textarea>
-
-
-
-
 		</div>
 		<br>
 		<div class="container">
-
 			<p id="sin_sub2">
 				꿀TIP을 전수해줄 카테고리를 선택해주세요<span style="font-size: 12px; color: gray;">(최대
 					3개)</span>
@@ -235,68 +222,62 @@ body {
 						<option value="IT">IT</option>
 						<option value="기타">기타</option>
 				</select>
-
 				</label>
-
-
 			</div>
-
-
 		</div>
 		<br>
-
 		<div class="container">
 			<p id="sin_sub3">꿀TIP을 전수해줄 지역을 정확히 입력해주세요</p>
 			<span style="font-size: 10px; color: gray;">(해당지역 검색에 노출됩니다)</span> <br>
 			<input type="text" name="tiper_addr" id="sin_addr1"
 				placeholder="활동지역(시)" required="required">
-
 		</div>
 		<br> <br>
 		<div id="div_btn1">
 			<button type="submit" id="sin_btn1">TIPer등록 신청하기</button>
 		</div>
-
 		<br> <br>
 	</form>
 	<%@include file="../main/footer.jsp"%>
-
 	<script type="text/javascript">
-		function hsh(fparam) {
-
-			console.log($('#sin_img1 input[type=file]'), fparam);
-
-			let formData = new FormData();
-			formData.append('tiper_img', fparam);
-			$.ajax({
-				url : "/upload",
-				type : "post",
-				data : formData,
-				contentType : false,
-				processData : false,
-				cache : false,
-				success : function() {
-					console.log('success');
-				},
-				error : function() {
-					alert('error');
-				}
-			});
+		
+	$(() => {
+   $("#sin_img1 input[type=file]").change(function(){
+      console.log($('#sin_img1 input[type=file]')[0].files);
+      let formData = new FormData();
+      formData.append('tiper_img', $('#sin_img1 input[type=file]')[0].files[0]);
+      $.ajax({
+         url : "/upload",
+         type : "post",
+         data : formData,
+         contentType: false,
+         processData: false,
+         cache : false,
+         success : function(){
+            console.log('success');
+         },
+         error : function(){
+            alert('error');
+         }
+      });
+   });
+});
+	
+	function previewImage(event) {
+		var reader = new FileReader();
+		reader.onload = function() {
+			var output = document.getElementById('tiperUppreview');
+			output.src = reader.result;
 		}
-
-		function previewImage(event) {
-			var reader = new FileReader();
-			reader.onload = function() {
-				var output = document.getElementById('tiperUppreview');
-				output.src = reader.result;
-			}
-			reader.readAsDataURL(event.target.files[0]);
-			// 파일 선택 후 input 요소 숨기기
-			var input = document.getElementById('sin_img1');
-			input.style.display = 'none';
-			hsh(event.target.files[0]);
-		}
+		reader.readAsDataURL(event.target.files[0]);
+		// 파일 선택 후 input 요소 숨기기
+		var input = document.getElementById('sin_img1');
+		input.style.display = 'none';
+		
+	}
+	
+	
+	
 	</script>
-
 </body>
 </html>

@@ -28,10 +28,10 @@ import com.ggul.zip.escrow.EscrowService;
 import com.ggul.zip.escrow.EscrowVO;
 import com.ggul.zip.lesson.LessonService;
 import com.ggul.zip.lesson.LessonVO;
+import com.ggul.zip.lesson.ReviewVO;
 import com.ggul.zip.payment.PointService;
 import com.ggul.zip.payment.PointVO;
 import com.ggul.zip.review.ReviewService;
-import com.ggul.zip.lesson.ReviewVO;
 import com.ggul.zip.tiper.TiperService;
 import com.ggul.zip.tiper.TiperVO;
 import com.ggul.zip.user.ReportVO;
@@ -62,6 +62,7 @@ public class TiperController {
 
 	@Autowired
 	private ServletContext servletContext;
+
 	// 상현이부분
 
 	// 강사 마이페이지 이동
@@ -85,7 +86,7 @@ public class TiperController {
 
 	}
 
-	// 강사 정보 수정 페이지 이동(수정함)
+	// 강사 정보 수정 페이지 이동
 	@RequestMapping(value = "/tiperUpdateGo")
 	public String tiperUpdateGo(Model model, HttpSession session, LessonVO lessonVO, TiperVO tiperVO, UserVO vo) {
 		String userId = (String) session.getAttribute("user_id");
@@ -98,15 +99,14 @@ public class TiperController {
 		lessonVO.setLesson_tiper_code(tiperVO.getTiper_code());
 		model.addAttribute("lessonTiper", lessonService.selectLessonName(lessonVO));
 		return "tiper/tiperInfoUpdate";
-
 	}
 
 	// 강의 정보 수정 페이지 이동
 	@RequestMapping(value = "/lessonUpdateGo")
-	public String lessonUpdateGo(HttpServletRequest request, HttpSession session, LessonVO lessonVO) {
-		lessonVO.setLesson_num(Integer.parseInt(request.getParameter("lesson_num")));
+	public String lessonUpdateGo(Model model, HttpSession session, LessonVO lessonVO) {
+		lessonVO.setLesson_num((int) (model.getAttribute("lesson_num")));
 		lessonVO = lessonService.selectLessonNum(lessonVO);
-		request.setAttribute("lesson", lessonVO);
+		model.addAttribute("lesson", lessonVO);
 		return "tiper/tiperLessonUpdate";
 
 	}
@@ -133,7 +133,7 @@ public class TiperController {
 
 	// 회원 정보 수정하기
 	@RequestMapping(value = "/userUpdateAction")
-	public String userUpdateAction(HttpServletRequest req, HttpServletResponse res, HttpSession session, UserVO vo) {
+	public String userUpdateAction(Model model, HttpSession session, UserVO vo) {
 		String userId = (String) session.getAttribute("user_id");
 		vo.setUser_id(userId);
 		int check = userService.updateUser(vo);
@@ -150,8 +150,7 @@ public class TiperController {
 	// 강사신청 액션
 	@ResponseBody
 	@RequestMapping(value = "/tiperSignUp")
-	public String tiperSignUp(HttpServletRequest req, HttpServletResponse res, HttpSession session, UserVO vo,
-			TiperVO tiperVO) {
+	public String tiperSignUp(Model model, HttpSession session, UserVO vo, TiperVO tiperVO) {
 		String msg = "";
 		String userId = (String) session.getAttribute("user_id");
 		tiperVO.setTiper_user_id(userId);
@@ -165,34 +164,42 @@ public class TiperController {
 		return msg;
 	}
 
-	// 포인트 정산 액션
+	// 포인트 정산 액션(5월 13일 수정함)
 	@RequestMapping(value = "/honeyTakeAction")
-	public String honeyTakeAction(HttpServletRequest req, HttpServletResponse res, HttpSession session, UserVO vo) {
+	public String honeyTakeAction(Model model, HttpServletResponse response, HttpSession session, UserVO vo,
+			PointVO pointVO) throws IOException {
 		String userId = (String) session.getAttribute("user_id");
 		vo.setUser_id(userId);
-		userService.pointTake(vo);
+		vo = userService.selectName(vo);
+		pointVO.setPoint_price(vo.getUser_point());
 		vo.setUser_point(userService.pointSelect(vo));
-		session.setAttribute("user_point", vo.getUser_point());
-		return "user/userMyPage";
+		if (vo.getUser_point() == 0) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('정산받을 포인트가 없습니다!'); history.back();</script>");
+			writer.flush();
+		}
+		pointVO.setPoint_id(userId);
+		pointService.honeyTakePoint(pointVO);
+		userService.pointTake(vo);
+		return "redirect:tiperMypage";
 	}
 
 	// 강사 정보 수정 액션
 	@RequestMapping(value = "/tiperUpdateAction")
-	public String tiperUpdateAction(HttpServletRequest req, HttpServletResponse res, HttpSession session,
-			TiperVO tiperVO) {
+	public String tiperUpdateAction(Model model, HttpSession session, TiperVO tiperVO) {
 		tiperVO.setTiper_user_id((String) session.getAttribute("user_id"));
 		tiperService.tiperUpdate(tiperVO);
-		return "user/userMyPage";
+		return "redirect:tiperMypage";
 	}
 
 	// 강의 정보 수정 액션
 	@RequestMapping(value = "/lessonUpdateAction")
-	public String lessonUpdateAction(HttpServletRequest req, HttpServletResponse res, HttpSession session,
-			LessonVO lessonVO) {
-		int lessonNum = Integer.parseInt(req.getParameter("lessonNum"));
+	public String lessonUpdateAction(Model model, HttpSession session, LessonVO lessonVO) {
+		int lessonNum = (int) (model.getAttribute("lessonNum"));
 		lessonVO.setLesson_num(lessonNum);
 		lessonService.lessonUpdate(lessonVO);
-		return "user/userMyPage";
+		return "redirect:tiperMypage";
 	}
 
 	// 강의 등록 액션
@@ -205,20 +212,7 @@ public class TiperController {
 		lessonVO.setLesson_tiper_code(tiperVO.getTiper_code());
 		lessonVO.setLesson_user_name(vo.getUser_name());
 		lessonService.lessonMake(lessonVO);
-		return "user/userMyPage";
-	}
-
-	// 리뷰 작성 액션
-	@ResponseBody
-	@RequestMapping(value = "/reviewAction")
-	public String reviewAction(HttpServletRequest req, HttpServletResponse res, HttpSession session, LessonVO lessonVO,
-			ReviewVO reviewVO) {
-		String message = "";
-		reviewVO.setReview_writer((String) session.getAttribute("user_id"));
-		System.out.println(reviewVO.getReview_lesson_num());
-		reviewService.reviewInsert(reviewVO);
-		message = "<script>location.href='userMyPageGo';</script>";
-		return message;
+		return "redirect:tiperMypage";
 	}
 
 	// 메인페이지에서 마이허니페이버튼클릭시 리스트보여주는페이지로 이동
@@ -274,9 +268,84 @@ public class TiperController {
 	}
 
 	// 정성현 : 마이페이지 ==================================
+
+	// 강사 마이페이지 : 강의신고 - 중복된 신고 있는지 확인 후 신고.
+	@RequestMapping(value = "/tiperReportLessonNum", method = RequestMethod.POST)
+	public void tiperReportLessonNum(ReportVO vo, HttpServletResponse response) throws Exception {
+		int result = userService.isDupReport(vo);
+		if (result == 0) {
+			userService.reportLessonNum(vo);
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println(
+					"<script type='text/javascript'>alert('신고가 접수되었습니다.');location.href='/tiperMypage';</script>");
+			writer.flush();
+		} else if (result == 1) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println(
+					"<script type='text/javascript'>alert('이미 신고한 강의입니다.');location.href='/tiperMypage';</script>");
+			writer.flush();
+		}
+	}
+
+	// 파일 업로드
+	@PostMapping("/upload")
+	public ResponseEntity<String> uploadFile(@RequestParam("tiper_img") MultipartFile file, Model model) {
+		// 파일 저장
+		try {
+			String fileName = file.getOriginalFilename();
+			model.addAttribute("filename", fileName);
+			String savePath = "C:/Springwork/honeytiper/src/main/webapp/resources/img/";
+			String filePath = savePath + fileName;
+			model.addAttribute("filename", fileName);
+			File saveDir = new File(savePath);
+			if (!saveDir.exists()) {
+				saveDir.mkdirs();
+			}
+			File saveFile = new File(filePath);
+			file.transferTo(saveFile);
+			System.out.println(fileName);
+			return ResponseEntity.ok().body("File uploaded successfully");
+		} catch (IOException e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file");
+		}
+	}
+
+	// 마이페이지 : 강의신고 - 같은 학생-강의 간 중복된 신고 있는지 확인 후 신고.
+	@RequestMapping(value = "/reportLessonNum", method = RequestMethod.POST)
+	public void reportLessonNum(ReportVO vo, HttpServletResponse response) throws Exception {
+
+		int result = userService.isDupReport(vo); // 0 일 때 : 중복신고 없음, 1 일 때 이미 신고된 내용 있음.
+		if (result == 0) {
+			userService.reportLessonNum(vo);
+		} else if (result == 1) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println(
+					"<script type='text/javascript'>alert('이미 신고한 강의입니다.');location.href='/userMyPageGo';</script>");
+			writer.flush();
+		}
+	}
+
+	// 리뷰 작성 액션
+	@ResponseBody
+	@RequestMapping(value = "/reviewAction")
+	public String reviewAction(HttpServletRequest req, HttpServletResponse res, HttpSession session, LessonVO lessonVO,
+			ReviewVO reviewVO, EscrowVO escrowVO) {
+		String message = "";
+		reviewVO.setReview_writer((String) session.getAttribute("user_id"));
+		System.out.println(reviewVO.getReview_lesson_num());
+		reviewService.reviewInsert(reviewVO);
+		escrowService.updateEscrowStatus12(escrowVO);
+		message = "<script>location.href='userMyPageGo';</script>";
+		return message;
+	}
+
 	// 유저 마이페이지 이동
 	@RequestMapping(value = "/userMyPageGo")
-	public String myPageGo(HttpServletRequest request, HttpSession session, UserVO vo, LessonVO lessonVO,
+	public String myPageGo(HttpServletRequest request, Model model, HttpSession session, UserVO vo, LessonVO lessonVO,
 			TiperVO tiperVO) {
 		vo.setUser_id((String) session.getAttribute("user_id"));
 		tiperVO.setTiper_user_id((String) session.getAttribute("user_id"));
@@ -294,95 +363,8 @@ public class TiperController {
 		String completedLessonListJSON = new Gson().toJson(lessonService.getCompletedLessonList(lessonVO));
 		request.setAttribute("completedListJSON", completedLessonListJSON);
 
+		model.addAttribute("info", userService.getUserInfoMypage(vo));
+
 		return "user/userMyPage";
 	}
-
-	// 마이페이지 : 강의신고 - 중복된 신고 있는지 확인 후 신고.
-	@RequestMapping(value = "/reportLessonNum", method = RequestMethod.POST)
-	public void reportLessonNum(ReportVO vo, HttpServletResponse response) throws Exception {
-
-		int result = userService.isDupReport(vo);
-		if (result == 0) {
-			userService.reportLessonNum(vo);
-		} else if (result == 1) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter writer = response.getWriter();
-			writer.println(
-					"<script type='text/javascript'>alert('이미 신고한 강의입니다.');location.href='/userMyPageGo';</script>");
-			writer.flush();
-		}
-
-	}
-
-	// 강사 마이페이지 : 강의신고 - 중복된 신고 있는지 확인 후 신고.
-	@RequestMapping(value = "/tiperReportLessonNum", method = RequestMethod.POST)
-	public void tiperReportLessonNum(ReportVO vo, HttpServletResponse response) throws Exception {
-
-		int result = userService.isDupReport(vo);
-		if (result == 0) {
-			userService.reportLessonNum(vo);
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter writer = response.getWriter();
-			writer.println(
-					"<script type='text/javascript'>alert('신고가 접수되었습니다.');location.href='/tiperMypage';</script>");
-			writer.flush();
-		} else if (result == 1) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter writer = response.getWriter();
-			writer.println(
-					"<script type='text/javascript'>alert('이미 신고한 강의입니다.');location.href='/tiperMypage';</script>");
-			writer.flush();
-		} 
-
-	}
-
-	// 파일 업로드
-	@PostMapping("/upload")
-	public ResponseEntity<String> uploadFile(@RequestParam("tiper_img") MultipartFile file, Model model) {
-		// 파일 저장
-		try {
-			String fileName = file.getOriginalFilename();
-			model.addAttribute("filename", fileName);
-			String savePath = servletContext.getRealPath("resources/img/profile");
-			String filePath = savePath + fileName;
-			model.addAttribute("filename", fileName);
-			File saveDir = new File(savePath);
-			if (!saveDir.exists()) {
-				saveDir.mkdirs();
-			}
-
-			File saveFile = new File(filePath);
-			file.transferTo(saveFile);
-			System.out.println(fileName+"코코마데");
-			return ResponseEntity.ok().body("File uploaded successfully");
-		} catch (IOException e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file");
-		}
-	}
-
-//	@PostMapping("/upload")
-//	public ResponseEntity<String> uploadFile(@RequestParam("tiper_img") MultipartFile file, Model model) {
-//		// 파일 저장
-//		try {
-//			String fileName = file.getOriginalFilename();
-//			model.addAttribute("filename", fileName);
-//			String savePath = "C:\\Springwork\\honeytiper999\\src\\main\\webapp\\resources\\img\\";
-//			String filePath = savePath + fileName;
-//			model.addAttribute("filename", fileName);
-//			File saveDir = new File(savePath);
-//			if (!saveDir.exists()) {
-//				saveDir.mkdirs();
-//			}
-//
-//			File saveFile = new File(filePath);
-//			file.transferTo(saveFile);
-//			System.out.println(fileName);
-//			return ResponseEntity.ok().body("File uploaded successfully");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file");
-//		}
-//	}
-
 }

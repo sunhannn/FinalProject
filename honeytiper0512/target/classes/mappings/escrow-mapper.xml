@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EscrowDAO">
+
+	<resultMap type="com.ggul.zip.escrow.EscrowVO" id="escrowMap">
+		<result property="escrow_user_id" column="escrow_user_id" />
+		<result property="escrow_tiper_code" column="escrow_tiper_code" />
+		<result property="escrow_lesson_num" column="escrow_lesson_num" />
+		<result property="escrow_status" column="escrow_status" />
+		<result property="escrow_price" column="escrow_price" />
+		<result property="escrow_start" column="escrow_start" />
+		<result property="escrow_end" column="escrow_end" />
+		<result property="tiper_user_id" column="tiper_user_id" />
+		<result property="lesson_title" column="lesson_title" />
+	</resultMap>
+
+	<select id="getEscrowList" parameterType="escrow" resultMap="escrowMap">
+		SELECT escrow.*, tiper.tiper_user_id AS tiper_user_id,
+		lesson.lesson_title AS lesson_title
+		FROM escrow
+		LEFT JOIN tiper ON escrow.escrow_tiper_code = tiper.tiper_code
+		LEFT JOIN lesson ON escrow.escrow_lesson_num = lesson.lesson_num
+		WHERE 1 = 1
+		<if test="startDate != null and startDate != ''">
+        <![CDATA[ AND escrow_start >= ]]>#{startDate}
+		</if>
+		<if test="endDate != null and endDate != ''">
+        <![CDATA[ AND escrow_start <= ]]>DATE_ADD(#{endDate}, INTERVAL 1 DAY)
+		</if>
+		ORDER BY escrow_start DESC
+	</select>
+
+
+	<select id="getEscrowListByStatus" parameterType="escrow" resultMap="escrowMap">
+
+		SELECT escrow.*, tiper.tiper_user_id AS tiper_user_id, lesson.lesson_title
+		AS lesson_title
+		FROM escrow
+		LEFT JOIN tiper ON escrow.escrow_tiper_code = tiper.tiper_code
+		LEFT JOIN lesson ON escrow.escrow_lesson_num = lesson.lesson_num
+		WHERE escrow_status =#{escrow_status}
+		ORDER BY escrow_start DESC;
+	</select>
+
+	<select id="getDisputeResolutionList" parameterType="escrow" resultMap="escrowMap">
+		SELECT escrow.*, tiper.tiper_user_id AS tiper_user_id,
+		lesson.lesson_title AS lesson_title
+		FROM escrow
+		LEFT JOIN tiper ON escrow.escrow_tiper_code = tiper.tiper_code
+		LEFT JOIN lesson ON escrow.escrow_lesson_num = lesson.lesson_num
+		WHERE escrow_status IN (0, 1)
+		ORDER BY escrow_start DESC;
+	</select>
+
+	<select id="searchDispute" parameterType="escrow" resultMap="escrowMap">
+		SELECT escrow.*, tiper.tiper_user_id AS tiper_user_id,
+		lesson.lesson_title AS lesson_title
+		FROM escrow
+		LEFT JOIN tiper ON escrow.escrow_tiper_code = tiper.tiper_code
+		LEFT JOIN lesson ON escrow.escrow_lesson_num = lesson.lesson_num
+		WHERE escrow_status IN (0, 1)
+		<if test="search_condition == 'escrow_user_id' "> AND escrow_user_id LIKE CONCAT('%', #{search_keyword},'%')</if>
+		<if test="search_condition == 'tiper_user_id' "> AND tiper_user_id LIKE CONCAT('%', #{search_keyword},'%')</if>
+		ORDER BY escrow_start DESC;
+	</select>
+	
+	
+	<!--  정성현 : 마이페이지 -->
+	<update id="updateEscrowStatus12">
+UPDATE ESCROW SET ESCROW_STATUS=2, ESCROW_END=NOW() WHERE ESCROW_USER_ID = #{escrow_user_id} AND ESCROW_LESSON_NUM=#{escrow_lesson_num}
+</update>
+
+
+	
+	<select id="select_escrow" parameterType="com.ggul.zip.escrow.EscrowVO" resultType="com.ggul.zip.escrow.EscrowVO">
+	    select	lesson_num AS escrow_lesson_num, lesson_title, lesson_tiper_code AS escrow_tiper_code
+	    from 	lesson 
+	    where	lesson_onoff = 1 and lesson_num = any(select escrow_lesson_num
+				from escrow
+				where escrow_user_id = #{escrow_user_id} AND escrow_tiper_code = (select tiper_code
+				FROM tiper
+				WHERE tiper_user_id = #{tiper_user_id}) AND escrow_status = 0)
+	</select>
+	
+
+	<update id="update_price" parameterType="com.ggul.zip.escrow.EscrowVO">
+		UPDATE 	escrow
+		SET 	ESCROW_PRICE = #{escrow_price}
+		WHERE 	ESCROW_USER_ID = #{escrow_user_id} and
+				ESCROW_TIPER_CODE = #{escrow_tiper_code} and
+				ESCROW_LESSON_NUM = #{escrow_lesson_num} and
+				ESCROW_STATUS = 0
+	</update>
+	
+	<update id="escrow_status" parameterType="com.ggul.zip.escrow.EscrowVO">
+		UPDATE 	escrow
+		SET 	ESCROW_STATUS = 1
+		WHERE 	ESCROW_USER_ID = #{escrow_user_id} and
+				ESCROW_TIPER_CODE = #{escrow_tiper_code} and
+				ESCROW_LESSON_NUM = #{escrow_lesson_num} and
+				ESCROW_STATUS = 0
+	</update>
+	
+	<!-- 성현 -->
+	<insert id="insertEscrow">
+		INSERT INTO ESCROW (ESCROW_USER_ID, ESCROW_TIPER_CODE, ESCROW_LESSON_NUM) VALUES (#{escrow_user_id}, #{escrow_tiper_code} ,#{escrow_lesson_num});
+	</insert>
+
+</mapper>

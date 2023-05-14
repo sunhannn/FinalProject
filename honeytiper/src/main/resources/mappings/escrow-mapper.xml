@@ -16,7 +16,7 @@
 		<result property="lesson_title" column="lesson_title" />
 	</resultMap>
 
-	<select id="getEscrowList" parameterType="escrow" resultMap="escrowMap">
+<select id="getEscrowList" parameterType="escrow" resultMap="escrowMap">
 		SELECT escrow.*, tiper.tiper_user_id AS tiper_user_id,
 		lesson.lesson_title AS lesson_title
 		FROM escrow
@@ -66,14 +66,58 @@
 		ORDER BY escrow_start DESC;
 	</select>
 	
+	<select id="checkStatus" resultType="_int">
+	SELECT escrow_status FROM
+	escrow WHERE escrow_num=#{escrow_num}
+	</select>
+
+	<update id="updateStatus0103"  parameterType="escrow" >
+	UPDATE ESCROW
+	SET ESCROW_STATUS = 3, ESCROW_END=SYSDATE()
+	WHERE escrow_num =#{escrow_num}
+	</update>
+	
+	<insert id="insertTiperPointList">
+	INSERT INTO POINT
+	(point_id, point_price, point_history, point_time)
+	VALUES(#{tiper_user_id},#{escrow_price},'[관리자]완료 강의입금', SYSDATE())
+	</insert>
+	
+	<update id="updateTiperPoint">
+	UPDATE users
+		SET user_point =
+		( SELECT SUM(point_price)
+		FROM point
+		WHERE point_id = #{tiper_user_id})
+		WHERE user_id = #{tiper_user_id}
+	</update>
+	
+	<update id="updateStatus04"  parameterType="escrow" >
+	UPDATE ESCROW
+	SET ESCROW_STATUS = 4, ESCROW_END=SYSDATE()
+	WHERE escrow_num =#{escrow_num}
+	</update>
+	
+	<insert id="insertUserPointList">
+	INSERT INTO POINT
+	(point_id, point_price, point_history, point_time)
+	VALUES(#{escrow_user_id},#{escrow_price},'[관리자]취소 강의환불', SYSDATE())
+	</insert>
+	
+	<update id="updateUserPoint">
+	UPDATE users
+		SET user_point =
+		( SELECT SUM(point_price)
+		FROM point
+		WHERE point_id = #{escrow_user_id})
+		WHERE user_id = #{escrow_user_id}
+	</update>
+	
+
+
+<!-- 여기까지 보영 -->
 	
 	<!--  정성현 : 마이페이지 -->
-	<update id="updateEscrowStatus12">
-UPDATE ESCROW SET ESCROW_STATUS=2, ESCROW_END=NOW() WHERE ESCROW_USER_ID = #{escrow_user_id} AND ESCROW_LESSON_NUM=#{escrow_lesson_num}
-</update>
-
-
-	
 	<select id="select_escrow" parameterType="com.ggul.zip.escrow.EscrowVO" resultType="com.ggul.zip.escrow.EscrowVO">
 	    select	lesson_num AS escrow_lesson_num, lesson_title, lesson_tiper_code AS escrow_tiper_code
 	    from 	lesson 
@@ -107,5 +151,9 @@ UPDATE ESCROW SET ESCROW_STATUS=2, ESCROW_END=NOW() WHERE ESCROW_USER_ID = #{esc
 	<insert id="insertEscrow">
 		INSERT INTO ESCROW (ESCROW_USER_ID, ESCROW_TIPER_CODE, ESCROW_LESSON_NUM) VALUES (#{escrow_user_id}, #{escrow_tiper_code} ,#{escrow_lesson_num});
 	</insert>
+	
+	<update id="updateEscrowStatus12">
+UPDATE ESCROW SET ESCROW_STATUS=2, ESCROW_END=NOW() WHERE ESCROW_USER_ID = #{escrow_user_id} AND ESCROW_LESSON_NUM=#{escrow_lesson_num}
+</update>
 
 </mapper>

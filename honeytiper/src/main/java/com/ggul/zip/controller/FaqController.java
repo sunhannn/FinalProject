@@ -58,7 +58,7 @@ public class FaqController {
 	@RequestMapping("/updateFaq")
 	public String updateFaq(FaqVO vo) {
 		faqService.updateFaq(vo);
-		return "redirect:adminFaqUpdate?update=1";
+		return "queen/adminFaqUpdateSuccess";
 	}
 	
 	

@@ -54,7 +54,7 @@ h5 {
 
 h4 {
 	font-weight: bold;
-	font-size: 30px;
+	font-size: 27px;
 }
 
 hr {
@@ -80,6 +80,10 @@ h4 {
 	width: 100%;
 }
 
+.container0{
+	width: 95%;
+	}
+
 .container1 {
 	width: 768px;
 	margin: 0 auto;
@@ -90,8 +94,7 @@ h4 {
 	text-align: left;
 	display: block;
 	font-weight: bold;
-	font-size: 30px;
-	margin-left: 35px;
+	font-size: 27px;
 }
 
 #sub_2 {
@@ -115,9 +118,9 @@ h4 {
 .container0_grid {
 	display: grid;
 	grid-template-columns: 300px auto;
-	width: 90%;
 	margin: 0px auto;
 	gap: 4px;
+	width: 100%;
 }
 
 #container0_grid001 {
@@ -160,6 +163,7 @@ h4 {
 	flex: 1 1 0%;
 	overflow: hidden;
 	background: rgb(255, 255, 255);
+	height:100%
 }
 
 .container0_cont3_text {
@@ -169,18 +173,21 @@ h4 {
 	height: 100%;
 	padding: 10px 10px 10px 10px;
 	border-right: 4px solid rgb(247, 247, 247);
+	justify-content: center;
 }
 
 #container0_cont4 {
 	flex: 1 1 0%;
 	overflow: hidden;
 	background: rgb(255, 255, 255);
+	height:100%
 }
 
 #container0_cont5 {
 	flex: 1 1 0%;
 	overflow: hidden;
 	background: rgb(255, 255, 255);
+	height:100%
 }
 
 #container0_cont6 {
@@ -236,6 +243,7 @@ h4 {
 	border: 0;
 	border-radius: 10%;
 	display: inline;
+	font-weight: bold;
 }
 
 #mypage_tab {
@@ -261,7 +269,7 @@ h4 {
 }
 
 .grid002_title {
-	font-size: 14px;
+	font-size: 10px;
 	padding-bottom: 20px;
 }
 
@@ -272,7 +280,6 @@ h4 {
 }
 
 .mytab_2 {
-	/*       width: 30%; */
 	text-align: left;
 }
 
@@ -341,11 +348,11 @@ h4 {
 }
 
 .modal1 {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
 	display: none;
 	background: rgba(0, 0, 0, 0.6);
 }
@@ -353,12 +360,13 @@ h4 {
 .modal1 .modal1-window {
 	background-color: white;
 	position: relative;
-	width: 40vw;
+	width: 600px;
 	height: 50%;
-	padding: 10px;
+	padding: 30px;
 	margin: auto;
 	margin-top: 20vh;
-	border-radius: 10%;
+	border-radius: 3%;
+	box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.3), -1px -1px 3px 3px rgba(0, 0, 0, 0.3);
 }
 
 #modal1-title {
@@ -376,11 +384,8 @@ h4 {
 #modal1-title h3 {
 	padding: 10px;
 	margin: 10 !important;
-	display: inline;
 	width: 100%;
-	background-color: #FFD400;
-	border-radius: 20%;
-	font-size: 30px;
+	font-size: 24px;
 }
 
 .modal1-content1 {
@@ -392,12 +397,18 @@ h4 {
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	justify-content: flex-start;
 }
 
-#text_container pre {
+#text_container {
 	width: 70%;
 	text-align: center;
+	padding: 30px 0;
+	margin: 0 auto;
+}
+
+.text_container_singo{
+	padding: 30px 0;
 }
 
 .modal1-content1 img {
@@ -428,13 +439,14 @@ h4 {
 }
 
 #sugar_button_box {
-	margin: 10px;
 	display: flex;
 	justify-content: center;
 }
 
 #sugar_button_box button {
-	margin: 15px;
+	margin: 0 10px;
+	width: 100px;
+	height: 30px;
 }
 
 #review_text {
@@ -445,28 +457,48 @@ h4 {
 
 .rev_span {
 	/*       font-size: 27px; */
-	font-size: 1.25rem;
+	font-size: 15px;
+	font-weight: bolder;
+	color: #382407;
 }
 
-#btn_submit {
+.btn_submit {
 	background-color: #FFD400;
 	border: 0;
 	border-radius: 10%;
 	width: 200px;
-	font-size: 25px;
+	font-size: 14px;
 }
 
-#btn_close {
+.btn_close {
 	background-color: #d8dee5;
 	border: 0;
 	border-radius: 10%;
 	width: 200px;
-	font-size: 25px;
+	font-size: 14px;
 }
 
 #singo_input1 {
-	height: 40px;
+	height: 140px;
 	width: 70%;
+	margin-top: -30px;
+	resize:none;
+	display: block;
+	margin: 0 auto;
+	border-radius: 3px;
+	border: 1px solid #darkgray;
+}
+
+#user_singo1{
+	text-align: left;
+	margin: 0 0 40px 0;
+}
+
+#singo_span_ps{
+	color: gray;
+	padding-left: 80px;
+    margin-top: 20px;
+    font-size: 12px;
 }
 
 #pagingul {
@@ -491,6 +523,10 @@ ul li .a_tag {
 	text-decoration-line: none;
 }
 
+#singo_input1:focus{
+	border: 2px solid #FFD400;
+	outline : none;
+}
 ul li.on {
 	background: #FFD400;
 }
@@ -503,13 +539,19 @@ ul li.on .a_tag {
 	margin: 0 auto;
 }
 
-@media ( max-width : 769px) {
+@media ( max-width : 769px) {   /*==========================================================*/
 	.container0_grid {
 		display: flex;
 		flex-direction: column;
 		width: 90%;
 		margin: 0px auto;
 		gap: 4px;
+	}
+	#cont1_username{
+		font-weight: bold;
+    	margin-left: 10px;
+  	 	 font-size: 18px;
+    	line-height: inherit;
 	}
 	#container0_cont6 {
 		padding: 30px 0px 30px 30px;
@@ -531,6 +573,10 @@ ul li.on .a_tag {
 		flex-direction: column;
 		margin-top: 0;
 	}
+	.grid002_title {
+	font-size: 10px;
+	padding-bottom: 4px;
+	}
 	#container0_grid001 {
 		padding: 50px 15px 30px;
 		grid-row: 1/3;
@@ -548,6 +594,45 @@ ul li.on .a_tag {
     height: 100%;
     padding: 30px 10px 30px 10px;
     border-right: 4px solid rgb(247, 247, 247);
+	}
+	
+	.mytab_6{
+		display:none;
+	}
+	.grid002_text {
+	font-size: 14px;
+}
+	
+	.cont1_btn_wrapper{
+		display: flex;
+		flex-direction: column;
+    	align-items: center;
+   		 width: 190px;
+   		 margin-right: 10px;
+	}
+	.container0{
+		width: 98%;
+	}
+	.container1{
+		width: 95%;
+	}
+	
+	.container2{
+		width: 95%;
+	}
+	
+	#btn_complete{
+		width: 80px;
+	}
+	
+	.filemodal1.singo{
+		width: 30px;
+		height: 30px;
+	}
+	.mytab_5 {
+    width: 100px;
+    padding-top: 5px;
+    padding-left: 0px ! important;
 	}
 	/*==========================================================*/
 }
@@ -721,8 +806,8 @@ ul li.on .a_tag {
 								type="text" name="review_cont" id="review_text"
 								placeholder="한 줄 리뷰를 작성해주세요" />
 							<div id="sugar_button_box">
-								<button type="submit" id="btn_submit">리뷰등록</button>
-								<button type="button" id="btn_close">닫기</button>
+								<button type="submit" class="btn_submit" id="btn_submit">리뷰등록</button>
+								<button type="button" class="btn_close" id="btn_close">닫기</button>
 							</div>
 						</form>
 					</div>
@@ -739,29 +824,25 @@ ul li.on .a_tag {
 							<h3>신고 하기</h3>
 						</div>
 
-						<div class="text_container">
+						<div class="text_container_singo">
 
-							<span class="rev_span">강의에 문제가 있었나요? 신고를 통해 보다 나은 꿀집 환경을
-								만들어 주세요!</span> <br> <span class="rev_span">신고를 통해 보다 나은 꿀집
-								환경을 만들어 주세요!</span><br> <br> <span class="rev_span">신고를
-								하시기 전에 한번 더 생각 해주세요!</span> <br> <span class="rev_span">허위
-								신고를 할 경우</span> <br> <span class="rev_span">그 사람에게 큰 상처가 될
-								수 있습니다.</span>
+							<span class="rev_span">강의에 문제가 있었나요?</span><br>
+							<span class="rev_span"> 신고를 통해 보다 나은 꿀집 환경을 만들어 주세요! </span> 
 
 						</div>
 
 						<form action="reportLessonNum" method="post">
 
 							<div id="user_singo1">
-								<input type="text" placeholder="신고내용을 입력해주세요!" id="singo_input1"
-									name="report_cont"> <input type="hidden"
-									name="report_lesson_num" id="lessonNum_singo"> <input
-									type="hidden" name="report_user_id" id="userID_singo">
+								<textarea placeholder="신고내용을 입력해주세요!" id="singo_input1" name="report_cont"></textarea> 
+								<span id="singo_span_ps">*허위 신고시 처벌의 대상이 될 수 있습니다.</span>
+									<input type="hidden" name="report_lesson_num" id="lessonNum_singo"> 
+									<input type="hidden" name="report_user_id" id="userID_singo">
 							</div>
 
 							<div id="sugar_button_box">
-								<button type="submit" id="btn_submit_singo">신고하기</button>
-								<button type="button" id="btn_close_singo">닫기</button>
+								<button type="submit" class="btn_submit" id="btn_submit_singo">신고하기</button>
+								<button type="button" class="btn_close" id="btn_close_singo">닫기</button>
 							</div>
 						</form>
 					</div>
@@ -802,10 +883,12 @@ ul li.on .a_tag {
        //리뷰창 닫기
        btnmodal1Close.addEventListener('click', () => {
        modal1.style.display='none';
+    	   document.body.style.removeProperty('overflow');
        });
        // 신고창 닫기
        btnmodal1CloseSingo.addEventListener('click', () => {
     	   modal1Singo.style.display='none';
+    	   document.body.style.removeProperty('overflow');
            });
        
     </script>

@@ -21,7 +21,14 @@ public class EscrowVO {
     private String search_condition;
     private String search_keyword;
     
-    
+    private int escrow_num;
+
+    public int getEscrow_num() {
+    		return escrow_num;
+    	}
+    	public void setEscrow_num(int escrow_num) {
+    		this.escrow_num = escrow_num;
+    	}
     
     
 	public String getSearch_condition() {

@@ -21,13 +21,10 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 @media ( max-width : 768px) {
 	#tipup_sub1 {
 		font-size: 23px;
-		background-color: #FFD400;
-		border: 0;
-		border-radius: 10%;
-		font-weight: bolder;
+		font-weight: bold;
 	}
 	#tipup_sub2 {
-		font-size: 20px;
+		font-size: 18px;
 		text-decoration-line: underline;
 		text-decoration-color: #FFD400;
 	}
@@ -37,6 +34,12 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 	#tipup_td1 {
 		width: 50%;
 		border-right: 1px solid #d8dee5;
+		vertical-align: top;
+		text-align: center;
+	}
+	#tipimg {
+		width: 120px;
+		margin-left: 30px;
 	}
 	#tipup_td2 {
 		text-align: right;
@@ -44,7 +47,7 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 	}
 	#tipup_info1 {
 		border: 0;
-		width: 80%;
+		width: 95%;
 		resize: none;
 	}
 	#tipup_info1:focus {
@@ -56,7 +59,6 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		font-size: 18px;
 		text-decoration-line: underline;
 		text-decoration-color: #FFD400;
-		font-weight: bold;
 	}
 	#tipup_tab2 {
 		width: 100%;
@@ -66,7 +68,10 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		border-bottom: 2px solid #d8dee5;
 	}
 	.tipup_td4 {
-		font-size: 17px;
+		font-size: 16px;
+	}
+	.tipup_td5 {
+		text-align: right;
 	}
 	.tipup_btn1 {
 		background-color: #FFD400;
@@ -88,12 +93,12 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		font-weight: bold;
 	}
 	#tiperpreview {
-		width: 150px;
-		height: 150px;
+		width: 100px;
+		height: 100px;
 		border-radius: 10%;
 	}
 	input[type=file]::file-selector-button {
-		width: 150px;
+		width: 120px;
 		height: 30px;
 		background: #FFD400;
 		border: 0;
@@ -117,14 +122,18 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 	#tipup_tab1 {
 		width: 100%;
 	}
+	#tipimg {
+		width: 150px;
+		
+	}
 	#tipup_td1 {
 		text-align: center;
-		width: 600px;
+		width: 50%;
 		border-right: 2px solid #d8dee5;
 	}
 	#tipup_td2 {
 		text-align: center;
-		width: 800px;
+		width: 50%;
 	}
 	#tipup_info1:focus {
 		border: 3px solid #FFD400;
@@ -132,7 +141,7 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		border-radius: 20px;
 	}
 	#tipup_info1 {
-		width: 500px;
+		width: 90%;
 		border: 0;
 		resize: none;
 	}
@@ -172,7 +181,6 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		width: 200px;
 		height: 55px;
 		font-weight: bold;
-		margin-right: 240px;
 	}
 	#tiperpreview {
 		width: 180px;
@@ -193,12 +201,14 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 </head>
 <body>
 	<%@include file="../main/header.jsp"%>
+	<br>
+	<br>
 	<div class="container">
 		<span id="tipup_sub1">TIPer 정보 수정</span>
 		<hr>
 
 	</div>
-	<form action="tiperUpdateAction" method="post">
+	<form action="tiperUpdateAction" method="post" id="tipup_form">
 		<div class="container">
 			<span id="tipup_sub2">프로필 수정</span> <br> <br>
 			<table id="tipup_tab1">
@@ -206,13 +216,13 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 				<tr id="tipup_tr1">
 					<td id="tipup_td1"><input type="file" name="tiper_img"
 						placeholder="<%=tiperVO.getTiper_img()%>" accept=".jpg,.jpeg,.png"
-						id="tipimg" onchange="previewImage(event)"> <img
-						id="tiperpreview" src="front/<%=tiperVO.getTiper_img()%>"
-						alt="프로필사진 없음"></td>
+						id="tipimg" onchange="previewImage(event)" required="required">
+						<br> <img id="tiperpreview"
+						src="front/<%=tiperVO.getTiper_img()%>" alt="프로필사진 없음"></td>
 
 					<td id="tipup_td2"><textarea name="tiper_info"
 							placeholder="<%=tiperVO.getTiper_info()%>" id="tipup_info1"
-							cols="30" rows="10"></textarea></td>
+							cols="30" rows="10" required="required"></textarea></td>
 				</tr>
 
 
@@ -278,6 +288,26 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 			input.style.display = 'none';
 			hsh(event.target.files[0]);
 		}
+
+		function tiperInfoUpdateSubmit(event) {
+			// form submit 이벤트를 중지합니다.
+			event.preventDefault();
+			console.log("작동");
+			// 확인(confirm) 창을 띄웁니다.
+			if (confirm("강사 정보를 정말 수정할까요?")) {
+				// 확인 버튼을 클릭한 경우 form을 submit합니다.
+				event.target.submit();
+			} else {
+				// 취소 버튼을 클릭한 경우 아무런 작업을 하지 않습니다.
+				return false;
+			}
+		}
+
+		// form 요소를 선택합니다.
+		const form = document.querySelector("#tipup_form");
+
+		// form submit 이벤트를 처리하는 함수를 등록합니다.
+		form.addEventListener("submit", tiperInfoUpdateSubmit);
 	</script>
 	<%@include file="../main/footer.jsp"%>
 </body>

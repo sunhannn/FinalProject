@@ -25,4 +25,6 @@
     <fullyQualifiedTypeName name="org.apache.commons.io.FilenameUtils"/>
     <fullyQualifiedTypeName name="org.apache.commons.io.FileUtils"/>
     <fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
+    <fullyQualifiedTypeName name="org.springframework.web.context.support.ServletContextResource"/>
+    <fullyQualifiedTypeName name="org.springframework.core.io.Resource"/>
 </qualifiedTypeNameHistroy>

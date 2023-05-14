@@ -28,17 +28,38 @@ public class EscrowServiceImpl implements EscrowService {
 	 public ArrayList<EscrowVO>searchDispute(HashMap<String, Object> map){
 		 return  (ArrayList<EscrowVO>)escrowDAO.searchDispute(map);
 	 }
+	 //상태거르기
 	 public int checkStatus(EscrowVO vo) {
 		 return escrowDAO.checkStatus(vo);
 	 }
-	 
-	 public void update_price(EscrowVO vo) {
-			escrowDAO.update_price(vo);
-		}
-	 
+	//강제완료 눌렀을때
+	 public void updateStatus0103(EscrowVO vo) {
+		 escrowDAO.updateStatus0103(vo);
+	 }
+	 public void insertTiperPointList(EscrowVO vo) {
+		 escrowDAO.insertTiperPointList(vo);
+	 }
+	 public void updateTiperPoint(EscrowVO vo) {
+		 escrowDAO.updateTiperPoint(vo);
+	 }
+	 //취소 눌렀을때
+	 public void updateStatus04(EscrowVO vo) {
+		 escrowDAO.updateStatus04(vo);
+	 }
+	 public void insertUserPointList(EscrowVO vo) {
+		 escrowDAO.insertUserPointList(vo);
+	 }
+	 public void updateUserPoint(EscrowVO vo) {
+		 escrowDAO.updateUserPoint(vo);
+	 }
+	//-------------------------------------------------------------- 
 	 @Override
 		public void insertEscrow(EscrowVO evo) {
 			escrowDAO.insertEscrow(evo);
 		}
 	 
+	 @Override
+	 	public void updateEscrowStatus12(EscrowVO evo) {
+		 	escrowDAO.updateEscrowStatus12(evo);
+	 }
 }

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.ggul.zip.faq.FaqVO, java.util.*" %>
 <%@ page import="java.util.Date" %>
@@ -130,7 +129,7 @@ var search = $("#faq-search").val();
 
 
 function selTdUpdate(val){
-updateBtn = window.open('adminFaqUpdate?faq_question_num='+val, "_blank", "width=640, height=450, resizeable");
+updateBtn = window.open('adminFaqUpdate?faq_question_num='+val, "_blank", "width=850px, height=550px, resizeable");
 
 }
 
@@ -150,7 +149,6 @@ function selTdDelete(val){
 // 검색 버튼 클릭 이벤트
 function btnSFnc() {
 	search = $("#faq-search").val();
-	console.log(search);
     ajaxFnc();
 };
 
@@ -195,10 +193,10 @@ if(endPage > (dataList.length)) endPage = dataList.length;
 
 for (var i = startPage; i < endPage; i++) {
 	
-	 chartHtml += "<tr><td>" +(dataList[i].faq_question || "") + "</td><td>" + 
+	 chartHtml += "<tr><td style='text-overflow:ellipsis; overflow:hidden; white-space:nowrap;'>" +(dataList[i].faq_question || "") + "</td><td style='text-overflow:ellipsis; overflow:hidden; white-space:nowrap;'>" + 
 	 (dataList[i].faq_answer || "") + 
-	 "</td><td onclick='selTdUpdate("+dataList[i].faq_question_num +") style='text-overflow:ellipsis; overflow:hidden; white-space:nowrap;'' ><button type='button'>수정</button></td>"+
-	 "</td><td onclick='selTdDelete("+dataList[i].faq_question_num +")' style='text-overflow:ellipsis; overflow:hidden; white-space:nowrap;'><button type='button'>삭제</button></td></tr>";
+	 "</td><td onclick='selTdUpdate("+dataList[i].faq_question_num +")'><button type='button'>수정</button></td>"+
+	 "</td><td onclick='selTdDelete("+dataList[i].faq_question_num +")'><button type='button'>삭제</button></td></tr>";
  }
  
 $("#dataTableBody").html(chartHtml);

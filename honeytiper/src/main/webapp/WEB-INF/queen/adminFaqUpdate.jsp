@@ -25,6 +25,7 @@
 			margin: 50px auto;
 			max-width: 700px;
 			padding: 20px;
+			
 		}
 
 		input[type="text"], textarea {
@@ -82,8 +83,10 @@
 		<input type="text" name="faq_question_num" value="${faqUpdate.faq_question_num }" style="display: none;">
 		<textarea placeholder="변경할 `질문`내용을 입력하세요" name="faq_question" >${faqUpdate.faq_question }</textarea>
 		<textarea placeholder="변경할 `답변`내용을 입력하세요" name="faq_answer">${faqUpdate.faq_answer }</textarea>
-		<input type="submit" value="전송">
-		<button type="button" onclick="BtnClose()">닫기</button>
+		<div>
+			<input type="submit" value="전송">
+			<button type="button" onclick="BtnClose()">닫기</button>
+		</div>
 	</form>
 </body>
 </html>

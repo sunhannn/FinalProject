@@ -218,13 +218,26 @@
 		</if>
 	</select>
 	
-	<insert id="reportLessonNum">
-		INSERT INTO REPORT (REPORT_LESSON_NUM, REPORT_USER_ID, REPORT_CONT) VALUES (#{report_lesson_num}, #{report_user_id} ,#{report_cont});
+		<insert id="reportLessonNum">
+		INSERT INTO REPORT (REPORT_LESSON_NUM,
+		REPORT_USER_ID, REPORT_CONT) VALUES (#{report_lesson_num}, #{report_user_id} ,#{report_cont});
 	</insert>
-	
+
 	<select id="isDupReport" resultType="users">
-		SELECT REPORT_NUM FROM REPORT WHERE REPORT_USER_ID = #{report_user_id} AND REPORT_LESSON_NUM = #{report_lesson_num}
+		SELECT REPORT_NUM FROM
+		REPORT WHERE REPORT_USER_ID = #{report_user_id} AND REPORT_LESSON_NUM
+		= #{report_lesson_num}
 	</select>
+
+	<select id="getUserInfoMypage" resultType="users">
+		SELECT * FROM
+		USERS WHERE USER_ID = #{user_id}
+	</select>
+	
+	<update id="updateUserRole01">
+		UPDATE USERS SET USER_ROLE = 1 WHERE USER_ID =
+		#{user_id};
+	</update>
 	
 </mapper>
 

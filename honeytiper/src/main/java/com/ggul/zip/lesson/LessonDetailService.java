@@ -3,6 +3,8 @@ package com.ggul.zip.lesson;
 import java.util.HashMap;
 import java.util.List;
 
+import com.ggul.zip.escrow.EscrowVO;
+
 
 public interface LessonDetailService {
 
@@ -20,4 +22,5 @@ public interface LessonDetailService {
 	List<ReviewVO> getTotalReviewList(HashMap<String, Object> map);
 	
 	double getSugarAvg(int lesson_num);
+	int isDupEscrowLesson(EscrowVO evo);
 }

@@ -108,6 +108,9 @@ public interface UserService {
 	//정성현 마이페이지 =======
 	void reportLessonNum(ReportVO rvo);
 	int isDupReport(ReportVO rvo);
+	List<UserVO> getUserInfoMypage(UserVO vo);
+	void updateUserRole01(UserVO vo);
+
 	
 	
 }

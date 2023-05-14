@@ -20,25 +20,36 @@ String formattedDate = String.format("%tF", today);
   width: 65%;
   margin: 0 auto;
 }
-/* 나머지 요소들은 기본값인 z-index: 1로 설정 */
-table {
-  border-collapse: collapse;
-  width: 100%;
-  z-index: 1;
+
+tr {
+	height: 24px;
+	padding: 18px 0px;
+}
+.cont1_table {
+	width: 100%;
+	margin: 0 auto;
+	border-spacing: 0px !important;
 }
 
-th, td {
-  text-align: center;
-  vertical-align: middle;
-  border: 1px solid #ddd;
-  padding: 12px;
-  z-index: 1;
+.cont1_th {
+	background-color: #F0F0F0;
 }
 
-th {
-  background-color: #f2f2f2;
-  font-weight: bold;
+.thCenter1 {
+	margin: 10px 5px;
+	text-align: center;
+	padding: 12px 0;
+	border-bottom: 1px solid lightgray;
+	font-size: 0.85rem;
 }
+.tdCenter1 {
+	margin: 10px 5px;
+	text-align: center;
+	padding: 17px 0;
+	border-bottom: 1px solid lightgray;
+	font-size: 0.9rem;
+}
+
 
 #view-all-button, #search-button {
   border: 0;
@@ -89,10 +100,21 @@ th {
 }
  input[type=date] {
     width: 170px;
-   height: 25px;
+   	height: 25px;
     text-align: center;
   }
+  #escrow-status-select{
+  width: 100px;
+    height: 30px;
+    text-align: center;
+    border-color: lightgray;
+    border-radius: 4px;
+    font-size: 14px;}
 </style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </head>
 <body>
 <script>
@@ -115,7 +137,7 @@ window.onload = function() {
 
 //전역변수정의
 var totalData; //총 데이터 수
-var dataPerPage=10; //한 페이지에 나타낼 글 수
+var dataPerPage=8; //한 페이지에 나타낼 글 수
 var pageCount = 5; //페이징에 나타낼 페이지 수
 var globalCurrentPage= 1; //현재 페이지
 
@@ -148,6 +170,7 @@ function ajaxFnc(startDate = null, endDate = null) {
             endDate: endDate
         },
         success: function (res) {
+        	console.log(res);
             totalData = res.length;
             //글 목록 표시 재호출
             displayData(globalCurrentPage, dataPerPage, res);
@@ -157,18 +180,18 @@ function ajaxFnc(startDate = null, endDate = null) {
     });
 }
 //필터링된 데이터를 가져오는 아약스 함수
-function filterDataByStatus(startDate, endDate, escrow_status) {
-	console.log(escrow_status);
+function filterDataByStatus(escrow_status) {
+	
   $.ajax({
     method: "POST",
     url: 'callEscrowListByStatus',
     data: {
-      startDate: startDate,
-      endDate: endDate,
+      
      escrow_status: escrow_status
     },
     success: function (res) {
       totalData = res.length;
+      
       //글 목록 표시 재호출
       displayData(globalCurrentPage, dataPerPage, res);
       //페이징 표시 재호출
@@ -181,12 +204,10 @@ $(document).ready(function () {
   // 페이지 로드 시 전체 데이터를 불러옵니다.
   ajaxFnc();
 
-  $('input[name="escrow_status"]').on('click', function () {
-    var startDate = $("#start-date").val();
-    var endDate = $("#end-date").val();
-    var escrow_status = $('input[name="escrow_status"]:checked').val();
-    filterDataByStatus(startDate, endDate, escrow_status);
-  });
+  $('#escrow-status-select').on('change', function() {
+	    var escrow_status = $(this).val();
+	    filterDataByStatus(escrow_status);
+	});
 });
 //displayData를 부르면 실행되는 함수
 //현재 페이지(currentPage)와 페이지당 글 개수(dataPerPage) 반영
@@ -222,17 +243,17 @@ for (var i = startPage; i < endPage; i++) {
     var formattedEscrowStart = formatDate(dataList[i].escrow_start) || "";
     var formattedEscrowEnd = formatDate(dataList[i].escrow_end) || "";
     
-	 chartHtml += "<tr><td>" +(dataList[i].escrow_start ? formatDate(new Date(dataList[i].escrow_start)) : "") + 
-	 "</td><td>" + (dataList[i].escrow_user_id || "") +
-	 "</td><td>" + (dataList[i].tiper_user_id || "") +
-	    "</td><td>" + (dataList[i].lesson_title || "") +
-	 "</td><td>" + (dataList[i].escrow_status === 0 ? "신청중" :
+	 chartHtml += '<tr><td class="tdCenter1">' +(dataList[i].escrow_start ? formatDate(new Date(dataList[i].escrow_start)) : "") + 
+	 '</td><td class="tdCenter1">' + (dataList[i].escrow_user_id || "") +
+	 '</td><td class="tdCenter1">' + (dataList[i].tiper_user_id || "") +
+	 '</td><td class="tdCenter1">' + (dataList[i].lesson_title || "") +
+	 '</td><td class="tdCenter1">' + (dataList[i].escrow_status === 0 ? "신청중" :
          						dataList[i].escrow_status === 1 ? "진행중" :
          						dataList[i].escrow_status === 2 ? "완료" :
-         						dataList[i].escrow_status === 3 ? "강제완료" :
-             					dataList[i].escrow_status === 4 ? "취소" : "") +
-	 "</td><td>" + (dataList[i].escrow_end ? formatDate(new Date(dataList[i].escrow_end)) : "") +
-	 "</td><td>" + (dataList[i].escrow_price || "").toLocaleString()+ "</td></tr>";
+         						dataList[i].escrow_status === 3 ? "관리자완료" :
+             					dataList[i].escrow_status === 4 ? "관리자취소" : "") +
+	'</td><td class="tdCenter1">' + (dataList[i].escrow_end ? formatDate(new Date(dataList[i].escrow_end)) : "") +
+	'</td><td class="tdCenter1">' + (dataList[i].escrow_price || "").toLocaleString()+ "</td></tr>";
  }
  
 $("#dataTableBody").html(chartHtml);
@@ -301,7 +322,7 @@ $("#pagingul li a").click(function () {
 }
 </script>
 <div class="container">
-<h2 style="margin:40px 0px;">안전결제내역</h2>
+<h2 style="margin:100px 0px 50px 0px;">안전결제내역</h2>
 
 <button id="view-all-button" onclick="viewAllFnc()">전체목록보기</button>
 <br><br>
@@ -309,33 +330,36 @@ $("#pagingul li a").click(function () {
 <input type="date" id="start-date" name="startDate" >
 <label for="end-date">~</label>
 <input type="date" id="end-date" name="endDate" >
-<button id="search-button"  onclick="btnSFnc()"><i style='font-size:19px; color:white;' class='fas'>&#xf002;</i></button>
+<button id="search-button"  onclick="btnSFnc()"style="outline:none; border:none; background:transparent;"><i class="fa fa-search" style="font-size:24px; color:#FFD400;"></i></button>
 <br><br><br>
-<label for="status-0">신청중</label>
-<input type="radio" id="status-0" name="escrow_status" value="0">
-<label for="status-1">진행중</label>
-<input type="radio" id="status-1" name="escrow_status" value="1">
-<label for="status-2">완료</label>
-<input type="radio" id="status-2" name="escrow_status" value="2">
+<select id="escrow-status-select">
+    <option value="" disabled selected>진행상황</option>
+    <option id="status-0" value="0">신청중</option>
+    <option id="status-1" value="1">진행중</option>
+    <option id="status-2" value="2">완료</option>
+    <option id="status-3" value="3">관리자완료</option>
+    <option id="status-4" value="4">관리자취소</option>
+</select>
 				<br>
             <hr class="hrFirst">
             <br>
-            <span id="displayCount"></span>
-            <table class="table table-bordered">
+<!--             <span id="displayCount"></span> -->
+            <table class="cont1_table">
 	            <thead>
-	                <tr class="pagination-row" >
-	                    <th style="width:15%">강의수락날짜</th> 
-	                    <th style="width:15%">수강자</th> 
-	                    <th style="width:10%">강사</th>
-	                    <th style="width:15%">강의이름</th>
-	                    <th style="width:15%">진행상황</th>
-	                    <th style="width:15%">완료날짜</th>
-	                    <th style="width:15%">금액</th>
+	                <tr class="cont1_th" >
+	                    <th class="thCenter1">강의수락날짜</th> 
+	                    <th class="thCenter1">수강자</th> 
+	                    <th class="thCenter1">강사</th>
+	                    <th class="thCenter1">강의이름</th>
+	                    <th class="thCenter1">진행상황</th>
+	                    <th class="thCenter1">완료날짜</th>
+	                    <th class="thCenter1">금액</th>
 	                </tr>
 	            </thead>
 	            <tbody id="dataTableBody"></tbody>
             </table>
 	<ul id="pagingul"></ul>
 	</div>
+<div style="padding:100px 0px"></div>
 </body>
 </html>

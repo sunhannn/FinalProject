@@ -9,7 +9,7 @@ body {
 
 h3 {
 	margin: 0 auto;
-	margin-left: 16%;
+	margin-left: 19%;
 	font-size: 26px;
 	margin-bottom: 25px;
 }
@@ -51,8 +51,7 @@ tr {
 
 #super_container {
 	margin: 0 auto;
-	margin-top: 120px;
-	margin-left: 200px;
+	margin-top: 100px;
 }
 
 .table_wrapper {
@@ -150,6 +149,55 @@ tr {
 	text-align: left;
 }
 
+#pagingul8 {
+  margin-top: 20px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+#pagingul8 li {
+  margin-right: 5px;
+}
+
+#pagingul8 li a {
+  display: block;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #333;
+  text-decoration: none;
+}
+
+#pagingul8 li.on a {
+  background-color: #FFD400;
+  color: #fff;
+}
+
+#pagingul9 {
+  margin-top: 20px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+#pagingul9 li {
+  margin-right: 5px;
+}
+
+#pagingul9 li a {
+  display: block;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #333;
+  text-decoration: none;
+}
+
+#pagingul9 li.on a {
+  background-color: #FFD400;
+  color: #fff;
+}
 }
 </style>
 <script
@@ -159,7 +207,6 @@ tr {
 <%@include file="../queen/adminNavbar.jsp"%>
 <body>
 	<div class="jumbotron">
-		<h1>UserList</h1>
 	</div>
 	<nav id="searchNav" class="navbar navbar-expand-sm navbar-dark">
 
@@ -189,9 +236,6 @@ tr {
 			<ul id="pagingul8">
 			</ul>
 		</div>
-
-		<!-- 				<hr id="br0203"> -->
-
 		<div class="table_wrapper">
 			<div id="top_bar">
 				<h3>블랙리스트 관리</h3>

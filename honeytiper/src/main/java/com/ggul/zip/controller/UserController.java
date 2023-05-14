@@ -284,9 +284,47 @@ public class UserController {
 		return "redirect:/index";
 	}
 
+	//비밀번호 일치 확인
+	   @RequestMapping(value = "/checkPW", method = RequestMethod.POST)
+	   public String checkPW(UserVO vo, HttpSession session, Model model) {
+	      UserVO user = null;
+	      String user_id = (String)session.getAttribute("user_id");
+	      vo.setUser_id(user_id);
+	      
+	      // parameter로 받은값
+	      String user_pw = vo.getUser_pw();
+	      
+	      if (userService.getUser(vo) != null) {
+	         System.out.println("null 아님");
+	         // db 값
+	         user = userService.getUser(vo);
+	         String chkPassword = user.getUser_pw();
+	         
+	         boolean chk = false;
+	         if (user_pw != null) {
+	            // db값과 parameter값이 일치하는지 확인
+	            chk = userService.pwMatchChk(user_pw, chkPassword);
+	         }
+	         
+	         if (chk) {
+	            System.out.println("success");
+	            model.addAttribute("edit", user);
+	            System.out.println("user model : " + ((UserVO) model.getAttribute("edit")).getUser_tel());
+	            return "user/userEdit";
+	         } else {
+	            return "redirect:pwCheck?error=1";
+	         }
+	      } else {
+	         return "redirect:pwCheck?error=1";
+	      }
+	   }
+	   
+	   //비밀번호 확인 이동
+	   @RequestMapping("/chkPassword")
+	   public String chkPassword() {
+	      return "user/pwCheck";
+	   }
 
-	
-	
 	
 	
 	

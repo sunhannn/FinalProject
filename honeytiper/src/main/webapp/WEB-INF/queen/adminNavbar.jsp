@@ -75,8 +75,8 @@ color: #ffd400;
   <a href="adminNoticeList">공지사항 수정</a>
   <a href="adminFaqList">F A Q 수정</a>
   <a href="adminUpdateGo">관리자정보수정</a>
-<a href="getDisputeResolutionList">티퍼-회원 분쟁해결</a>
   <a href="callEscrowList">에스크로내역</a>
+<a href="getDisputeResolutionList">티퍼-회원 분쟁조정</a>
 <div class="menu-icon">
     <i class="fas fa-angle-right"></i>
   </div>

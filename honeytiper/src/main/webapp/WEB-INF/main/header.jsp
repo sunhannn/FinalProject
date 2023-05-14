@@ -33,15 +33,14 @@
 
 <title>Document</title>
 
-<style>
-/* # General
-================================ */
-body {
-   font-family: "Open Sans", Helvetica, sans-serif;
-}
 
+<style>
 /* # Header, Main Menu
 ================================ */
+#main-navbar{
+   border-bottom: solid 0.5px #D2D2D2;
+}
+
 .navbar {
    opacity: 0.8;
    margin-bottom: 0;
@@ -148,18 +147,20 @@ body {
       left: 0;
       width: 100%;
       height: 1px;
-      background: #FFDF48;
+      background: #FFBB00;
       content: "";
       opacity: 0;
-      transition: height 0.3s, opacity 0.3s, transform 0.3s;
       transform: translateY(-);
    }
+   
+   
    .navbar-nav>li>a:hover::after, .navbar-nav>li>a:focus::after {
       text-decoration: none;
       height: 2px;
       opacity: 1;
-      transform: translateY(0px);
+      transform: translateY(0px); 
    }
+   
    .navbar-nav>:nth-child(1)>a:hover::after, .navbar-nav>:nth-child(1)>a:focus::after
       {
       opacity: 0;
@@ -270,12 +271,12 @@ body {
    position: fixed;
    background: #eee;
    transition: 0.3s;
-   font-size: 20px;
+
 }
 
 .nav1 a {
    color: #696969;
-   font-size: 30px;
+   font-size: 25px;
    text-decoration: none;
    display: block;
    transition: 0.3s;
@@ -351,7 +352,7 @@ body {
 }
 
 .search-input:active, .search-input:focus {
-   border: 2px solid #FFDF48;
+   border: 2px solid #FFBB00;
 }
 
 .search-input {
@@ -392,17 +393,23 @@ body {
             <div class="container navbar-container">
                <div class="navbar-header">
                   <a class="navbar-brand" href="/"><img
-                     src="${pageContext.request.contextPath}/front/ggultiperLogo.png"
+                     src="${pageContext.request.contextPath}/front/ggulTiper.png"
                      alt="" title="Logo"></a> <span id="send_msgImg"> <c:if
                         test='${user_id ne NULL}'>
                         <c:choose>
                            <c:when test='${unread == 0}'>
+                           <div class="image-container">
                             <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
-                             <img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/message.png">
+                             <img title="메세지함 열기" alt="message list" id="msg_img_m" class="send_msg" src="front/message.png">
+                             <img title="메세지함 열기" alt="message list" id="msg_img_m2" class="send_msg" src="front/on-messsge.png">
+                            </div>
                            </c:when>
                            <c:otherwise>
+                           <div class="image-container">
                                 <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
-                              <img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/on-message.png">
+                              <img title="메세지함 열기" alt="message list" id="msg_img_m" class="send_msg" src="front/on-message.png">
+                              <img title="메세지함 열기" alt="message list" id="msg_img_m2" class="send_msg" src="front/on-messsge.png">
+                            </div>
                            </c:otherwise>
                         </c:choose>
                      </c:if>
@@ -411,7 +418,7 @@ body {
                <div id="navbar" class="navbar-collapse collapse">
                   <ul class="nav navbar-nav navbar-left">
                      <li><a href="/"><img
-                           src="${pageContext.request.contextPath}/front/ggultiperLogo.png"
+                           src="${pageContext.request.contextPath}/front/ggulTiper.png"
                            alt="" title="Logo"></a></li>
                      <li class="dropdown" style="margin-left:30px;"><a href="#" class=""
                         data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -454,14 +461,20 @@ body {
                            <c:choose>
                               <c:when test='${unread == 0}'>
                                  <li style="padding: 0px;">
+                                 <div class="image-container">
                                     <img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/message.png">
+                                    <img title="메세지함 열기" alt="message list" id="msg_img2" class="send_msg" src="front/on-messsge.png">
                                     <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
+                                  </div>
                                  </li>
                               </c:when>
                               <c:otherwise>
                                  <li style="padding: 0px;">
+                                 <div class="image-container">
                                     <img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/on-message.png">
+                                    <img title="메세지함 열기" alt="message list" id="msg_img2" class="send_msg" src="front/on-messsge.png">
                                     <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
+                                   </div>
                                  </li>
                               </c:otherwise>
                            </c:choose>
@@ -473,27 +486,27 @@ body {
                      </c:choose>
                      <c:choose>
                         <c:when test='${user_id ne NULL and user_role == 0}'>
-                           <li class="dropdown"><a href="#" class=""
+                           <li class="dropdown" id="userDropdown"><a href="#" class=""
                               data-toggle="dropdown" role="button" aria-haspopup="true"
                               aria-expanded="false">${user_name}님 반갑습니다<span
-                                 class="caret2"></span></a>
+                                 class="caret"></span></a>
                               <ul class="dropdown-menu">
                                  <li><a href="goMyHoneypay">허니페이</a></li>
-                                 <li><a href="userUpdateGo">회원정보수정</a></li>
+                                 <li><a href="chkPassword">회원정보수정</a></li>
                                  <li><a href="userMyPageGo">마이페이지</a></li>
                                  <li><a href="tiperSignUpMove">TIPer신청</a></li>
                                  <li>---------------------------</li>
                                  <li><a href="logOut">로그아웃</a></li>
-                              </ul></li>
+                              </ul></li>                           
                         </c:when>
                         <c:when test='${user_id ne NULL and user_role == 1}'>
-                           <li class="dropdown"><a href="#" class=""
+                           <li class="dropdown" id="userDropdown"><a href="#" class=""
                               data-toggle="dropdown" role="button" aria-haspopup="true"
                               aria-expanded="false">${user_name}님 반갑습니다<span
-                                 class="caret2"></span></a>
+                                 class="caret"></span></a>
                               <ul class="dropdown-menu">
                                  <li><a href="goMyHoneypay">허니페이</a></li>
-                                 <li><a href="userUpdateGo">회원정보수정</a></li>
+                                 <li><a href="chkPassword">회원정보수정</a></li>
                                  <li><a href="userMyPageGo">회원마이페이지</a></li>
                                  <li><a href="tiperMypage">TIPer마이페이지</a></li>
                                  <li><a href="tiperUpdateGo">TIPer관리</a></li>
@@ -505,16 +518,17 @@ body {
                            <li>${user_name}님반갑습니다</li>
                         </c:when>
                         <c:when test='${user_id ne NULL and user_role == 3}'>
-                           <li class="dropdown"><a href="#" class=""
+                           <li class="dropdown" id="userDropdown"><a href="#" class=""
                               data-toggle="dropdown" role="button" aria-haspopup="true"
                               aria-expanded="false">${user_name}님 반갑습니다<span
-                                 class="caret2"></span></a>
+                                 class="caret"></span></a>
                               <ul class="dropdown-menu">
                                  <li><a href="goMyHoneypay">허니페이</a></li>
-                                 <li><a href="userUpdateGo">회원정보수정</a></li>
+                                 <li><a href="chkPassword">회원정보수정</a></li>
                                  <li><a href="userMyPageGo">마이페이지</a></li>
                                  <li>---------------------------</li>
                                  <li><a href="logOut">로그아웃</a></li>
+                              </ul></li>
                               </ul></li>
                         </c:when>
                         <c:otherwise>
@@ -546,8 +560,7 @@ body {
          <c:if test="${user_id ne NULL and user_role == 1}">
             <a href="goMyHoneypay">허니페이</a>
             <a href="userUpdateGo">회원정보수정</a>
-            <a href="userMypageGo">회원마이페이지</a>
-            <a href="tiperMypage">TIPer마이페이지</a>
+            <a href="tiperMypage">마이페이지</a>
             <a href="tiperUpdateGo">TIPer관리</a>
             <br>
             <a href="#portfolio">꿀TIPer</a>
@@ -616,7 +629,7 @@ function openNav() {
                         console.log("메세지 체크 하기");
                      },
                      error : function() {
-                        alert('서버 에러');
+                        alert('index===================서버 에러');
                      }
                   });
                    if (self.name != 'reload') {
@@ -636,7 +649,25 @@ function openNav() {
             Message_chk();
          });
             
+
+            $(document).ready(function() {
+                var userDropdown = $('#userDropdown');
+                var dropdownMenu = userDropdown.find('.dropdown-menu');
+
+                // 드롭다운 메뉴를 클릭했을 때, 하위 메뉴를 열거나 닫을 수 있도록 처리
+                userDropdown.click(function(e) {
+                  e.stopPropagation();
+                  dropdownMenu.toggle();
+                });
+
+                // 화면의 다른 부분을 클릭했을 때, 열려있는 하위 메뉴를 닫도록 처리
+                $(document).click(function(e) {
+                  if (!userDropdown.is(e.target) && userDropdown.has(e.target).length === 0) {
+                    dropdownMenu.hide();
+                  }
+                });
+              });
+
    </script>
 
 </body>
-</html>

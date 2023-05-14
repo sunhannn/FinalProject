@@ -17,25 +17,52 @@
   width: 65%;
   margin: 0 auto;
 }
-/* 나머지 요소들은 기본값인 z-index: 1로 설정 */
-table {
-  border-collapse: collapse;
-  width: 100%;
-  z-index: 1;
+
+tr {
+	height: 24px;
+	padding: 18px 0px;
+}
+.cont1_table {
+	width: 100%;
+	margin: 0 auto;
+	border-spacing: 0px !important;
 }
 
-th, td {
-  text-align: center;
-  vertical-align: middle;
-  border: 1px solid #ddd;
-  padding: 12px;
-  z-index: 1;
- 
+.cont1_th {
+	background-color: #F0F0F0;
 }
 
-th {
-  background-color: #f2f2f2;
-  font-weight: bold;
+.thCenter1 {
+	margin: 10px 5px;
+	text-align: center;
+	padding: 12px 0;
+	border-bottom: 1px solid lightgray;
+	font-size: 0.85rem;
+}
+.tdCenter1 {
+	margin: 10px 5px;
+	text-align: center;
+	padding: 12px 0;
+	border-bottom: 1px solid lightgray;
+	font-size: 0.9rem;
+}
+
+.tdcenter1_btn1 {
+	border-style: none;
+	background: #FFD400;
+	color: #5c3b0c;
+	margin: 5px;
+	padding: 5px 18px;
+	cursor: pointer;
+}
+
+.tdcenter1_btn2 {
+	border-style: none;
+	background: #E9E9E9;
+	color: #5c3b0c;
+	margin: 5px;
+	padding: 5px 18px;
+	cursor: pointer;
 }
 
 #view-all-button, .btn-success {
@@ -52,13 +79,6 @@ th {
 #view-all-button:hover, .btn-success:hover {
   background-color: #E6B800;
 
-}
-.pagination-row {
-  background-color: #e8f0fe;
-}
-
-.pagination-row th {
-  font-size: 12pt;
 }
 
 #pagingul {
@@ -94,12 +114,21 @@ th {
     height: 30px;
   }
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 </head>
 <body>
+<c:if test="${not empty message}">
+   <script type="text/javascript">
+       var message = "<c:out value='${message}'/>";
+       alert(message);
+   </script>
+</c:if>
 <div class="container">
-<h2 style="margin:40px 0px;">티퍼-회원 분쟁조정</h2>
+<h2 style="margin:100px 0px 50px 0px;">티퍼-회원 분쟁조정</h2>
 <button id="view-all-button" >전체목록보기</button>
 <br><br>
  
@@ -111,7 +140,8 @@ th {
 						<option value="tiper_user_id">강사아이디</option>
 					</select> <input class="search" type="text" name="search_keyword" id="sel2"
 						placeholder="검색어를 입력하세요.">
-					<button class="btn btn-success" type="submit" class="search" id="sel3"><i style='font-size:19px; color:white;' class='fas'>&#xf002;</i></button>
+					<button class="btn btn-success" type="submit" class="search" id="sel3"style="outline:none; border:none; background:transparent;">
+					<i class="fa fa-search" style="font-size:24px; color:#FFD400;"></i></button>
 						 <br><br><br>
 						 <label for="status-0">신청중</label>
 						<input type="radio" id="status-0" name="escrow_status" value="0">
@@ -122,26 +152,26 @@ th {
 				</div>
 			</div>
             <span id="displayCount"></span>
-            <table class="table table-bordered">
+            <table class="cont1_table">
 	            <thead>
-	                <tr class="pagination-row" >
-	                    <th style="width:15%">강의수락날짜</th> 
-	                    <th style="width:10%">수강자</th> 
-	                    <th style="width:25%">강의이름</th>
-	                     <th style="width:10%">강사</th>
-	                     <th style="width:10%">금액</th>
-	                    <th style="width:10%">진행상황</th><!--상태가 0또는 1만 불러와야함 -->
-	                    <th style="width:25%">강제완료 or 취소</th><!-- 버튼이 자동으로 생성되야하네 낄낄 -->
+	                <tr class="cont1_th" >
+	                    <th class="thCenter1">강의수락날짜</th> 
+	                    <th class="thCenter1">수강자</th> 
+	                    <th class="thCenter1">강의이름</th>
+	                     <th class="thCenter1">강사</th>
+	                     <th class="thCenter1">금액</th>
+	                    <th class="thCenter1">진행상황</th><!--상태가 0또는 1만 불러와야함 -->
+	                    <th class="thCenter1" style="width:20%">완료 or 취소</th><!-- 버튼이 자동으로 생성되야하네 낄낄 -->
 	                </tr>
 	            </thead>
 	            <tbody id="data_table_body"></tbody>
             </table>
 	<ul id="pagingul"></ul>
-	</div>
+	<div style="padding:100px 0px"></div>
 </body>
 <script>
 var totalData; //총 데이터 수
-var dataPerPage=10; //한 페이지에 나타낼 글 수
+var dataPerPage=8; //한 페이지에 나타낼 글 수
 var pageCount = 5; //한 번에 나타낼 페이지 수 ([이전] 1 2 3 4 5 [다음])
 var globalCurrentPage= 1; //현재 페이지
 var dataList; //데이터 리스트
@@ -157,7 +187,7 @@ function formatDate(date) {
 	
  
 $(document).ready(function () {
-	 
+	
      //totalData(총 데이터 수) 구하기 항상실행이여서 컨트롤러에서 걍가져옴아약스X
 	 dataList = ${DisputeListtJSON};		
      
@@ -189,16 +219,16 @@ function displayData(currentPage, dataPerPage) {
 			     i++
 			   ) {
 		  chartHtml +=
-		 	  '<tr><td>' + (dataList[i].escrow_start ? formatDate(new Date(dataList[i].escrow_start)) : "") + 
-		 	  '</td><td>' +(dataList[i].escrow_user_id || "")  +
-		 	  '</td><td>' +(dataList[i].lesson_title || "")  +
-		 	  '</td><td>' +(dataList[i].tiper_user_id || "") +
-		 	  '</td><td>' +(dataList[i].escrow_price || "").toLocaleString()+
-		 	  '</td><td>' +(dataList[i].escrow_status === 0 ? "신청중" :
+		 	  '<tr><td class="tdCenter1">' + (dataList[i].escrow_start ? formatDate(new Date(dataList[i].escrow_start)) : "") + 
+		 	  '</td><td class="tdCenter1">' +(dataList[i].escrow_user_id || "")  +
+		 	  '</td><td class="tdCenter1">' +(dataList[i].lesson_title || "")  +
+		 	  '</td><td class="tdCenter1">' +(dataList[i].tiper_user_id || "") +
+		 	  '</td><td class="tdCenter1">' +(dataList[i].escrow_price || "").toLocaleString()+
+		 	  '</td><td class="tdCenter1">' +(dataList[i].escrow_status === 0 ? "신청중" :
 									dataList[i].escrow_status === 1 ? "진행중" : "" )+
-		 	  '</td><td>' +
-		 	 '<button type="button" class="tdcenter1_btn1" onclick="location.href=\'/forcedCompletion?escrow_price='+dataList[i].escrow_price+'&escrow_start='+dataList[i].escrow_start+'&user_id='+dataList[i].escrow_user_id+'&tiper_user_id='+dataList[i].tiper_user_id+'&report_lesson_num='+dataList[i].report_lesson_num+'\'">강제완료하기</button>'+
-		 	 '<button type="button" class="tdcenter1_btn2" onclick="location.href=\'/cancel?escrow_price='+dataList[i].escrow_price+'&escrow_start='+dataList[i].escrow_start+'&user_id='+dataList[i].escrow_user_id+'&tiper_user_id='+dataList[i].tiper_user_id+'&report_lesson_num='+dataList[i].report_lesson_num+'\'">취소하기</button></tr>';
+		 	  '</td><td class="tdCenter1">' +
+		 	 '<button type="button" class="tdcenter1_btn1" title="티퍼에게 강의료가 입금됩니다" onclick="location.href=\'/forcedCompletion?escrow_num='+dataList[i].escrow_num+'&escrow_user_id='+dataList[i].escrow_user_id+'&tiper_user_id='+dataList[i].tiper_user_id+'&escrow_price='+dataList[i].escrow_price+'\'">완료</button>'+
+		 	 '<button type="button" class="tdcenter1_btn2" title="회원에게 환불처리됩니다" onclick="location.href=\'/cancel?escrow_num='+dataList[i].escrow_num+'&escrow_user_id='+dataList[i].escrow_user_id+'&tiper_user_id='+dataList[i].tiper_user_id+'&escrow_price='+dataList[i].escrow_price+'\'">취소</button></tr>';
 			   } 
  }else{ 
   
@@ -208,16 +238,16 @@ function displayData(currentPage, dataPerPage) {
     i++
   ) {
 	  chartHtml +=
-		  '<tr><td>' + (dataList[i].escrow_start ? formatDate(new Date(dataList[i].escrow_start)) : "") + 
-	 	  '</td><td>' +(dataList[i].escrow_user_id || "")  +
-	 	  '</td><td>' +(dataList[i].lesson_title || "")  +
-	 	  '</td><td>' +(dataList[i].tiper_user_id || "") +
-	 	 '</td><td>' +(dataList[i].escrow_price || "").toLocaleString()+
-	 	  '</td><td>' +(dataList[i].escrow_status === 0 ? "신청중" :
+		  '<tr><td class="tdCenter1">' + (dataList[i].escrow_start ? formatDate(new Date(dataList[i].escrow_start)) : "") + 
+	 	  '</td><td class="tdCenter1">' +(dataList[i].escrow_user_id || "")  +
+	 	  '</td><td class="tdCenter1">' +(dataList[i].lesson_title || "")  +
+	 	  '</td><td class="tdCenter1">' +(dataList[i].tiper_user_id || "") +
+	 	 '</td><td class="tdCenter1">' +(dataList[i].escrow_price || "").toLocaleString()+
+	 	  '</td><td class="tdCenter1">' +(dataList[i].escrow_status === 0 ? "신청중" :
 	 							dataList[i].escrow_status === 1 ? "진행중" : "" )+
-	 	  '</td><td>' +
-	 	 '<button type="button" class="tdcenter1_btn1" onclick="location.href=\'/forcedCompletion?escrow_price='+dataList[i].escrow_price+'&escrow_start='+dataList[i].escrow_start+'&user_id='+dataList[i].escrow_user_id+'&tiper_user_id='+dataList[i].tiper_user_id+'&report_lesson_num='+dataList[i].report_lesson_num+'\'">강제완료하기</button>'+
-	 	  '<button type="button" class="tdcenter1_btn2" onclick="location.href=\'/cancel?escrow_price='+dataList[i].escrow_price+'&escrow_start='+dataList[i].escrow_start+'&user_id='+dataList[i].escrow_user_id+'&tiper_user_id='+dataList[i].tiper_user_id+'&report_lesson_num='+dataList[i].report_lesson_num+'\'">취소하기</button></tr>';
+	 	  '</td><td class="tdCenter1">' +
+	 	  '<button type="button" class="tdcenter1_btn1" title="티퍼에게 강의료가 입금됩니다" onclick="location.href=\'/forcedCompletion?escrow_num='+dataList[i].escrow_num+'&escrow_user_id='+dataList[i].escrow_user_id+'&tiper_user_id='+dataList[i].tiper_user_id+'&escrow_price='+dataList[i].escrow_price+'\'">완료</button>'+
+	 	  '<button type="button" class="tdcenter1_btn2" title="회원에게 환불처리됩니다" onclick="location.href=\'/cancel?escrow_num='+dataList[i].escrow_num+'&escrow_user_id='+dataList[i].escrow_user_id+'&tiper_user_id='+dataList[i].tiper_user_id+'&escrow_price='+dataList[i].escrow_price+'\'">취소</button></tr>';
   }
   
 }
@@ -289,6 +319,30 @@ function paging(totalData, dataPerPage, pageCount, currentPage) {
 	    paging(totalData, dataPerPage, pageCount, globalCurrentPage);
 	  });
 	}
+
+$('input[name="escrow_status"]').on('click', function () {
+    var escrow_status = $('input[name="escrow_status"]:checked').val();
+    filterDataByStatus(escrow_status);
+  });
+function filterDataByStatus(escrow_status) {
+	console.log(escrow_status);
+  $.ajax({
+    method: "POST",
+    url: 'callEscrowListByStatus',
+    data: {
+     escrow_status: escrow_status
+    },
+    success: function (data) {
+      totalData = data.length;
+      
+      dataList=data;
+      //글 목록 표시 재호출
+      displayData(1, 5);
+      //페이징 표시 재호출
+      paging(totalData, 5, pageCount, 1);
+    }
+  });
+}
 $("#sel3").click(function(){
 	console.log("여기오니");
 	var search_condition=$('#sel1').val();
@@ -301,7 +355,7 @@ $("#sel3").click(function(){
 		dataType: "json",
 		async:false,
 		success: function (data) {
-// 		 		alert("data: " + JSON.stringify(data));
+// 			alert("data: " + JSON.stringify(data));
 		   //totalData(총 데이터 수) 구하기
 		   totalData = data.length;
 	       //데이터 대입

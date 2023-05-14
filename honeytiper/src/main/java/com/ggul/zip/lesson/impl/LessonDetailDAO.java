@@ -6,7 +6,9 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.ObjectUtils;
 
+import com.ggul.zip.escrow.EscrowVO;
 import com.ggul.zip.lesson.LessonDetailVO;
 import com.ggul.zip.lesson.ReviewVO;
 
@@ -46,6 +48,18 @@ public class LessonDetailDAO{
 			}
 		}
 		
+		// 중복된 수강신청 내역 있는지 확인
+		public int isDupEscrowLesson(EscrowVO vo) {
+			System.out.println("===>mybatis로 isDupEscrowLesson() 기능처리");
+
+			Object result = mybatis.selectList("LessonDAO.isDupEscrowLesson", vo);
+
+			if (ObjectUtils.isEmpty(result) == false) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}
 			
 
 }

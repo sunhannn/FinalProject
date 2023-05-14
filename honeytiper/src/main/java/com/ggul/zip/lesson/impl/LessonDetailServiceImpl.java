@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ggul.zip.escrow.EscrowVO;
 import com.ggul.zip.lesson.LessonDetailService;
 import com.ggul.zip.lesson.LessonDetailVO;
 import com.ggul.zip.lesson.ReviewVO;
@@ -43,6 +44,12 @@ public class LessonDetailServiceImpl implements LessonDetailService {
 	@Override
 	public double getSugarAvg(int lesson_num) {
 		return lessonDAO.getSugarAvg(lesson_num);
+	}
+	
+	@Override
+	public int isDupEscrowLesson (EscrowVO evo){
+		int result = lessonDAO.isDupEscrowLesson(evo);
+		return result;
 	}
 	
 

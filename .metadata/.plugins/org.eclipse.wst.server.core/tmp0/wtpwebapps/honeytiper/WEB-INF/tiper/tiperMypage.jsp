@@ -38,7 +38,7 @@ if (tiperVO.getTiper_cate3() == null) {
 <style>
 @media ( max-width : 768px) {
 	#mytip_sub1 {
-		font-size: 25px;
+		font-size: 20px;
 	}
 	#mytip_sub2 {
 		font-size: 15px;
@@ -50,7 +50,7 @@ if (tiperVO.getTiper_cate3() == null) {
 		text-align: right;
 	}
 	#mytip_point2 {
-		font-size: 14px;
+		font-size: 12px;
 	}
 	#mytip_imgpro {
 		width: 70px;
@@ -70,17 +70,17 @@ if (tiperVO.getTiper_cate3() == null) {
 	}
 	.mytip_td1 {
 		text-align: left;
-		width: 150px;
+		font-size: 12px;
 	}
 	.mytip_td2 {
 		text-align: left;
-		width: 160px;
+		font-size: 12px
 	}
 	.mytip_td3 {
-		width: 200px;
+		font-size: 12px
 	}
 	.mytip_td4 {
-		width: 100px;
+		font-size: 12px
 	}
 	.mytip_td5 {
 		width: 35px;
@@ -95,38 +95,44 @@ if (tiperVO.getTiper_cate3() == null) {
 		background-color: #FFD400;
 		border: 0;
 		border-radius: 10px;
-		width: 170px;
+		width: 70px;
 		height: 40px;
 		font-weight: bold;
+		margin-bottom: 10px;
 	}
 	#mytip_btn3 {
 		background-color: #FFD400;
 		border: 0;
 		border-radius: 10px;
-		width: 170px;
+		width: 120px;
 		height: 40px;
 		font-weight: bold;
-		margin-bottom: 10px;
 	}
 	#mytip_tdpro2 {
 		text-align: center;
 		vertical-align: top;
-		width: 200px;
+		background-color: white;
+		border-right: 3px solid rgb(247, 247, 247);
 	}
 	#mytip_tdpro1 {
-		width: 100px;
-		text-align: right;
+		text-align: center;
+		vertical-align: top;
+		background-color: white;
+		border-right: 3px solid rgb(247, 247, 247);
 	}
 	#mytip_tdpro3 {
 		vertical-align: top;
-		width: 200px;
-		font-size: 14px;
+		font-size: 12px;
 		text-align: center;
+		background-color: white;
+		border-right: 3px solid rgb(247, 247, 247);
 	}
 	#mytip_tdpro4 {
-		vertical-align: bottom;
+		vertical-align: top;
 		text-align: center;
-		width: 200px;
+		font-size: 12px;
+		background-color: white;
+		border-right: 3px solid rgb(247, 247, 247);
 	}
 	.modal1 {
 		position: absolute;
@@ -233,8 +239,29 @@ if (tiperVO.getTiper_cate3() == null) {
 		margin: 0 auto;
 	}
 	#mytip_singo {
-		width: 30px;
-		height: 30px;
+		width: 20px;
+		height: 20px;
+		margin-bottom: 2px;
+	}
+	#tipup_div4 {
+		text-align: center;
+	}
+	#mytip_div1 {
+		padding: 0px;
+		background-color: rgb(247, 247, 247);
+	}
+	#mytip_tabpro {
+		width: 100%;
+	}
+	#mytip_catespan {
+		font-weight: bold;
+	}
+	#mytip_pointspan{
+	font-weight: bold;
+	}
+	.mytip_td5{
+	text-align: center;
+	
 	}
 }
 
@@ -254,7 +281,7 @@ if (tiperVO.getTiper_cate3() == null) {
 		text-align: right;
 	}
 	#mytip_point2 {
-		font-size: 14px;
+		font-size: 15px;
 	}
 	#mytip_point3 {
 		
@@ -273,22 +300,22 @@ if (tiperVO.getTiper_cate3() == null) {
 	}
 	.mytip_td1 {
 		text-align: left;
-		font-size: 17px;
+		font-size: 15px;
 		width: 250px;
 	}
 	.mytip_td2 {
 		text-align: left;
-		font-size: 17px;
+		font-size: 15px;
 		width: 300px;
 	}
 	.mytip_td3 {
 		width: 300px;
-		font-size: 17px;
+		font-size: 15px;
 		text-align: left;
 	}
 	.mytip_td4 {
 		width: 200px;
-		font-size: 17px;
+		font-size: 15px;
 	}
 	.mytip_btn1 {
 		background-color: #FFD400;
@@ -310,10 +337,9 @@ if (tiperVO.getTiper_cate3() == null) {
 		border: 0;
 		border-radius: 10px;
 		width: 300px;
-		height: 40px;
+		height: 50px;
 		font-size: 16px;
 		font-weight: bold;
-		margin-bottom: 15px;
 	}
 	#mytip_imgpro {
 		width: 150px;
@@ -324,21 +350,31 @@ if (tiperVO.getTiper_cate3() == null) {
 		text-align: center;
 		vertical-align: top;
 		width: 300px;
+		background-color: white;
+		border-right: 6px solid rgb(247, 247, 247);
 	}
 	#mytip_tdpro1 {
 		width: 200px;
-		text-align: right;
+		text-align: center;
+		vertical-align: top;
+		background-color: white;
+		border-right: 6px solid rgb(247, 247, 247);
+		border-left: 6px solid rgb(247, 247, 247);
 	}
 	#mytip_tdpro3 {
 		vertical-align: top;
 		width: 260px;
-		font-size: 14px;
+		font-size: 15px;
 		text-align: center;
+		background-color: white;
+		border-right: 6px solid rgb(247, 247, 247);
 	}
 	#mytip_tdpro4 {
-		vertical-align: bottom;
+		vertical-align: top;
 		text-align: center;
 		width: 300px;
+		background-color: white;
+		border-right: 6px solid rgb(247, 247, 247);
 	}
 	.modal1 {
 		position: absolute;
@@ -428,7 +464,7 @@ if (tiperVO.getTiper_cate3() == null) {
 	}
 	ul li .a_tag {
 		display: block;
-		font-size: 14px;
+		font-size: 15px;
 		color: black;
 		padding: 9px 12px;
 		border-right: solid 1px #ccc;
@@ -448,49 +484,60 @@ if (tiperVO.getTiper_cate3() == null) {
 		width: 30px;
 		height: 30px;
 	}
+	#tipup_div4 {
+		text-align: right;
+	}
+	#mytip_div1 {
+		background-color: rgb(247, 247, 247);
+		padding: 0;
+	}
+	#mytip_tabpro {
+		width: 100%;
+	}
+	#mytip_catespan {
+		font-weight: bold;
+	}
 }
 </style>
 <body>
 	<%@include file="../main/header.jsp"%>
-	<div class="container">
-		<h4 id="mytip_sub1">TIPer마이페이지(강사)</h4>
+	<div class="container" id="mytip_div1">
+		<h4 id="mytip_sub1">TIPer마이페이지</h4>
 		<br> <br>
-		<div id="mytip_div1">
+		<div>
 			<table id="mytip_tabpro">
 				<tr id="mytip_trpro">
 					<td id="mytip_tdpro1"><img alt="프로필"
 						src="front/<%=tiperVO.getTiper_img()%>" id="mytip_imgpro"></td>
 
 					<td id="mytip_tdpro3"><span>내 카테고리</span> <br> <br>
-						<span><%=tiperVO.getTiper_cate1()%><br>
-						<br><%=cate2%><br>
-						<br><%=cate3%></span></td>
-					<td></td>
+						<span id="mytip_catespan"><%=tiperVO.getTiper_cate1()%><br>
+							<br><%=cate2%><br> <br><%=cate3%></span></td>
 					<td id="mytip_tdpro2"><p id="mytip_point2">
-							<span id="mytip_point3">My허니페이 <%=point%> point
+							<span id="mytip_point3">My허니페이 <span id="mytip_pointspan"><%=point%></span>point
 							</span>
-						</p> <br> <br> <br>
+						</p> <br> <br> <br> <br>
 						<button type="button" onclick="location.href='honeyTake'"
 							id="mytip_btn2">허니페이 정산하기</button></td>
-					<td id="mytip_tdpro4"><button type="button"
-							onclick="location.href='lessonMakeGo'" id="mytip_btn3">강의등록하기</button></td>
+					<td id="mytip_tdpro4"><span>강사 소개</span> <br> <br> <span><%=tiperVO.getTiper_info()%></span></td>
 				</tr>
-
-
 			</table>
-
+		</div>
+		<div id="tipup_div4">
+			<button type="button" onclick="location.href='lessonMakeGo'"
+				id="mytip_btn3">강의등록하기</button>
 
 		</div>
-
-		<br> <br>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="container">
 		<div id="mytip_sub2">
 			<span id="mytip_sub3">진행중인 꿀TIP</span><br>
 		</div>
 		<br>
-		<div id="mytip_point1"></div>
-	</div>
-	<br>
-	<div class="container">
 		<table id="mytip_table1">
 			<c:forEach items="${lessonTiper}" var="lesson">
 				<tr class="mytip_tr1">
@@ -580,16 +627,17 @@ if (tiperVO.getTiper_cate3() == null) {
        
        
        // 신고버튼 누르면 색깔 변경
-      const myImage = document.getElementById("mytip_singo");
+      const myImage = document.querySelector(".filemodal1_singo");
 const originalSrc = myImage.src; // 원래 이미지의 src 저장
 
-myImage.addEventListener("mousedown", function() {
-  this.src = "front/siren_click.png"; // 이미지를 클릭하면 이미지 변경
-});
+myImage.addEventListener("mouseover", function() {
+	  this.src = "front/siren_click.png"; // 이미지 위에 마우스를 올리면 이미지 변경
+	});
 
-myImage.addEventListener("mouseup", function() {
-  this.src = originalSrc; // 이미지를 떼면 원래 이미지로 돌아감
-});
+	myImage.addEventListener("mouseout", function() {
+	  this.src = originalSrc; // 마우스를 이미지 밖으로 빼면 원래 이미지로 돌아감
+	});
     </script>
+	<%@include file="../main/footer.jsp"%>
 </body>
 </html>

@@ -1,8 +1,12 @@
 package com.ggul.zip.controller;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,16 +78,37 @@ public class LessonDetailController {
 
 		return totalReviewList;
 	}
-
+	
 	@RequestMapping("/insertEscrow")
-	public String insertEscrow(EscrowVO evo, Model model) {
+	public void insertEscrow(EscrowVO evo, Model model, HttpSession session, HttpServletResponse response) throws Exception{
 
-		System.out.println("============================ctrl진입! " + evo);
-
-		escrowService.insertEscrow(evo);
-//		model.addAttribute("lessonList", lessonDetailService.getLessonList(ldvo));
-
-		return "redirect:allSearch";
+		int result = lessonDetailService.isDupEscrowLesson(evo); //0 일 때 : 중복 수강신청 없음, 1 일 때 이미 수강신청한 내역 있음.
+		String user_id = (String) session.getAttribute("user_id");
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter writer = response.getWriter();
+		
+		// 로그인했으면 계속 진행, 비로그인 시 로그인창으로.
+		if(user_id != null) {
+		
+			System.out.println("로그인 된 계정이 수강신청 클릭");
+			
+		if (result == 0) {
+			escrowService.insertEscrow(evo);	//기존에 수강신청된 내역 없을 시 Escrow테이블에 insert
+			System.out.println(" 에스크로 인서트 성공");
+			writer.println("<script type='text/javascript'>alert('수강신청에 성공했습니다.');location.href='/allSearch';</script>");
+			writer.flush();
+		} else if (result == 1) {
+			
+			System.out.println(" 중복된 신청 있음");
+			writer.println("<script type='text/javascript'>alert('이미 수강신청한 강의입니다.');location.href='/allSearch';</script>");
+			writer.flush();
+			}
+		} else {
+			System.out.println("로그인 안 한 수강신청 클릭");
+			writer.println("<script type='text/javascript'>alert('로그인이 필요한 서비스입니다.');location.href='/login';</script>");
+		}
+		
 	}
 
 	

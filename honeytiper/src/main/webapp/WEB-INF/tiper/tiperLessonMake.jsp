@@ -39,9 +39,8 @@ if (cateCheck2 == false) {
 <style type="text/css">
 @media ( max-width : 768px) {
 	#lesmake_sub1 {
-		font-size: 30px;
-		background-color: #FFD400;
-		border-radius: 10%;
+		font-size: 24px;
+		font-weight: bold;
 	}
 	#lesmake_tab {
 		width: 100%;
@@ -53,10 +52,10 @@ if (cateCheck2 == false) {
 	#lesmake_img {
 		width: 150px;
 	}
-	#preview {
-		width: 300px;
-		height: 300px;
-		border-radius: 10%;
+	#lesmake_preview {
+		width: 200px;
+		height: 200px;
+		border-radius: 10px;
 	}
 	.lesmake_tr {
 		height: 60px;
@@ -64,41 +63,53 @@ if (cateCheck2 == false) {
 	#lesmake_info {
 		border: 0;
 		vertical-align: middle;
-		width: 300px;
-		height: 300px;
+		width: 200px;
+		height: 200px;
+		resize: none;
 	}
 	#lesmake_info:focus {
 		border: 3px solid #FFD400;
 		outline: none;
+		border-radius: 10px;
 	}
 	#lesmake_title {
-		width: 300px;
+		width: 200px;
 		height: 35px;
 		border: 0;
 	}
 	#lesmake_title:focus {
 		border: 3px solid #FFD400;
 		outline: none;
+		border-radius: 10px;
 	}
 	.lesmake_td1 {
-		font-size: 20px;
-		text-decoration: underline;
-		text-decoration-color: #FFD400;
+		font-size: 17px;
+		vertical-align: top;
 		width: 150px;
+	}
+	.lesmake_td2{
+	vertical-align: top;
+	
 	}
 	#lesmake_cate {
 		height: 40px;
 		border: 0;
 		width: 200px;
 		margin-left: 20px;
+		border: 0;
+	}
+	#lesmake_cate:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
 	}
 	#lesmake_btn1 {
 		background-color: #FFD400;
 		border-radius: 10px;
 		border: 0;
-		width: 200px;
-		height: 55px;
-		color: white;
+		width: 120px;
+		height: 45px;
+		font-weight: bold;
 	}
 	#lesmake_div2 {
 		text-align: center;
@@ -110,15 +121,14 @@ if (cateCheck2 == false) {
 		border: 0;
 		border-radius: 10px;
 		cursor: pointer;
-		color: white;
+		font-weight: bold;
 	}
 }
 
 @media ( min-width : 769px) {
 	#lesmake_sub1 {
-		font-size: 35px;
-		background-color: #FFD400;
-		border-radius: 10%;
+		font-size: 27px;
+		font-weight: bold;
 	}
 	#lesmake_tab {
 		width: 100%;
@@ -130,9 +140,9 @@ if (cateCheck2 == false) {
 	#lesmake_img {
 		width: 150px;
 	}
-	#preview {
-		width: 300px;
-		height: 300px;
+	#lesmake_preview {
+		width: 200px;
+		height: 200px;
 		border-radius: 10%;
 	}
 	.lesmake_tr {
@@ -161,10 +171,8 @@ if (cateCheck2 == false) {
 		border-radius: 10px;
 	}
 	.lesmake_td1 {
-		font-size: 25px;
-		text-decoration: underline;
-		text-decoration-color: #FFD400;
-		width: 20s0px;
+		font-size: 20px;
+		width: 200px;
 	}
 	.lesmake_td2 {
 		width: 500px;
@@ -209,6 +217,9 @@ if (cateCheck2 == false) {
 </head>
 <body>
 	<%@include file="../main/header.jsp"%>
+
+	<br>
+	<br>
 	<div class="container">
 		<span id="lesmake_sub1">TIPer 강의 등록</span> <br>
 		<hr>
@@ -216,31 +227,34 @@ if (cateCheck2 == false) {
 	<div class="container">
 
 
-		<form action="lessonMakeAction">
+		<form action="lessonMakeAction" id="lesmake_form">
 			<div id="lesmake_imgdiv">
 				<div id="lesmake_divimg1">
 					<input type="file" accept=".jpg,.jpeg,.png" name="lesson_img"
-						id="lesmake_img" onchange="previewImage(event)">
+						id="lesmake_img" onchange="previewImage(event)"
+						required="required">
 				</div>
 				<div id="lesmake_divimg2">
-					<img id="preview" src="front/lessonimg.png" alt="강의사진을 올려주세요">
+					<img id="lesmake_preview" src="front/lessonimg.png"
+						alt="강의사진을 올려주세요">
 				</div>
 			</div>
 			<table id="lesmake_tab1">
 				<tr class="lesmake_tr">
 					<td class="lesmake_td1">강의 제목</td>
 					<td class="lesmake_td2"><input type="text" name="lesson_title"
-						placeholder="강의제목을 입력해주세요" id="lesmake_title"></td>
+						placeholder="강의제목을 입력해주세요" id="lesmake_title" required="required"></td>
 				</tr>
 				<tr class="lesmake_tr">
 					<td class="lesmake_td1">강의 내용</td>
 					<td class="lesmake_td2"><textarea name="lesson_info"
-							id="lesmake_info" cols="30" rows="10" placeholder="강의내용을 입력해주세요"></textarea></td>
+							id="lesmake_info" cols="30" rows="10" placeholder="강의내용을 입력해주세요"
+							required="required"></textarea></td>
 				</tr>
 				<tr class="lesmake_tr">
 					<td class="lesmake_td1">강의 카테고리</td>
 					<td class="lesmake_td2"><select name="lesson_cate"
-						id="lesmake_cate">
+						id="lesmake_cate" required="required">
 							<option selected disabled hidden>강의 카테고리 선택</option>
 							<option value="<%=tiperVO.getTiper_cate1()%>"><%=tiperVO.getTiper_cate1()%></option>
 							<option style="<%=style1%>" value="<%=tiperVO.getTiper_cate2()%>"><%=tiperVO.getTiper_cate2()%></option>
@@ -260,19 +274,63 @@ if (cateCheck2 == false) {
 	</div>
 	<br>
 	<script type="text/javascript">
+		function hsh(fparam) {
+
+			console.log($('#lesmake_img input[type=file]'), fparam);
+
+			let formData = new FormData();
+			formData.append('tiper_img', fparam);
+			$.ajax({
+				url : "/upload",
+				type : "post",
+				data : formData,
+				contentType : false,
+				processData : false,
+				cache : false,
+				success : function() {
+					console.log('success');
+				},
+				error : function() {
+					alert('error');
+				}
+			});
+		}
+
 		function previewImage(event) {
 			var reader = new FileReader();
 			reader.onload = function() {
-				var output = document.getElementById('preview');
+				var output = document.getElementById('lesmake_preview');
 				output.src = reader.result;
 			}
 			reader.readAsDataURL(event.target.files[0]);
 			// 파일 선택 후 input 요소 숨기기
 			var input = document.getElementById('lesmake_img');
 			input.style.display = 'none';
-
+			hsh(event.target.files[0]);
 		}
+
+		function onLessonMakeSubmit(event) {
+			// form submit 이벤트를 중지합니다.
+			event.preventDefault();
+			console.log("작동");
+			// 확인(confirm) 창을 띄웁니다.
+			if (confirm("강의를 정말 등록할까요?")) {
+				// 확인 버튼을 클릭한 경우 form을 submit합니다.
+				event.target.submit();
+			} else {
+				// 취소 버튼을 클릭한 경우 아무런 작업을 하지 않습니다.
+				return false;
+			}
+		}
+
+		// form 요소를 선택합니다.
+		const form = document.querySelector("#lesmake_form");
+
+		// form submit 이벤트를 처리하는 함수를 등록합니다.
+		form.addEventListener("submit", onLessonMakeSubmit);
 	</script>
+
+
 	<%@include file="../main/footer.jsp"%>
 </body>
 </html>

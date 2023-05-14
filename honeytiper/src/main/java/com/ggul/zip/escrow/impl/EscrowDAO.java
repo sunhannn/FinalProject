@@ -34,10 +34,33 @@ public class EscrowDAO {
 		return mybatis.selectList("EscrowDAO.searchDispute", map);
 	}
 
-	public int checkStatus(EscrowVO vo) {
-		return mybatis.selectOne("EscrowDAO.checkStatus", vo);
-	}
+	//상태거르기
+			public int checkStatus(EscrowVO vo) {
+				return mybatis.selectOne("EscrowDAO.checkStatus",vo);
+			}
+			//강제완료 눌렀을때
+			public void updateStatus0103(EscrowVO vo) {
+				mybatis.update("EscrowDAO.updateStatus0103",vo);
+			 }
+			 public void insertTiperPointList(EscrowVO vo) {
+				mybatis.insert("EscrowDAO.insertTiperPointList",vo);
+			 }
+			 public void updateTiperPoint(EscrowVO vo) {
+				 mybatis.update("EscrowDAO.updateTiperPoint",vo);
+			 }
+			 
+			 //취소눌렀을때
+			 public void updateStatus04(EscrowVO vo) {
+				 mybatis.update("EscrowDAO.updateStatus04",vo);
+			 }
+			 public void insertUserPointList(EscrowVO vo) {
+				 mybatis.insert("EscrowDAO.insertUserPointList",vo);
+			 }
+			 public void updateUserPoint(EscrowVO vo) {
+				 mybatis.update("EscrowDAO.updateUserPoint",vo);
+			 }
 
+//------------------------------------------------------------------------------
 	// 정보 조회
 	public ArrayList<EscrowVO> select_escrow(EscrowVO vo) {
 
@@ -68,4 +91,12 @@ public class EscrowDAO {
 		mybatis.insert("EscrowDAO.insertEscrow", evo);
 	}
 
+	// 성현
+	public void updateEscrowStatus12(EscrowVO evo) {
+		System.out.println("===>Spring JDBC로 updateEscrowStatus12() 기능처리");
+		System.out.println(evo);
+
+		mybatis.insert("EscrowDAO.updateEscrowStatus12", evo);
+	}
+	
 }

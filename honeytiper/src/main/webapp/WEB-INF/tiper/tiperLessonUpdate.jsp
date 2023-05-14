@@ -68,8 +68,8 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		border-radius: 10px;
 	}
 	#lesup_img1 {
-		width: 200px;
-		height: 200px;
+		width: 100px;
+		height: 100px;
 	}
 	#lesup_imgg {
 		width: 200px;
@@ -79,7 +79,7 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		font-size: 20px;
 	}
 	#lesup_td6 {
-		text-align: center;
+		text-align: left;
 	}
 	#lesup_div3 {
 		text-align: center;
@@ -90,7 +90,7 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		border-radius: 10px;
 		width: 200px;
 		height: 40px;
-		color: white;
+		font-weight: bold;
 	}
 	input[type=file]::file-selector-button {
 		width: 150px;
@@ -102,10 +102,7 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		color: white;
 	}
 	.lesup_span {
-		font-size: 22px;
-		text-decoration-line: underline;
-		text-decoration-color: #FFD400;
-		text-decoration-line: underline;
+		font-size: 18px;
 	}
 }
 
@@ -156,8 +153,8 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		border-radius: 10px;
 	}
 	#lesup_img1 {
-		width: 300px;
-		height: 300px;
+		width: 200px;
+		height: 200px;
 		border-radius: 10px;
 	}
 	#lesup_imgg {
@@ -197,10 +194,6 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		cursor: pointer;
 		font-weight: bold;
 	}
-	.lesup_span {
-		text-decoration-line: underline;
-		text-decoration-color: #FFD400;
-	}
 }
 </style>
 
@@ -214,21 +207,25 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 	</div>
 	<div class="container">
 		<form action="lessonUpdateAction?lessonNum=<%=vo.getLesson_num()%>"
-			method="post">
+			method="post" id="lesup_form">
 			<table id="lesup_tab1">
 
 				<tr id="lesup_tr1">
 					<td id="lesup_td1"><span class="lesup_span">수정할 강의 제목</span> :<br></td>
-					<td id="lesup_td2"><input type="text" placeholder="수정할 강의 제목"
-						name="lesson_title" id="lesup_input1"></td>
+					<td id="lesup_td2"><input type="text"
+						placeholder="<%=vo.getLesson_title()%>" name="lesson_title"
+						id="lesup_input1"></td>
 				</tr>
 
 				<tr id="lesup_tr2">
 
 					<td id="lesup_td3"><span class="lesup_span">수정할 강의 내용</span> :
+
+
 					
 					<td id="lesup_td4"><textarea name="lesson_info"
-							id="lesup_info1" cols="30" rows="10" placeholder="수정할 강의 내용"></textarea></td>
+							id="lesup_info1" cols="30" rows="10"
+							placeholder="<%=vo.getLesson_info()%>"></textarea></td>
 
 
 				</tr>
@@ -255,46 +252,60 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 	<br>
 
 	<script type="text/javascript">
-	$(() => {
-		   $("#lesup_img input[type=file]").change(function(){
-		      console.log($('#lesup_img input[type=file]')[0].files);
-		      
-		      let formData = new FormData();
-		      formData.append('tiper_img', $('#lesup_img input[type=file]')[0].files[0]);
-		      $.ajax({
-		         url : "/upload",
-		         type : "post",
-		         data : formData,
-		         contentType: false,
-		         processData: false,
-		         cache : false,
-		         success : function(sin_img1){
-		            console.log('success');
-		         },
-		         error : function(){
-		            alert('error');
-		         }
-		      });
-		   });
-		});
-	
-	function previewImage(event) {
-		var reader = new FileReader();
-		reader.onload = function() {
-			var output = document.getElementById('lesup_img1');
-			output.src = reader.result;
+		function hsh(fparam) {
+
+			console.log($('#lesup_img input[type=file]'), fparam);
+
+			let formData = new FormData();
+			formData.append('tiper_img', fparam);
+			$.ajax({
+				url : "/upload",
+				type : "post",
+				data : formData,
+				contentType : false,
+				processData : false,
+				cache : false,
+				success : function() {
+					console.log('success');
+				},
+				error : function() {
+					alert('error');
+				}
+			});
 		}
-		reader.readAsDataURL(event.target.files[0]);
-		// 파일 선택 후 input 요소 숨기기
-		var input = document.getElementById('lesup_img');
-		input.style.display = 'none';
-		
-	}
-	
-	
-	
-	
-	
+
+		function previewImage(event) {
+			var reader = new FileReader();
+			reader.onload = function() {
+				var output = document.getElementById('lesup_img1');
+				output.src = reader.result;
+			}
+			reader.readAsDataURL(event.target.files[0]);
+			// 파일 선택 후 input 요소 숨기기
+			var input = document.getElementById('lesup_img');
+			input.style.display = 'none';
+			hsh(event.target.files[0]);
+		}
+
+		function onLessonUpSubmit(event) {
+			// form submit 이벤트를 중지합니다.
+			event.preventDefault();
+
+			// 확인(confirm) 창을 띄웁니다.
+			if (confirm("강의를 수정할까요?")) {
+				// 확인 버튼을 클릭한 경우 form을 submit합니다.
+				event.target.submit();
+			} else {
+				// 취소 버튼을 클릭한 경우 아무런 작업을 하지 않습니다.
+				return false;
+			}
+		}
+
+		// form 요소를 선택합니다.
+		const form = document.querySelector("#lesup_form");
+
+		// form submit 이벤트를 처리하는 함수를 등록합니다.
+		form.addEventListener("submit", onLessonUpSubmit);
 	</script>
 
 

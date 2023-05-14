@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
+
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script
@@ -16,7 +17,7 @@
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style>
 .container {
-   position: relative; /*이만큼이 전체사이즈이다 알려주려고 넣은것*/
+position: relative; /*이만큼이 전체사이즈이다 알려주려고 넣은것*/ */
 }
 div.pagination{
 width:300px;
@@ -61,7 +62,6 @@ margin: 20px auto;
 .btn {
    background-color: #c8c8c8;
    display: block;
-   position: absolute;
    left: 15px;
    border: none;
    color: white;
@@ -72,13 +72,14 @@ margin: 20px auto;
 .warning {
    border-radius: 4px;
    background-color: #ffd400;
-   position: absolute;
    display: block;
    right: 15px;
    border: none;
-   color: white;
+   color: #5c3b0c;
    padding: 12px 15px;
    cursor: pointer;
+   font-size:17px;
+   font-weight:bold;
 }
 
 .warning:hover {
@@ -87,34 +88,37 @@ margin: 20px auto;
 }
 
 .totalPay {
-/*    background-color: #ffd400; */
-   position: absolute;
    left: 15px;
    color: black;
    display: block;
    font-size: 22px;
-/*    border-radius: 250px; */
-/*    width: 400px; */
-/*    height: 50px; */
    magin: 0;
+   font-weight:bold;
+   
 }
 .end-hr{
 margin-bottom: 230px;
 }
+
+.container-fluid{
+background-color: rgb(247, 247, 247);
+
+}
+
 </style>
 </head>
 <body>
 <%@include file="../main/header.jsp" %>
    <input type="hidden" id="point_id" value="${point_id}">
+   
    <div class="container">
-      <h2 style="margin:140px 0px 70px 0px;">마이페이지</h2>
-      <p style="font-size:23px;">MY허니페이</p>
+   <p style="font-size:27px; margin:50px 0px 50px 0px; font-weight:bold;">허니페이</p>
+      
       <br>
       <p class="totalPay">잔여허니페이: <fmt:formatNumber value="${totalPoint.user_point}" groupingUsed="true" /> point</p>
       <button class="warning" type="button"
-         onclick="location.href='goPointCharge'">충전하러가기</button>
-               <br> <br>
-                     <br> <br>
+         onclick="location.href='goPointCharge'">허니페이 충전하러가기 ></button>
+               <br>
       <hr>
       <table class="table table-bordered">
          <thead>
@@ -144,8 +148,9 @@ margin-bottom: 230px;
             </div>
          </div>
       </div>
+      
       <hr class="end-hr">
-   </div>
+      </div>
    <script>
       $(document).ready(function() {
                      var rows = 10;//페이지당 나타낼 데이터수 

@@ -21,5 +21,6 @@ public interface PointService {
 	public PointVO callTotalPoint(PointVO vo);
 	//포인트 환불시 내역insert
 	public void insertRefundPoint(PointVO vo);
-	
+	//강사 포인트 정산 insert
+	public void honeyTakePoint(PointVO vo);
 }

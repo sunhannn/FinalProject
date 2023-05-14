@@ -19,13 +19,13 @@
 	border:0;
 	border-radius: 10px;
 	background-color: #FFD400;
-	font-size: 14pt; 
+	font-size: 14px; 
 }
 
 ul {
     text-align: center;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: none;
     border-right: 0;
 	padding-left :0;
 }
@@ -41,7 +41,7 @@ ul li a {
     font-size: 14px;
 	color: black;
     padding: 9px 12px;
-    border-right: solid 1px #ccc;
+    border-right: none;
     box-sizing: border-box;
 	text-decoration-line:none;
 }
@@ -56,6 +56,7 @@ ul li.on a {
 
 th, td{
 	padding: 10px 0px;
+	text-align: center;
 }
 </style>
 
@@ -223,7 +224,7 @@ function paging(totalData, dataPerPage, pageCount, currentPage) {
 				<br>
             <hr class="hrFirst">
             <span id="displayCount"></span>
-            <table style="width:100%; font-size:15pt;">
+            <table style="width:100%; font-size:14px;">
 	            <thead>
 	                <tr>
 	                    <th style="width:10% ">글번호</th> <th style="width:75%">제목</th> <th style="width:15%">등록일</th>
