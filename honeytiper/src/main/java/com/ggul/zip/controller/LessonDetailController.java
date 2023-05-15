@@ -96,12 +96,14 @@ public class LessonDetailController {
 		if (result == 0) {
 			escrowService.insertEscrow(evo);	//기존에 수강신청된 내역 없을 시 Escrow테이블에 insert
 			System.out.println(" 에스크로 인서트 성공");
-			writer.println("<script type='text/javascript'>alert('수강신청에 성공했습니다.');location.href='/allSearch';</script>");
+//			writer.println("<script type='text/javascript'>alert('수강신청에 성공했습니다.');location.href='/allSearch';</script>");
+			writer.println("<script type='text/javascript'>alert('수강신청에 성공했습니다.');history.back();</script>");
 			writer.flush();
 		} else if (result == 1) {
 			
 			System.out.println(" 중복된 신청 있음");
-			writer.println("<script type='text/javascript'>alert('이미 수강신청한 강의입니다.');location.href='/allSearch';</script>");
+//			writer.println("<script type='text/javascript'>alert('이미 수강신청한 강의입니다.');location.href='/allSearch';</script>");
+			writer.println("<script type='text/javascript'>alert('이미 수강신청한 강의입니다.');history.back();</script>");
 			writer.flush();
 			}
 		} else {

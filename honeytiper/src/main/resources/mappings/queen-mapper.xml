@@ -22,7 +22,7 @@
 	
 <!-- 	일주일값 -->
 	<select id="getWeekTop" resultType="String">
-		SELECT round(max(sales_value),1) AS SALES_VALUE FROM sales 
+		SELECT format(round(max(sales_value),1),1) AS SALES_VALUE FROM sales 
 		WHERE SALES_DATE BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK ) AND NOW()
 		GROUP BY SALES_DATE
 		HAVING max(sales_value)
@@ -31,19 +31,19 @@
 	</select>
 	
 	<select id="getWeekAvg" resultType="String">
-		SELECT ROUND(AVG(sales_value),1) AS SALES_VALUE FROM sales 
+		SELECT format(ROUND(AVG(sales_value),1),1) AS SALES_VALUE FROM sales 
 		WHERE SALES_DATE BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK ) AND NOW()
 	</select>
 	
 	<select id="getWeekTotal" resultType="String">
-		SELECT SUM(sales_value) AS SALES_VALUE FROM sales 
+		SELECT format(SUM(sales_value),1) AS SALES_VALUE FROM sales 
 		WHERE SALES_DATE BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK ) AND NOW()
 	</select>
 	
 	
 <!-- 	한달값 -->
 	<select id="getMonthTop" resultType="String">
-		SELECT round(max(sales_value),1) AS SALES_VALUE FROM sales 
+		SELECT format(round(max(sales_value),1),1) AS SALES_VALUE FROM sales 
 		WHERE SALES_DATE BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW()
 		GROUP BY SALES_DATE
 		HAVING max(sales_value)
@@ -52,12 +52,12 @@
 	</select>
 	
 	<select id="getMonthAvg" resultType="String">
-		SELECT ROUND(AVG(sales_value),1) AS SALES_VALUE FROM sales 
-		WHERE SALES_DATE BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW()
+		SELECT format(ROUND(AVG(sales_value),1), 1) AS SALES_VALUE FROM sales 
+		WHERE SALES_DATE BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW();
 	</select>
 	
 	<select id="getMonthTotal" resultType="String">
-		SELECT SUM(sales_value) AS SALES_VALUE FROM sales 
+		SELECT format(SUM(sales_value),1) AS SALES_VALUE FROM sales 
 		WHERE SALES_DATE BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW()
 	</select>
 	

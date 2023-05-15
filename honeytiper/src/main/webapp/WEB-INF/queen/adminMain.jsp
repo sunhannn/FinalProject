@@ -9,166 +9,106 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
 <style>
+.container{
+	width: 65%;
+	padding: 0;
+}
 #salesTableBody{
+	margin-top: 20px;
 	width:100%;
-	text-align: center;
-}
-#chartDiv{
-	width: 600px;
-	height: 400px;
-	margin: 0 auto;
-}
-.thTitle{
-	padding-top: 55px;
 }
 .chartBtn{
 	text-align: right;
 	margin:0 auto;
 }
-</style>
-<script src="${pageContext.request.contextPath}/front/jquery.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script>
-
-// 이번주 최고매출
-// 전주 평균매출 
-// 오늘 매출
-// 어제 매출
-// 전달 평균 매출
-
-function chart(val){
-	   $.ajax({
-	        url: "chartAjax",
-	        type: "POST",
-	        data:{'chart_select':val},
-	        cache:false,
-	        success:function(res){
-	         	var jsonObject = JSON.stringify(res);
-	         	var jData = JSON.parse(jsonObject);
-	         	var valueList = new Array();
-	         	var dateList = new Array();
-	         	
-	         	for (var i = 0; i < jData.length; i++) {
-	         		var d = jData[i];
-	         		valueList.push(d.sales_value);
-	         		dateList.push(d.sales_date);
-	         	}
-
-	         	var chartData = {
-	         		labels : dateList,
-	         		datasets : [ {
-        			label:val,
-		         		backgroundColor: [
-			         			'white'
-// 			         			,
-// 			         			'rgba(255, 99, 132, 0.2)',
-// 		                        'rgba(54, 162, 235, 0.2)',
-// 		                        'rgba(255, 206, 86, 0.2)',
-// 		                        'rgba(75, 192, 192, 0.2)',
-// 		                        'rgba(153, 102, 255, 0.2)',
-// 		                        'rgba(255, 159, 64, 0.2)'
-		         			],
-		                    borderColor: [
-// 		                    	'rgba(255, 247, 206, 1)',
-		                    	'rgba(105, 80, 226, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-		                    	'rgba(52, 43, 165, 1)',
-// 		                        'rgba(54, 162, 235, 1)',
-// 		                        'rgba(255, 206, 86, 1)',
-// 		                        'rgba(75, 192, 192, 1)',
-// 		                        'rgba(153, 102, 255, 1)',
-// 		                        'rgba(255, 159, 64, 1)'
-		                    ],
-		                    //아래채우기 삭제
-// 		                    fill:false,
-		                    pointStyle: 'circle',
-// 		                    borderColor: 'lightblue',
-		                    borderWidth: 5,
-		         			data : valueList
-	         		} ],
-	         	};
-	         	
-	         	var ctx1 = document.getElementById('myChart').getContext('2d');
-	         	new Chart(ctx1, {
-	         		type : 'line',
-	         		data : chartData
-	         	});
-
-// 	         	let tableHtml ="";
-// 	         	let weekTop = weekTop;
-// 	         	tableHtml += "<tr><td>${weekTop}</td></tr>";
-// 	         	$("#salesTableBody").html(tableHtml);
-	         	
-	         	
-	        }	//success 닫는중괄호
-	        
-	    });
+button{
+	border-style: none;
+    background: #FFD400;
+    color: #5c3b0c;
+    margin: 5px;
+    padding: 5px 18px;
+    cursor: pointer;
+    font-size: 12pt;
+    font-weight: bolder;
+    border-radius: 5px;
+    display: inline-block;
 }
 
-		$(function(){
-			chart('week');
-		});
-		
-</script>
+th, td{
+	padding:5px 15px;
+	height:38px;
+	border-bottom: 1px solid #efefef;
+}
+
+th{
+	background-color: #efefef;
+	text-align: center;
+}
+canvas{
+	width: 450px;
+	height: 300px;
+}
+h2{
+    display: block;
+    font-size: 24px;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bolder;
+}
+</style>
+<script src="${pageContext.request.contextPath}/front/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="${pageContext.request.contextPath}/front/adminLineChart.js"></script>
+<script src="${pageContext.request.contextPath}/front/adminBarChart.js"></script>
 <body>
-	<h5 style="text-align: center;">금액별 그래프</h5>
-<!-- 	<button type="button" onclick="chart(this.value)" value="week" class="chartBtn">주간차트보기</button> -->
-<!-- 	<button type="button" onclick="chart(this.value)" value="month" class="chartBtn">월간차트보기</button> -->
-	<div id="chartDiv">
-		<canvas id="myChart"></canvas>
+<div class="container">
+	<h2 style="margin:40px 0;">매출내역</h2>
+	<br><br>
+		<h4 style="text-align: center;  font-weight: bolder;">매출내역 - 차트</h4>
+		<div id="lineChart" style="float:left; width:49%; text-align: center;">
+			<canvas id="myChart"></canvas>
+			<button type="button" onclick="chart(this.value)" value="week" class="chartBtn">line주간차트보기</button>
+			<button type="button" onclick="chart(this.value)" value="month" class="chartBtn">line월간차트보기</button>
+		</div>
+		<div id="barChart" style="float:right;  width:49%;text-align: center;">
+			<canvas id="myChart2"></canvas>
+			<button type="button" onclick="chart2(this.value)" value="week" class="chartBtn">bar주간차트보기</button>
+			<button type="button" onclick="chart2(this.value)" value="month" class="chartBtn">bar월간차트보기</button>
+		</div>
+		<div style="margin-top:40px; float:left; width: 100%;">
+		<hr style="border:1px solid #efefef;">
 		<br>
-		<br>
-		<table id="salesTableBody" >
-			<tr>
-				<th colspan="4" class="thTitle">주간</th>
-			</tr>
-			<tr>
-				<th>주간최고매출</th><th>주간평균매출</th><th>주간총매출</th>
-			</tr>
-			<tr>
-				<td>${sales.weektop_sales}</td>
-				<td>${sales.weekavg_sales}</td>
-				<td>${sales.weektotal_sales}</td>
-				<td><button type="button" onclick="chart(this.value)" value="week" class="chartBtn">주간차트보기</button></td>
-			</tr>
-			<tr>
-				<th colspan="4" class="thTitle">월간</th>
-			</tr>
-			<tr>
-				<th>월간최고매출</th><th>월간평균매출</th><th>월간총매출</th>
-			</tr>
-			<tr>
-				<td>${sales.monthtop_sales}</td>
-				<td>${sales.monthavg_sales}</td>
-				<td>${sales.monthtotal_sales}</td>
-				<td><button type="button" onclick="chart(this.value)" value="month" class="chartBtn">월간차트보기</button></td>
-			</tr>
-		</table>
+			<h4 style="text-align: center; font-weight: bolder;">매출내역 - 표</h4>
+				<table id="salesTableBody" >
+					<tr>
+						<th colspan="3" class="thTitle">주간</th>
+					</tr>
+					<tr>
+						<td>주간최고매출</td><td>일평균매출</td><td>주간총매출</td>
+					</tr>
+					<tr>
+						<td>${sales.weektop_sales}원</td>
+						<td>${sales.weekavg_sales}원</td>
+						<td>${sales.weektotal_sales}원</td>
+					</tr>
+					<tr>
+						<th colspan="3" class="thTitle">월간</th>
+					</tr>
+					<tr>
+						<td>월간최고매출</td><td>일평균매출</tD><td>월간총매출</td>
+					</tr>
+					<tr>
+						<td>${sales.monthtop_sales}원</td>
+						<td>${sales.monthavg_sales}원</td>
+						<td>${sales.monthtotal_sales}원</td>
+					</tr>
+				</table>
+		</div>
 	</div>
 </body>
 </html>

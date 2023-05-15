@@ -7,7 +7,6 @@
 	<style>
 		body {
 			background-color: #F2F2F2;
-			font-family: Arial, sans-serif;
 			margin: 0;
 			padding: 0;
 		}
@@ -39,10 +38,11 @@
 
 		textarea {
 			height: 100px;
-			font-size: 15pt;
+			font-size: 14px;
+			border: 1px solid #efefef;
 		}
 
-		input[type="submit"], button {
+		input[type="submit"]{
 			background-color: #FFD400;
 			border: none;
 			border-radius: 3px;
@@ -51,15 +51,34 @@
 			cursor: pointer;
 			font-size: 16px;
 			font-weight: bold;
-			margin-top: 10px;
 			padding: 10px 20px;
 			transition: background-color 0.3s;
-			margin-right: 0;
+			margin:10px;
 			float:right;
 		}
-
-		input[type="submit"]:hover, button:hover {
+		button{
+			background-color: #bbbbbb;
+			border: none;
+			border-radius: 3px;
+			box-shadow: 0 3px 0 #999999;
+			color: #FFF;
+			cursor: pointer;
+			font-size: 16px;
+			font-weight: bold;
+			padding: 10px 20px;
+			transition: background-color 0.3s;
+			margin:10px;
+			float:right;
+		}
+		button:hover{
+			background-color: #999999;
+		}
+		input[type="submit"]:hover{
 			background-color: #DBB600;
+		}
+		
+		#faqUpdate{
+			height: 400px;
 		}
 	</style>
 
@@ -82,10 +101,10 @@
 	<form action="updateFaq" id="FrmUpdate" onsubmit="submitForm(event)">
 		<input type="text" name="faq_question_num" value="${faqUpdate.faq_question_num }" style="display: none;">
 		<textarea placeholder="변경할 `질문`내용을 입력하세요" name="faq_question" >${faqUpdate.faq_question }</textarea>
-		<textarea placeholder="변경할 `답변`내용을 입력하세요" name="faq_answer">${faqUpdate.faq_answer }</textarea>
-		<div>
-			<input type="submit" value="전송">
-			<button type="button" onclick="BtnClose()">닫기</button>
+		<textarea placeholder="변경할 `답변`내용을 입력하세요" name="faq_answer" id="faqUpdate">${faqUpdate.faq_answer }</textarea>
+		<div style="height:50px;">
+			<input type="submit" class="btn" value="수정완료">
+			<button type="button" class="btn" onclick="BtnClose()">닫기</button>
 		</div>
 	</form>
 </body>

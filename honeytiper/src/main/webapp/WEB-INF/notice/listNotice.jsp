@@ -9,12 +9,17 @@
         <title>부트스트랩 이용했음</title>
         <link rel="shortcut icon" href="data:image/x-icon" type="image/x-icon">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/front/notice.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.2/jquery.min.js"></script> -->
 <script src="${pageContext.request.contextPath}/front/jquery.js"></script>
 <%-- <jsp:include page="../main/header.jsp" /> --%>
 <style>
+
+.hrFirst{
+        background:#efefef;
+}
 #btnSearch{
 	border:0;
 	border-radius: 10px;
@@ -47,7 +52,7 @@ ul li a {
 }
 
 ul li.on {
-    background: #eda712;
+    background: #FFD400;
 }
 
 ul li.on a {
@@ -57,6 +62,32 @@ ul li.on a {
 th, td{
 	padding: 10px 0px;
 	text-align: center;
+	border-bottom: 3px solid white;
+}
+
+#iptSearch{
+	padding: 5px;
+	font-size: 14px;
+}
+
+#selCondition{
+	height: 34px;
+	padding: 5px;
+	font-size: 14px;
+}
+#tlqkffha{
+	border-style: none;
+    background: #FFD400;
+    color: #5c3b0c;
+    margin: 5px;
+    padding: 5px 18px;
+    cursor: pointer;
+    font-size: 12pt;
+    font-weight: bolder;
+    border-radius: 5px;
+}
+.noticeTitle{
+	text-align: left;
 }
 </style>
 
@@ -125,9 +156,9 @@ function displayData(currentPage, dataPerPage, dataList) {
 	 for (var i = startPage ;i < endPage; i++){
 		 chartHtml += "<tr onclick='selTr("+dataList[i].notice_num +")' style='";
 			 if(dataList[i].notice_pin > 0){
-				 chartHtml += "background-color:#FFD400; ";
+				 chartHtml += "background-color:#fff8e3; ";
 			 }
-		 chartHtml += "cursor: pointer'><td>" + dataList[i].notice_num + "</td><td>" + dataList[i].notice_title + "</td><td>"+dataList[i].notice_date+"</tr>";
+		 chartHtml += "cursor: pointer'><td>" + dataList[i].notice_num + "</td><td  class='noticeTitle'>" + dataList[i].notice_title + "</td><td>"+dataList[i].notice_date+"</tr>";
 	 }
 	 
 	$("#dataTableBody").html(chartHtml);
@@ -201,33 +232,32 @@ function paging(totalData, dataPerPage, pageCount, currentPage) {
 </script>
 <body>
 
-<%--         <a href="/"><img src="${pageContext.request.contextPath}/front/LOGO.png" alt="로고이미지" title="로고이미지" id="logo"></a> --%>
         <div class="container">
-            <hr class="hrFirst">
-            <div class="divLeft">
-                <span id="spnNotice">공지사항</span>
+        <br>
+            <div class="divLeft" style="width:150px; text-align: left;">
+                <span id="spnNotice" style="text-align: left;">공지사항</span>
             </div>
-            <div class="divRight">
             
-            
-            <form name="frm">
-	            <select name="notice_condition" id="selCondition">
-					<option value="title">제목</option>
-					<option value="content">내용</option>
-    			</select>
-                <input type="text" name="notice_search" id="iptSearch">
-                <button id="btnSearch" type="button" onclick="btnSFnc()">검색</button>
-             </form>
-                
-                
+            <div style="float:right;">
+	            <form name="frm">
+		            <select name="notice_condition" id="selCondition">
+						<option value="title">제목</option>
+						<option value="content">내용</option>
+	    			</select>
+	                <input type="text" name="notice_search" id="iptSearch" placeholder="검색할 제목을 입력해주세요.">
+	                <button id="btnSearch" type="button" onclick="btnSFnc()" style="background:white;"><i class="fa fa-search" style="font-size:24px; color:#FFD400;"></i></button>
+	                <button type="button" onclick="location.href='listnotice'" id='tlqkffha'>전체보기</button>
+	             </form>
             </div>
-				<br>
+				<br><br>
             <hr class="hrFirst">
-            <span id="displayCount"></span>
+            <span id="displayCount" style="text-align: left; display: block;"></span>
             <table style="width:100%; font-size:14px;">
 	            <thead>
 	                <tr>
-	                    <th style="width:10% ">글번호</th> <th style="width:75%">제목</th> <th style="width:15%">등록일</th>
+	                    <th style="width:10% ">글번호</th>
+	                    <th style="width:75%">제목</th>
+						<th style="width:15%">등록일</th>
 	                </tr>
 	            </thead>
 	            <tbody id="dataTableBody"></tbody>

@@ -45,10 +45,6 @@ if (cateCheck2 == false) {
 	#lesmake_tab {
 		width: 100%;
 	}
-	#lesmake_imgdiv {
-		width: 500px;
-		height: 350px;
-	}
 	#lesmake_img {
 		width: 150px;
 	}
@@ -83,19 +79,18 @@ if (cateCheck2 == false) {
 		border-radius: 10px;
 	}
 	.lesmake_td1 {
-		font-size: 17px;
+		font-size: 15px;
 		vertical-align: top;
 		width: 150px;
+		font-weight: bold;
 	}
-	.lesmake_td2{
-	vertical-align: top;
-	
+	.lesmake_td2 {
+		vertical-align: top;
 	}
 	#lesmake_cate {
 		height: 40px;
 		border: 0;
 		width: 200px;
-		margin-left: 20px;
 		border: 0;
 	}
 	#lesmake_cate:focus {
@@ -123,6 +118,9 @@ if (cateCheck2 == false) {
 		cursor: pointer;
 		font-weight: bold;
 	}
+	#lesmake_divimg2 {
+		text-align: center;
+	}
 }
 
 @media ( min-width : 769px) {
@@ -134,7 +132,7 @@ if (cateCheck2 == false) {
 		width: 100%;
 	}
 	#lesmake_imgdiv {
-		width: 500px;
+		width: 600px;
 		height: 350px;
 	}
 	#lesmake_img {
@@ -210,7 +208,7 @@ if (cateCheck2 == false) {
 		color: white;
 	}
 	#lesmake_divimg2 {
-		text-align: right;
+		text-align: center;
 	}
 }
 </style>
@@ -232,12 +230,14 @@ if (cateCheck2 == false) {
 				<div id="lesmake_divimg1">
 					<input type="file" accept=".jpg,.jpeg,.png" name="lesson_img"
 						id="lesmake_img" onchange="previewImage(event)"
-						required="required">
+						required="required" style="display: none;">
 				</div>
 				<div id="lesmake_divimg2">
-					<img id="lesmake_preview" src="front/lessonimg.png"
-						alt="강의사진을 올려주세요">
+					<label for="lesmake_img" id="lesmake-label"> <img
+						id="lesmake_preview" src="front/lessonimg.png" alt="강의사진을 올려주세요"
+						onmouseover="changeCursor(this)" title="이미지를 클릭해서 사진을 선택해주세요!"></label>
 				</div>
+				<br> <br>
 			</div>
 			<table id="lesmake_tab1">
 				<tr class="lesmake_tr">
@@ -245,6 +245,7 @@ if (cateCheck2 == false) {
 					<td class="lesmake_td2"><input type="text" name="lesson_title"
 						placeholder="강의제목을 입력해주세요" id="lesmake_title" required="required"></td>
 				</tr>
+
 				<tr class="lesmake_tr">
 					<td class="lesmake_td1">강의 내용</td>
 					<td class="lesmake_td2"><textarea name="lesson_info"
@@ -252,7 +253,7 @@ if (cateCheck2 == false) {
 							required="required"></textarea></td>
 				</tr>
 				<tr class="lesmake_tr">
-					<td class="lesmake_td1">강의 카테고리</td>
+					<td class="lesmake_td1">카테 고리</td>
 					<td class="lesmake_td2"><select name="lesson_cate"
 						id="lesmake_cate" required="required">
 							<option selected disabled hidden>강의 카테고리 선택</option>
@@ -296,6 +297,10 @@ if (cateCheck2 == false) {
 			});
 		}
 
+		function selectProfileImage() {
+			document.getElementById('sin_img1').click();
+		}
+
 		function previewImage(event) {
 			var reader = new FileReader();
 			reader.onload = function() {
@@ -322,12 +327,19 @@ if (cateCheck2 == false) {
 				return false;
 			}
 		}
-
+		// 마우스를 올리면 pointer로 바뀌는 함수
+		function changeCursor(img) {
+			img.style.cursor = "pointer";
+		}
 		// form 요소를 선택합니다.
 		const form = document.querySelector("#lesmake_form");
 
 		// form submit 이벤트를 처리하는 함수를 등록합니다.
 		form.addEventListener("submit", onLessonMakeSubmit);
+
+		// img 요소를 클릭했을 때 파일 선택 창 활성화
+		document.getElementById('tiperpreview-label').addEventListener('click',
+				selectProfileImage);
 	</script>
 
 

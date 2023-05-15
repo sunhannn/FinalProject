@@ -28,7 +28,7 @@
 		<mapper resource="mappings/queen-mapper.xml" />
 		<mapper resource="mappings/notice-mapper.xml"/>
 		<mapper resource="mappings/faq-mapper.xml"/>
-		<mapper resource="mappings/message-mapping.xml" />
+		<mapper resource="mappings/message-mapper.xml" />
 		<mapper resource="mappings/lessonDetail-mapper.xml" />
 		<mapper resource="mappings/lesson-mapper.xml" />
 		<mapper resource="mappings/tiper-mapper.xml" />

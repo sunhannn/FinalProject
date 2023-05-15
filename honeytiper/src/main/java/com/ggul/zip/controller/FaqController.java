@@ -28,9 +28,6 @@ public class FaqController {
 	public String listFaq(FaqVO vo, Model model) {
 		List<FaqVO> a =  faqService.getFaqList(vo);
 		model.addAttribute("faqList",a);
-//		for(FaqVO i :a) {
-//			System.out.println("i:::: "+i);
-//		}
 		return "faq/getFaqList";
 	}
 	

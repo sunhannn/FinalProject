@@ -62,4 +62,14 @@ public class EscrowServiceImpl implements EscrowService {
 	 	public void updateEscrowStatus12(EscrowVO evo) {
 		 	escrowDAO.updateEscrowStatus12(evo);
 	 }
+	 
+	 
+//	 현민
+	 public void update_price(EscrowVO vo) {
+			escrowDAO.update_price(vo);
+		}
+	 
+	public EscrowVO select_status(EscrowVO vo) {
+		return escrowDAO.select_status(vo);
+	}
 }

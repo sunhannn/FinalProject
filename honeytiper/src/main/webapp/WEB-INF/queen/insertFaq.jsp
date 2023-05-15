@@ -42,6 +42,17 @@
 			font-size: 14px;
 			margin-bottom: 10px;
 		}
+		
+		#answerUpdate{
+			width: 100%;
+			height: 25.25em;
+			resize: none;
+			border: 1px solid #CCC;
+			padding: 5px;
+			border-radius: 4px;
+			font-size: 14px;
+			margin-bottom: 10px;
+		}
 		input[type="radio"] {
 			margin-right: 5px;
 		}
@@ -57,19 +68,22 @@
 			display: inline-block;
 		}
 		button[type="button"] {
-			background-color: #F5F5F5;
-			color: #333;
+			background-color: #FFD400;
 			border: none;
-			border-radius: 4px;
-			padding: 10px 20px;
-			font-size: 16px;
+			border-radius: 3px;
+			box-shadow: 0 3px 0 #E6BF00;
+			color: #FFF;
 			cursor: pointer;
-			margin-top: 20px;
-			display: inline-block;
-			margin-left: 10px;
+			font-size: 16px;
+			font-weight: bold;
+			margin-top: 10px;
+			padding: 10px 20px;
+			transition: background-color 0.3s;
+			margin-right: 0;
+			float:right;
 		}
 		button[type="button"]:hover {
-			background-color: #CCC;
+			background-color: #DBB600;
 		}
 </style>
 <body>
@@ -82,10 +96,10 @@
 			</tr>
 			<tr>
 				<td>답변</td>
-				<td><textarea name="faq_answer"></textarea> </td>
+				<td><textarea name="faq_answer" id="answerUpdate"></textarea> </td>
 			</tr>
 		</table>
-		<input type="submit" value="FAQ등록">
+		<input type="submit" value="FAQ등록" style="float: right;">
 	</form>
 </body>
 </html>

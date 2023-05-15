@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -66,6 +67,7 @@ public class TiperController {
 	// 상현이부분
 
 	// 강사 마이페이지 이동
+	// 강사 마이페이지 이동
 	@RequestMapping(value = "/tiperMypage")
 	public String tiperMypage(Model model, HttpSession session, UserVO vo, TiperVO tiperVO, LessonVO lessonVO) {
 		tiperVO.setTiper_user_id((String) session.getAttribute("user_id"));
@@ -103,10 +105,10 @@ public class TiperController {
 
 	// 강의 정보 수정 페이지 이동
 	@RequestMapping(value = "/lessonUpdateGo")
-	public String lessonUpdateGo(Model model, HttpSession session, LessonVO lessonVO) {
-		lessonVO.setLesson_num((int) (model.getAttribute("lesson_num")));
+	public String lessonUpdateGo(HttpServletRequest request, HttpSession session, LessonVO lessonVO) {
+		lessonVO.setLesson_num(Integer.parseInt(request.getParameter("lesson_num")));
 		lessonVO = lessonService.selectLessonNum(lessonVO);
-		model.addAttribute("lesson", lessonVO);
+		request.setAttribute("lesson", lessonVO);
 		return "tiper/tiperLessonUpdate";
 
 	}
@@ -133,7 +135,7 @@ public class TiperController {
 
 	// 회원 정보 수정하기
 	@RequestMapping(value = "/userUpdateAction")
-	public String userUpdateAction(Model model, HttpSession session, UserVO vo) {
+	public String userUpdateAction(HttpServletRequest req, HttpServletResponse res, HttpSession session, UserVO vo) {
 		String userId = (String) session.getAttribute("user_id");
 		vo.setUser_id(userId);
 		int check = userService.updateUser(vo);
@@ -150,7 +152,8 @@ public class TiperController {
 	// 강사신청 액션
 	@ResponseBody
 	@RequestMapping(value = "/tiperSignUp")
-	public String tiperSignUp(Model model, HttpSession session, UserVO vo, TiperVO tiperVO) {
+	public String tiperSignUp(HttpServletRequest req, HttpServletResponse res, HttpSession session, UserVO vo,
+			TiperVO tiperVO) {
 		String msg = "";
 		String userId = (String) session.getAttribute("user_id");
 		tiperVO.setTiper_user_id(userId);
@@ -164,7 +167,7 @@ public class TiperController {
 		return msg;
 	}
 
-	// 포인트 정산 액션(5월 13일 수정함)
+	// 포인트 정산 액션(수정함~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~)
 	@RequestMapping(value = "/honeyTakeAction")
 	public String honeyTakeAction(Model model, HttpServletResponse response, HttpSession session, UserVO vo,
 			PointVO pointVO) throws IOException {
@@ -185,18 +188,20 @@ public class TiperController {
 		return "redirect:tiperMypage";
 	}
 
-	// 강사 정보 수정 액션
+	// 강사 정보 수정 액션(수정함~~~~~~~~~~~~~~~~~~~~~~~~~~)
 	@RequestMapping(value = "/tiperUpdateAction")
-	public String tiperUpdateAction(Model model, HttpSession session, TiperVO tiperVO) {
+	public String tiperUpdateAction(HttpServletRequest req, HttpServletResponse res, HttpSession session,
+			TiperVO tiperVO) {
 		tiperVO.setTiper_user_id((String) session.getAttribute("user_id"));
 		tiperService.tiperUpdate(tiperVO);
 		return "redirect:tiperMypage";
 	}
 
-	// 강의 정보 수정 액션
+	// 강의 정보 수정 액션(수정함~~~~~~~~~~~~~~~~~~~)
 	@RequestMapping(value = "/lessonUpdateAction")
-	public String lessonUpdateAction(Model model, HttpSession session, LessonVO lessonVO) {
-		int lessonNum = (int) (model.getAttribute("lessonNum"));
+	public String lessonUpdateAction(HttpServletRequest req, HttpServletResponse res, HttpSession session,
+			LessonVO lessonVO) {
+		int lessonNum = Integer.parseInt(req.getParameter("lessonNum"));
 		lessonVO.setLesson_num(lessonNum);
 		lessonService.lessonUpdate(lessonVO);
 		return "redirect:tiperMypage";
@@ -215,18 +220,62 @@ public class TiperController {
 		return "redirect:tiperMypage";
 	}
 
-	// 메인페이지에서 마이허니페이버튼클릭시 리스트보여주는페이지로 이동
+//----------------------보영 5/15수정--------------------------------------
+	// 토탈포인트 가져오기
 	@RequestMapping(value = "/goMyHoneypay")
-	public String getPointListPost(PointVO vo, Model model, HttpSession session) {
-		// 세션아이디 받아와서 포인트vo에 담아놓음
+	public String getTotalPoint(PointVO vo, Model model, HttpSession session) {
 		String id = (String) session.getAttribute("user_id");
 		vo.setPoint_id(id);
-		List<PointVO> pointList = pointService.getPointList(vo);
-		// point테이블 불러오기
-		model.addAttribute("pointList", pointList);
-		// user테이블 user포인트 불러오기
 		model.addAttribute("totalPoint", pointService.callTotalPoint(vo));
+
 		return "user/pointInfo";
+	}
+
+	// 포인트리스트 가져오기 날짜별,키워드검색도가능
+	@RequestMapping(value = "/callHoneypayList", method = RequestMethod.POST)
+	@ResponseBody
+	public List<PointVO> getPointListPost(PointVO vo, HttpSession session, @RequestParam("startDate") String startDate,
+			@RequestParam("endDate") String endDate, @RequestParam("search_condition") String search_condition,
+			@RequestParam(value = "search_keyword", required = false) String search_keyword,
+			@RequestParam(value = "price_type", defaultValue = "all") String price_type) {
+		String id = (String) session.getAttribute("user_id");
+		vo.setPoint_id(id);
+		vo.setStartDate(startDate);
+		vo.setEndDate(endDate);
+		vo.setSearch_condition(search_condition);
+		vo.setSearch_keyword(search_keyword);
+		vo.setPrice_type(price_type);
+		List<PointVO> pointList = pointService.getPointList(vo);
+		if (price_type.equals("negative")) {
+			// -일 때의 검색 결과
+			pointList = filterByNegativePrice(pointList);
+		} else if (price_type.equals("non-negative")) {
+			// -가 아닐 때의 검색 결과
+			pointList = filterByNonNegativePrice(pointList);
+		}
+		return pointList;
+	}
+
+	private List<PointVO> filterByNegativePrice(List<PointVO> pointList) {
+		List<PointVO> filteredList = new ArrayList<>();
+
+		for (PointVO point : pointList) {
+			if (point.getPoint_price() < 0) {
+				filteredList.add(point);
+			}
+		}
+		return filteredList;
+	}
+
+	private List<PointVO> filterByNonNegativePrice(List<PointVO> pointList) {
+		List<PointVO> filteredList = new ArrayList<>();
+
+		for (PointVO point : pointList) {
+			if (point.getPoint_price() >= 0) {
+				filteredList.add(point);
+			}
+		}
+		return filteredList;
 	}
 
 	// 리스트페이지에서 허니페이충전 버튼눌러서 충전페이지로 이동
@@ -234,6 +283,7 @@ public class TiperController {
 	public String goChargePage(PointVO vo, Model model, HttpSession session) {
 		String id = (String) session.getAttribute("user_id");
 		vo.setPoint_id(id);
+		model.addAttribute("totalPoint", pointService.callTotalPoint(vo));
 		return "user/goPointCharge";
 	}
 
@@ -289,7 +339,7 @@ public class TiperController {
 		}
 	}
 
-	// 파일 업로드
+	// 파일 업로드 (수정함~~~~~~~~~~~~~~~~~~~~~~~~~)
 	@PostMapping("/upload")
 	public ResponseEntity<String> uploadFile(@RequestParam("tiper_img") MultipartFile file, Model model) {
 		// 파일 저장

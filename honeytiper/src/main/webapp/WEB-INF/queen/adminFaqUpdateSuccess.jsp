@@ -12,10 +12,10 @@
 		h1 {
 			color: #333;
 			text-align: center;
-			margin-top: 50px;
+			margin-top: 250px;
 		}
 		button {
-			background-color: #008CBA;
+			background-color: #FFD400;
 			color: #FFF;
 			border: none;
 			border-radius: 4px;
@@ -27,7 +27,7 @@
 			margin: 0 auto;
 		}
 		button:hover {
-			background-color: #005A6E;
+			background-color: #E6B800;
 		}
 	</style>
 	<script>
@@ -35,8 +35,6 @@
 			close1();
  			self.close();
  		}
-		
-		
 		
 		function close1() {
 		    opener.location.reload();

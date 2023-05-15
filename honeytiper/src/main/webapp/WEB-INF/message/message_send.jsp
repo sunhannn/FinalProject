@@ -43,6 +43,7 @@
 					<div class="headind_srch">
 						<div class="recent_heading">
 							<h4>Message</h4>
+							<img title="새로고침" alt="message reload" class="msg_list_reload" src="front/reload.png">
 						</div>
 						<!-- 메세지 검색 -->
 						<div class="srch_bar">
@@ -63,22 +64,22 @@
 					<div class="msg_history" name="contentList">
 						<!-- 메세지 내용이 올 자리 -->
 					</div>
-					<div class="modal_price_input">
-						<div style='display: none' id='price_modal' data-backdrop='static'
-							class='modal'>
-							<select class="escrow_lesson_title" name="lesson_num" size="1" required="required">
-							</select>
-							<button class="modal_close" type="button">
-								<i class="fa fa-close" aria-hidden="true"></i>
-							</button>
-							<p class='price_p'>아래 입력란에 협의된 포인트를 입력해주세요.</p>
-							<input autofocus id='price_modal_input' class='price_input' type='number'
-								placeholder='&nbsp;숫자만 입력 가능합니다.'>
-							<button class='price_send_btn' type='button'>
-								<i class='fa fa-paper-plane-o' aria-hidden='true'></i>
-							</button>
-						</div>
-					</div>
+<!-- 					<div class="modal_price_input"> -->
+<!-- 						<div style='display: none' id='price_modal' data-backdrop='static' -->
+<!-- 							class='modal'> -->
+<!-- 							<select class="escrow_lesson_title" name="lesson_num" size="1" required="required"> -->
+<!-- 							</select> -->
+<!-- 							<button class="modal_close" type="button"> -->
+<!-- 								<i class="fa fa-close" aria-hidden="true"></i> -->
+<!-- 							</button> -->
+<!-- 							<p class='price_p'>아래 입력란에 협의된 포인트를 입력해주세요.</p> -->
+<!-- 							<input autofocus id='price_modal_input' class='price_input' type='number' -->
+<!-- 								placeholder='&nbsp;숫자만 입력 가능합니다.'> -->
+<!-- 							<button class='price_send_btn' type='button'> -->
+<!-- 								<i class='fa fa-paper-plane-o' aria-hidden='true'></i> -->
+<!-- 							</button> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 					<div class="send_message">
 						<!-- 메세지 입력란이 올자리 -->
 					</div>
@@ -118,7 +119,9 @@
 				console.log("메세지 리스트 리로드 성공");
 				console.log('data: ',data);
 				
-				$('.inbox_chat').html(data);
+				$('.inbox_chat').html(data.replaceAll("[<@전수일>]","<p class='start_date'>꿀TIP 전수일<br>").replaceAll("[<@강의명>]", "</p><pre class='lesson_title'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-receipt-cutoff' viewBox='0 0 16 16'><path d='M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zM11.5 4a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z'/><path d='M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293 2.354.646zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118l.137-.274z'/></svg>견적서<br>").replaceAll("[<@/강의명>]", "</pre>").replaceAll("[<@가격>]", "<br><p class='lesson_price'>").replaceAll("[<@/전수일>]", "<br>").replaceAll("[<@/가격|버튼>]", "</p><button type='button' class='accept_btn'>수락하기</button><input class='escrow_lesson_num' type='hidden' value='").replaceAll("[<@/버튼|코드>]", "'><input class='escrow_tiper_code' type='hidden' value='").replaceAll("[<@/코드>]", "'><input class='escrow_status' value='").replaceAll("[<@status>]","' style='display: none;'>"));
+// 				$('.lesson_title').prepend('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-receipt-cutoff" viewBox="0 0 16 16"><path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zM11.5 4a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/><path d="M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293 2.354.646zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118l.137-.274z"/></svg>');
+				
 				let message_room = $('.chat_list').attr('message_room');
 				let user_role = $('.chat_list').attr('user_role');
 				
@@ -138,13 +141,14 @@
 			      	send_msg +="<div class='input_msg_write row'>";
 			      	if($(this).attr('other-user_id')== 'admin'){
 				      	send_msg +="<div class='col-11'>";
-				      	send_msg +="<textarea class='write_msg form-control' maxlength='800' color='red' readonly='readonly'>&nbsp;여왕벌은 메세지를 받을 수 없어요.</textarea>";
+				      	send_msg +="<textarea id='admin_msg' class='write_msg form-control' maxlength='800' color='red' readonly='readonly'>&nbsp;여왕벌은 메세지를 받을 수 없어요.</textarea>";
 				      	send_msg +="</div>";
 				      	send_msg +="<div class='col-1'>";
-				      	send_msg +="<button class='msg_send_btn' disabled='disabled' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
+// 				      	send_msg +="<button class='msg_send_btn' disabled='disabled' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
 				      	send_msg +="</div>";
 			      	}else{
-							send_msg +="<div class='col-11'>";
+// 			      		send_msg +="<button class='msg_send_btn' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
+			      		send_msg +="<div class='col-11'>";
 				      	
 				      	//가격 입력창 띄우는 버튼
 						if(user_role == 1){
@@ -155,11 +159,29 @@
 					      	send_msg +="</svg>";
 					      	send_msg +="</button>";
 						}				      	
-					      	send_msg +="<textarea class='write_msg form-control' maxlength='800' autofocus placeholder='&nbsp;메세지를 입력해주세요.&#13;&#10;&nbsp;800자까지 전송 가능합니다.'></textarea>";
-					      	send_msg +="</div>";
-					      	send_msg +="<div class='col-1'>";
+					      	send_msg +="<textarea class='write_msg form-control' autofocus maxlength='800' placeholder='&nbsp;메세지를 입력해주세요.&#13;&#10;&nbsp;800자까지 전송 가능합니다.'></textarea>";
 					      	send_msg +="<button class='msg_send_btn' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
 					      	send_msg +="</div>";
+					      	
+					      	send_msg +="<div class='modal_price_input'>";
+						      	send_msg +="<div style='display: none' id='price_modal' data-backdrop='static' class='modal'>";
+							      	send_msg +="<select class='escrow_lesson_title' name='lesson_num' size='1' required='required'></select>";
+							      	send_msg +="<label class='escrow_start_lb' for='escrow_start'>꿀TIP 전수할 날짜:</label>";
+							      	send_msg +="<input type='date' id='escrow_start' class='escrow_start' required='required'>";
+							      	send_msg +="<button class='modal_close' type='button'><i class='fa fa-close' aria-hidden='true'></i></button>";
+							      	send_msg +="<div class='price_send_div'>";
+							      	send_msg +="<p class='price_p'>아래 입력란에 제시할 허니페이를<br>입력해주세요.</p>";
+							      	send_msg +="<div class='price_input_div'>";
+							      	send_msg +="<input onKeyup='this.value=this.value.replace(/[^-0-9]/g,&#39;&#39;)' autofocus id='price_modal_input' class='price_input' placeholder='&nbsp;숫자만 입력 가능합니다.'>";
+							      	send_msg +="<button id='price_send_btn' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
+							      	send_msg +="</div>";
+							      	send_msg +="</div>";
+						      	send_msg +="</div>";
+					      	send_msg +="</div>";
+					      	
+// 					      	send_msg +="<div class='col-1'>";
+// 					      	send_msg +="<button class='msg_send_btn' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
+// 					      	send_msg +="</div>";
 			      	}
 			      	send_msg +="</div>";
 			      	send_msg +="</div>";
@@ -169,9 +191,17 @@
 					$('.send_message').html(send_msg);
 					$('.write_msg').focus();
 
-					// 일반회원인 경우 메세지입력창 키움
-			      	if(user_role == 0){
-						$('.write_msg').width('350px');
+					// 일반회원과 admin인 경우 메세지입력창 키움
+					if(user_role == 0 || user_role == 2){
+			      		var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
+
+							if(isMobile) {
+								$('.write_msg').width('240px');
+								$(".msg_history").scrollTop($(".msg_history")[0].scrollHeight);
+							}else{
+								$('.write_msg').width('350px');
+								$(".msg_history").scrollTop($(".msg_history")[0].scrollHeight);
+							}
 					}
 					
 					
@@ -181,7 +211,7 @@
 						SendMessage(message_room, other_user_id, send_btn);
 					});
 					
-					$('.price_send_btn').on('click',function(){
+					$('#price_send_btn').on('click',function(){
 						SendPrice(message_room, other_user_id, send_btn);
 					});
 					
@@ -189,14 +219,16 @@
 						select_lesson(message_room, other_user_id, send_btn);
 					});
 					
-					// 메세지 내용을 불러오는 함수 호출 ***
+					$('.msg_list_reload').click(function(){
+						MessageList(message_room, other_user_id, send_btn);
+					});					// 메세지 내용을 불러오는 함수 호출 ***
 					MessageContentList(message_room, other_user_id, send_btn);
 
 					
 					// 메세지 리스트중 하나를 클릭했을 때 
 					$('.chat_list').on('click', function(){
 						//alert('room : '+ $(this).attr('message_room'));
-						$('.chat_ib svg').remove();
+// 						$('.chat_ib svg').remove();
 						let message_room = $(this).attr('message_room');
 						let other_user_id = $(this).attr('other-user_id'); //**ohter-nick
 						let user_role = $(this).attr('user_role');
@@ -214,12 +246,13 @@
 				      	send_msg +="<div class='input_msg_write row'>";
 				      	if($(this).attr('other-user_id') == 'admin'){
 					      	send_msg +="<div class='col-11'>";
-					      	send_msg +="<textarea class='write_msg form-control' maxlength='800' color='red' readonly='readonly'>&nbsp;여왕벌은 메세지를 받을 수 없어요.</textarea>";
+					      	send_msg +="<textarea id='admin_msg' class='write_msg form-control' maxlength='800' color='red' readonly='readonly'>&nbsp;여왕벌은 메세지를 받을 수 없어요.</textarea>";
 					      	send_msg +="</div>";
 					      	send_msg +="<div class='col-1'>";
-					      	send_msg +="<button class='msg_send_btn' disabled='disabled' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
+// 					      	send_msg +="<button class='msg_send_btn' disabled='disabled' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
 					      	send_msg +="</div>";
 				      	}else{
+// 				      		send_msg +="<button class='msg_send_btn' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
 				      		send_msg +="<div class='col-11'>";
 					      	
 					      	//가격 입력창 띄우는 버튼
@@ -231,11 +264,29 @@
 						      	send_msg +="</svg>";
 						      	send_msg +="</button>";
 							}				      	
-						      	send_msg +="<textarea class='write_msg form-control' maxlength='800' autofocus placeholder='&nbsp;메세지를 입력해주세요.&#13;&#10;&nbsp;800자까지 전송 가능합니다.'></textarea>";
+						      	send_msg +="<textarea class='write_msg form-control' autofocus maxlength='800' placeholder='&nbsp;메세지를 입력해주세요.&#13;&#10;&nbsp;800자까지 전송 가능합니다.'></textarea>";
+	 					      	send_msg +="<button class='msg_send_btn' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
 						      	send_msg +="</div>";
-						      	send_msg +="<div class='col-1'>";
-						      	send_msg +="<button class='msg_send_btn' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
+						      	
+						      	send_msg +="<div class='modal_price_input'>";
+							      	send_msg +="<div style='display: none' id='price_modal' data-backdrop='static' class='modal'>";
+								      	send_msg +="<select class='escrow_lesson_title' name='lesson_num' size='1' required='required'></select>";
+								      	send_msg +="<label class='escrow_start_lb' for='escrow_start'>꿀TIP 전수할 날짜:</label>";
+								      	send_msg +="<input type='date' id='escrow_start' class='escrow_start' required='required'>";
+								      	send_msg +="<button class='modal_close' type='button'><i class='fa fa-close' aria-hidden='true'></i></button>";
+								      	send_msg +="<div class='price_send_div'>";
+								      	send_msg +="<p class='price_p'>아래 입력란에 제시할 허니페이를<br>입력해주세요.</p>";
+								      	send_msg +="<div class='price_input_div'>";
+								      	send_msg +="<input onKeyup='this.value=this.value.replace(/[^-0-9]/g,&#39;&#39;)' autofocus id='price_modal_input' class='price_input' placeholder='&nbsp;숫자만 입력 가능합니다.'>";
+								      	send_msg +="<button id='price_send_btn' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
+								      	send_msg +="</div>";
+								      	send_msg +="</div>";
+							      	send_msg +="</div>";
 						      	send_msg +="</div>";
+						      	
+//	 					      	send_msg +="<div class='col-1'>";
+//	 					      	send_msg +="<button class='msg_send_btn' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
+//	 					      	send_msg +="</div>";
 				      	}
 				      	send_msg +="</div>";
 				      	send_msg +="</div>";
@@ -245,9 +296,17 @@
 						$('.send_message').html(send_msg);
 						$('.write_msg').focus();
 						
-						// 일반회원인 경우 메세지입력창 키움
-				      	if(user_role == 0){
-							$('.write_msg').width('350px');
+						// 일반회원과 admin인 경우 메세지입력창 키움
+						if(user_role == 0 || user_role == 2){
+				      		var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
+
+								if(isMobile) {
+									$('.write_msg').width('240px');
+									$(".msg_history").scrollTop($(".msg_history")[0].scrollHeight);
+								}else{
+									$('.write_msg').width('350px');
+									$(".msg_history").scrollTop($(".msg_history")[0].scrollHeight);
+								}
 						}
 						
 						// 메세지 전송버튼을 눌렀을 때
@@ -256,7 +315,7 @@
 							SendMessage(message_room, other_user_id, send_btn);
 						});
 						
-						$('.price_send_btn').on('click',function(){
+						$('#price_send_btn').on('click',function(){
 							SendPrice(message_room, other_user_id, send_btn);
 						});
 						
@@ -264,6 +323,9 @@
 							select_lesson(message_room, other_user_id, send_btn);
 						});
 						
+// 						$('.msg_list_reload').click(function(){
+// 							MessageList(message_room, other_user_id, send_btn);
+// 						});
 						// 메세지 내용을 불러오는 함수 호출
 						MessageContentList(message_room, other_user_id, send_btn);
 					});

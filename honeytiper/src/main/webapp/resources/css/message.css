@@ -3,7 +3,10 @@
 .price_p{
     text-align: center;
     font-weight: bold;
-    margin-bottom: 50px;
+}
+
+#admin_msg{
+	width: 100%;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -100,6 +103,7 @@ img{ max-width:100%;}
     -webkit-box-orient: vertical;
     overflow-y: hidden; 
     white-space: pre-wrap;
+    font-family: none;
 }
 
 .chat_img {
@@ -151,7 +155,9 @@ img{ max-width:100%;}
   margin: 0;
   padding: 10px 10px 10px 12px;
   width: 100%;
+  font-family: none;
 }
+
 .time_date {
   color: #382407;
   display: block;
@@ -175,7 +181,9 @@ img{ max-width:100%;}
   margin: 0; color:#382407;
   padding: 10px 10px 10px 12px;
   width:100%;
+  font-family: none;
 }
+
 .outgoing_msg{ overflow:hidden; margin:26px 0 26px;}
 .sent_msg {
   float: right;
@@ -192,6 +200,18 @@ img{ max-width:100%;}
 
 .type_msg {border-top: 1px solid #dfdfdf;position: relative;}
 
+#escrow_start{
+    width: 30%;
+    text-align: center;
+    font-family: none;
+}
+
+.escrow_start_lb{
+	margin-left: 20%;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
 .msg_send_btn {
   background: #FFE775 none repeat scroll 0 0;
   border: medium none;
@@ -202,11 +222,11 @@ img{ max-width:100%;}
   height: 33px;
   position: absolute;
   top: 19px;
-  right: 20px;
+  right: -20px;
   width: 33px;
 }
 
-.price_send_btn {
+#price_send_btn {
   background: #FFE775 none repeat scroll 0 0;
   border: medium none;
   border-radius: 50%;
@@ -218,7 +238,7 @@ img{ max-width:100%;}
   width: 33px;
   display: block;
   right: 70px;
-  bottom: 36px;
+  bottom: 19%;
 }
 
 .price_btn{
@@ -236,19 +256,19 @@ img{ max-width:100%;}
 }
 
 #price_btn{
-    position: inherit;
-    bottom: 27px;
+    position: sticky;
+    bottom: 15px;
 }
 
 .col-11{
     height: 70px;
 }
 
-.msg_send_btn:hover, .price_send_btn:hover {
+.msg_send_btn:hover, #price_send_btn:hover {
 	background: #FFD400 none repeat scroll 0 0;
 }
 
-.msg_send_btn:focus, .price_send_btn:focus {
+.msg_send_btn:focus, #price_send_btn:focus {
 	outline: none;
 }
 
@@ -276,11 +296,6 @@ img{ max-width:100%;}
     box-shadow: none;
 }
 
-/* a.close-modal{ */
-/* 	top: 4.5px!important; */
-/*     right: 4.5px!important; */
-/* } */
-
 i.fa.fa-search{
     font-size: x-large;
 }
@@ -288,10 +303,10 @@ i.fa.fa-search{
 .modal_close:hover, .modal_close:focus, .modal_close{
 	background-color: rgba(0,0,0,0);
 	border: none;
-    float: right;
+/*     float: right; */
     outline: none;
     display: block;
-    position: inherit;
+    position: absolute;
     right: 10px;
     top: 10px;
 }
@@ -365,7 +380,8 @@ div .modal:hover{
 #price_modal{
 	background-color: white;
 	width: 50%;
-    height: 50%;
+    height: 55%;
+    position: fixed;
 }  
 
 
@@ -381,12 +397,28 @@ div .modal:hover{
     background-color: #F8F8F8;
     font-size: large;
     text-align: center;
+    font-family: none;
 }
 
 .sent_msg .lesson_price{
     text-align: right;
     font-weight: bold;
     font-size: initial;
+    font-family: none;
+}
+
+.sent_msg .start_date{
+	text-align: center;
+    font-weight: bold;
+    font-size: initial;
+    font-family: none;
+}
+
+.received_withd_msg .start_date{
+	text-align: center;
+    font-weight: bold;
+    font-size: initial;
+    font-family: none;
 }
 
 
@@ -395,12 +427,14 @@ div .modal:hover{
     background-color: #F8F8F8;
     font-size: large;
     text-align: center;
+    font-family: none;
 }
 
 .received_withd_msg .lesson_price{
 	text-align: right;
     font-weight: bold;
     font-size: initial;
+    font-family: none;
 }
 
 .received_withd_msg .accept_btn{
@@ -412,6 +446,11 @@ div .modal:hover{
     font-size: large;
     font-weight: bolder;
     color: #382407;
+    font-family: none;
+}
+
+.received_withd_msg .accept_btn:focus{
+	outline: none;
 }
 
 .received_withd_msg .accept_btn:hover{
@@ -421,7 +460,7 @@ div .modal:hover{
 
 .escrow_lesson_title{
 	display: block;
-    margin: 50px auto;
+    margin: 20px auto;
     padding: 10px;
     border-radius: 5px;
     width: inherit;
@@ -473,10 +512,192 @@ div .modal:hover{
   margin-top: 3px;
 }
 
-/* #msgOpen_img { */
-/*   cursor: pointer; */
-/*   height: 30px; */
-/*   position: absolute; */
-/*   top: 0px; */
-/*   left: 0px; */
+#msg_button{
+    width: 40px;
+    height: 30px;
+    background-color: #ffdf48;
+    color: #5c3b0c;
+    border-style: none;
+    border-radius: 5px;
+}
+
+
+.image-container {
+  position: relative;
+}
+
+#msg_img2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  height: 30px;
+  cursor: pointer;
+}
+
+#msg_img2:hover{
+  opacity: 1;
+}
+
+
+#msg_img_m{
+	height: 30px;
+	margin-top: 3px;
+	cursor: pointer;
+}
+
+#msg_img_m2{
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  height: 30px;
+  cursor: pointer;
+  right: 0px;
+}
+
+#msg_img_m2:hover {
+  opacity: 1;
+}
+
+.msg_list_reload{
+	width: 30px;
+    position: absolute;
+    top: 20px;
+    left: 15%;
+    transition: all 0.5s linear;
+}
+
+.msg_list_reload:hover{
+	cursor: pointer;
+    transform: rotate(720deg);
+}
+
+#msg_button .fa{
+	font-size: large;
+}
+
+
+@media ( max-width : 768px) {
+	
+html, body, .msg-container, .messaging, .inbox_msg, .inbox_people, .inbox_chat {
+	height: 100%
+}
+
+.escrow_lesson_title{
+	margin-top: 50px;	
+}
+
+.inbox_chat{
+   height: 100%;
+}
+
+.headind_srch{
+/*    position: fixed; */
+}
+
+.inbox_people{	
+    width: 100%;
+}
+
+.msg_list_reload{
+    position: relative;
+    top: -28px;
+    left: 95%;
+}
+
+.mesgs{
+    width: 100%;
+    height: 100%;	
+}
+
+#price_btn{
+    position: relative;
+    top: -40%;
+}
+
+.msg_send_btn{
+	right: -10px;
+}
+
+.write_msg{
+	left: 13px;
+	width: 76%;
+	font-size: smaller;
+}
+
+#price_modal{
+	width: 90%;
+    top: -35%;
+}
+
+#price_modal_input{
+    display: inline;
+    margin-right: 15px;
+    margin-left: 17%;
+    margin-top: 5%;
+    width: 55%;
+}
+
+#price_send_btn{
+    display: inline;
+    margin-bottom: -29%;
+    position: static;
+}
+
+.bi-arrow-left-square-fill{
+	color: #C1C1C1;
+	width: 2em;
+    height: 2em;
+}
+
+.msg_history{
+	height: 55%;	
+	transition: height 0.5s ease 0s;
+	position: relative;
+	overflow-x: hidden;
+}
+
+.escrow_start_lb{
+    width: 100%;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+#escrow_start{
+    display: block;
+    margin-top: -20%;
+    position: static;
+   	margin: 0 auto;
+    width:50%;
+}
+
+.price_p{
+    position: static;
+    margin-bottom: 0;
+    display: inline-block;
+    margin-top: 60%;
+    width: 100%
+}
+
+.price_send_div{
+    height: 100%;
+    width: 90%;
+    position: inherit;
+    top: 5%;
+    display: inline;
+    right: 5%;
+    z-index: -1;
+}
+
+.price_input_div{
+    width: 100%;
+}
+
+div .modal{
+	position: fixed;
+/* 	display: flex; */
+}
+
+
 }

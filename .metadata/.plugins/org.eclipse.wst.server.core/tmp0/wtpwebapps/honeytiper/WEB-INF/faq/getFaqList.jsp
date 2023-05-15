@@ -1,17 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.*, com.ggul.zip.faq.FaqVO" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <%@include file="../main/header.jsp"%>
 <style>
-/* 제목 */
-#accordion{
- 	display: none;
-}
 mark{
 	border-radius: 50px;
 	background-color: lightblue;
@@ -30,19 +28,15 @@ mark{
 border:0;
 text-align: right;
 }
-label.LBLquestion{
-	background-color:lightblue;
+.LBLquestion{
 	border-radius: 30px;
-
-label.LBLanswer{
-	background-color:lightpink;
+}
+	label.LBLanswer{
+	background-color:#FFD400;
 	border-radius: 30px;
 }
 .panel-body{
 	border:0;
-}
-label{
-	font-size: 15pt;
 }
 
 #btnMore {
@@ -55,57 +49,100 @@ label{
   border: none;
   cursor: pointer;
 }
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-$(function(){
-    $("#accordion").slice(0, 1).show(); // 초기갯수
-    $("#btnMore").click(function(e){ // 클릭시 more
-        e.preventDefault();
-    	console.log('btn');
-        $("#accordion:hidden").slice(0, 1).show(); // 클릭시 more 갯수 지저정
-        if($("#accordion:hidden").length == 0){ // 컨텐츠 남아있는지 확인
-            alert("게시물의 끝입니다."); // 컨텐츠 없을시 alert 창 띄우기 
-        }
-    });
-});
 
-// function addMore(){
-// 	$('#accordion').slice(0,3).show();
-// 	if($('#accordion').length == 0){
-// 		alert("게시물의 끝입니다.");
-// 	}
-// }
-</script>
+button.tlqkffha{
+	border-style: none;
+    background: #FFD400;
+    color: #5c3b0c;
+    margin: 5px;
+    padding: 5px 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#searchFaq{
+	padding: 5px;
+	font-size: 14px;
+}
+</style>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+ $(function(){
+     $(".moreList").slice(0, 7).show();
+     if($(".moreList:hidden").length == 0){
+         $("#btnMore").hide();
+     }
+     $("#btnMore").click(function(e){
+         e.preventDefault();
+         $(".moreList:hidden").slice(0, 3).show();
+         if($(".moreList:hidden").length == 0){
+             $("#btnMore").hide();
+         }
+     });
+ });
+ </script>
 <body>
+<br>
 	<div class="container">
-  <h2>자주찾는 도움말</h2>
-  <p>평소에 <strong>꿀티퍼에게 궁금한점이</strong> 있으시면 <strong>질문을 </strong>클릭해보세요.</p>
+		<div class="divLeft" style="width:100%; margin: 0 auto;">
+		  <span style="font-size:17pt; font-weight: bolder;">자주찾는 도움말</span><br>
+		  <span>평소에 <strong>꿀티퍼에게 궁금한점이</strong> 있으시면 <strong>질문을 </strong>클릭해보세요.</span>
+			  <form action="faqList" style="float:right;">
+			  	<input type="text" name="faq_search" id="searchFaq" style="	padding: 5px; font-size: 14px; width: 200px;" placeholder="검색하실 제목을 입력하세요.">
+			  	<button type="submit" style="border:0; background:none;"><i class="fa fa-search" style="font-size:24px; color:#FFD400;"></i></button>
+			  	<button type="button" class="tlqkffha" onclick="location.href='faqList'" 
+				  	style="	border-style: none;
+				    background: #FFD400;
+				    color: #5c3b0c;
+				    margin: 5px;
+				    padding: 5px 18px;
+				    cursor: pointer;
+				    border-radius: 5px;
+				        font-size: 12pt;
+    font-weight: bolder;">전체보기
+				 </button>
+			  </form>
+		</div>
+		<br>
+		<hr>
+		<br><br>
+
+<!--  표현태그방식   -->
+  <%
+  List<FaqVO> faqList = (List<FaqVO>)request.getAttribute("faqList");
+  if(faqList != null){
+     for(FaqVO faq : faqList){
+  %>
+	<div class="panel-group moreList" id="accordion" style="width:100%; margin: 0 auto; display: none; ">
+ 		<div class="panel panel-default" style="border:0;" id="accordion2">
+			<div class="panel-heading" style="background-image: url(''); background-color: white; font-size: 16px; font-weight: bolder;" id="accordion3">
+				<a data-toggle="collapse" data-parent="#accordion" href="#collapse<%=faq.getFaq_question_num() %>" aria-expanded="false">
+  		 			<span class="LBLquestion" style="cursor: pointer;"><%=faq.getFaq_question() %></span>
+  		 			<span style="float:right;"><i class='fas fa-angle-down' style='font-size:30px'></i></span>
+  		 		</a>
+			</div>
+  		 	<div id="collapse<%=faq.getFaq_question_num() %>" class="panel-collapse collapse">
+	  		 	<div class="panel-body" style="border:0;">
+	  		 		<pre class="LBLanswer" style="padding:25px; background-color:rgba(255,212,0,0.1); border-radius: 5px; width: 100%; border:0;
+	white-space: pre-wrap; text-align: left; font-size: 12pt;"><%=faq.getFaq_answer() %></pre>
+	  		 	</div>
+  		 	</div>
+		</div>
+  		 	<hr>
+	</div>
+  <%
+     }
+  }
+  %>
   
-  <form action="faqList">
-  	<input type="text" name="faq_search">
-  	<input type="submit" value="검색">
-  	<button type="button" onclick="location.href='faqList'">전체보기</button>
-  </form>
-  
-  <c:forEach items="${faqList}" var="faq">
-  <div class="panel-group" id="accordion" style="width:900px; margin: 0 auto;">
-    <div class="panel panel-default" style="border:0;">
-      <div class="panel-heading" style="background-image: url(''); background-color: white;">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse${faq.faq_question_num }" aria-expanded="false"><label class="LBLquestion">${faq.faq_question}</label></a>
-      </div>
-      <div id="collapse${faq.faq_question_num }" class="panel-collapse collapse">
-        <div class="panel-body"  style="border:0;"><label class="LBLanswer" style="background-color:lightpink; border-radius: 30px;">${faq.faq_answer}</label>
-        </div>
-      </div>
-    </div>
+<div style="display: flex; justify-content: center; ">
+	<button id="btnMore" type="button" style="border: 0; background: transparent;">
+		<i class='fas fa-angle-double-down' style='font-size:35px;'></i>
+	</button>
 	</div>
 	<br>
-	</c:forEach>
-<!-- 	<button id="btnMore" type="button">더 보기</button> -->
-<a href="#" id="btnMore">더 보기</a>
 </div>
-    
 	<%@include file="../main/footer.jsp"%>
 </body>
 </html>

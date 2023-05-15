@@ -72,8 +72,8 @@ color: #ffd400;
   <a href="getLessonListLesson">강의리스트</a>
   <a href="getReportList">블랙리스트관리</a>
   <a href="getPotentialTiperList">승급요청처리</a>
-  <a href="adminNoticeList">공지사항 수정</a>
-  <a href="adminFaqList">F A Q 수정</a>
+  <a href="adminNoticeList">공지사항 관리</a>
+  <a href="adminFaqList">F A Q 관리</a>
   <a href="adminUpdateGo">관리자정보수정</a>
   <a href="callEscrowList">에스크로내역</a>
 <a href="getDisputeResolutionList">티퍼-회원 분쟁조정</a>

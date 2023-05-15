@@ -15,9 +15,50 @@ public class PointVO {
 	
 	private String searchCondition;
     private String searchKeyword;
-
+   
+    private String startDate;
+    private String endDate;
+    
+    private String price_type;
+    
+    private String search_condition;
+    private String search_keyword;
+    
 	
-	
+    
+    
+    
+    
+	public String getSearch_condition() {
+		return search_condition;
+	}
+	public void setSearch_condition(String search_condition) {
+		this.search_condition = search_condition;
+	}
+	public String getSearch_keyword() {
+		return search_keyword;
+	}
+	public void setSearch_keyword(String search_keyword) {
+		this.search_keyword = search_keyword;
+	}
+	public String getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+	public String getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+	public String getPrice_type() {
+		return price_type;
+	}
+	public void setPrice_type(String price_type) {
+		this.price_type = price_type;
+	}
 	public String getSearchCondition() {
 		return searchCondition;
 	}

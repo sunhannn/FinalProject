@@ -80,7 +80,7 @@
 	<insert id="insertTiperPointList">
 	INSERT INTO POINT
 	(point_id, point_price, point_history, point_time)
-	VALUES(#{tiper_user_id},#{escrow_price},'[관리자]완료 강의입금', SYSDATE())
+	VALUES(#{tiper_user_id},FLOOR(#{escrow_price} * 0.95),CONCAT('강의명:', #{lesson_title}, ', 수강회원:', #{escrow_user_id}, ', [관리자]완료'), SYSDATE())
 	</insert>
 	
 	<update id="updateTiperPoint">
@@ -101,7 +101,7 @@
 	<insert id="insertUserPointList">
 	INSERT INTO POINT
 	(point_id, point_price, point_history, point_time)
-	VALUES(#{escrow_user_id},#{escrow_price},'[관리자]취소 강의환불', SYSDATE())
+	VALUES(#{escrow_user_id},#{escrow_price},CONCAT('강의명:', #{lesson_title}, ', 강사id:', #{tiper_user_id}, ', [관리자]취소'), SYSDATE())
 	</insert>
 	
 	<update id="updateUserPoint">
@@ -112,12 +112,13 @@
 		WHERE point_id = #{escrow_user_id})
 		WHERE user_id = #{escrow_user_id}
 	</update>
-	
 
 
 <!-- 여기까지 보영 -->
 	
-	<!--  정성현 : 마이페이지 -->
+	
+<!-- 	현민 -->
+	<!-- 	신청받은 강의목록 조회 -->
 	<select id="select_escrow" parameterType="com.ggul.zip.escrow.EscrowVO" resultType="com.ggul.zip.escrow.EscrowVO">
 	    select	lesson_num AS escrow_lesson_num, lesson_title, lesson_tiper_code AS escrow_tiper_code
 	    from 	lesson 
@@ -128,24 +129,41 @@
 				WHERE tiper_user_id = #{tiper_user_id}) AND escrow_status = 0)
 	</select>
 	
-
+	
+<!-- 	가격 업데이트 -->
 	<update id="update_price" parameterType="com.ggul.zip.escrow.EscrowVO">
 		UPDATE 	escrow
-		SET 	ESCROW_PRICE = #{escrow_price}
+		SET 	ESCROW_PRICE = #{escrow_price},
+				ESCROW_START = #{startDate}
 		WHERE 	ESCROW_USER_ID = #{escrow_user_id} and
 				ESCROW_TIPER_CODE = #{escrow_tiper_code} and
 				ESCROW_LESSON_NUM = #{escrow_lesson_num} and
 				ESCROW_STATUS = 0
 	</update>
 	
+	
+<!-- 	강의상태 업데이트 -->
 	<update id="escrow_status" parameterType="com.ggul.zip.escrow.EscrowVO">
-		UPDATE 	escrow
-		SET 	ESCROW_STATUS = 1
-		WHERE 	ESCROW_USER_ID = #{escrow_user_id} and
-				ESCROW_TIPER_CODE = #{escrow_tiper_code} and
-				ESCROW_LESSON_NUM = #{escrow_lesson_num} and
-				ESCROW_STATUS = 0
+		UPDATE escrow e
+		INNER JOIN users u ON e.ESCROW_USER_ID = u.user_id
+		SET e.ESCROW_STATUS = 1, u.USER_POINT = u.USER_POINT - e.ESCROW_PRICE
+		WHERE e.ESCROW_USER_ID = #{escrow_user_id}
+		AND e.ESCROW_TIPER_CODE = #{escrow_tiper_code}
+		AND e.ESCROW_LESSON_NUM = #{escrow_lesson_num}
+		AND e.ESCROW_STATUS = 0
+		AND u.user_id = #{escrow_user_id}
+		AND u.USER_POINT >= e.ESCROW_PRICE
 	</update>
+	
+	
+<!-- 	강의상태 조회 -->
+	<select id="select_status" parameterType="com.ggul.zip.escrow.EscrowVO" resultType="com.ggul.zip.escrow.EscrowVO">
+		SELECT 	escrow_status 
+		FROM 	escrow 
+		WHERE 	escrow_user_id = #{escrow_user_id}
+		AND		escrow_tiper_code = #{escrow_tiper_code}
+		AND		escrow_lesson_num = #{escrow_lesson_num}
+	</select>
 	
 	<!-- 성현 -->
 	<insert id="insertEscrow">

@@ -41,11 +41,8 @@
 		width: 100%;
 		text-align: center;
 	}
-	#honeyTake_div3{
-	text-align: center;
-	
-	
-	
+	#honeyTake_div3 {
+		text-align: center;
 	}
 }
 
@@ -79,11 +76,8 @@
 		width: 100%;
 		text-align: center;
 	}
-	#honeyTake_div3{
-	text-align: center;
-	
-	
-	
+	#honeyTake_div3 {
+		text-align: center;
 	}
 }
 </style>
@@ -91,7 +85,9 @@
 <body>
 	<%@include file="../main/header.jsp"%>
 	<div class="container">
-		<span id="honeyTake_sub1">허니페이 정산하기</span> <br>
+		<p id="honeyTake_sub1" style="margin: 40px 0;">허니페이
+			정산하기</p>
+		<br>
 		<hr>
 		<br>
 	</div>

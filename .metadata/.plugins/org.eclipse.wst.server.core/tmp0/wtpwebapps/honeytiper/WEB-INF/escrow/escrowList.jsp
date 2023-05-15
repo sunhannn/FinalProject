@@ -58,7 +58,7 @@ tr {
   font-size: 12pt;
   padding: 5px;
   cursor: pointer;
-  color: white;
+  color: #5c3b0c;
   font-weight: bold;
 }
 
@@ -110,6 +110,9 @@ tr {
     border-color: lightgray;
     border-radius: 4px;
     font-size: 14px;}
+    .plz-right{
+    text-align:right;
+    }
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -137,7 +140,7 @@ window.onload = function() {
 
 //전역변수정의
 var totalData; //총 데이터 수
-var dataPerPage=8; //한 페이지에 나타낼 글 수
+var dataPerPage=10; //한 페이지에 나타낼 글 수
 var pageCount = 5; //페이징에 나타낼 페이지 수
 var globalCurrentPage= 1; //현재 페이지
 
@@ -255,7 +258,7 @@ for (var i = startPage; i < endPage; i++) {
 	'</td><td class="tdCenter1">' + (dataList[i].escrow_end ? formatDate(new Date(dataList[i].escrow_end)) : "") +
 	'</td><td class="tdCenter1">' + (dataList[i].escrow_price || "").toLocaleString()+ "</td></tr>";
  }
- 
+if( typeof chartHtml == "undefined" || chartHtml == ''){ chartHtml +="<tr><td colspan='7' style='text-align:center;' id='if_undefined'>해당정보가 없습니다.</td></tr>"}
 $("#dataTableBody").html(chartHtml);
 
 }
@@ -322,7 +325,7 @@ $("#pagingul li a").click(function () {
 }
 </script>
 <div class="container">
-<h2 style="margin:100px 0px 50px 0px;">안전결제내역</h2>
+<h2 style="margin:40px 0px;">안전결제내역</h2>
 
 <button id="view-all-button" onclick="viewAllFnc()">전체목록보기</button>
 <br><br>
@@ -331,7 +334,8 @@ $("#pagingul li a").click(function () {
 <label for="end-date">~</label>
 <input type="date" id="end-date" name="endDate" >
 <button id="search-button"  onclick="btnSFnc()"style="outline:none; border:none; background:transparent;"><i class="fa fa-search" style="font-size:24px; color:#FFD400;"></i></button>
-<br><br><br>
+<br>
+<div class="plz-right">
 <select id="escrow-status-select">
     <option value="" disabled selected>진행상황</option>
     <option id="status-0" value="0">신청중</option>
@@ -339,21 +343,20 @@ $("#pagingul li a").click(function () {
     <option id="status-2" value="2">완료</option>
     <option id="status-3" value="3">관리자완료</option>
     <option id="status-4" value="4">관리자취소</option>
-</select>
-				<br>
+</select></div>
             <hr class="hrFirst">
             <br>
-<!--             <span id="displayCount"></span> -->
+            <span id="displayCount"></span>
             <table class="cont1_table">
 	            <thead>
 	                <tr class="cont1_th" >
-	                    <th class="thCenter1">강의수락날짜</th> 
-	                    <th class="thCenter1">수강자</th> 
-	                    <th class="thCenter1">강사</th>
-	                    <th class="thCenter1">강의이름</th>
-	                    <th class="thCenter1">진행상황</th>
-	                    <th class="thCenter1">완료날짜</th>
-	                    <th class="thCenter1">금액</th>
+	                    <th class="thCenter1" style="width:15%;">강의수락날짜</th> 
+	                    <th class="thCenter1" style="width:10%;">수강자</th> 
+	                    <th class="thCenter1" style="width:10%;">강사</th>
+	                    <th class="thCenter1" style="width:20%;">강의이름</th>
+	                    <th class="thCenter1" style="width:15%;">진행상황</th>
+	                    <th class="thCenter1" style="width:15%;">완료날짜</th>
+	                    <th class="thCenter1" style="width:15%;">금액</th>
 	                </tr>
 	            </thead>
 	            <tbody id="dataTableBody"></tbody>

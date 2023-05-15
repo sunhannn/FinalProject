@@ -82,6 +82,13 @@ public class EscrowDAO {
 		System.out.println("status==" + status);
 		return status;
 	}
+	
+	// 거래시 상태 조회
+	public EscrowVO select_status(EscrowVO vo) {
+		System.out.println("상태조회");
+		EscrowVO select_status = mybatis.selectOne("EscrowDAO.select_status", vo);
+		return select_status;
+	}
 
 	// Escrow테이블에 수강생id, 강사코드, 강의번호 insert ------성현
 	public void insertEscrow(EscrowVO evo) {

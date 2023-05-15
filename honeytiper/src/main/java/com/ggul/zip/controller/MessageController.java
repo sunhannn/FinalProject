@@ -15,6 +15,8 @@ import com.ggul.zip.escrow.EscrowVO;
 import com.ggul.zip.escrow.impl.EscrowDAO;
 import com.ggul.zip.message.MessageTO;
 import com.ggul.zip.message.impl.MessageDAO;
+import com.ggul.zip.payment.PointVO;
+import com.ggul.zip.payment.impl.PointDAO;
 
 @Controller
 public class MessageController {
@@ -24,6 +26,10 @@ public class MessageController {
 	
 	@Autowired
 	private EscrowDAO escrowDao;
+	
+	@Autowired
+	private PointDAO pointDao;
+	
 
 	// 메세지 목록
 	@RequestMapping(value = "/message_list")
@@ -31,7 +37,6 @@ public class MessageController {
 
 		String user_id = (String) session.getAttribute("user_id");
 		int send_btn = Integer.parseInt(request.getParameter("send_btn"));
-		
 		MessageTO to = new MessageTO();
 		to.setUser_id(user_id);
 		to.setSend_btn(send_btn);
@@ -43,9 +48,15 @@ public class MessageController {
 
 //		System.out.println("메세지리스트는 "+list);
 		
-		if(to.getSend_btn()==1) {
+		if(to.getSend_btn() == 1) {
 			System.out.println("if탐==="+to.getSend_btn());
 			return "message/message_send";
+		}else if(to.getSend_btn() == 3){
+			System.out.println("else if탐==="+to.getSend_btn());
+			return "message/message_list_m";
+		}else if(to.getSend_btn() == 4){
+			System.out.println("else if탐==="+to.getSend_btn());
+			return "message/message_send_m";
 		}else {
 			System.out.println("else탐==="+to.getSend_btn());
 			return "message/message_list";
@@ -84,7 +95,7 @@ public class MessageController {
 		System.out.println("to.getSend_btn()"+to.getSend_btn());
 		to.setSend_btn(send_btn);
 		
-		if(to.getSend_btn() == 1) {
+		if(to.getSend_btn() == 1 || to.getSend_btn() == 4) {
 			int message_room_param = Integer.parseInt(request.getParameter("message_room"));
 			to.setMessage_room(message_room_param);
 			
@@ -95,8 +106,8 @@ public class MessageController {
 			int message_room = to.getMessage_room();
 			messageDao.messageSendChk(to);
 			int exist_chat = to.getExist_chat();
-//			System.out.println("0받아야하는데..."+message_room);
-//			System.out.println("exist_chat 0이어야됨..."+exist_chat);
+			System.out.println("0받아야하는데..."+message_room);
+			System.out.println("exist_chat 0이어야됨..."+exist_chat);
 			// 강사에게 직접 메세지 보내기를 할 경우 방번호 0을 가져오고 기존에 방이 없는경우 방생성
 			if (message_room == 0 && exist_chat == 0) {
 				System.out.println("방생성 if탐===exist_chat??"+exist_chat);
@@ -137,6 +148,7 @@ public class MessageController {
 		int unread = messageDao.message_unread(to);
 		System.out.println("메세지 읽고나서 재확인 unread는? "+unread);
 		session.setAttribute("unread", unread);
+		
 		
 		return "message/message_content_list";
 	}
@@ -186,13 +198,21 @@ public class MessageController {
 	@RequestMapping(value = "/update_price")
 	public String update_price(@RequestParam int message_room, @RequestParam int escrow_price,
 			@RequestParam int escrow_lesson_num, @RequestParam int escrow_tiper_code, @RequestParam String escrow_user_id,
-			@RequestParam String lesson_title, HttpServletRequest request, HttpSession session) {
+			@RequestParam String lesson_title, @RequestParam int escrow_status, String startDate, HttpServletRequest request, HttpSession session) throws java.text.ParseException {
 		EscrowVO vo = new EscrowVO();
-		vo.setEscrow_price(escrow_price);
+		
+		String escrow_price_str = String.valueOf(escrow_price);
+		escrow_price_str = escrow_price_str.replaceAll(",","");
+		int price = Integer.parseInt(escrow_price_str);
+		
+		
+		vo.setEscrow_price(price);
 		vo.setEscrow_lesson_num(escrow_lesson_num);
 		vo.setEscrow_tiper_code(escrow_tiper_code);
 		vo.setEscrow_user_id(escrow_user_id);
-		System.out.println("escrow_price="+escrow_price+"/레슨넘="+escrow_lesson_num+"/티퍼코드="+escrow_tiper_code+"/escrow_user_id"+escrow_user_id);
+		vo.setEscrow_status(escrow_status);
+		vo.setStartDate(startDate);
+		System.out.println("escrow_price="+price+"/레슨넘="+escrow_lesson_num+"/티퍼코드="+escrow_tiper_code+"/escrow_user_id"+escrow_user_id+"/startDate"+startDate);
 		escrowDao.update_price(vo);
 		
 		// 입력한 가격을 message테이블에도 insert
@@ -200,25 +220,76 @@ public class MessageController {
 		to.setMessage_room(message_room);
 		to.setMessage_send_id((String) session.getAttribute("user_id"));
 		to.setMessage_recv_id(escrow_user_id);
-		to.setMessage_cont("<pre class='lesson_title'>견적서<br>"+lesson_title+"</pre>"+"<br><p class='lesson_price'>"+String.valueOf(escrow_price)+" 페이"+"</p>"+"<button type='button' class='accept_btn'>수락하기</button><input class='escrow_lesson_num' type='hidden' value='"+escrow_lesson_num+"'><input class='escrow_tiper_code' type='hidden' value='"+escrow_tiper_code+"'>");
+		
+		String price_str = String.valueOf(escrow_price);
+		price_str = price_str.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
+		
+//		String price_tot = "<pre class='lesson_title'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-receipt-cutoff' viewBox='0 0 16 16'><path d='M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zM11.5 4a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z'/><path d='M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293 2.354.646zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118l.137-.274z'/></svg>견적서<br>"+lesson_title+"</pre>"+"<br><p class='lesson_price'>"+price_str+" 페이"+"</p>"+"<button type='button' class='accept_btn'>수락하기</button><input class='escrow_lesson_num' type='hidden' value='"+escrow_lesson_num+"'><input class='escrow_tiper_code' type='hidden' value='"+escrow_tiper_code+"'>";
+//		String escaped_price_tot = StringEscapeUtils.escapeHtml(price_tot);
+//		to.setMessage_cont(escaped_price_tot);
+		
+//		to.setMessage_cont("<pre class='lesson_title'>견적서<br>"+lesson_title+"</pre>"+"<br><p class='lesson_price'>"+price_str+" 페이"+"</p>"+"<button type='button' class='accept_btn'>수락하기</button><input class='escrow_lesson_num' type='hidden' value='"+escrow_lesson_num+"'><input class='escrow_tiper_code' type='hidden' value='"+escrow_tiper_code+"'>");
+//		to.setMessage_cont("[<@강의명>]"+lesson_title+"[<@/강의명>]"+"[<@가격>]"+"꿀TIP 전수일: "+startDate+"[<@/전수일>]"+price_str+" 허니페이"+"[<@/가격|버튼>]"+escrow_lesson_num+"[<@/버튼|코드>]"+escrow_tiper_code+"[<@/코드>]"+escrow_status+"[<@status>]");
+		to.setMessage_cont("[<@전수일>]"+startDate+"[<@강의명>]"+lesson_title+"[<@/강의명>]"+"[<@가격>]"+price_str+" 허니페이"+"[<@/가격|버튼>]"+escrow_lesson_num+"[<@/버튼|코드>]"+escrow_tiper_code+"[<@/코드>]"+escrow_status+"[<@status>]");
 		messageDao.messageSendInlist(to);
 		return "message/message_list";
 	}
 	
-	
 	// 제시된 가격 수락
 	@ResponseBody
 	@RequestMapping(value = "/escrow_status")
-	public int escrow_status(HttpServletRequest request, HttpSession session, @RequestParam int escrow_tiper_code, @RequestParam int escrow_lesson_num) {
+	public int escrow_status(HttpServletRequest request, HttpSession session, @RequestParam int escrow_tiper_code,
+			@RequestParam String escrow_price, @RequestParam String lesson_title, @RequestParam int escrow_lesson_num) {
 		EscrowVO vo = new EscrowVO();
 		vo.setEscrow_user_id((String) session.getAttribute("user_id"));
 		vo.setEscrow_tiper_code(escrow_tiper_code);
 		vo.setEscrow_lesson_num(escrow_lesson_num);
 		System.out.println("escrow_lesson_num"+escrow_lesson_num);
+		
+		System.out.println("수락할때 가져오는 값들 :"+escrow_tiper_code+"+"+escrow_price+"+"+lesson_title.replace("견적서","")+"+"+escrow_lesson_num);
+		
+		// 업데이트
 		int status = escrowDao.escrow_status(vo);
 		
-//		request.setAttribute("status", status);
-		return status;
+		// 상태조회
+		vo = escrowDao.select_status(vo);
+		
+		vo.getEscrow_status();
+		System.out.println("vo.getEscrow_status()====;"+vo.getEscrow_status()+"status======"+status);
+		int select_status = vo.getEscrow_status();
+				
+		int status_con = 0;
+		
+		if(status == 2 && select_status == 1) { // 신청완료됨
+			// point 차감내역 insert
+			PointVO pvo = new PointVO();
+			
+			String escrow_price_str = String.valueOf(escrow_price);
+			escrow_price_str = escrow_price_str.replaceAll("[,허니페이 ]","");
+			int price = Integer.parseInt(escrow_price_str);
+			
+			String title = lesson_title.replace("견적서", "");
+			
+			pvo.setPoint_id((String) session.getAttribute("user_id"));
+			pvo.setPoint_price(-price);
+			pvo.setPoint_history(title);
+			pointDao.insertPoint(pvo);
+			
+			status_con = 1;
+			System.out.println("status_con1="+status_con);
+			return status_con;
+		}else if(status == 0 && select_status == 1) { // 이미 신청됨
+			status_con = 2;
+			System.out.println("status_con2="+status_con);
+			return status_con;
+		}else if(status == 0 && select_status == 0){ // 잔액이 부족함
+			status_con = 3;
+			System.out.println("status_con3="+status_con);
+			return status_con;
+		}else {
+			System.out.println("status_con0="+status_con);
+			return status_con;
+		}
 	}
 	
 }

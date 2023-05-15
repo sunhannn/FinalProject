@@ -13,11 +13,12 @@
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<link rel="stylesheet"
-   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
 
 <!--  메세지관련 css파일 -->
 <link href="front/message.css" rel="stylesheet">
+<!-- 메세지 전송 아이콘(종이비행기) 때문에 필요 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet" />
 
 <!-- 부가적인 테마 -->
 <link rel="stylesheet"
@@ -399,16 +400,16 @@
                         <c:choose>
                            <c:when test='${unread == 0}'>
                            <div class="image-container">
-                            <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
+                        	 <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
                              <img title="메세지함 열기" alt="message list" id="msg_img_m" class="send_msg" src="front/message.png">
-                             <img title="메세지함 열기" alt="message list" id="msg_img_m2" class="send_msg" src="front/on-messsge.png">
+                             <img title="메세지함 열기" alt="message list" id="msg_img_m2" class="send_msg" src="front/open-messsge.png">
                             </div>
                            </c:when>
                            <c:otherwise>
                            <div class="image-container">
-                                <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
+                           	  <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
                               <img title="메세지함 열기" alt="message list" id="msg_img_m" class="send_msg" src="front/on-message.png">
-                              <img title="메세지함 열기" alt="message list" id="msg_img_m2" class="send_msg" src="front/on-messsge.png">
+                              <img title="메세지함 열기" alt="message list" id="msg_img_m2" class="send_msg" src="front/open-messsge.png">
                             </div>
                            </c:otherwise>
                         </c:choose>
@@ -462,19 +463,19 @@
                               <c:when test='${unread == 0}'>
                                  <li style="padding: 0px;">
                                  <div class="image-container">
-                                    <img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/message.png">
-                                    <img title="메세지함 열기" alt="message list" id="msg_img2" class="send_msg" src="front/on-messsge.png">
-                                    <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
-                                  </div>
+                                 	<img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/message.png">
+                                 	<img title="메세지함 열기" alt="message list" id="msg_img2" class="send_msg" src="front/open-messsge.png">
+                           			<img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
+                               	</div>
                                  </li>
                               </c:when>
                               <c:otherwise>
                                  <li style="padding: 0px;">
-                                 <div class="image-container">
-                                    <img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/on-message.png">
-                                    <img title="메세지함 열기" alt="message list" id="msg_img2" class="send_msg" src="front/on-messsge.png">
-                                    <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
-                                   </div>
+                              	<div class="image-container">
+                                	 <img title="메세지함 열기" alt="message list" id="msg_img" class="send_msg" src="front/on-message.png">
+                                	 <img title="메세지함 열기" alt="message list" id="msg_img2" class="send_msg" src="front/open-messsge.png">
+                                	 <img title="새로고침" alt="message reload" class="msg_reload" src="front/reload.png">
+                               	 </div>
                                  </li>
                               </c:otherwise>
                            </c:choose>
@@ -593,80 +594,132 @@ function openNav() {
 
  }
 
-         // 메세지 전체리스트창 팝업창 띄우기
-         $('.send_msg').on('click', function(){
-             popupWindow = window.open("message_list?send_btn=0", "_blank", "width=940, height=620, resizeable")
-             //팝업창 리사이즈 방지
-             popupWindow.onresize = (_=>{
-                popupWindow.resizeTo(940,690);
-            });
-             
-             popupWindow.onload = function (){
-                    call_chlid2();
-                 }
-          });
-          
-          var parent_value;
-          
-          
-          // 전체 메세지리스트 실행할때 호출
-          function call_chlid2(){  //부모창에서 자식창에 값 전달
-                 try{
-                     popup.child_value_send_btn = 0;
-                     popup.child_function(); // 자식창 함수 호출
-                 }catch(e){} // 부모 자식간의 연결이 끊어졌을 경우 처리할게 있으면 기술
-             }
-          
-          function parent_function(){}
-          
-          // 헤더에서 메세지 미열람 체크
-          const Message_chk = function(){
-               
-                  $.ajax({
-                     url:"message_chk_on",
-                     method:"GET",
-                     success:function(data){
-                        console.log("메세지 체크 하기");
-                     },
-                     error : function() {
-                        alert('index===================서버 에러');
-                     }
-                  });
-                   if (self.name != 'reload') {
-                        self.name = 'reload';
-                        self.location.reload(true);
-                    }
-                    else {
-                       self.name = ''; 
-                    }
-            };
-          
-            $(document).ready(function(){
-               Message_chk();
-            });
-       
-            $('.msg_reload').on('click', function(){
-            Message_chk();
+
+  $(document).ready(function() {
+      var userDropdown = $('#userDropdown');
+      var dropdownMenu = userDropdown.find('.dropdown-menu');
+
+      // 드롭다운 메뉴를 클릭했을 때, 하위 메뉴를 열거나 닫을 수 있도록 처리
+      userDropdown.click(function(e) {
+        e.stopPropagation();
+        dropdownMenu.toggle();
+      });
+
+      // 화면의 다른 부분을 클릭했을 때, 열려있는 하위 메뉴를 닫도록 처리
+      $(document).click(function(e) {
+        if (!userDropdown.is(e.target) && userDropdown.has(e.target).length === 0) {
+          dropdownMenu.hide();
+        }
+      });
+    });
+  
+  
+  // 메세지 전체리스트창 팝업창 띄우기
+  $('.send_msg').on('click', function(){
+  	var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
+
+ 	if(isMobile) {
+ 		location.href="message_list?send_btn=3";
+//  		FirstMessageList(message_room, other_user_id, send_btn);
+		}else{
+     	 popupWindow = window.open("message_list?send_btn=0", "_blank", "width=940, height=620, resizeable")
+          //팝업창 리사이즈 방지
+          popupWindow.onresize = (_=>{
+             popupWindow.resizeTo(940,690);
          });
-            
+          popupWindow.onload = function (){
+                 call_chlid2();
+          }
+		}
+   });
+   
+   var parent_value;
+   
+   
+   // 전체 메세지리스트 실행할때 호출
+   function call_chlid2(){  //부모창에서 자식창에 값 전달
+          try{
+              popup.child_value_send_btn = 0;
+              popup.child_function(); // 자식창 함수 호출
+          }catch(e){} // 부모 자식간의 연결이 끊어졌을 경우 처리할게 있으면 기술
+      }
+   
+   
+   // 직접 메세지 보낼때 호출
+   function open_popup(){
+ 	  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
+ 	  if(isMobile) {
+		 	let tiper_id = $('#cont1-group-text').text();
+        	tiper_id = tiper_id.replace("@", "");
+   		location.href="message_list?send_btn=4&other_user_id="+tiper_id;
+		}else{
+       popupWindow = window.open('message_list?send_btn=1', '_blank', 'width=940, height=620, resizeable');
+       //팝업창 리사이즈 방지 함수
+       popupWindow.onresize = (_=>{
+   	   	popupWindow.resizeTo(940,690);
+   		});
+       
+       popupWindow.onload = function (){
+       	call_chlid();
+       }
+		}
+   }
 
-            $(document).ready(function() {
-                var userDropdown = $('#userDropdown');
-                var dropdownMenu = userDropdown.find('.dropdown-menu');
+	  // 직접 메세지 보낼때 호출
+   function call_chlid(){  //부모창에서 자식창에 값 전달
+       try{
+       	let tiper_id = $('#cont1-group-text').text();
+       	tiper_id = tiper_id.replace("@", "");
+       	console.log("tiper_id??======",tiper_id);
+       	popup.child_value_id = tiper_id; // 현재 강의글에 있는 강사아이디값을 넣어야하는 곳
+           popup.child_value_room = 0; // 방번호를 보내야할 곳
+           popup.child_value_send_btn = 1;
+           popup.child_function(); // 자식창 함수 호출
+       }catch(e){} // 부모 자식간의 연결이 끊어졌을 경우 처리할게 있으면 기술
+   }
 
-                // 드롭다운 메뉴를 클릭했을 때, 하위 메뉴를 열거나 닫을 수 있도록 처리
-                userDropdown.click(function(e) {
-                  e.stopPropagation();
-                  dropdownMenu.toggle();
-                });
+   
+   function parent_function(){}
+   
+   // 헤더에서 메세지 미열람 체크
+   const Message_chk = function(){
+        
+           $.ajax({
+              url:"message_chk_on",
+              method:"GET",
+              success:function(data){
+             	 console.log('헤더msg_chk??data??',data);
+             	 if(data == 0){
+             		 $('#msg_img_m').attr("src", "front/message.png");
+             		 $('#msg_img').attr("src", "front/message.png");
+             		 console.log("메세지없음");
+             	 }else{
+             		 $('#msg_img_m').attr("src", "front/on-message.png");
+             		 $('#msg_img').attr("src", "front/on-message.png");
+             		 console.log("메세지있음");
+             	 }
+                 console.log("메세지 체크 하기");
+              },
+              error : function() {
+                 alert('알 수 없는 오류가 발생했어요.');
+              }
+           });
+//             if (self.name != 'reload') {
+//                  self.name = 'reload';
+//                  self.location.reload(true);
+//              }
+//              else {
+//                 self.name = ''; 
+//              }
+     };
+   
+     $(document).ready(function(){
+        Message_chk();
+     });
 
-                // 화면의 다른 부분을 클릭했을 때, 열려있는 하위 메뉴를 닫도록 처리
-                $(document).click(function(e) {
-                  if (!userDropdown.is(e.target) && userDropdown.has(e.target).length === 0) {
-                    dropdownMenu.hide();
-                  }
-                });
-              });
+     $('.msg_reload').on('click', function(){
+			Message_chk();
+		});
 
    </script>
 

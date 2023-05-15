@@ -34,7 +34,7 @@ if(request.getParameter("del")!=null){
 %>
 <style>
 .container {
-  width: 70%;
+  width: 65%;
   margin: 0 auto;
 }
 /* 나머지 요소들은 기본값인 z-index: 1로 설정 */
@@ -42,36 +42,43 @@ table {
   border-collapse: collapse;
   width: 100%;
   z-index: 1;
+  font-size: 14px;
 }
 
 th, td {
   text-align: center;
   vertical-align: middle;
-  border: 1px solid #ddd;
-  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  padding: 5px 15px;
   z-index: 1;
+  height: 38px;
 }
-
-th {
-  background-color: #f2f2f2;
-  font-weight: bold;
+th{
+	height: 21px;
+	background: #f2f2f2;
 }
 
 #view-all-button, #search-button, #addNotice {
-  border: 0;
-  border-radius: 4px;
-  background-color: #FFD400;
-  font-size: 12pt;
-  padding: 5px;
-  margin: 5px;
-  cursor: pointer;
-  color: white;
+    border-style: none;
+    background: #FFD400;
+    color: #5c3b0c;
+    margin: 5px;
+    padding: 5px 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 12pt;
+    font-weight: bolder;
 }
 
 #view-all-button:hover, #search-button:hover, #addNotice:hover {
   background-color: #E6B800;
-
 }
+
+#start-date, #end-date{
+	padding: 4px;
+	font-size: 14px;
+}
+
 .pagination-row {
   background-color: #e8f0fe;
 }
@@ -104,13 +111,14 @@ th {
   background-color: #FFD400;
   color: #fff;
 }
-td{
-	padding-left: 25px;
-	padding-right: 25px;
-}
 
 #addNotice{
 	float:right;
+}
+#notice-search{
+	width: 20%;
+	padding: 5px;
+	font-size: 14px;
 }
 </style>
 </head>
@@ -299,7 +307,6 @@ function addNotice(){
 
 		
 <button id="view-all-button" onclick="viewAllFnc()">전체목록보기</button>
-<button type="button" onclick="addNotice()" id="addNotice">공지사항 등록</button>
 <br>
 <label for="start-date">기간선택</label>
 <input type="date" id="start-date" name="notice_start" >
@@ -307,19 +314,20 @@ function addNotice(){
 <input type="date" id="end-date" name="notice_end" >
 <input type="text" id="notice-search" name="notice_search" placeholder="검색할 제목을 입력해주세요">
 <button id="search-button"  style="outline:none; border:none; background:transparent;" onclick="btnSFnc()"><i class="fa fa-search" style="font-size:24px; color:#FFD400;"></i></button>
+<button type="button" onclick="addNotice()" id="addNotice">공지사항 등록</button>
 
 				<br>
             <hr class="hrFirst">
-            <span id="displayCount"></span>
             <br>
+            <span id="displayCount"></span>
             <table class="table table-bordered" style="table-layout: fixed;">
 	            <thead>
 	                <tr class="pagination-row" >
 	                    <th style="width:15%">제목</th> 
 	                    <th style="width:50%">내용</th> 
-	                    <th style="width:10%">날짜</th>
-	                    <th style="width:5%">조회수</th>
-	                    <th style="width:5%">고정여부</th>
+	                    <th style="width:12%">날짜</th>
+	                    <th style="width:7%">조회수</th>
+	                    <th style="width:10%">고정여부</th>
 	                </tr>
 	            </thead>
 	            <tbody id="dataTableBody" style="table-layout: fixed;"></tbody>

@@ -35,4 +35,8 @@ public interface EscrowService {
 		void insertEscrow(EscrowVO evo);
 		
 		void updateEscrowStatus12(EscrowVO evo);
+		
+		void update_price(EscrowVO vo);
+		
+		EscrowVO select_status(EscrowVO vo);
 }

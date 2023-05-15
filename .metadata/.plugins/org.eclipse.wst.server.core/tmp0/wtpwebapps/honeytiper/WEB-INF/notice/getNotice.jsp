@@ -7,7 +7,6 @@
 	<%@ include file="../main/header.jsp" %>
 	<style>
 		#bdyMain {
-			background-color: #F2F2F2;
 			font-family: Arial, sans-serif;
 			margin: 0;
 			padding: 0;
@@ -16,30 +15,10 @@
 		#noticeName {
 			font-size: 20pt;
 			font-weight: bold;
-			margin-left: 20px;
-			margin-top: 30px;
 			margin-bottom: 10px;
 			color: #333;
 		}
 
-/* 		button[type="button"] { */
-/* 			background-color: #333; */
-/* 			border: none; */
-/* 			border-radius: 3px; */
-/* 			color: #FFF; */
-/* 			cursor: pointer; */
-/* 			font-size: 14px; */
-/* 			padding: 8px 16px; */
-/* 			text-align: center; */
-/* 			transition: background-color 0.3s; */
-/* 			margin-top: 20px; */
-/* 			margin-right: 20px; */
-/* 			float: right; */
-/* 		} */
-
-/* 		button[type="button"]:hover { */
-/* 			background-color: #555; */
-/* 		} */
 
 		#frmMain {
 			background-color: #FFF;
@@ -67,28 +46,27 @@
 			word-wrap: break-word;
 			margin-top: 20px;
 			padding: 20px;
-			background-color: #F2F2F2;
+			background-color: #fff8e3;
 			border-radius: 5px;
 			line-height: 1.5;
 			min-height: 300px;
 			overflow: auto;
 			max-width: 100%;
 			box-sizing: border-box;
+			border: 0;
 		}
 
-		button[type="submit"], #userListBack, #adminListBack, #listUpdate{
-			background-color: #FFD400;
-			border: none;
-			border-radius: 3px;
-			box-shadow: 0 3px 0 #E6BF00;
-			color: #FFF;
-			cursor: pointer;
-			font-size: 16px;
-			font-weight: bold;
-			padding: 10px 20px;
-			transition: background-color 0.3s;
+		#userListBack, #adminListBack, #listUpdate{
+		    border-style: none;
+		    background: #FFD400;
+		    color: #5c3b0c;
+		    margin: 5px;
+		    padding: 5px 18px;
+		    cursor: pointer;
 			float: right;
-			margin: 10px;
+			font-size: 12pt;
+    		font-weight: bolder;
+    		border-radius: 5px;
 		}
 
 		button[type="submit"]:hover, #adminListBack:hover, #userListBack:hover, #listUpdate:hover {
@@ -96,13 +74,12 @@
 		}
 	</style>
 </head>
-<%
-	
-%>
 <body id="bdyMain">
 	<div class="container">
-		<span id="noticeName" style="margin:165px; font-size: 30pt; font-weight: border;">공지사항</span>
-		<button type="button" onclick="location.href='listnotice'" style="margin-right:170px;" id="userListBack">목록으로 돌아가기</button>
+		<div style="width: 85%; margin:50px auto;">
+			<span id="noticeName" style="font-size: 27px; font-weight: border;">공지사항</span>
+			<button type="button" onclick="location.href='listnotice'" id="userListBack">목록</button>
+		</div>
 	</div>
 	<form action="updateMoveNotice?notice_num=${notice.notice_num}" method="post" id="frmMain">
 		<span id="spnTitle">${notice.notice_title}</span><br>

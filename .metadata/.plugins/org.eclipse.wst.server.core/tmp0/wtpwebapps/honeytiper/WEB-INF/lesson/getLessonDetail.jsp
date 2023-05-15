@@ -9,10 +9,8 @@ int lesson_num = Integer.parseInt(request.getParameter("lesson_num"));
 
 
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <style>
@@ -349,13 +347,6 @@ img {
 	font-size: 1.2rem;
 }
 
-#msg_button{
-	outline: none;
-	border-style: none;
-	background: #fff;
-	width: 50px;
-	height: 50px;
-}
 
 @media ( min-width : 768px) {
 	/*=======================================================*/
@@ -534,7 +525,7 @@ img {
 		<div id="contbox1">
 			<div class="profile_img_box">
 				<img
-					src="${pageContext.request.contextPath}/front/${lessonDetail.tiper_img}"
+					src="${pageContext.request.contextPath}/front/profile/${lessonDetail.tiper_img}"
 					alt="기본이미지" />
 			</div>
 
@@ -554,14 +545,7 @@ img {
 					<div id="button_box">
 						<button type="button" id="msg_button_escrow" class="cont1_button"
 							onclick="location.href='/insertEscrow?escrow_lesson_num=${lessonDetail.lesson_num}&escrow_tiper_code=${lessonDetail.tiper_code}&escrow_user_id=<%=user_idd%>'">수강신청</button>
-							<button type="button" id="msg_button" onclick="open_popup()">
-							
-							<svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" fill="#FFD400" class="bi bi-send-plus" viewBox="0 0 10 10">
-  <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855a.75.75 0 0 0-.124 1.329l4.995 3.178 1.531 2.406a.5.5 0 0 0 .844-.536L6.637 10.07l7.494-7.494-1.895 4.738a.5.5 0 1 0 .928.372l2.8-7Zm-2.54 1.183L5.93 9.363 1.591 6.602l11.833-4.733Z"/>
-  <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5Z"/>
-</svg>
-
-</button>
+						<button title="메세지 보내기" type="button" id="msg_button" onclick="open_popup()"><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>
 					</div>
 					<%-- 					<div id="button_box"><button type="button" id="msg_button" onclick="location.href='/insertEscrow?escrow_lesson_num=${lessonDetail.lesson_num}&escrow_tiper_code=${lessonDetail.tiper_code}&escrow_user_id=<%=user_idd%>>쪽지</button></div> --%>
 				</div>

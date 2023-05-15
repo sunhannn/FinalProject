@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@include file="../queen/adminNavbar.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,9 @@ body {
   line-height: 1.5;
   margin: 0;
   padding: 0;
+}
+.container{
+	width: 65%;
 }
 
 /* Style the title */
@@ -37,7 +41,7 @@ table td {
 table textarea {
   width: 100%;
   height: 70px;
-  font-size: 14pt;
+  font-size: 14px;
 }
 #contSpace{
   width: 100%;
@@ -46,22 +50,20 @@ table textarea {
 
 /* Style the buttons */
 button {
-  background-color: #FFD400;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  float:right;
+    border-style: none;
+    background: #FFD400;
+    color: #5c3b0c;
+    margin: 5px;
+    padding: 5px 18px;
+    cursor: pointer;
+	float:right;
+    font-size: 12pt;
+    font-weight: bolder;
+    border-radius: 5px;
 }
 
 button:hover {
-  background-color: #DBB600;
+  background-color: #E6B800;
 }
 
 /* Style the radio buttons */
@@ -82,10 +84,13 @@ form {
 </script>
 <body>
 <div class="container">
-<span id="noticeName">공지사항</span>
-	<button type="button" onclick="location.href='listnotice'">목록(사용자) 가기</button>
-	<button type="button" onclick="location.href='adminNoticeList'">목록(관리자) 가기</button>
+	<div style="margin: 40px 0;">
+		<span id="noticeName">공지사항</span>
+		<button type="button" onclick="location.href='listnotice'">목록(사용자) 가기</button>
+		<button type="button" onclick="location.href='adminNoticeList'">목록(관리자) 가기</button>
+	</div>
 	<form action="updateNotice?notice_num=+${getNotice.notice_num}" method="post">
+	
 		<table>
 			<tr>
 				<td style="font-size: 14pt;">${getNotice.notice_date }</td>

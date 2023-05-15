@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,9 +21,14 @@
     //<<<<<<<<<<<<<<아임포트결제코드>>>>>>>>>>>>>>>
     function requestPay() {
        var amount = $("#amount").val();
-//        var amount = document.getElementById("amount").value;
+       
+	if (amount == "" || amount == "0" || amount <= 100) {
+    alert("충전은 100원 이상부터 가능합니다!");
+    return;
+     
+    }
 
-             var IMP = window.IMP; 
+        var IMP = window.IMP; 
         IMP.init("imp63414107"); 
       
         var today = new Date();   
@@ -84,16 +90,17 @@
  
 </script>
 <style>
-.container {
-position: relative; /*이만큼이 전체사이즈이다 알려주려고 넣은것*/ */
+.allSize{
+	 width: 90%;
+	 margin: 0 auto;
 }
 .warning {
-   background-color: #ffd400;
-   border: none;
-   border-radius: 4px;
-   padding: 12px 15px;
-   cursor: pointer;
-   border-radius: 4px;
+	background-color: #ffd400;
+	border: none;
+	border-radius: 4px;
+	padding: 12px 15px;
+	cursor: pointer;
+	border-radius: 4px;
    color: #5c3b0c;
    cursor: pointer;
    font-size:17px;
@@ -101,35 +108,65 @@ position: relative; /*이만큼이 전체사이즈이다 알려주려고 넣은�
 }
 .info-button{
 background-color: #ffd400;
-   border: none;
-   border-radius: 4px;
-   color: #5c3b0c;
+	border: none;
+	border-radius: 4px;
+	color: #5c3b0c;
    cursor: pointer;
    font-size:17px;
    font-weight:bold;
-   padding: 12px 15px;
+	padding: 12px 15px;
+	
 }
 .warning:hover {
-   background-color: #e7c310;
-   color:black;
+	background-color: #e7c310;
+	color:black;
 }
 
+#amount {
+    width: 50%;
+    padding: 10px;
+  }
+.end-hr{
+  margin-bottom: 230px;}
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
-   {
-   -webkit-appearance: none;
-   margin: 0;
+	{
+	-webkit-appearance: none;
+	margin: 0;
 }
 .w3-modal {
   z-index: 9999;
 }
 .w3-container{
-margin:40px 40px;
+margin:30px 10px;
 
 }
 .w3-modal-content.w3-card-4 {
-    width: 35%;
+    width: 40%;
     border-radius: 4px;
 }
+.totalPay {
+
+   left: 15px;
+   color: #333333;
+   display: block;
+   font-size: 22px;
+	font-weight:bold;
+   magin: 0;
+}
+.form-group {
+  background-color: #f9f9f9; /* 배경색상 설정 */
+  border-radius: 4px; /* 테두리 모서리 둥글기 설정 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 테두리 그림자 설정 */
+  width:100%;
+  padding-top:100px;
+  padding-bottom:100px;
+  display: inline-block; /* 너비를 자식 요소에 맞추어주기 위해 inline-block 속성 부여 */
+}
+.w3-button:hover {
+    color: #000!important;
+    background-color: #e7c310!important;
+}
+
 @media (max-width: 768px) {
   #amount {
     width: 90%;
@@ -139,29 +176,28 @@ margin:40px 40px;
     display: block;
     margin: 10px auto 0;
   }
+  .end-hr{
+  margin-bottom: 50px;}
 }
-@media(min-width: 768px){
-#amount{
-width: 50%; padding: 10px;
-}}
-.end-hr{
-margin-bottom: 230px;
-}
+
 </style>
 </head>
 <body>
-   <%@include file="../main/header.jsp"%>
-   <div class="container">
-      <p style="font-size:27px; margin:50px 0px 50px 0px; font-weight:bold;">허니페이 충전하기</p>
-      <br>
-      <button onclick="document.getElementById('id01').style.display='block'" class="info-button">허니페이란</button>
-      
+	<%@include file="../main/header.jsp"%>
+
+	<div class="container">
+	 <div class="allSize">
+		<p style="font-size:27px; margin:40px 0px 20px 0px; font-weight:bold;">허니페이 충전하기</p>
+		<br>
+		<p class="totalPay">잔여허니페이: <fmt:formatNumber value="${totalPoint.user_point}" groupingUsed="true" /> point</p>
+		<button onclick="document.getElementById('id01').style.display='block'" class="info-button">허니페이란 <i class='fas fa-question-circle'></i></button>
+		
 <div class="w3-container">
   <div id="id01" class="w3-modal">
     <div class="w3-modal-content w3-card-4">
       <header class="container teal" style="background-color:#ffd400;"> 
         <span onclick="document.getElementById('id01').style.display='none'" 
-        class="w3-button w3-display-topright">&times;</span>
+        class="w3-button w3-display-topright">✖</span>
         
       </header>
       <div class="w3-container">
@@ -197,21 +233,24 @@ margin-bottom: 230px;
   </div>
 </div>
 
-      <hr>
-      <br><br>
-      <div class="form-group">
-         <label class="col-sm-4 control-label"
-            style="font-size: 25px; text-align: right;">충전 금액:</label>
-         <div class="col-sm-8">
-            <input type="number" id="amount" name="amount" class="payfull-input"
-               placeholder="결제할 금액을 입력해주세요" >
-            <button class="warning" onclick="requestPay()">결제하기</button>
-         </div>
-      </div>
-      <br>
-      <br> <br>
-      <hr class="end-hr">
-   </div>
+		<hr><br>
+		<div class="form-group">
+			<label class="col-sm-4 control-label"
+				style="font-size: 25px; text-align: right;">충전 금액:</label>
+			<div class="col-sm-8">
+				<input type="number" id="amount" name="amount" class="payfull-input"
+					placeholder="결제할 금액을 입력해주세요" >
+				<button class="warning" onclick="requestPay()">결제하기</button>
+			</div>
+		</div>
+		<br>
+		<hr> 
+		<a class="warning" href="goMyHoneypay" style="text-decoration: none; float: right;">돌아가기</a><br>
+		
+		<div style="padding:50px 0px"></div>
+	</div>
+	</div>
 <%@include file="../main/footer.jsp"%>
 
 </body>
+</html>

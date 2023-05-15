@@ -27,7 +27,7 @@ if(request.getParameter("update")!=null){
 %>
 <style>
 .container {
-  width: 70%;
+  width: 65%;
   margin: 0 auto;
 }
 /* 나머지 요소들은 기본값인 z-index: 1로 설정 */
@@ -35,12 +35,12 @@ table {
   border-collapse: collapse;
   width: 100%;
   z-index: 1;
+  font-size: 14px;
 }
 
 th, td {
-  text-align: center;
   vertical-align: middle;
-  border: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   padding: 8px;
   z-index: 1;
 }
@@ -51,19 +51,23 @@ th {
 }
 
 #view-all-button, #search-button {
-  border: 0;
-  border-radius: 4px;
-  background-color: #FFD400;
-  font-size: 12pt;
-  padding: 5px;
-  margin: 5px;
-  cursor: pointer;
-  color: white;
+    border-style: none;
+    background: #FFD400;
+    color: #5c3b0c;
+    margin: 5px;
+    padding: 5px 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 12pt;
+    font-weight: bold;
 }
 
-#view-all-button:hover, #search-button:hover {
+#view-all-button:hover, #search-button:hover, #addFaq:hover, #updateBtn:hover {
   background-color: #E6B800;
+}
 
+#deleteBtn:hover{
+  background-color: #e0e0e0;
 }
 .pagination-row {
   background-color: #e8f0fe;
@@ -97,20 +101,45 @@ th {
   background-color: #FFD400;
   color: #fff;
 }
-td{
-	padding-left: 25px;
-	padding-right: 25px;
-}
 #addFaq{
-	border: 0;
-	border-radius: 4px;
-	background-color: #FFD400;
-	font-size: 12pt;
-	padding: 5px;
-	margin: 5px;
-	cursor: pointer;
-	color: white;
+    border-style: none;
+    background: #FFD400;
+    color: #5c3b0c;
+    margin: 5px;
+    padding: 5px 18px;
+    cursor: pointer;
+    border-radius: 5px;
 	float: right;
+	font-size: 12pt;
+    font-weight: bold;
+}
+
+#updateBtn{
+	border-style: none;
+    background: #FFD400;
+    color: #5c3b0c;
+    margin: 5px;
+    padding: 5px 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#deleteBtn{
+    border-style: none;
+    background: #E9E9E9;
+    color: #5c3b0c;
+    margin: 5px;
+    padding: 5px 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+th, td{
+	padding:5px 15px;
+}
+#faq-search{
+	width: 20%;
+	padding: 5px;
+	font-size: 14px;
 }
 </style>
 </head>
@@ -129,7 +158,7 @@ var search = $("#faq-search").val();
 
 
 function selTdUpdate(val){
-updateBtn = window.open('adminFaqUpdate?faq_question_num='+val, "_blank", "width=850px, height=550px, resizeable");
+updateBtn = window.open('adminFaqUpdate?faq_question_num='+val, "_blank", "width=850px, height=800px, resizeable");
 
 }
 
@@ -195,8 +224,8 @@ for (var i = startPage; i < endPage; i++) {
 	
 	 chartHtml += "<tr><td style='text-overflow:ellipsis; overflow:hidden; white-space:nowrap;'>" +(dataList[i].faq_question || "") + "</td><td style='text-overflow:ellipsis; overflow:hidden; white-space:nowrap;'>" + 
 	 (dataList[i].faq_answer || "") + 
-	 "</td><td onclick='selTdUpdate("+dataList[i].faq_question_num +")'><button type='button'>수정</button></td>"+
-	 "</td><td onclick='selTdDelete("+dataList[i].faq_question_num +")'><button type='button'>삭제</button></td></tr>";
+	 "</td><td><button id='updateBtn' type='button' onclick='selTdUpdate("+dataList[i].faq_question_num +")'>수정</button>&nbsp;&nbsp;"+
+	 "<button id='deleteBtn' type='button' onclick='selTdDelete("+dataList[i].faq_question_num +")'> 삭제</button></td></tr>";
  }
  
 $("#dataTableBody").html(chartHtml);
@@ -271,16 +300,15 @@ $("#pagingul li a").click(function () {
 </script>
 <div class="container">
 <h2 style="margin:40px 0px;">F A Q 관리</h2>
-
-		
 <button id="view-all-button" onclick="viewAllFnc()">전체목록보기</button>
-<br>
+		<br>
 <label for="faq-search">제목검색</label>
 <input type="text" id="faq-search" name="faq_search" placeholder="검색하실 제목을 입력하세요.">
 <button id="search-button"  style="outline:none; border:none; background:transparent;" onclick="btnSFnc()"><i class="fa fa-search" style="font-size:24px; color:#FFD400;"></i></button>
 <button type="button" onclick="addFaq()" id="addFaq">자주묻는질문등록하기</button>
 				<br>
             <hr class="hrFirst">
+            <br>
             <span id="displayCount"></span>
             <br>
             <table class="table table-bordered" style="table-layout: fixed;">
@@ -288,8 +316,7 @@ $("#pagingul li a").click(function () {
 	                <tr class="pagination-row" >
 	                    <th style="width:35%">질문</th> 
 	                    <th style="width:35%">답변</th>
-	                    <th style="width:10%">수정</th>
-	                    <th style="width:10%">삭제</th>
+	                    <th style="width:17%" style="padding:5px;">관리</th>
 	                </tr>
 	            </thead>
 	            <tbody id="dataTableBody" style="table-layout: fixed;"></tbody>

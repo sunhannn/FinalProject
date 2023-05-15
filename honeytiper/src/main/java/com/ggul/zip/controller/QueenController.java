@@ -329,69 +329,70 @@ public String adminLoginBtn() {
 					return "redirect:getPotentialTiperList";
 				}
 //-------------------------------보영-------------------------------------------------------
-		//분쟁해결관리- 전체리스트 가져오기 상태가 0또는 1만 가져옴
-		@RequestMapping("/getDisputeResolutionList")
-		public String getDisputeResolutionList(EscrowVO vo, Model model) {
-			model.addAttribute("DisputeResolution", escrowService.getDisputeResolutionList(vo));
-			String disputeListtJSON = new Gson().toJson(escrowService.getDisputeResolutionList(vo));
-			model.addAttribute("DisputeListtJSON", disputeListtJSON);
-			System.out.println(vo);
-			return "/escrow/disputeResolution";
-		}
 
-		//분쟁해결관리- 검색결과 가져오기
-		@RequestMapping("/searchDispute")
-		@ResponseBody
-		public ArrayList<EscrowVO> searchDispute(@RequestParam("search_condition") String search_condition,	
-			@RequestParam(value = "search_keyword", required = false) String search_keyword) {
-			System.out.println("검색결과받아오기");
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("search_condition", search_condition);
-		map.put("search_keyword", search_keyword);				
-		ArrayList<EscrowVO>searchDispute=escrowService.searchDispute((HashMap<String, Object>) map);
-		return searchDispute;
-		}
-		
-		
-		//	분쟁해결관리-상태가 (진행중) 인사람이 <강제완료>누를시=>3으로변경
-		@RequestMapping("/forcedCompletion")
-		public String forcedCompletion(EscrowVO vo, RedirectAttributes redirectAttributes) throws Exception {
-		    String message = "";
-		    
-		    // 진행상태가 0(신청)인 경우: 해당 사항 없음.
-		    if (escrowService.checkStatus(vo) == 0) {
-		        message = "신청단계에서는 변경 해당사항이 없습니다.";
-		    } else {
-		        // 진행상태가 1(진행중)인 경우: 3으로 변경, 티퍼이름으로 포인트리스트에 +내역 insert, 티퍼한테 point 업데이트
-		        escrowService.updateStatus0103(vo); // 받아온 status를 3으로 변경, 완료날짜 설정
-		        escrowService.insertTiperPointList(vo); // 티퍼의 point를 +내역으로 인서트
-		        escrowService.updateTiperPoint(vo); // tiper-id 기준으로 join해서 해당 아이디 list를 통합해서 update함
-		        message = "티퍼에게 강의료가 전달되었습니다.";
-		    }
-		    
-		    redirectAttributes.addFlashAttribute("message", message);
-		    return "redirect:getDisputeResolutionList";
-		}
-		
-		//분쟁해결관리-취소누를시 진행상태 4로변경, 포인트테이블 유저환불
-		@RequestMapping("/cancel")
-		public String cancel(EscrowVO vo, Model model, RedirectAttributes redirectAttributes) throws Exception{
-			String message = "";
-			//진행상태가 0(신청)인 경우 : 4로 변경되면서 날짜 인서트
-			if(escrowService.checkStatus(vo) == 0) {
-				escrowService.updateStatus04(vo);//받아온 status를 4로 변경,완료날짜설정
-				message = "신청이 취소되었습니다";
+				//분쟁해결관리- 전체리스트 가져오기 상태가 0또는 1만 가져옴
+			@RequestMapping("/getDisputeResolutionList")
+			public String getDisputeResolutionList(EscrowVO vo, Model model) {
+				model.addAttribute("DisputeResolution", escrowService.getDisputeResolutionList(vo));
+				String disputeListtJSON = new Gson().toJson(escrowService.getDisputeResolutionList(vo));
+				model.addAttribute("DisputeListtJSON", disputeListtJSON);
+				System.out.println(vo);
+				return "/escrow/disputeResolution";
 			}
-			//진행상태가 1(진행중)인경우 : 4로 변경,유저이름으로 포인트리스트에 +내역insert, 유저한테 point업데이트
-			else {
-				escrowService.updateStatus04(vo);//받아온 status를 4로 변경,완료날짜설정
-				escrowService.insertUserPointList(vo);//유저의 point테이블에 +내역으로 인서트 
-				escrowService.updateUserPoint(vo);//유저에게 pointlist합해서 유저테이블에 업데이트
-				message = "강의가 취소되었습니다 회원에게 강의료가 환급됩니다";
+
+			//분쟁해결관리- 검색결과 가져오기
+			@RequestMapping("/searchDispute")
+			@ResponseBody
+			public ArrayList<EscrowVO> searchDispute(@RequestParam("search_condition") String search_condition,	
+				@RequestParam(value = "search_keyword", required = false) String search_keyword) {
+				System.out.println("검색결과받아오기");
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("search_condition", search_condition);
+			map.put("search_keyword", search_keyword);				
+			ArrayList<EscrowVO>searchDispute=escrowService.searchDispute((HashMap<String, Object>) map);
+			return searchDispute;
 			}
-			redirectAttributes.addFlashAttribute("message", message);
-			return "redirect:getDisputeResolutionList";
 			
-		}
+			
+			//	분쟁해결관리-상태가 (진행중) 인사람이 <강제완료>누를시=>3으로변경
+			@RequestMapping("/forcedCompletion")
+			public String forcedCompletion(EscrowVO vo, RedirectAttributes redirectAttributes) throws Exception {
+			    String message = "";
+			    
+			    // 진행상태가 0(신청)인 경우: 해당 사항 없음.
+			    if (escrowService.checkStatus(vo) == 0) {
+			        message = "신청단계에서는 변경 해당사항이 없습니다.";
+			    } else {
+			        // 진행상태가 1(진행중)인 경우: 3으로 변경, 티퍼이름으로 포인트리스트에 +내역 insert, 티퍼한테 point 업데이트
+			        escrowService.updateStatus0103(vo); // 받아온 status를 3으로 변경, 완료날짜 설정
+			        escrowService.insertTiperPointList(vo); // 티퍼의 point를 +내역으로 인서트
+			        escrowService.updateTiperPoint(vo); // tiper-id 기준으로 join해서 해당 아이디 list를 통합해서 update함
+			        message = "티퍼에게 강의료가 전달되었습니다.";
+			    }
+			    
+			    redirectAttributes.addFlashAttribute("message", message);
+			    return "redirect:getDisputeResolutionList";
+			}
+			
+			//분쟁해결관리-취소누를시 진행상태 4로변경, 포인트테이블 유저환불
+			@RequestMapping("/cancel")
+			public String cancel(EscrowVO vo, Model model, RedirectAttributes redirectAttributes) throws Exception{
+				String message = "";
+				//진행상태가 0(신청)인 경우 : 4로 변경되면서 날짜 인서트
+				if(escrowService.checkStatus(vo) == 0) {
+					escrowService.updateStatus04(vo);//받아온 status를 4로 변경,완료날짜설정
+					message = "신청이 취소되었습니다";
+				}
+				//진행상태가 1(진행중)인경우 : 4로 변경,유저이름으로 포인트리스트에 +내역insert, 유저한테 point업데이트
+				else {
+					escrowService.updateStatus04(vo);//받아온 status를 4로 변경,완료날짜설정
+					escrowService.insertUserPointList(vo);//유저의 point테이블에 +내역으로 인서트 
+					escrowService.updateUserPoint(vo);//유저에게 pointlist합해서 유저테이블에 업데이트
+					message = "강의가 취소되었습니다 회원에게 강의료가 환급됩니다";
+				}
+				redirectAttributes.addFlashAttribute("message", message);
+				return "redirect:getDisputeResolutionList";
+				
+			}
 	
 }

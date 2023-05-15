@@ -4,17 +4,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<script>
-//리스트 프로필 모달
-// $('.list_img').click(function(event){
-//     event.stopPropagation();
-//     $(this).siblings("div").toggle();
-// });
-
-// $(document).click(function(){
-// 	$('.list_img').siblings("div").hide();
-// });
-</script>
 <script src="front/message_ajax_list.js"></script>
 
 <c:forEach var="tmp" items="${list }">

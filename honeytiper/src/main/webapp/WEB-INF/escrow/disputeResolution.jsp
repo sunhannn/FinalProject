@@ -72,7 +72,7 @@ tr {
   font-size: 12pt;
   padding: 5px;
   cursor: pointer;
-  color: white;
+  color: #5c3b0c;
   font-weight: bold;
 }
 
@@ -106,13 +106,14 @@ tr {
   color: #fff;
 }
  input[type=text]{
-    width: 170px;
+   width: 170px;
    height: 25px;
   }
   select{
-      width: 110px;
+    width: 110px;
     height: 30px;
   }
+
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -128,7 +129,7 @@ tr {
    </script>
 </c:if>
 <div class="container">
-<h2 style="margin:100px 0px 50px 0px;">티퍼-회원 분쟁조정</h2>
+<h2 style="margin:40px 0px;">티퍼-회원 분쟁조정</h2>
 <button id="view-all-button" >전체목록보기</button>
 <br><br>
  
@@ -142,11 +143,12 @@ tr {
 						placeholder="검색어를 입력하세요.">
 					<button class="btn btn-success" type="submit" class="search" id="sel3"style="outline:none; border:none; background:transparent;">
 					<i class="fa fa-search" style="font-size:24px; color:#FFD400;"></i></button>
-						 <br><br><br>
+						<br><br>
 						 <label for="status-0">신청중</label>
 						<input type="radio" id="status-0" name="escrow_status" value="0">
 						<label for="status-1">진행중</label>
-						<input type="radio" id="status-1" name="escrow_status" value="1"><br>
+						<input type="radio" id="status-1" name="escrow_status" value="1">
+						
 						 <hr class="hrFirst">
 						 <br>
 				</div>
@@ -155,12 +157,12 @@ tr {
             <table class="cont1_table">
 	            <thead>
 	                <tr class="cont1_th" >
-	                    <th class="thCenter1">강의수락날짜</th> 
-	                    <th class="thCenter1">수강자</th> 
-	                    <th class="thCenter1">강의이름</th>
-	                     <th class="thCenter1">강사</th>
-	                     <th class="thCenter1">금액</th>
-	                    <th class="thCenter1">진행상황</th><!--상태가 0또는 1만 불러와야함 -->
+	                    <th class="thCenter1" style="width:10%;">강의수락날짜</th> 
+	                    <th class="thCenter1" style="width:10%;">수강자</th> 
+	                    <th class="thCenter1" style="width:20%;">강의이름</th>
+	                     <th class="thCenter1" style="width:10%;">강사</th>
+	                     <th class="thCenter1" style="width:15%;">금액</th>
+	                    <th class="thCenter1" style="width:15%;">진행상황</th><!--상태가 0또는 1만 불러와야함 -->
 	                    <th class="thCenter1" style="width:20%">완료 or 취소</th><!-- 버튼이 자동으로 생성되야하네 낄낄 -->
 	                </tr>
 	            </thead>
@@ -168,6 +170,7 @@ tr {
             </table>
 	<ul id="pagingul"></ul>
 	<div style="padding:100px 0px"></div>
+	</div>
 </body>
 <script>
 var totalData; //총 데이터 수
@@ -227,8 +230,8 @@ function displayData(currentPage, dataPerPage) {
 		 	  '</td><td class="tdCenter1">' +(dataList[i].escrow_status === 0 ? "신청중" :
 									dataList[i].escrow_status === 1 ? "진행중" : "" )+
 		 	  '</td><td class="tdCenter1">' +
-		 	 '<button type="button" class="tdcenter1_btn1" title="티퍼에게 강의료가 입금됩니다" onclick="location.href=\'/forcedCompletion?escrow_num='+dataList[i].escrow_num+'&escrow_user_id='+dataList[i].escrow_user_id+'&tiper_user_id='+dataList[i].tiper_user_id+'&escrow_price='+dataList[i].escrow_price+'\'">완료</button>'+
-		 	 '<button type="button" class="tdcenter1_btn2" title="회원에게 환불처리됩니다" onclick="location.href=\'/cancel?escrow_num='+dataList[i].escrow_num+'&escrow_user_id='+dataList[i].escrow_user_id+'&tiper_user_id='+dataList[i].tiper_user_id+'&escrow_price='+dataList[i].escrow_price+'\'">취소</button></tr>';
+		 	 '<button type="button" class="tdcenter1_btn1" title="티퍼에게 강의료가 입금됩니다" onclick="location.href=\'/forcedCompletion?escrow_num='+dataList[i].escrow_num+'&escrow_user_id='+dataList[i].escrow_user_id+'&tiper_user_id='+dataList[i].tiper_user_id+'&escrow_price='+dataList[i].escrow_price+'&lesson_title='+dataList[i].lesson_title+'\'">완료</button>'+
+		 	 '<button type="button" class="tdcenter1_btn2" title="회원에게 환불처리됩니다" onclick="location.href=\'/cancel?escrow_num='+dataList[i].escrow_num+'&escrow_user_id='+dataList[i].escrow_user_id+'&tiper_user_id='+dataList[i].tiper_user_id+'&escrow_price='+dataList[i].escrow_price+'&lesson_title='+dataList[i].lesson_title+'\'">취소</button></tr>';
 			   } 
  }else{ 
   
@@ -246,13 +249,13 @@ function displayData(currentPage, dataPerPage) {
 	 	  '</td><td class="tdCenter1">' +(dataList[i].escrow_status === 0 ? "신청중" :
 	 							dataList[i].escrow_status === 1 ? "진행중" : "" )+
 	 	  '</td><td class="tdCenter1">' +
-	 	  '<button type="button" class="tdcenter1_btn1" title="티퍼에게 강의료가 입금됩니다" onclick="location.href=\'/forcedCompletion?escrow_num='+dataList[i].escrow_num+'&escrow_user_id='+dataList[i].escrow_user_id+'&tiper_user_id='+dataList[i].tiper_user_id+'&escrow_price='+dataList[i].escrow_price+'\'">완료</button>'+
-	 	  '<button type="button" class="tdcenter1_btn2" title="회원에게 환불처리됩니다" onclick="location.href=\'/cancel?escrow_num='+dataList[i].escrow_num+'&escrow_user_id='+dataList[i].escrow_user_id+'&tiper_user_id='+dataList[i].tiper_user_id+'&escrow_price='+dataList[i].escrow_price+'\'">취소</button></tr>';
+	 	  '<button type="button" class="tdcenter1_btn1" title="티퍼에게 강의료가 입금됩니다" onclick="location.href=\'/forcedCompletion?escrow_num='+dataList[i].escrow_num+'&escrow_user_id='+dataList[i].escrow_user_id+'&tiper_user_id='+dataList[i].tiper_user_id+'&escrow_price='+dataList[i].escrow_price+'&lesson_title='+dataList[i].lesson_title+'\'">완료</button>'+
+	 	  '<button type="button" class="tdcenter1_btn2" title="회원에게 환불처리됩니다" onclick="location.href=\'/cancel?escrow_num='+dataList[i].escrow_num+'&escrow_user_id='+dataList[i].escrow_user_id+'&tiper_user_id='+dataList[i].tiper_user_id+'&escrow_price='+dataList[i].escrow_price+'&lesson_title='+dataList[i].lesson_title+'\'">취소</button></tr>';
   }
   
 }
  
- if( typeof chartHtml == "undefined" || chartHtml == ''){ chartHtml +="<div id='if_undefined'>해당정보가 없습니다.</div>"}
+ if( typeof chartHtml == "undefined" || chartHtml == ''){ chartHtml +="<tr><td colspan='7' style='text-align:center;' id='if_undefined'>해당정보가 없습니다.</td></tr>"}
 
 $("#data_table_body").html(chartHtml);
 }
@@ -298,7 +301,10 @@ function paging(totalData, dataPerPage, pageCount, currentPage) {
 	  }
 
 	  $("#pagingul").html(pageHtml);
-
+	  let displayCount = "";
+	  displayCount = "현재 1 - " + totalPage + " 페이지 / " + totalData + "건";
+	  $("#displayCount").text(displayCount);
+	  
 	  //페이징 번호 클릭 이벤트 
 	  $("#pagingul li a").click(function () {
 	    let $id = $(this).attr("id");

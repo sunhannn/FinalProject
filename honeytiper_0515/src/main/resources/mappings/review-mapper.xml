@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reviewDAO">
+
+	<resultMap type="com.ggul.zip.lesson.ReviewVO" id="reviewMap">
+		<id property="review_num" column="REVIEW_NUM"/>
+		<result property="review_lesson_num" column="REVIEW_LESSON_NUM"/>
+		<result property="review_cont" column="REVIEW_CONT"/>
+		<result property="review_writer" column="REVIEW_WRITER"/>
+		<result property="review_sugar" column="REVIEW_SUGAR"/>
+		<result property="review_date" column="REVIEW_DATE"/>
+	</resultMap>
+
+
+	<insert id="reviewInsert">
+		INSERT INTO REVIEW (REVIEW_LESSON_NUM, REVIEW_CONT, REVIEW_WRITER, REVIEW_SUGAR) VALUES (#{review_lesson_num}, #{review_cont} ,#{review_writer}, #{review_sugar});
+	</insert>
+	
+
+</mapper>

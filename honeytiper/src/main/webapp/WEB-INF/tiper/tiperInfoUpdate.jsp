@@ -124,7 +124,6 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 	}
 	#tipimg {
 		width: 150px;
-		
 	}
 	#tipup_td1 {
 		text-align: center;
@@ -161,7 +160,7 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		font-size: 17px;
 	}
 	.tipup_td5 {
-		text-align: center;
+		text-align: right;
 	}
 	.tipup_btn1 {
 		background-color: #FFD400;
@@ -179,12 +178,12 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		border-radius: 10px;
 		border: 0;
 		width: 200px;
-		height: 55px;
+		height: 50px;
 		font-weight: bold;
 	}
 	#tiperpreview {
-		width: 180px;
-		height: 180px;
+		width: 200px;
+		height: 200px;
 		border-radius: 10%;
 	}
 	input[type=file]::file-selector-button {
@@ -215,10 +214,13 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 
 				<tr id="tipup_tr1">
 					<td id="tipup_td1"><input type="file" name="tiper_img"
-						placeholder="<%=tiperVO.getTiper_img()%>" accept=".jpg,.jpeg,.png"
-						id="tipimg" onchange="previewImage(event)" required="required">
-						<br> <img id="tiperpreview"
-						src="front/<%=tiperVO.getTiper_img()%>" alt="프로필사진 없음"></td>
+						id="tipimg" accept=".jpg,.jpeg,.png"
+						onchange="previewImage(event)" required="required"
+						style="display: none;"> <br> <label for="tipimg"
+						id="tiperpreview-label"> <img id="tiperpreview"
+							src="front/<%=tiperVO.getTiper_img()%>" alt="프로필사진 없음"
+							onmouseover="changeCursor(this)" title="이미지를 클릭해서 사진을 선택해주세요!">
+					</label></td>
 
 					<td id="tipup_td2"><textarea name="tiper_info"
 							placeholder="<%=tiperVO.getTiper_info()%>" id="tipup_info1"
@@ -276,6 +278,10 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 			});
 		}
 
+		function selectProfileImage() {
+			document.getElementById('tipimg').click();
+		}
+
 		function previewImage(event) {
 			var reader = new FileReader();
 			reader.onload = function() {
@@ -303,11 +309,19 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 			}
 		}
 
+		// 마우스를 올리면 pointer로 바뀌는 함수
+		function changeCursor(img) {
+			img.style.cursor = "pointer";
+		}
 		// form 요소를 선택합니다.
 		const form = document.querySelector("#tipup_form");
 
 		// form submit 이벤트를 처리하는 함수를 등록합니다.
 		form.addEventListener("submit", tiperInfoUpdateSubmit);
+
+		// img 요소를 클릭했을 때 파일 선택 창 활성화
+		document.getElementById('tiperpreview-label').addEventListener('click',
+				selectProfileImage);
 	</script>
 	<%@include file="../main/footer.jsp"%>
 </body>

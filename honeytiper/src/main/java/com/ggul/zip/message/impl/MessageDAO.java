@@ -2,6 +2,7 @@ package com.ggul.zip.message.impl;
 
 import java.util.ArrayList;
 
+import org.apache.commons.lang.StringEscapeUtils;
 //import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,6 @@ public class MessageDAO {
 
 		// 메세지 내역을 가져온다
 		ArrayList<MessageTO> clist = (ArrayList) sqlSession.selectList("room_content_list", to);
-		
 		// 해당 방의 메세지들 중 받는 사람이 현재사용자의 nick인 메세지를 모두 읽음 처리한다
 		sqlSession.update("message_read_chk", to);
 
@@ -94,6 +94,8 @@ public class MessageDAO {
 				int room = Integer.parseInt(sqlSession.selectOne("select_room", to));
 				to.setMessage_room(room);
 			}
+		}else {
+			System.out.println("==============TEst=====================");
 		}
 
 		int flag = sqlSession.insert("messageSendInlist", to);
