@@ -27,26 +27,47 @@ body {
 
 @media ( max-width : 768px) {
 	#sin_sub1 {
-		font-size: 24px;
+		font-size: 22px;
 	}
 	#sin_sub2 {
-		font-size: 20px;
+		font-size: 15px;
+		font-weight: bold;
+		text-align: center;
 	}
 	#sin_div1 {
-		width: 200px;
-		height: 200px;
+		margin: 0 auto;
+		text-align: center;
 	}
-	#sin_img1 {
-		width: 80px;
-		height: 80px;
+	#sin-div2 {
+		text-align: center;
+		border-bottom: 3px solid #efefef;
+	}
+	#sin-div3 {
+		padding: 0px;
+		text-align: center;
+	}
+	#sin-div4 {
+		text-align: center;
 	}
 	#sin_info1 {
-		width: 95%;
-		border: 0;
+		width: 90%;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+		resize: none;
+		margin-bottom: 30px;
 	}
 	#sin_info1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
+	}
+	#sin_cate1, #sin_cate3, #sin_cate2 {
+		width: 115px;
+		border: 1px solid #efefef;
+		font-size: 12px;
+		height: 25px;
+		display: inline;
+		float: left;
+		border-radius: 10px;
 	}
 	#sin_cate1:focus {
 		border: 3px solid #FFD400;
@@ -66,17 +87,39 @@ body {
 		width: 200px;
 		height: 30px;
 		border-radius: 10px;
+		font-weight: bold;
 	}
 	#div_btn1 {
 		text-align: center;
 	}
 	#tiperUppreview {
-		width: 100px;
-		height: 100px;
+		width: 140px;
+		height: 140px;
+	}
+	#sin-info-p {
+		text-align: center;
+		font-size: 15px;
+		font-weight: bold;
+	}
+	#sin_sel1 {
+		text-align: center;
+	}
+	#sin_sub3 {
+		font-size: 15px;
+		font-weight: bold;
+	}
+	#sin_addr1 {
+		width: 180px;
+		height: 30px;
+		border: 1px solid #efefef;
+	}
+	#sin_addr1:focus {
+		outline: none;
+		border: 3px solid #FFD400;
 	}
 }
 
-@media ( min-width : 769px) {
+@media ( min-width : 769px){
 	#sin_sub1 {
 		font-size: 27px;
 	}
@@ -88,10 +131,6 @@ body {
 		width: 300px;
 		height: 80px;
 	}
-	#sin_div1 {
-		width: 300px;
-		height: 300px;
-	}
 	#sin_img1 {
 		width: 300px;
 		height: 50px;
@@ -101,6 +140,9 @@ body {
 		height: 250px;
 		resize: none;
 		border: 0;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+		width: 500px;
 	}
 	#sin_info1:focus {
 		border: 3px solid #FFD400;
@@ -147,6 +189,8 @@ body {
 		width: 300px;
 		height: 40px;
 		border: 0;
+		border: 1px solid #efefef;
+		border-radius: 10px;
 	}
 	#sin_addr1:focus {
 		border: 3px solid #FFD400;
@@ -154,23 +198,45 @@ body {
 		border-radius: 10px
 	}
 	#tiperUppreview {
-		width: 250px;
-		height: 250px;
+		width: 200px;
+		height: 200px;
 		border-radius: 10px;
+	}
+	#sin-div1 {
+		width: 768px;
+		margin: 0 auto;
+	}
+	#sin-div2 {
+		width: 768px;
+		margin: 0 auto;
+		text-align: center;
+		border-bottom: 2px solid #efefef;
+	}
+	#sin-div3 {
+		width: 768px;
+		margin: 0 auto;
+	}
+	#sin-div4 {
+		width: 768px;
+		margin: 0 auto;
+	}
+	#sin-info-p {
+		font-size: 20px;
+		font-weight: bold;
 	}
 }
 </style>
 </head>
 <body>
 	<%@include file="../main/header.jsp"%>
-	<div class="container">
+	<div class="container" id="sin-div1">
 		<span id="sin_sub1">TIPer 신청</span> <br> <br> <span
 			id="sin_sub2">카테고리 심사 후 TIPer 등록이 완료됩니다</span> <br>
 		<hr>
 	</div>
 	<form action="tiperSignUp" enctype="multipart/form-data"
 		id="sin_tipsign">
-		<div class="container">
+		<div class="container" id="sin-div2">
 			<div id="sin_div1">
 				<input type="file" id="sin_img1" accept=".jpg,.jpeg,.png"
 					placeholder="눌러서 강사에 대한 img등록" name="tiper_img" required="required"
@@ -180,12 +246,14 @@ body {
 					onmouseover="changeCursor(this)" title="이미지를 클릭해서 사진을 선택해주세요!"></label>
 			</div>
 			<br>
+			<p id="sin-info-p">무슨 꿀TIP을 가르쳐주실지 알려주세요!</p>
 			<textarea name="tiper_info" id="sin_info1" cols="30" rows="10"
 				placeholder="TIPer소개를 작성해주세요 (경력, 수상내역, 취득자격증 등등)"
 				required="required"></textarea>
+			<br>
 		</div>
 		<br> <br>
-		<div class="container">
+		<div class="container" id="sin-div3">
 			<p id="sin_sub2">
 				꿀TIP을 전수해줄 카테고리를 선택해주세요<span style="font-size: 12px; color: gray;">(최대
 					3개)</span>
@@ -224,7 +292,7 @@ body {
 			</div>
 		</div>
 		<br> <br>
-		<div class="container">
+		<div class="container" id="sin-div4">
 			<p id="sin_sub3">꿀TIP을 전수해줄 지역을 정확히 입력해주세요</p>
 			<span style="font-size: 10px; color: gray;">(해당지역 검색에 노출됩니다)</span> <br>
 			<br> <br> <input type="text" name="tiper_addr"

@@ -20,9 +20,10 @@
 		font-size: 18px;
 	}
 	#honeyTake_point {
-		border: 0;
+		border: 1px solid #efefef; border-radius : 10px;
 		width: 300px;
 		height: 45px;
+		border-radius: 10px;
 	}
 	#honeyTake_point:focus {
 		border: 3px solid #FFD400;
@@ -55,9 +56,10 @@
 		font-size: 18px;
 	}
 	#honeyTake_point {
-		border: 0;
-		width: 300px;
+		border: 1px solid #efefef; border-radius : 10px; width : 300px;
 		height: 45px;
+		width: 300px;
+		border-radius: 10px;
 	}
 	#honeyTake_point:focus {
 		border: 3px solid #FFD400;
@@ -85,8 +87,7 @@
 <body>
 	<%@include file="../main/header.jsp"%>
 	<div class="container">
-		<p id="honeyTake_sub1" style="margin: 40px 0;">허니페이
-			정산하기</p>
+		<p id="honeyTake_sub1" style="margin: 40px 0;">허니페이 정산하기</p>
 		<br>
 		<hr>
 		<br>

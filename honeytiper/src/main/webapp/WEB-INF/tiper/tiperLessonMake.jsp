@@ -39,18 +39,15 @@ if (cateCheck2 == false) {
 <style type="text/css">
 @media ( max-width : 768px) {
 	#lesmake_sub1 {
-		font-size: 24px;
+		font-size: 22px;
 		font-weight: bold;
 	}
 	#lesmake_tab {
 		width: 100%;
 	}
-	#lesmake_img {
-		width: 150px;
-	}
 	#lesmake_preview {
-		width: 200px;
-		height: 200px;
+		width: 150px;
+		height: 15 0px;
 		border-radius: 10px;
 	}
 	.lesmake_tr {
@@ -62,45 +59,55 @@ if (cateCheck2 == false) {
 		width: 200px;
 		height: 200px;
 		resize: none;
+		border: 2px solid #efefef;
+		border-radius: 2px;
 	}
 	#lesmake_info:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 10px;
+		border-radius: 2px;
 	}
 	#lesmake_title {
 		width: 200px;
 		height: 35px;
-		border: 0;
+		border: 2px solid #efefef;
+		border-radius: 2px;
 	}
 	#lesmake_title:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 10px;
+		border-radius: 2px;
 	}
 	.lesmake_td1 {
 		font-size: 15px;
-		vertical-align: top;
-		width: 150px;
+		vertical-align: middle;
+		width: 130px;
 		font-weight: bold;
+		background-color: #efefef;
+		border-bottom: 8px solid white;
+		text-align: center;
 	}
 	.lesmake_td2 {
-		vertical-align: top;
+		vertical-align: middle;
+		text-align: right;
+		width: 230px;
 	}
 	#lesmake_cate {
 		height: 40px;
 		border: 0;
 		width: 200px;
 		border: 0;
+		border: 1px solid #efefef;
+		border-radius: 2px;
 	}
 	#lesmake_cate:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 10px;
+		border-radius: 2px;
 	}
 	#lesmake_btn1 {
 		background-color: #FFD400;
-		border-radius: 10px;
+		border-radius: 2px;
 		border: 0;
 		width: 120px;
 		height: 45px;
@@ -109,16 +116,10 @@ if (cateCheck2 == false) {
 	#lesmake_div2 {
 		text-align: center;
 	}
-	input[type=file]::file-selector-button {
-		width: 150px;
-		height: 30px;
-		background: #FFD400;
-		border: 0;
-		border-radius: 10px;
-		cursor: pointer;
-		font-weight: bold;
-	}
 	#lesmake_divimg2 {
+		text-align: center;
+	}
+	#lesmake_imgdiv {
 		text-align: center;
 	}
 }
@@ -132,8 +133,7 @@ if (cateCheck2 == false) {
 		width: 100%;
 	}
 	#lesmake_imgdiv {
-		width: 600px;
-		height: 350px;
+		
 	}
 	#lesmake_img {
 		width: 150px;
@@ -144,71 +144,91 @@ if (cateCheck2 == false) {
 		border-radius: 10%;
 	}
 	.lesmake_tr {
-		height: 60px;
+		height: px;
 	}
 	#lesmake_info {
 		border: 0;
 		vertical-align: middle;
-		width: 300px;
-		height: 300px;
+		width: 450px;
+		height: 250px;
 		resize: none;
+		margin-left: 20px;
+		border: 2px solid #efefef;
+		border-radius: 2px;
 	}
 	#lesmake_info:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 10px;
+		border-radius: 2px;
 	}
 	#lesmake_title {
-		width: 300px;
+		width: 450px;
 		height: 45px;
 		border: 0;
+		margin-left: 20px;
+		border: 2px solid #efefef;
+		border-radius: 2px;
 	}
 	#lesmake_title:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 10px;
+		border-radius: 2px;
 	}
 	.lesmake_td1 {
-		font-size: 20px;
+		font-size: 18px;
 		width: 200px;
+		background-color: #efefef;
+		border-bottom: 10px solid white;
 	}
 	.lesmake_td2 {
 		width: 500px;
-		text-align: center;
+		text-align: left;
 	}
 	#lesmake_cate {
 		height: 40px;
 		border: 0;
 		width: 300px;
 		margin-left: 20px;
+		border: 2px solid #efefef;
+		border-radius: 2px;
 	}
 	#lesmake_cate:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 10px;
+		border-radius: 2px;
 	}
 	#lesmake_btn1 {
 		background-color: #FFD400;
-		border-radius: 10px;
+		border-radius: 2px;
 		border: 0;
 		width: 200px;
 		height: 55px;
-		color: white;
+		font-weight: bold;
 	}
 	#lesmake_div2 {
 		text-align: center;
 	}
-	input[type=file]::file-selector-button {
-		width: 150px;
-		height: 30px;
-		background: #FFD400;
-		border: 0;
-		border-radius: 10px;
-		cursor: pointer;
-		color: white;
-	}
 	#lesmake_divimg2 {
 		text-align: center;
+		width: 768px;
+		margin: 0 auto;
+	}
+	#lesmake-div2 {
+		width: 768px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	#lesmake-tr1 {
+		height: 70px;
+	}
+	#lesmake-tr2 {
+		height: 300px;
+	}
+	#lesmake-tr3 {
+		height: 70px;
+	}
+	#lesmake-catetd {
+		border: 0px;
 	}
 }
 </style>
@@ -218,44 +238,40 @@ if (cateCheck2 == false) {
 
 	<br>
 	<br>
-	<div class="container">
+	<div class="container" id="lesmake-div1">
 		<span id="lesmake_sub1">TIPer 강의 등록</span> <br>
 		<hr>
 	</div>
-	<div class="container">
+	<div class="container" id="lesmake-div2">
 
 
 		<form action="lessonMakeAction" id="lesmake_form">
 			<div id="lesmake_imgdiv">
-				<div id="lesmake_divimg1">
-					<input type="file" accept=".jpg,.jpeg,.png" name="lesson_img"
-						id="lesmake_img" onchange="previewImage(event)"
-						required="required" style="display: none;">
-				</div>
-				<div id="lesmake_divimg2">
-					<label for="lesmake_img" id="lesmake-label"> <img
-						id="lesmake_preview" src="front/lessonimg.png" alt="강의사진을 올려주세요"
-						onmouseover="changeCursor(this)" title="이미지를 클릭해서 사진을 선택해주세요!"></label>
-				</div>
+				<input type="file" accept=".jpg,.jpeg,.png" name="lesson_img"
+					id="lesmake_img" onchange="previewImage(event)" required="required"
+					style="display: none;"> <label for="lesmake_img"
+					id="lesmake-label"> <img id="lesmake_preview"
+					src="front/lessonimg.png" alt="강의사진을 올려주세요"
+					onmouseover="changeCursor(this)" title="이미지를 클릭해서 사진을 선택해주세요!"></label>
 				<br> <br>
 			</div>
 			<table id="lesmake_tab1">
-				<tr class="lesmake_tr">
+				<tr class="lesmake_tr" id="lesmake-tr1">
 					<td class="lesmake_td1">강의 제목</td>
 					<td class="lesmake_td2"><input type="text" name="lesson_title"
 						placeholder="강의제목을 입력해주세요" id="lesmake_title" required="required"></td>
 				</tr>
 
-				<tr class="lesmake_tr">
+				<tr class="lesmake_tr" id="lesmake-tr2">
 					<td class="lesmake_td1">강의 내용</td>
 					<td class="lesmake_td2"><textarea name="lesson_info"
 							id="lesmake_info" cols="30" rows="10" placeholder="강의내용을 입력해주세요"
 							required="required"></textarea></td>
 				</tr>
-				<tr class="lesmake_tr">
+				<tr class="lesmake_tr" id="lesmake-tr3">
 					<td class="lesmake_td1">카테 고리</td>
-					<td class="lesmake_td2"><select name="lesson_cate"
-						id="lesmake_cate" required="required">
+					<td class="lesmake_td2" id="lesmake-catetd"><select
+						name="lesson_cate" id="lesmake_cate" required="required">
 							<option selected disabled hidden>강의 카테고리 선택</option>
 							<option value="<%=tiperVO.getTiper_cate1()%>"><%=tiperVO.getTiper_cate1()%></option>
 							<option style="<%=style1%>" value="<%=tiperVO.getTiper_cate2()%>"><%=tiperVO.getTiper_cate2()%></option>
@@ -282,7 +298,7 @@ if (cateCheck2 == false) {
 			let formData = new FormData();
 			formData.append('tiper_img', fparam);
 			$.ajax({
-				url : "/upload",
+				url : "/uploadLesson",
 				type : "post",
 				data : formData,
 				contentType : false,

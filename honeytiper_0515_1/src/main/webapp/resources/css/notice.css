@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+
+
+  
+.container{
+        padding: 0;
+    }
+
+    span{
+        text-align: right;
+    }
+
+    #logo{
+        width: 150px;
+        text-align: left;
+        margin-left:10%;
+    }
+
+    
+    #spnNotice{
+        font-size: 17pt;
+        font-weight: bolder;
+        
+    }
+    .hrFirst{
+        border: 0;
+        height: 2px;
+
+    }
+
+    #iptSerch{
+        text-align: right;
+        border-radius: 10px;
+    }
+
+    .divLeft{
+        float: left;
+        vertical-align: middle;
+    }
+
+    .divRight{
+        float: right;
+        vertical-align: middle;
+    }
+
+    #tblMain{
+        width: 100%;
+        border:1px solid #000;
+    }

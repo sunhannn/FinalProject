@@ -19,7 +19,7 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 <style type="text/css">
 @media ( max-width : 768px) {
 	#lesup_sub1 {
-		font-size: 24px;
+		font-size: 22px;
 		font-weight: bold;
 	}
 	#lesup_tab1 {
@@ -27,29 +27,39 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		margin: 0 auto;
 	}
 	#lesup_td1 {
-		width: 200px;
-		font-size: 16px;
+		font-size: 14px;
 		height: 70px;
+		background-color: #efefef;
+		border-bottom: 8px solid white;
+		text-align: center;
+		vertical-align: middle;
+		border-radius: 2px;
+	}
+	#lesup_td2 {
+		text-align: right;
 	}
 	#lesup_td3 {
-		width: 200px;
-		font-size: 16px;
-		vertical-align: top;
+		font-size: 14px;
+		vertical-align: middle;
+		text-align: center;
+		background-color: #efefef;
+		border-radius: 2px;
 	}
 	#lesup_td5 {
-		width: 200px;
-		font-size: 16px;
+		text-align: center;
+		vertical-align: top;
 	}
 	#lesup_input1 {
 		width: 200px;
 		height: 40px;
 		margin-left: 2px;
-		border: 0;
+		border: 2px solid #efefef;
+		border-radius: 2px;
 	}
 	#lesup_input1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 10px;
+		border-radius: 2px;
 	}
 	#lesup_tr2 {
 		height: 70px;
@@ -60,17 +70,14 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 	#lesup_info1 {
 		margin-left: 2px;
 		width: 200px;
-		border: 0;
+		border: 2px solid #efefef;
 		resize: none;
+		border-radius: 2px;
 	}
 	#lesup_info1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 10px;
-	}
-	#lesup_img {
-		width: 150px;
-		margin-left: 25px;
+		border-radius: 2px;
 	}
 	#lesup_preview {
 		width: 100px;
@@ -78,9 +85,10 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 	}
 	#lesup_td5 {
 		vertical-align: top;
+		height: 150px;
 	}
-	#lesup_td6 {
-		text-align: center;
+	#lesup_td4 {
+		text-align: right;
 	}
 	#lesup_div3 {
 		text-align: center;
@@ -88,18 +96,9 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 	#lesup_btn1 {
 		background-color: #FFD400;
 		border: 0;
-		border-radius: 10px;
+		border-radius: 2px;
 		width: 200px;
 		height: 40px;
-		font-weight: bold;
-	}
-	input[type=file]::file-selector-button {
-		width: 150px;
-		height: 30px;
-		background: #FFD400;
-		border: 0;
-		border-radius: 10px;
-		cursor: pointer;
 		font-weight: bold;
 	}
 	.lesup_span {
@@ -118,26 +117,30 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		margin: 0 auto;
 	}
 	#lesup_td1 {
-		font-size: 20px;
-		height: 80px;
-		vertical-align: top;
-		width: 300px;
+		font-size: 18px;
+		height: 70px;
+		vertical-align: middle;
+		width: 200px;
 		background-color: #efefef;
-		font-weight: bold;
+		border-bottom: 10px solid white;
+		text-align: center;
 	}
 	#lesup_td2 {
-		vertical-align: top;
+		vertical-align: center;
+		text-align: center;
 	}
 	#lesup_input1 {
 		width: 450px;
-		height: 50px;
+		height: 45px;
 		margin-left: 2px;
 		border: 0;
+		border: 2px solid #efefef;
+		border-radius: 2px;
 	}
 	#lesup_input1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 10px;
+		border-radius: 2px;
 	}
 	#lesup_tr2 {
 		height: 70px;
@@ -150,33 +153,41 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		margin-left: 2px;
 		width: 450px;
 		resize: none;
-		border: 0;
+		border: 2px solid #efefef;
+		border-radius: 2px;
+		height: 250px;
 	}
 	#lesup_info1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 10px;
+		border-radius: 2px;
 	}
 	#lesup_preview {
 		width: 200px;
 		height: 200px;
-		border-radius: 10px;
+		border-radius: 2px;
 	}
 	#lesup_td3 {
-		font-size: 20px;
-		vertical-align: top;
+		font-size: 18px;
+		vertical-align: middle;
 		background-color: #efefef;
-		font-weight: bold;
+		border-bottom: 10px solid white;
+		height: 300px;
+		width: 200px;
+		text-align: center;
+	}
+	#lesup_td4 {
+		text-align: center;
 	}
 	#lesup_td5 {
-		font-size: 20px;
-		height: 300px;
-		vertical-align: top;
-		background-color: #efefef;
-		font-weight: bold;
+		font-size: 18px;
+		height: 250px;
+		vertical-align: middle;
+		text-align: center;
 	}
 	#lesup_td6 {
-		vertical-align: top;
+		vertical-align: center;
+		text-align: center;
 	}
 	#lesup_div3 {
 		text-align: center;
@@ -189,27 +200,18 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		height: 40px;
 		font-weight: bold;
 	}
-	input[type=file]::file-selector-button {
-		width: 200px;
-		height: 30px;
-		background: #FFD400;
-		border: 0;
-		border-radius: 10px;
-		cursor: pointer;
-		font-weight: bold;
-	}
 	#lesup_img {
 		width: 200px;
 	}
-	#lesmake_imgdiv{
-	margin: 0 auto;
-	
+	#lesmake_imgdiv {
+		margin: 0 auto;
 	}
-	.lesup_span{
-	display: block;
-	
-	
-	
+	#lesup-sub-div {
+		margin: 0 auto;
+		width: 768px;
+	}
+	#lesup-tab-div {
+		width: 768px;
 	}
 }
 </style>
@@ -218,17 +220,25 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 </head>
 <body>
 	<%@include file="../main/header.jsp"%>
-	<div class="container">
-		<p id="lesup_sub1">TIPer 강의 수정하기</p> <br>
+	<div class="container" id="lesup-sub-div">
+		<p id="lesup_sub1">TIPer 강의 수정하기</p>
 		<hr>
 	</div>
-	<div class="container">
+	<div class="container" id="lesup-tab-div">
 		<form action="lessonUpdateAction?lessonNum=<%=vo.getLesson_num()%>"
 			method="post" id="lesup_form">
 			<table id="lesup_tab1">
-
+				<tr id="lesup_tr3">
+					<td id="lesup_td5" colspan="2"><input type="file"
+						placeholder="수정할 사진" name="lesson_img" accept=".jpg,.jpeg,.png"
+						id="lesup_img" onchange="previewImage(event);" required="required"
+						style="display: none;"> <br> <label for="lesup_img"
+						id="lesup_preview_label"> <img src="front/lessonimg.png"
+							alt="강의 사진" id="lesup_preview" onmouseover="changeCursor(this)"
+							title="이미지를 클릭해서 사진을 선택해주세요!"></label></td>
+				</tr>
 				<tr id="lesup_tr1">
-					<td id="lesup_td1"><span class="lesup_span">수정할 강의 제목</span> :<br></td>
+					<td id="lesup_td1"><span class="lesup_span">수정할 강의 제목</span><br></td>
 					<td id="lesup_td2"><input type="text"
 						placeholder="<%=vo.getLesson_title()%>" name="lesson_title"
 						id="lesup_input1" required="required"></td>
@@ -236,26 +246,13 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 
 				<tr id="lesup_tr2">
 
-					<td id="lesup_td3"><span class="lesup_span">수정할 강의 내용</span> :
-
-
-					
+					<td id="lesup_td3"><span class="lesup_span">수정할 강의 내용</span>
 					<td id="lesup_td4"><textarea name="lesson_info"
 							id="lesup_info1" cols="30" rows="10"
 							placeholder="<%=vo.getLesson_info()%>" required="required"></textarea></td>
 
 				</tr>
-				<tr id="lesup_tr3">
-					<td id="lesup_td5"><span class="lesup_span">수정할 이미지 :</span></td>
 
-					<td id="lesup_td6"><input type="file" placeholder="수정할 사진"
-						name="lesson_img" accept=".jpg,.jpeg,.png" id="lesup_img"
-						onchange="previewImage(event);" required="required"
-						style="display: none;"> <br> <label for="lesup_img"
-						id="lesup_preview_label"> <img src="front/lessonimg.png"
-							alt="강의 사진" id="lesup_preview" onmouseover="changeCursor(this)"
-							title="이미지를 클릭해서 사진을 선택해주세요!"></label></td>
-				</tr>
 
 			</table>
 			<br> <br>
@@ -278,7 +275,7 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 			let formData = new FormData();
 			formData.append('tiper_img', fparam);
 			$.ajax({
-				url : "/upload",
+				url : "/uploadLesson",
 				type : "post",
 				data : formData,
 				contentType : false,
@@ -339,12 +336,8 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		document.getElementById('tiperpreview-label').addEventListener('click',
 				selectProfileImage);
 	</script>
-
-
-
-
-
 	<%@include file="../main/footer.jsp"%>
+
 
 </body>
 </html>

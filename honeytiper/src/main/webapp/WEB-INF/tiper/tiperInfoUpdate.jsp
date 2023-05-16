@@ -49,6 +49,8 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		border: 0;
 		width: 95%;
 		resize: none;
+		border: 1px solid #efefef;
+		border-radius: 10px;
 	}
 	#tipup_info1:focus {
 		border: 3px solid #FFD400;
@@ -93,18 +95,9 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		font-weight: bold;
 	}
 	#tiperpreview {
-		width: 100px;
-		height: 100px;
+		width: 140px;
+		height: 140px;
 		border-radius: 10%;
-	}
-	input[type=file]::file-selector-button {
-		width: 120px;
-		height: 30px;
-		background: #FFD400;
-		border: 0;
-		border-radius: 10px;
-		cursor: pointer;
-		font-weight: bold;
 	}
 }
 
@@ -143,6 +136,8 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		width: 90%;
 		border: 0;
 		resize: none;
+		border: 1px solid #efefef;
+		border-radius: 10px;
 	}
 	#tipup_sub3 {
 		font-size: 22px;
@@ -186,15 +181,6 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		height: 200px;
 		border-radius: 10%;
 	}
-	input[type=file]::file-selector-button {
-		width: 150px;
-		height: 30px;
-		background: #FFD400;
-		border: 0;
-		border-radius: 10px;
-		cursor: pointer;
-		font-weight: bold;
-	}
 }
 </style>
 </head>
@@ -223,8 +209,7 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 					</label></td>
 
 					<td id="tipup_td2"><textarea name="tiper_info"
-							placeholder="<%=tiperVO.getTiper_info()%>" id="tipup_info1"
-							cols="30" rows="10" required="required"></textarea></td>
+							id="tipup_info1" cols="30" rows="10"><%=tiperVO.getTiper_info()%></textarea></td>
 				</tr>
 
 
@@ -263,7 +248,7 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 			let formData = new FormData();
 			formData.append('tiper_img', fparam);
 			$.ajax({
-				url : "/upload",
+				url : "/uploadProfile",
 				type : "post",
 				data : formData,
 				contentType : false,
@@ -306,6 +291,13 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 			} else {
 				// 취소 버튼을 클릭한 경우 아무런 작업을 하지 않습니다.
 				return false;
+			}
+		}
+
+		function showDefault() {
+			var textarea = document.getElementById("tipup_info1");
+			if (!textarea.value) {
+				textarea.value = textarea.getAttribute("placeholder");
 			}
 		}
 

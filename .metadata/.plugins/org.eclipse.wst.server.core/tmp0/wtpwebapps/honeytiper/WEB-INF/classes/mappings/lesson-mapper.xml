@@ -28,32 +28,33 @@
 	</select>
 
 
-<select id="getLessonList" resultType="lesson">
-      SELECT l.lesson_title,
-      l.lesson_date, l.lesson_info, t.tiper_user_id, t.tiper_info
-      FROM lesson l inner join tiper t on l.lesson_tiper_code = t.tiper_code
-      ORDER BY
-      l.lesson_date DESC
-   </select>
+	<select id="getLessonList" resultType="lesson">
+		SELECT l.lesson_title,
+		l.lesson_date, l.lesson_info, t.tiper_user_id, t.tiper_info
+		FROM lesson l inner join tiper t on l.lesson_tiper_code = t.tiper_code
+		ORDER BY
+		l.lesson_date DESC
+	</select>
 
 
-   <select id="getLessonListPostSearch" resultType="lesson">
-      <!-- 동적 쿼리문 -->
-      SELECT l.lesson_title,
-      l.lesson_date, l.lesson_info, t.tiper_user_id, t.tiper_info
-      FROM lesson l inner join tiper t on l.lesson_tiper_code = t.tiper_code
-      <if test="lesson_condition == 'lesson_title' ">AND LESSON_TITLE LIKE CONCAT('%', #{lesson_search}, '%')
-      </if>
-      <if test="lesson_condition == 'tiper_user_id' ">AND TIPER_USER_ID LIKE CONCAT('%', #{lesson_search}, '%')
-      </if>
-   </select>
+	<select id="getLessonListPostSearch" resultType="lesson">
+		<!-- 동적 쿼리문 -->
+		SELECT l.lesson_title,
+		l.lesson_date, l.lesson_info, t.tiper_user_id, t.tiper_info
+		FROM lesson l inner join tiper t on l.lesson_tiper_code = t.tiper_code
+		<if test="lesson_condition == 'lesson_title' ">AND LESSON_TITLE LIKE CONCAT('%', #{lesson_search}, '%')
+		</if>
+		<if test="lesson_condition == 'tiper_user_id' ">AND TIPER_USER_ID LIKE CONCAT('%', #{lesson_search}, '%')
+		</if>
+	</select>
 
 
 	<!-- 상현이부분 -->
 	<select id="selectLessonTiper" resultType="lesson">
 		select
 		lesson.LESSON_DATE, lesson.LESSON_TITLE, escrow.ESCROW_USER_ID as
-		lesson_info, escrow.ESCROW_PRICE AS lesson_onoff, lesson.lesson_num
+		lesson_info, FORMAT(escrow.ESCROW_PRICE, 0) AS lesson_cate,
+		lesson.lesson_num
 		FROM escrow, lesson
 		WHERE #{lesson_tiper_code} =
 		escrow.ESCROW_tiper_code AND
@@ -81,35 +82,45 @@
 	<insert id="makeLesson">
 		insert into lesson(lesson_tiper_code, lesson_title,
 		lesson_info,
-		lesson_cate, lesson_img, lesson_user_name) values(#{lesson_tiper_code},
-		#{lesson_title}, #{lesson_info}, #{lesson_cate}, #{lesson_img}, #{lesson_user_name})
+		lesson_cate, lesson_img, lesson_user_name)
+		values(#{lesson_tiper_code},
+		#{lesson_title}, #{lesson_info},
+		#{lesson_cate}, #{lesson_img}, #{lesson_user_name})
 	</insert>
-	
-	
-	<!-- 	정성현 : 마이페이지======================================== -->
-		<select id="getUserLessonList" resultType="lesson">
+
+
+	<!-- 정성현 : 마이페이지======================================== -->
+	<select id="getUserLessonList" resultType="lesson">
 		select
 		lesson.LESSON_TITLE, lesson.LESSON_USER_NAME, lesson.LESSON_CATE,
-		escrow.ESCROW_LESSON_NUM, escrow.ESCROW_START,lesson.LESSON_IMG, lesson.LESSON_NUM, lesson.LESSON_USER_NAME
+		escrow.ESCROW_LESSON_NUM, escrow.ESCROW_START,lesson.LESSON_IMG,
+		lesson.LESSON_NUM, lesson.LESSON_USER_NAME
 		from lesson, escrow
-		where (select
+		where
+		(select
 		user_id from users WHERE user_id =#{lesson_info}) =
 		escrow.ESCROW_USER_ID
 		AND (SELECT escrow_lesson_num WHERE
 		escrow_user_id = #{lesson_info}) =
-		lesson.LESSON_NUM AND escrow.ESCROW_STATUS = 1
+		lesson.LESSON_NUM AND
+		escrow.ESCROW_STATUS = 1
 	</select>
-	
-		<select id="getCompletedLessonList" resultType="lesson">
+
+	<select id="getCompletedLessonList" resultType="lesson">
 		select
 		lesson.LESSON_TITLE, lesson.LESSON_USER_NAME, lesson.LESSON_CATE,
-		escrow.ESCROW_LESSON_NUM, escrow.ESCROW_START, escrow.ESCROW_USER_ID, lesson.LESSON_IMG, lesson.LESSON_NUM, lesson.LESSON_USER_NAME
-		from lesson, escrow
+		escrow.ESCROW_LESSON_NUM, escrow.ESCROW_START, escrow.ESCROW_USER_ID,
+		lesson.LESSON_IMG, lesson.LESSON_NUM, lesson.LESSON_USER_NAME
+		from
+		lesson, escrow
 		where (select
-		user_id from users WHERE user_id =#{lesson_info}) =
+		user_id from users WHERE user_id
+		=#{lesson_info}) =
 		escrow.ESCROW_USER_ID
-		AND (SELECT escrow_lesson_num WHERE
+		AND (SELECT escrow_lesson_num
+		WHERE
 		escrow_user_id = #{lesson_info}) =
-		lesson.LESSON_NUM AND escrow.ESCROW_STATUS = 2
+		lesson.LESSON_NUM AND
+		escrow.ESCROW_STATUS = 2
 	</select>
 </mapper>

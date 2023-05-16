@@ -67,7 +67,6 @@ public class TiperController {
 	// 상현이부분
 
 	// 강사 마이페이지 이동
-	// 강사 마이페이지 이동
 	@RequestMapping(value = "/tiperMypage")
 	public String tiperMypage(Model model, HttpSession session, UserVO vo, TiperVO tiperVO, LessonVO lessonVO) {
 		tiperVO.setTiper_user_id((String) session.getAttribute("user_id"));
@@ -339,23 +338,29 @@ public class TiperController {
 		}
 	}
 
-	// 파일 업로드 (수정함~~~~~~~~~~~~~~~~~~~~~~~~~)
-	@PostMapping("/upload")
-	public ResponseEntity<String> uploadFile(@RequestParam("tiper_img") MultipartFile file, Model model) {
-		// 파일 저장
+	// 프로필 사진 업로드
+	@PostMapping("/uploadProfile")
+	public ResponseEntity<String> uploadProfile(@RequestParam("tiper_img") MultipartFile file, Model model,
+			HttpServletRequest request) {
 		try {
 			String fileName = file.getOriginalFilename();
 			model.addAttribute("filename", fileName);
-			String savePath = "C:/Springwork/honeytiper/src/main/webapp/resources/img/";
+
+			String rootPath = request.getSession().getServletContext().getRealPath("/");
+			String savePath = rootPath + "resources/img/profile/";
+			System.out.println(savePath);
 			String filePath = savePath + fileName;
 			model.addAttribute("filename", fileName);
+
 			File saveDir = new File(savePath);
 			if (!saveDir.exists()) {
 				saveDir.mkdirs();
 			}
+
 			File saveFile = new File(filePath);
 			file.transferTo(saveFile);
 			System.out.println(fileName);
+
 			return ResponseEntity.ok().body("File uploaded successfully");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -363,19 +368,32 @@ public class TiperController {
 		}
 	}
 
-	// 마이페이지 : 강의신고 - 같은 학생-강의 간 중복된 신고 있는지 확인 후 신고.
-	@RequestMapping(value = "/reportLessonNum", method = RequestMethod.POST)
-	public void reportLessonNum(ReportVO vo, HttpServletResponse response) throws Exception {
+	// 강의 사진 업로드
+	@PostMapping("/uploadLesson")
+	public ResponseEntity<String> uploadLesson(@RequestParam("tiper_img") MultipartFile file, Model model,
+			HttpServletRequest request) {
+		try {
+			String fileName = file.getOriginalFilename();
+			model.addAttribute("filename", fileName);
 
-		int result = userService.isDupReport(vo); // 0 일 때 : 중복신고 없음, 1 일 때 이미 신고된 내용 있음.
-		if (result == 0) {
-			userService.reportLessonNum(vo);
-		} else if (result == 1) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter writer = response.getWriter();
-			writer.println(
-					"<script type='text/javascript'>alert('이미 신고한 강의입니다.');location.href='/userMyPageGo';</script>");
-			writer.flush();
+			String rootPath = request.getSession().getServletContext().getRealPath("/");
+			String savePath = rootPath + "resources/img/lesson/";
+			String filePath = savePath + fileName;
+			model.addAttribute("filename", fileName);
+
+			File saveDir = new File(savePath);
+			if (!saveDir.exists()) {
+				saveDir.mkdirs();
+			}
+
+			File saveFile = new File(filePath);
+			file.transferTo(saveFile);
+			System.out.println(fileName);
+
+			return ResponseEntity.ok().body("File uploaded successfully");
+		} catch (IOException e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file");
 		}
 	}
 

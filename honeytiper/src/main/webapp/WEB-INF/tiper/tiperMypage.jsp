@@ -329,7 +329,7 @@ if (tiperVO.getTiper_cate3() == null) {
 		border-bottom: 2px solid #d8dee5;
 		height: 70px;
 	}
-	.my_singo2 {
+	.filemodal1_singo {
 		width: 20px;
 		height: 20px;
 	}
@@ -368,8 +368,8 @@ if (tiperVO.getTiper_cate3() == null) {
 	.modal1 .modal1-window {
 		background-color: white;
 		position: relative;
-		width: 600px;
-		height: 450px;
+		width: 300px;
+		height: 500px;
 		padding: 30px;
 		margin: auto;
 		margin-top: 20vh;
@@ -494,7 +494,6 @@ if (tiperVO.getTiper_cate3() == null) {
 	}
 	#singo_span_ps {
 		color: gray;
-		padding-left: 80px;
 		margin-top: 20px;
 		font-size: 12px;
 	}
@@ -714,9 +713,9 @@ if (tiperVO.getTiper_cate3() == null) {
 						<div>회원ID: ${lesson.lesson_info}</div>
 					</td>
 					<td class="mytip_td3"><span>${lesson.lesson_title}</span></td>
-					<td class="mytip_td4"><span>가격 : ${lesson.lesson_onoff}</span></td>
+					<td class="mytip_td4"><span>가격 : ${lesson.lesson_cate}</span></td>
 					<td class="mytip_td5"><img src="front/siren.png" alt="신고"
-						class="filemodal1_singo"
+						class="filemodal1_singo ${lesson.lesson_num}"
 						onclick="hsh2(${lesson.lesson_num}, '${lesson.lesson_info}')"
 						id="mytip_singo"></td>
 				</tr>
@@ -792,18 +791,18 @@ if (tiperVO.getTiper_cate3() == null) {
        
        
        // 신고버튼 누르면 색깔 변경
-      const myImage = document.querySelector(".filemodal1_singo");
-const originalSrc = myImage.src; // 원래 이미지의 src 저장
+     const $myImage = $(".filemodal1_singo");
+const originalSrc = $myImage.attr("src"); // 원래 이미지의 src 저장
 
-myImage.addEventListener("mouseover", function() {
-	  this.src = "front/siren_click.png"; // 이미지 위에 마우스를 올리면 이미지 변경
-	  this.style.width = "30px"; // 이미지 크기를 20x20으로 변경
-	  this.style.height = "30px";
-	});
+$myImage.on("mouseover", function() {
+  $(this).attr("src", "front/siren_click.png"); // 이미지 위에 마우스를 올리면 이미지 변경
+  $(this).css("width", "30px"); // 이미지 크기를 20x20으로 변경
+  $(this).css("height", "30px");
+});
 
-	myImage.addEventListener("mouseout", function() {
-	  this.src = originalSrc; // 마우스를 이미지 밖으로 빼면 원래 이미지로 돌아감
-	});
+$myImage.on("mouseout", function() {
+  $(this).attr("src", originalSrc); // 마우스를 이미지 밖으로 빼면 원래 이미지로 돌아감
+});
     </script>
 	<%@include file="../main/footer.jsp"%>
 </body>
