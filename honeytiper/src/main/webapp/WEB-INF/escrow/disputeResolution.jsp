@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.ggul.zip.escrow.EscrowVO, java.util.*" %>
+
+<%@ page import="com.ggul.zip.escrow.EscrowVO, java.util.*" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.Date" %>
 <%@include file="../queen/adminNavbar.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>Insert title here</title>
 <!-- 퀸컨트롤러에있음 -->
 
@@ -65,17 +67,27 @@ tr {
 	cursor: pointer;
 }
 
-#view-all-button, .btn-success {
-  border: 0;
-  border-radius: 4px;
-  background-color: #FFD400;
-  font-size: 12pt;
-  padding: 5px;
-  cursor: pointer;
-  color: #5c3b0c;
-  font-weight: bold;
+#view-all-button {
+  border-style: none;
+    background: #FFD400;
+    color: #5c3b0c;
+    margin-bottom: 10px;
+    padding: 5px 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 12pt;
+    font-weight: bolder;
 }
+.btn-success {
+	border-style: none;
+    background: #FFD400;
+    color: #5c3b0c;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 12pt;
+    font-weight: bolder;
 
+}
 #view-all-button:hover, .btn-success:hover {
   background-color: #E6B800;
 
@@ -130,11 +142,10 @@ tr {
 </c:if>
 <div class="container">
 <h2 style="margin:40px 0px;">티퍼-회원 분쟁조정</h2>
-<button id="view-all-button" >전체목록보기</button>
-<br><br>
- 
+
   <div id="top_bar">
 				<div id="search_wrapper">
+				<button id="view-all-button" onclick="viewAll()">전체목록보기</button><br>
 					<select class="search" id="sel1" name="search_condition"
 						style="display: inline-block !important;">
 						<option value="escrow_user_id">회원아이디</option>
@@ -142,13 +153,14 @@ tr {
 					</select> <input class="search" type="text" name="search_keyword" id="sel2"
 						placeholder="검색어를 입력하세요.">
 					<button class="btn btn-success" type="submit" class="search" id="sel3"style="outline:none; border:none; background:transparent;">
-					<i class="fa fa-search" style="font-size:24px; color:#FFD400;"></i></button>
+					<i class="fa fa-search" style="font-size:24px; color:#FFD400; pading:0px"></i></button>
 						<br><br>
 						 <label for="status-0">신청중</label>
 						<input type="radio" id="status-0" name="escrow_status" value="0">
 						<label for="status-1">진행중</label>
 						<input type="radio" id="status-1" name="escrow_status" value="1">
-						
+<!-- 						<label for="status-12">전체</label> -->
+<!-- 						<input type="radio" id="status-12" name="escrow_status" value="12"> -->
 						 <hr class="hrFirst">
 						 <br>
 				</div>
@@ -157,7 +169,7 @@ tr {
             <table class="cont1_table">
 	            <thead>
 	                <tr class="cont1_th" >
-	                    <th class="thCenter1" style="width:10%;">강의수락날짜</th> 
+	                    <th class="thCenter1" style="width:10%;">강의시작날짜</th> 
 	                    <th class="thCenter1" style="width:10%;">수강자</th> 
 	                    <th class="thCenter1" style="width:20%;">강의이름</th>
 	                     <th class="thCenter1" style="width:10%;">강사</th>
@@ -169,12 +181,12 @@ tr {
 	            <tbody id="data_table_body"></tbody>
             </table>
 	<ul id="pagingul"></ul>
-	<div style="padding:100px 0px"></div>
+	
 	</div>
 </body>
 <script>
 var totalData; //총 데이터 수
-var dataPerPage=8; //한 페이지에 나타낼 글 수
+var dataPerPage=10; //한 페이지에 나타낼 글 수
 var pageCount = 5; //한 번에 나타낼 페이지 수 ([이전] 1 2 3 4 5 [다음])
 var globalCurrentPage= 1; //현재 페이지
 var dataList; //데이터 리스트
@@ -202,7 +214,9 @@ $(document).ready(function () {
 	 
    //페이징 표시 호출
      paging(totalData, dataPerPage, pageCount, 1);
-});
+   
+
+		});
 
 //현재 페이지(currentPage)와 페이지당 글 개수(dataPerPage) 반영
 function displayData(currentPage, dataPerPage) {
@@ -328,56 +342,67 @@ function paging(totalData, dataPerPage, pageCount, currentPage) {
 
 $('input[name="escrow_status"]').on('click', function () {
     var escrow_status = $('input[name="escrow_status"]:checked').val();
-    filterDataByStatus(escrow_status);
+    var search_condition=$('#sel1').val() || null;
+	var search_keyword=$('#sel2').val() || null;
+    searchAndStatus(escrow_status, search_condition, search_keyword);
   });
-function filterDataByStatus(escrow_status) {
-	console.log(escrow_status);
-  $.ajax({
-    method: "POST",
-    url: 'callEscrowListByStatus',
-    data: {
-     escrow_status: escrow_status
-    },
-    success: function (data) {
-      totalData = data.length;
-      
-      dataList=data;
-      //글 목록 표시 재호출
-      displayData(1, 5);
-      //페이징 표시 재호출
-      paging(totalData, 5, pageCount, 1);
-    }
-  });
+  
+function searchAndStatus(escrow_status, search_condition, search_keyword) {
+	globalCurrentPage = 1;
+	$.ajax({
+		method: "POST",
+		url: 'searchAndStatus',
+		data: {
+			escrow_status: escrow_status,
+			search_condition: search_condition,
+			search_keyword: search_keyword
+		},
+		success: function (data) {
+			console.log("Selected Data:", {
+				escrow_status: escrow_status,
+				search_condition: search_condition,
+				search_keyword: search_keyword
+			});
+			totalData = data.length;
+			dataList = data;
+
+			//글 목록 표시 재호출
+			displayData(globalCurrentPage, dataPerPage);
+			//페이징 표시 재호출
+			paging(totalData, dataPerPage, pageCount, globalCurrentPage);
+		}
+	}); // success 함수의 닫는 괄호 이동
 }
+function viewAll() {
+	 location.reload();
+}
+
 $("#sel3").click(function(){
 	console.log("여기오니");
 	var search_condition=$('#sel1').val();
 	var search_keyword=$('#sel2').val();
-	
+    fetchData(search_condition, search_keyword);
+});
+
+function fetchData(search_condition, search_keyword) {
 	$.ajax({ // ajax로 데이터 가져오기
 		method: "POST",
-		url: "/searchDispute",
+		url: "searchDispute",
 	 	data: {search_condition:search_condition, search_keyword:search_keyword},
 		dataType: "json",
 		async:false,
 		success: function (data) {
-// 			alert("data: " + JSON.stringify(data));
 		   //totalData(총 데이터 수) 구하기
 		   totalData = data.length;
 	       //데이터 대입
 	       dataList=data;
-	
-	       if(typeof totalData == "undefined" || totalData == null || totalData == ""){ alert("검색결과가 없습니다.");}	
-			 }
-	 });		
-	
+		
 	 //글 목록 표시 재호출
-    displayData(1, 5);
-    //페이징 표시 재호출
-    paging(totalData, 5, pageCount, 1);
-    
-});
-
-
+	 displayData(globalCurrentPage, dataPerPage);
+	 //페이징 표시 재호출
+	 paging(totalData, dataPerPage, pageCount, globalCurrentPage);
+		}
+	 });
+}
 </script>
 </html>

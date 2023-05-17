@@ -72,11 +72,26 @@
 		button[type="submit"]:hover, #adminListBack:hover, #userListBack:hover, #listUpdate:hover {
 			background-color: #DBB600;
 		}
+		
+		.noticeNameClass{
+				width: 70%;
+    			margin: 15px auto;
+			}
+		
+		@media ( max-width : 768px) {
+			.noticeNameClass{
+				width: 100%;
+    			margin: 15px 0 15px 0;
+			}
+			.getNotice{
+				height: 45px;
+			}
+		}
 	</style>
 </head>
 <body id="bdyMain">
-	<div class="container">
-		<div style="width: 85%; margin:50px auto;">
+	<div class="container getNotice">
+		<div class="noticeNameClass">
 			<span id="noticeName" style="font-size: 27px; font-weight: border;">공지사항</span>
 			<button type="button" onclick="location.href='listnotice'" id="userListBack">목록</button>
 		</div>

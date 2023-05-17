@@ -10,98 +10,45 @@
         <link rel="shortcut icon" href="data:image/x-icon" type="image/x-icon">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/front/notice.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
+<style>
+.theadColor{
+	background-color: #efefef;	
+}
 
+.noticeCont{
+	padding: 0;
+	width:65%;
+}
+
+.noticeTr:hover{
+	text-decoration: underline;
+	text-underline-offset: 5px;
+}
+
+@media ( max-width : 768px) {
+	.noticeCont{
+		padding: 7px;
+	}
+	
+	.noticeTitle{
+		padding: 8px;
+	}
+	
+	#iptSearch{
+		width: 160px;
+	}
+}
+</style>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.2/jquery.min.js"></script> -->
 <script src="${pageContext.request.contextPath}/front/jquery.js"></script>
 <%-- <jsp:include page="../main/header.jsp" /> --%>
-<style>
-
-.hrFirst{
-        background:#efefef;
-}
-#btnSearch{
-	border:0;
-	border-radius: 10px;
-	background-color: #FFD400;
-	font-size: 14px; 
-}
-
-ul {
-    text-align: center;
-    display: inline-block;
-    border: none;
-    border-right: 0;
-	padding-left :0;
-}
-ul li {
-    text-align: center;
-    float: left;
-	list-style:none;
-
-}
-
-ul li a {
-    display: block;
-    font-size: 14px;
-	color: black;
-    padding: 9px 12px;
-    border-right: none;
-    box-sizing: border-box;
-	text-decoration-line:none;
-}
-
-ul li.on {
-    background: #FFD400;
-}
-
-ul li.on a {
-    color: #fff;
-}
-
-th, td{
-	padding: 10px 0px;
-	text-align: center;
-	border-bottom: 3px solid white;
-}
-
-#iptSearch{
-	padding: 5px;
-	font-size: 14px;
-}
-
-#selCondition{
-	height: 34px;
-	padding: 5px;
-	font-size: 14px;
-}
-#tlqkffha{
-	border-style: none;
-    background: #FFD400;
-    color: #5c3b0c;
-    margin: 5px;
-    padding: 5px 18px;
-    cursor: pointer;
-    font-size: 12pt;
-    font-weight: bolder;
-    border-radius: 5px;
-}
-.noticeTitle{
-	text-align: left;
-}
-</style>
-
 <%--         <link rel="stylesheet" href="${pageContext.request.contextPath}/front/bootstrap.css"> --%>
-
-
-
-
 <script>
-
 function selTr(val){
 	location.href="getnotice?notice_num="+val;
 }
-
 
 function btnSFnc(){
 		ajaxFnc(); 
@@ -133,13 +80,28 @@ function ajaxFnc(){
 	
 }
 
+var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
+
 $(document).ready(function () {
 	ajaxFnc();
-	
 	
 	frm.addEventListener('submit', e =>{
 	 e.preventDefault();
 	});
+	
+	
+	if(isMobile) {
+	console.log("이거타면 모바일");
+		$("#allSearch").text("전체");
+		$("#iptSearch").attr("placeholder", "검색어 입력");
+		$("#noticeTitleHead").css("width","65%");
+	}else{
+	console.log("이거타면 모바일아님");
+		$("#allSearch").text("전체보기");
+		$("#iptSearch").attr("placeholder", "검색할 제목을 입력해주세요.");
+		$("#noticeTitleHead").css("width","75%");
+	}
+	
 });
     
 //현재 페이지(currentPage)와 페이지당 글 개수(dataPerPage) 반영
@@ -154,7 +116,7 @@ function displayData(currentPage, dataPerPage, dataList) {
 	if(endPage > (dataList.length)) endPage = dataList.length;
 	
 	 for (var i = startPage ;i < endPage; i++){
-		 chartHtml += "<tr onclick='selTr("+dataList[i].notice_num +")' style='";
+		 chartHtml += "<tr class='noticeTr' onclick='selTr("+dataList[i].notice_num +")' style='";
 			 if(dataList[i].notice_pin > 0){
 				 chartHtml += "background-color:#fff8e3; ";
 			 }
@@ -227,26 +189,26 @@ function paging(totalData, dataPerPage, pageCount, currentPage) {
 	});
 	  
 }
- 
+
 
 </script>
 <body>
 
-        <div class="container">
+        <div class="container noticeCont">
         <br>
             <div class="divLeft" style="width:150px; text-align: left;">
                 <span id="spnNotice" style="text-align: left;">공지사항</span>
             </div>
             
-            <div style="float:right;">
+            <div style="float:right; margin-top: 20px;">
 	            <form name="frm">
+	                <button type="button" onclick="location.href='listnotice'" id='allSearch'>전체보기</button>
 		            <select name="notice_condition" id="selCondition">
 						<option value="title">제목</option>
 						<option value="content">내용</option>
 	    			</select>
 	                <input type="text" name="notice_search" id="iptSearch" placeholder="검색할 제목을 입력해주세요.">
 	                <button id="btnSearch" type="button" onclick="btnSFnc()" style="background:white;"><i class="fa fa-search" style="font-size:24px; color:#FFD400;"></i></button>
-	                <button type="button" onclick="location.href='listnotice'" id='tlqkffha'>전체보기</button>
 	             </form>
             </div>
 				<br><br>
@@ -255,9 +217,9 @@ function paging(totalData, dataPerPage, pageCount, currentPage) {
             <table style="width:100%; font-size:14px;">
 	            <thead>
 	                <tr>
-	                    <th style="width:10% ">글번호</th>
-	                    <th style="width:75%">제목</th>
-						<th style="width:15%">등록일</th>
+	                    <th style="width:10%" class="theadColor">글번호</th>
+	                    <th style="width:75%" id="noticeTitleHead" class="theadColor">제목</th>
+						<th style="width:15%" class="theadColor">등록일</th>
 	                </tr>
 	            </thead>
 	            <tbody id="dataTableBody"></tbody>

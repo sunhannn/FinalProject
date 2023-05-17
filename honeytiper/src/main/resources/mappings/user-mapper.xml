@@ -20,7 +20,7 @@
 	<select id="kakaoUser" resultType="users">
 		SELECT * FROM users
 		WHERE
-		user_email = #{user_email} user_id = #{user_id}
+		user_email = #{user_email} and user_id = #{user_id}
 	</select>
 	<select id="viewUser" resultType="users">
 		SELECT * FROM users WHERE user_id = #{user_id}
@@ -43,6 +43,11 @@
 		INSERT INTO users (user_id, user_name, user_pw, user_email, user_date, user_role, user_point) 
 		values(#{user_id},#{user_name},#{user_pw},#{user_email}, default, default, default)
 	</insert>
+	
+	<update id="updateUserInfo">
+		UPDATE users set user_pw =#{user_pw}, user_addr1=#{user_addr1}, user_addr2=#{user_addr2}, user_addr3=#{user_addr3}, user_addr4=#{user_addr4},
+		user_tel=#{user_tel}, user_email=#{user_email}, user_cate=#{user_cate}
+	</update>
 	
 	
 	
@@ -239,6 +244,37 @@
 		#{user_id};
 	</update>
 	
+		<select id="getEscrowPrice" resultType="_int">
+		SELECT ESCROW_PRICE FROM
+		ESCROW WHERE ESCROW_USER_ID = #{escrow_user_id} and ESCROW_LESSON_NUM=#{escrow_lesson_num}
+	</select>
+	
+	<select id="getLessonTitle" resultType="String">
+		SELECT LESSON_TITLE FROM LESSON WHERE LESSON_NUM = (SELECT ESCROW_LESSON_NUM FROM ESCROW WHERE ESCROW_LESSON_NUM = #{escrow_lesson_num} AND ESCROW_USER_ID = #{escrow_user_id}); 
+	</select>
+	
+	<select id="getTiperUserId" resultType="String">
+		SELECT TIPER_USER_ID FROM TIPER WHERE TIPER_CODE = (SELECT ESCROW_TIPER_CODE FROM ESCROW WHERE ESCROW_LESSON_NUM = #{escrow_lesson_num} AND ESCROW_USER_ID = #{escrow_user_id}); 
+	</select>
+	
+	
+	<update id="addUserPoint">
+		update USERS set USER_POINT = USER_POINT+ #{report_num} WHERE USER_ID = #{user_id}
+	</update> <!-- report_num에 userPoint*0.95값 set되어있음. -->
+	
+	<insert id="insertLessonPrice">
+		INSERT INTO POINT (POINT_ID, POINT_PRICE, POINT_HISTORY, POINT_TIME) VALUES (#{user_id}, #{report_num}, #{report_cont}, SYSDATE())
+	</insert> <!-- report_num에 userPoint*0.95값 set되어있음. -->
+	
+	<select id="isTiper" resultType="users">
+			SELECT TIPER_AGREE FROM
+		TIPER WHERE TIPER_USER_ID = #{user_id}
+	</select>
+	
+	<select id="isTiperAgree" resultType="_int">
+		SELECT TIPER_AGREE FROM
+		TIPER WHERE TIPER_USER_ID = #{user_id}
+	</select>
 </mapper>
 
 

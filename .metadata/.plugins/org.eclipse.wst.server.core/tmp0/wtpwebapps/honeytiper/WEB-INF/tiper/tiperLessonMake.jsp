@@ -59,24 +59,24 @@ if (cateCheck2 == false) {
 		width: 200px;
 		height: 200px;
 		resize: none;
-		border: 2px solid #efefef;
-		border-radius: 2px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
 	}
 	#lesmake_info:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 2px;
+		border-radius: 10px;
 	}
 	#lesmake_title {
 		width: 200px;
 		height: 35px;
-		border: 2px solid #efefef;
-		border-radius: 2px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
 	}
 	#lesmake_title:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 2px;
+		border-radius: 10px;
 	}
 	.lesmake_td1 {
 		font-size: 15px;
@@ -98,16 +98,16 @@ if (cateCheck2 == false) {
 		width: 200px;
 		border: 0;
 		border: 1px solid #efefef;
-		border-radius: 2px;
+		border-radius: 10px;
 	}
 	#lesmake_cate:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 2px;
+		border-radius: 10px;
 	}
 	#lesmake_btn1 {
 		background-color: #FFD400;
-		border-radius: 2px;
+		border-radius: 10px;
 		border: 0;
 		width: 120px;
 		height: 45px;
@@ -153,26 +153,26 @@ if (cateCheck2 == false) {
 		height: 250px;
 		resize: none;
 		margin-left: 20px;
-		border: 2px solid #efefef;
-		border-radius: 2px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
 	}
 	#lesmake_info:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 2px;
+		border-radius: 10px;
 	}
 	#lesmake_title {
 		width: 450px;
 		height: 45px;
 		border: 0;
 		margin-left: 20px;
-		border: 2px solid #efefef;
-		border-radius: 2px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
 	}
 	#lesmake_title:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 2px;
+		border-radius: 10px;
 	}
 	.lesmake_td1 {
 		font-size: 18px;
@@ -189,17 +189,17 @@ if (cateCheck2 == false) {
 		border: 0;
 		width: 300px;
 		margin-left: 20px;
-		border: 2px solid #efefef;
-		border-radius: 2px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
 	}
 	#lesmake_cate:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 2px;
+		border-radius: 10px;
 	}
 	#lesmake_btn1 {
 		background-color: #FFD400;
-		border-radius: 2px;
+		border-radius: 10px;
 		border: 0;
 		width: 200px;
 		height: 55px;

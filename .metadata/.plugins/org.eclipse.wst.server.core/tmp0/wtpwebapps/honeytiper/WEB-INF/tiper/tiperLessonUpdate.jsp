@@ -33,7 +33,6 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		border-bottom: 8px solid white;
 		text-align: center;
 		vertical-align: middle;
-		border-radius: 2px;
 	}
 	#lesup_td2 {
 		text-align: right;
@@ -43,7 +42,6 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		vertical-align: middle;
 		text-align: center;
 		background-color: #efefef;
-		border-radius: 2px;
 	}
 	#lesup_td5 {
 		text-align: center;
@@ -53,13 +51,13 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		width: 200px;
 		height: 40px;
 		margin-left: 2px;
-		border: 2px solid #efefef;
-		border-radius: 2px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
 	}
 	#lesup_input1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 2px;
+		border-radius: 10px;
 	}
 	#lesup_tr2 {
 		height: 70px;
@@ -70,14 +68,14 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 	#lesup_info1 {
 		margin-left: 2px;
 		width: 200px;
-		border: 2px solid #efefef;
+		border: 1px solid #efefef;
 		resize: none;
-		border-radius: 2px;
+		border-radius: 10px;
 	}
 	#lesup_info1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 2px;
+		border-radius: 10px;
 	}
 	#lesup_preview {
 		width: 100px;
@@ -96,7 +94,7 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 	#lesup_btn1 {
 		background-color: #FFD400;
 		border: 0;
-		border-radius: 2px;
+		border-radius: 10px;
 		width: 200px;
 		height: 40px;
 		font-weight: bold;
@@ -134,13 +132,13 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		height: 45px;
 		margin-left: 2px;
 		border: 0;
-		border: 2px solid #efefef;
-		border-radius: 2px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
 	}
 	#lesup_input1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 2px;
+		border-radius: 10px;
 	}
 	#lesup_tr2 {
 		height: 70px;
@@ -153,19 +151,19 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		margin-left: 2px;
 		width: 450px;
 		resize: none;
-		border: 2px solid #efefef;
-		border-radius: 2px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
 		height: 250px;
 	}
 	#lesup_info1:focus {
 		border: 3px solid #FFD400;
 		outline: none;
-		border-radius: 2px;
+		border-radius: 10px;
 	}
 	#lesup_preview {
 		width: 200px;
 		height: 200px;
-		border-radius: 2px;
+		border-radius: 10px;
 	}
 	#lesup_td3 {
 		font-size: 18px;

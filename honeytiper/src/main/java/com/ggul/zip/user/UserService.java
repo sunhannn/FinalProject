@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 
+import com.ggul.zip.escrow.EscrowVO;
+import com.ggul.zip.lesson.LessonVO;
+
 public interface UserService {
 
 	public UserVO getUser(UserVO vo);
@@ -31,6 +34,10 @@ public interface UserService {
 	public UserVO getUserByKakaoAccount(UserVO vo);
 	
 	public UserVO joinKakaoUser(UserVO vo);
+	
+	public boolean updateUserInfo(UserVO vo);
+	
+	public String viewBlackList(UserVO vo);
 	
 	
 	
@@ -110,6 +117,14 @@ public interface UserService {
 	int isDupReport(ReportVO rvo);
 	List<UserVO> getUserInfoMypage(UserVO vo);
 	void updateUserRole01(UserVO vo);
+	
+	int getEscrowPrice(EscrowVO evo);
+	String getTiperUserId(EscrowVO evo);
+	String getLessonTitle(LessonVO lvo);
+	void addUserPoint(UserVO uvo);
+	void insertLessonPrice(UserVO vo);
+	int isTiper(UserVO uvo);
+	int isTiperAgree(UserVO uvo);
 
 	
 	

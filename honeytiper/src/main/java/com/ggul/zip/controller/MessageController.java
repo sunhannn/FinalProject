@@ -87,13 +87,13 @@ public class MessageController {
 
 		String user_id = (String) session.getAttribute("user_id");
 		String other_user_id = request.getParameter("other_user_id");
-
+		int send_btn = Integer.parseInt(request.getParameter("send_btn"));
+		
 		MessageTO to = new MessageTO();
 		to.setUser_id(user_id);
 
-		int send_btn = Integer.parseInt(request.getParameter("send_btn"));
-		System.out.println("to.getSend_btn()"+to.getSend_btn());
 		to.setSend_btn(send_btn);
+		System.out.println("to.getSend_btn(직접보내기는0,4)"+to.getSend_btn());
 		
 		if(to.getSend_btn() == 1 || to.getSend_btn() == 4) {
 			int message_room_param = Integer.parseInt(request.getParameter("message_room"));
@@ -103,13 +103,13 @@ public class MessageController {
 			to.setMessage_send_id(user_id);
 			to.setMessage_recv_id(other_user_id);
 			
-			int message_room = to.getMessage_room();
 			messageDao.messageSendChk(to);
+			int message_room = to.getMessage_room();
 			int exist_chat = to.getExist_chat();
-			System.out.println("0받아야하는데..."+message_room);
+			System.out.println("방없으면맥스+1, 있으면 있는방번호..."+message_room);
 			System.out.println("exist_chat 0이어야됨..."+exist_chat);
 			// 강사에게 직접 메세지 보내기를 할 경우 방번호 0을 가져오고 기존에 방이 없는경우 방생성
-			if (message_room == 0 && exist_chat == 0) {
+			if (message_room == 0 || exist_chat == 0) {
 				System.out.println("방생성 if탐===exist_chat??"+exist_chat);
 				messageDao.messageSendInlist(to);
 			}
@@ -120,7 +120,7 @@ public class MessageController {
 		ArrayList<MessageTO> list = messageDao.messageList(to);
 
 		request.setAttribute("list", list);
-//		System.out.println("lst::::::::::::"+list);
+		System.out.println("list::::::::::::"+list);
 		return "message/message_ajax_list";
 
 	}
@@ -190,7 +190,8 @@ public class MessageController {
 		
 		request.setAttribute("list", list);
 		
-		return "message/message_content_list";
+//		return "message/message_content_list";
+		return "message/message_escrow_list";
 	}
 	
 	

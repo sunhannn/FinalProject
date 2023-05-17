@@ -5,7 +5,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script src="front/message_ajax_list.js"></script>
-
 <c:forEach var="tmp" items="${list }">
 	<div class="chat_list_box${tmp.message_room } chat_list_box">
 		<div type="button" class="chat_list" message_room="${tmp.message_room }" other-user_id="${tmp.other_user_id }" user_role="${tmp.user_role }">

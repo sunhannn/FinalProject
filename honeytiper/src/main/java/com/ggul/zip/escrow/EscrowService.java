@@ -12,6 +12,7 @@ public interface EscrowService {
 	
 	//티퍼-회원 분쟁내역조회
 	List<EscrowVO>getDisputeResolutionList(EscrowVO evo);
+	List<EscrowVO>searchAndStatus(EscrowVO vo);
 	//분쟁내역에서 검색결과 아약스에게주기
 	ArrayList<EscrowVO>searchDispute(HashMap<String, Object> map);
 	//진행상태거르기

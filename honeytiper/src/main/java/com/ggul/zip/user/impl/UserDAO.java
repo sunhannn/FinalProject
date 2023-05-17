@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 
+import com.ggul.zip.escrow.EscrowVO;
+import com.ggul.zip.lesson.LessonVO;
 import com.ggul.zip.user.ReportVO;
 import com.ggul.zip.user.UserVO;
 
@@ -39,26 +41,49 @@ public class UserDAO {
 	}
 
 	// 회원 조회
-	public UserVO viewUser(UserVO vo) {
-			return mybatis.selectOne("UserDAO.viewUser", vo);
-	}
-	
-	//전화번호, 이름으로 회원정보 가져오기
-		public void findUser(UserVO vo, Model model) {
-			UserVO user = mybatis.selectOne("UserDAO.findUser", vo);
-			model.addAttribute("user_id", user.getUser_id());
+		public UserVO viewUser(UserVO vo) {
+				return mybatis.selectOne("UserDAO.viewUser", vo);
 		}
 		
-	//아이디, 전화번호로 회원정보 가져오기
-	public boolean findUserPW(UserVO vo) {
-		UserVO user = mybatis.selectOne("UserDAO.findUserPW", vo);
-		
-		if (user != null) {
-			return true;
-		}else {
-			return false;
+		//블랙리스트 조회
+		public String viewBlackList(UserVO vo) {
+			UserVO black = mybatis.selectOne("UserDAO.viewUser", vo);
+			
+			System.out.println("black 출력 : " + black);
+			
+			int role = black.getUser_role();
+			String role_st = String.valueOf(role);
+			
+			System.out.println("role_st 출력 : " + role_st);
+			
+			if(role_st.equals("3")) {
+				return "말벌";
+			}else if(role_st.equals("4")){
+				return "탈퇴";
+			}else {
+				return "로그인";
+			}
 		}
-	}
+		
+		//전화번호, 이름으로 회원정보 가져오기
+			public void findUser(UserVO vo, Model model) {
+				UserVO user = mybatis.selectOne("UserDAO.findUser", vo);
+				model.addAttribute("user_id", user.getUser_id());
+				model.addAttribute("user_role", user.getUser_role());
+			}
+			
+		//아이디, 전화번호로 회원정보 가져오기
+		public boolean findUserPW(UserVO vo) {
+			UserVO user = mybatis.selectOne("UserDAO.findUserPW", vo);
+			int role = user.getUser_role();
+			String user_role = String.valueOf(role);
+			
+			if(user_role.equals("3") || user_role.equals("4")) {
+				return false;
+			}else {
+				return true;
+			}
+		}
 
 	// 아이디 중복확인
 	public UserVO chkId(UserVO vo, Model model) {
@@ -66,14 +91,14 @@ public class UserDAO {
 	}
 	
 	//카카오 회원가입
-		public UserVO joinKakaoUser(UserVO vo) {
-			int insert = mybatis.insert("UserDAO.joinKakaoUser", vo);
-			if(insert < 1) {
-				System.out.println("회원가입 안됐음");
+			public UserVO joinKakaoUser(UserVO vo) {
+				int insert = mybatis.insert("UserDAO.joinKakaoUser", vo);
+				if(insert < 1) {
+					System.out.println("회원가입 안됐음");
+				}
+				return vo;
 			}
-			return vo;
-		}
-		
+			
 		//카카오 로그인 실행
 		public UserVO getUserByKakaoAccount(UserVO vo) {
 			UserVO user = mybatis.selectOne("UserDAO.kakaoUser", vo);
@@ -84,6 +109,17 @@ public class UserDAO {
 				System.out.println("db에 없음");
 			}
 			return user;
+		}
+
+	//개인정보 수정
+		boolean updateUserInfo(UserVO vo) {
+			int i = mybatis.update("UserDAO.updateUserInfo", vo);
+			
+			if(i != 0) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	
 	//sms 전송
@@ -373,4 +409,76 @@ public class UserDAO {
 
 				mybatis.update("UserDAO.updateUserRole01", vo);
 			}
-}
+			
+			// ===5월 13일 업데이트=============================
+			// escrow테이블에서 escrow_price 가져오기
+			public int getEscrowPrice(EscrowVO vo) {
+				System.out.println("===>mybatis로 getEscrowPrice() 기능처리");
+				return mybatis.selectOne("UserDAO.getEscrowPrice", vo);
+			}
+
+			// lesson테이블에서 LessonTitle 가져오기 (escrow와 lesson을 join)
+			public String getLessonTitle(LessonVO lvo) {
+				System.out.println("===>mybatis로 getLessonTitle() 기능처리");
+				return mybatis.selectOne("UserDAO.getLessonTitle", lvo);
+			}
+
+			// tiper테이블에서 tiper_user_id 가져오기 (escrow와 join해서)
+			public String getTiperUserId(EscrowVO evo) {
+				System.out.println("===>mybatis로 getTiperUserId() 기능처리");
+				return mybatis.selectOne("UserDAO.getTiperUserId", evo);
+			}
+
+			// User_Point에 5% 차감된 포인트만큼 +update
+			public void addUserPoint(UserVO vo) {
+				System.out.println("===>mybatis로 addUserPoint() 기능처리");
+
+				mybatis.update("UserDAO.addUserPoint", vo);
+			}
+
+			// 리뷰작성 시 해당 강의명을 가져오기
+			public void insertLessonPrice(UserVO vo) {
+				System.out.println("===>mybatis로 insertLessonPrice() 기능처리");
+
+				mybatis.update("UserDAO.insertLessonPrice", vo);
+			}
+
+				// 마이페이지 : 해당 회원이 Tiper테이블에 있는지 확인 
+					public int isTiper(UserVO uvo) {
+						System.out.println("===>mybatis로 isTiper() 기능처리");
+
+						Object result = mybatis.selectList("UserDAO.isTiper", uvo);
+
+						if (ObjectUtils.isEmpty(result) == false) {
+							return 1;
+						} else {
+							return 0;
+						}
+					}
+
+					// Tiper_agree값 가져오기
+					public int isTiperAgree(UserVO uvo) {
+						System.out.println("===>mybatis로 isTiperAgree() 기능처리");
+
+						int result = 0;
+						
+						if(isTiper(uvo) == 0) {
+						
+							return 31;
+						} else {
+					
+						result = mybatis.selectOne("UserDAO.isTiperAgree", uvo);
+							
+							if (result == 1) {
+							return 1;
+						} else if (result == 2) {
+							return 2;
+						} else if (result == 0) {
+							return 0;
+						} else {
+							return 99;
+						}
+					}	
+				}
+			}
+

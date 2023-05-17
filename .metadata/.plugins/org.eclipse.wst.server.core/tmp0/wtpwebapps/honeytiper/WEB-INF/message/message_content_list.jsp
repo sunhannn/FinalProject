@@ -16,6 +16,7 @@
 					 	<div class="chat_img_div">
 <!-- 						 	<a href="#modal2" rel="modal:open" > -->
 						 		<img class="content_img" src="front/profile/${tmp.tiper_img}" alt="${tmp.message_send_id }" >
+						 		<p class="msg_send_id">${tmp.message_send_id }</p>
 <!-- 						 	</a> -->
 						 		<div id="modal2" class="modal">
 						 			<button class="modal_close" type="button"><i class="fa fa-close" aria-hidden="true"></i></button>
@@ -47,6 +48,6 @@
 	</c:choose>
 </c:forEach>
 		
-	<c:forEach var="lesson" items="${list }">
-		<option class="select_option" value="${lesson.escrow_lesson_num}"><p style="display: none" class="lesson_title">${lesson.lesson_title}</p></option><input class="tiper_code" value="${lesson.escrow_tiper_code }" style="display: none;"><input class="escrow_status" value="${lesson.escrow_status }" style="display: none;">
-	</c:forEach>
+<%-- 	<c:forEach var="lesson" items="${list }"> --%>
+<%-- 		<option class="select_option" value="${lesson.escrow_lesson_num}"><p style="display: none" class="lesson_title">${lesson.lesson_title}</p></option><input class="tiper_code" value="${lesson.escrow_tiper_code }" style="display: none;"><input class="escrow_status" value="${lesson.escrow_status }" style="display: none;"> --%>
+<%-- 	</c:forEach> --%>

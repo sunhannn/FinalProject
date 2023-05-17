@@ -9,8 +9,10 @@ int lesson_num = Integer.parseInt(request.getParameter("lesson_num"));
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <style>
@@ -124,12 +126,14 @@ a {
 }
 
 #msg_button_escrow {
-	width: 150px;
+	width: 100px;
 	height: 30px;
 	background-color: #ffdf48;
 	color: #5c3b0c;
 	border-style: none;
 	font-size: 1.2rem;
+	border-radius: 5px;
+	margin-right: 10px;
 }
 
 #sugar_img {
@@ -149,6 +153,8 @@ a {
 #button_box {
 	text-align: center;
 	margin-top: 13px;
+	display: flex;
+    justify-content: center;
 }
 
 .cont2 {
@@ -258,7 +264,7 @@ a {
 }
 
 .data_list {
-	padding: 20px;
+	padding: 5px;
 }
 
 .sugar_point {
@@ -280,34 +286,29 @@ a {
 }
 
 #pagingul {
-	margin: 0 auto;
-	border-right: 0;
-	padding-left: 0;
+  margin-top: 20px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
 }
 
-ul li {
-	text-align: center;
-	float: left;
-	list-style: none;
+#pagingul li {
+  margin-right: 5px;
 }
 
-ul li .a_tag {
-	display: block;
-	font-size: 14px;
-	color: black;
-	padding: 9px 12px;
-	border-right: solid 1px #ccc;
-	box-sizing: border-box;
-	text-decoration-line: none;
+#pagingul li a {
+  display: block;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #333;
+  text-decoration: none;
 }
 
-ul li.on {
-	background: #FFD400;
+#pagingul li.on a {
+  background-color: #FFD400;
+  color: #fff;
 }
-
-ul li.on .a_tag {
-	color: #fff;
-} 
 
 #page_box {
 	margin: 0 auto;
@@ -431,16 +432,34 @@ img {
 		font-size: 1.65rem;
 	}
 	
+	#msg_button_escrow {
+	width: 150px;
+	height: 30px;
+	background-color: #ffdf48;
+	color: #5c3b0c;
+	border-style: none;
+	font-size: 1.2rem;
+	border-radius: 5px;
+	margin-right: 10px;
+}
+	
+	}
 	@media ( max-width : 576px) {
 		/*=======================================================*/
 		select {
 			padding: 2px;
 		}
+		h4{
+			margin-left: 10px;		
+		}
 		.profile_img_box {
 			position: absolute;
 			text-align: center;
-			left: 50%;
-			top: 50%;
+			width: 100%;
+			margin-left: 0px !important;
+			display: flex;
+    		justify-content: center;
+   			 margin-top: -20px;
 		}
 		#contbox1 {
 			width: 95vw;
@@ -493,31 +512,43 @@ img {
 
 	<div id="container_box1">
 
-		<input type="hidden" name="lesson_num" id="lesson_num"
-			value=<%=lesson_num%>>
+		<input type="hidden" name="lesson_num" id="lesson_num" value=<%=lesson_num%>>
 
 		<div id="contbox0">
 			<c:if test="${lessonDetail.lesson_cate eq 'IT' }">
-				<img src="${pageContext.request.contextPath}/front/ITdefault.jpg"
-					alt="IT카테고리">
+<%-- 				<img src="${pageContext.request.contextPath}/front/ITdefault.jpg" alt="IT카테고리"> --%>
+				<picture>
+    				<source srcset="${pageContext.request.contextPath}/front/ITdefault400.jpg" media="(max-width: 768px)">
+    				<img src="${pageContext.request.contextPath}/front/ITdefault.jpg" alt="IT카테고리"/>
+				</picture>
 			</c:if>
 			<c:if test="${lessonDetail.lesson_cate eq '예체능' }">
-				<img src="${pageContext.request.contextPath}/front/Musicdefault.jpg"
-					alt="예체능카테고리">
+<%-- 				<img src="${pageContext.request.contextPath}/front/Musicdefault.jpg" alt="예체능카테고리"> --%>
+				<picture>
+    				<source srcset="${pageContext.request.contextPath}/front/Musicdefault400.jpg" media="(max-width: 768px)">
+    				<img src="${pageContext.request.contextPath}/front/Musicdefault.jpg" alt="예체능카테고리"/>
+				</picture>
 			</c:if>
 			<c:if test="${lessonDetail.lesson_cate eq '공예' }">
-				<img src="${pageContext.request.contextPath}/front/Craftdefault.jpg"
-					alt="공예카테고리">
+<%-- 				<img src="${pageContext.request.contextPath}/front/Craftdefault.jpg" alt="공예카테고리"> --%>
+				<picture>
+					<source srcset="${pageContext.request.contextPath}/front/Craftdefault400.jpg" media="(max-width: 768px)">
+    				<img src="${pageContext.request.contextPath}/front/Craftdefault.jpg" alt="공예카테고리"/>
+				</picture>
 			</c:if>
 			<c:if test="${lessonDetail.lesson_cate eq '사무' }">
-				<img
-					src="${pageContext.request.contextPath}/front/Officedefault.jpg"
-					alt="사무카테고리">
+<%-- 				<img src="${pageContext.request.contextPath}/front/Officedefault.jpg" alt="사무카테고리"> --%>
+					<picture>
+    				<source srcset="${pageContext.request.contextPath}/front/Officedefault400.jpg" media="(max-width: 768px)">
+    				<img src="${pageContext.request.contextPath}/front/Officedefault.jpg" alt="사무카테고리"/>
+				</picture>
 			</c:if>
 			<c:if test="${lessonDetail.lesson_cate eq '라이프스타일' }">
-				<img
-					src="${pageContext.request.contextPath}/front/Lifestyledefault.jpg"
-					alt="라이프스타일카테고리">
+<%-- 				<img src="${pageContext.request.contextPath}/front/Lifestyledefault.jpg" alt="라이프스타일카테고리"> --%>
+				<picture>
+    				<source srcset="${pageContext.request.contextPath}/front/Lifestyledefault400.jpg" media="(max-width: 768px)">
+    				<img src="${pageContext.request.contextPath}/front/Lifestyledefault.jpg" alt="라이프스타일카테고리"/>
+				</picture>
 			</c:if>
 		</div>
 
@@ -544,8 +575,10 @@ img {
 
 					<div id="button_box">
 						<button type="button" id="msg_button_escrow" class="cont1_button"
-							onclick="location.href='/insertEscrow?escrow_lesson_num=${lessonDetail.lesson_num}&escrow_tiper_code=${lessonDetail.tiper_code}&escrow_user_id=<%=user_idd%>'">수강신청</button>
+							onclick="location.href='/insertEscrow?escrow_lesson_num=${lessonDetail.lesson_num}&escrow_tiper_code=${lessonDetail.tiper_code}&escrow_user_id=<%=user_idd%>&tiper_user_id=${lessonDetail.tiper_user_id}'">꿀TIP 전수 받기</button>
+							<%if(user_idd != null) {%>
 						<button title="메세지 보내기" type="button" id="msg_button" onclick="open_popup()"><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>
+						<%} %>
 					</div>
 					<%-- 					<div id="button_box"><button type="button" id="msg_button" onclick="location.href='/insertEscrow?escrow_lesson_num=${lessonDetail.lesson_num}&escrow_tiper_code=${lessonDetail.tiper_code}&escrow_user_id=<%=user_idd%>>쪽지</button></div> --%>
 				</div>
@@ -604,8 +637,7 @@ img {
 		<div id="contbox3">
 			<hr>
 			<div id="contbox3_titleholder">
-				<a href="#tiperinfo_h4">강사정보</a> <a href="#lessoninfo_h4">강의정보</a> <a
-					href="#review_h4">리뷰</a>
+				<a href="#tiperinfo_h4">강사정보</a> <a href="#lessoninfo_h4">강의정보</a> <a href="#review_h4">리뷰</a>
 			</div>
 
 			<span class="anchor" id="tiperinfo_h4"></span>
@@ -991,32 +1023,32 @@ function paging(totalData, dataPerPage, pageCount, currentPage) {
 
 
 // 팝업창 띄우기 함수
-var parent_value;
-function open_popup(){
-    popupWindow = window.open('message_list?send_btn=1', '_blank', 'width=940, height=620, resizeable');
-    //팝업창 리사이즈 방지 함수
-    popupWindow.onresize = (_=>{
-	   	popupWindow.resizeTo(940,690);
-		});
+// var parent_value;
+// function open_popup(){
+//     popupWindow = window.open('message_list?send_btn=1', '_blank', 'width=940, height=620, resizeable');
+//     //팝업창 리사이즈 방지 함수
+//     popupWindow.onresize = (_=>{
+// 	   	popupWindow.resizeTo(940,690);
+// 		});
     
-    popupWindow.onload = function (){
-    	call_chlid();
-    }
-}
+//     popupWindow.onload = function (){
+//     	call_chlid();
+//     }
+// }
 
 
-function call_chlid(){  //부모창에서 자식창에 값 전달
-    try{
-    	let tiper_id = $('#cont1-group-text').text();
-    	tiper_id = tiper_id.replace("@", "");
-    	console.log("tiper_id??======",tiper_id);
-    	popup.child_value_id = tiper_id; // 현재 강의글에 있는 강사아이디값을 넣어야하는 곳
-        popup.child_value_room = 0; // 방번호를 보내야할 곳
-        popup.child_value_send_btn = 1;
-        popup.child_function(); // 자식창 함수 호출
-    }catch(e){} // 부모 자식간의 연결이 끊어졌을 경우 처리할게 있으면 기술
-}
+// function call_chlid(){  //부모창에서 자식창에 값 전달
+//     try{
+//     	let tiper_id = $('#cont1-group-text').text();
+//     	tiper_id = tiper_id.replace("@", "");
+//     	console.log("tiper_id??======",tiper_id);
+//     	popup.child_value_id = tiper_id; // 현재 강의글에 있는 강사아이디값을 넣어야하는 곳
+//         popup.child_value_room = 0; // 방번호를 보내야할 곳
+//         popup.child_value_send_btn = 1;
+//         popup.child_function(); // 자식창 함수 호출
+//     }catch(e){} // 부모 자식간의 연결이 끊어졌을 경우 처리할게 있으면 기술
+// }
 
-function parent_function(){}
+// function parent_function(){}
 	</script>
 </html>

@@ -67,6 +67,7 @@
 		u
 		WHERE u.user_id = #{point_id};
 	</insert>
+
 	<insert id="honeyTakePoint">
 		INSERT INTO point (point_id, point_price, point_history, point_time)
 		SELECT
@@ -76,5 +77,4 @@
 		WHERE u.user_id = #{point_id};
 
 	</insert>
-
 </mapper>

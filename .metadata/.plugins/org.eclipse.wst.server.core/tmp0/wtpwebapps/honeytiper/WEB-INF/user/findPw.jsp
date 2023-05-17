@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <link rel="stylesheet" media="screen and (min-width:769px)" href="front/user.css">
+   <link rel="stylesheet" media="screen and (max-width:768px)" href="front/userJoinMobile.css">
 <style>
-	p {
-		color : red;
-	}	
 </style>
 </head>
 <body>
@@ -20,61 +20,51 @@
 			$(".invalid-feedback").hide();
 			$("#telSuccess").hide();
 			$("#showPW").hide();
+			$(".info_ptag").hide();
 		}
 	</script>
-	<div id="wrap">
-        <div class="logo"><img src="${pageContext.request.contextPath}/front/ggulTiper.png"></div>
+	<div class="findId_cover login_wrap">
+    	<div id="findId_wrap" class="login_contents">
+			<div id="login_wrap" class="findId_wrap_content findId_input_content">
+				<h3>비밀번호 변경</h3>
+				<div id="telcertification" class="form-input find_id_form_input">
+					<div class="login-input">
+						<div class="login-input findId_inputName">
+							<p>아이디</p>
+							<input type="text" name="user_id" id="user_id" class="check" placeholder="아이디를 입력해주세요." autofocus>
+							<p class="info_ptag"></p>
+						</div>
+						<p>이메일</p>
+						<input type="text" name="user_email" id="user_email" class="check" placeholder="이메일을 입력하세요.">
+						<button type="button" id="telCheck" onclick="emailSend()" disabled>인증번호받기</button>
+						<p class="info_ptag"></p>
+					</div>
+					<div class="telConfirmDiv">
+						<input type="text" id="certificationEmail" placeholder="인증번호를 입력해주세요.">
+						<button id="telConfirmBtn" onclick="smsConfirm()">인증하기</button>
+						<p class="info_ptag"></p>
+						<input type="hidden" id="checkTel" value="false">
+					</div>
+				</div>
+			</div>
+			<div id="showPW" class="input_wrap findId_show_content">
+				<h4>비밀번호를 재설정해주세요</h4>
+						<p>비밀번호</p>
+						<input name="user_pw" type="password" id="user_pw" class="check" placeholder="비밀번호를 입력해주세요" required>
+						<p class="info_ptag"></p>
 	
-		
-	</div>
-			<h3>비밀번호찾기</h3>
-			<div id="contents">
-				<label for="user_tel">전화번호 인증</label>
-			<table>
-				<tr>
-					<td>
-						<div>아이디
-							<input type="text" name="user_id" id="user_id" class="check" placeholder ="영문숫자조합으로 입력해주세요." required>
-							<p></p>
-						</div>
-						<div>전화번호
-							<input name="user_tel" type="text" id="user_tel" class="check" placeholder="(- 제외)숫자만 입력해주세요" required>
-							<button type="button" id="telCheck" onclick="smsSend()" disabled>인증번호받기</button>
-							<p></p>
-						</div>
-						<div class="forTextLabel">인증번호</div> <input type="text" id="certificationTel" required>
-						<div>
-							<button id="telConfirmBtn" onclick="smsConfirm()">인증하기</button>
-							<input type="hidden" id="checkTel" value="false">
-						</div>
-						<div class="invalid-feedback">필수 정보입니다.</div>
-						<div id="telSuccess">핸드폰번호 인증완료.</div>
-					</td>
-				</tr>
-			</table>
+						<p>비밀번호 확인</p>
+						<input name="user_pw2" type="password" id="user_pw2" class="check" placeholder="비밀번호를 입력해주세요." required>
+						<p class="info_ptag"></p>
+				<div class="page_btn">
+					<button type="button" onclick="updatePW()">비밀번호 수정</button>
+				</div>
+			</div>
+			<div class="findId_show_content">
+				<button type="button" onclick="javascript:history.go(-1)" class="goBack_findId">뒤로가기</button>
+			</div>
 		</div>
-		<div id="showPW">
-			<h4>비밀번호를 재설정해주세요</h4>
-				<table>
-					<tr>
-						<td class="td_left"><label for="user_pw">비밀번호</label></td>
-						<td class="td_right">
-							<input name="user_pw" type="password" id="user_pw" required>
-							<div class="invalid-feedback">필수 정보입니다.</div>
-						</td>
-					</tr>
-	
-					<tr>
-						<td class="td_left"><label for="user_pw2">비밀번호 확인</label></td>
-						<td class="td_right">
-							<input name="user_pw2" type="password" id="user_pw2" required>
-							<div class="invalid-feedback">필수 정보입니다.</div>
-						</td>
-					</tr>
-				</table>
-				<button type="button" onclick="updatePW()">비밀번호 수정</button>
-		</div>
-		<button type="button" onclick="javascript:history.go(-1)">뒤로가기</button>
+    </div>
 		
 		<script>
 		function updatePW(){
@@ -97,36 +87,36 @@
 				}
 			});
 		}
-		//sms 전송 함수
-		var smsData = '';
+		//이메일 전송함수
+		var mailData = "";
 		
-		function smsSend(){
-			alert('smsSend 들어왔음');
-			let clientTel = $("#user_tel").val();
-			console.log('입력 이메일' + clientTel);
+		function emailSend() {
+			alert('emailSend 들어왔음');
+			let clientEmail = $("#user_email").val();
 			
-			$.ajax({
-				type : "POST",
-				url : "sendSMS",
-				async : false,
-				data : {
-					"user_tel" : clientTel
-				},
-				success : function(data) {
-					console.log("data", data);
-					smsData = data;
-				},
-				error : function(e) {
-					alert('오류입니다. 잠시 후 다시 시도햐주세요');
-				}
-			});
-		}
+			console.log('입력 이메일 ' + clientEmail);
+			
+				$.ajax({
+					type : "POST",
+					url : "sendEmail",
+					async : false,
+					data : {
+						"user_email" : clientEmail
+					},
+					success : function(data) {
+						console.log("data : ", data);
+						mailData = data;
+					},
+					error : function(e) {
+						alert('오류입니다. 잠시 후 다시 시도햐주세요');
+					}
+				});
+			}
 		
-		//sms 인증번호 확인함수
+		//이메일 인증번호 확인 함수
 		function smsConfirm() {
-			var telNum = $("#user_tel").val();
-			var confirmNum = $("#certificationTel").val();
-			var sendNum = smsData;
+			var confirmNum = $("#certificationEmail").val();
+			var sendNum = mailData;
 			console.log('confirmNum',confirmNum);
 			console.log('sendNum',sendNum);
 			
@@ -135,13 +125,12 @@
 				url : "confirmNum",
 				data: {
 					"confirmNum" : confirmNum,
-					"sendNum" : smsData
+					"sendNum" : sendNum
 				},
 				cache : false,
 				success: function(data) {
 					if (data.check == "success") { //controller에서 넘겨준 성공여부 코드
-						console.log("성공");
-						findUser(telNum);
+						findUser();
 					} else {
 						console.log("실패");
 					}
@@ -154,121 +143,34 @@
 			mailData = "";
 		}
 		
-		//전화번호 인증에 따른 회원아이디 가져오기
-		function findUser(value) {
-			var user = $("#user_id").val();
-			console.log("value : ", value);
+		//회원확인절차 (findPW)
+		function findUser() {
+			var id = $("#user_id").val();
+			var email = $("#user_email").val();
 			
 			$.ajax({
 				type : "POST",
 				url : "findUserPW",
 				data : {
-					"user_tel" : value,
-					"user_id" : user
+					"user_id" : id,
+					"user_email" : email
 				},
+				async : false,
 				cache : false,
 				success : function(data) {
-					console.log("data : ", data);
-					if (data == "true") {
-					$("#contents").hide();
-					$("#showPW").show();
-					}else {
-						alert("존재하지 않는 아이디입니다.");
+					if(data == "true") {
+						console.log("성공");
+						$("#showPW").show();
+						$("#login_wrap").hide();
+						$(".goBack_findId").hide();
+					}else{
+						console.log("일치하는 정보가 없습니다.");
 					}
 				},
 				error : function(request, status) {
-					alert("에러.");
+					alert("비밀번호 변경과정 오류발생")
 				}
 			});
-			
-		}
-		
-		//유효성 확인
-		(function() {
-			'use strict';
-			window.addEventListener('load', function() {
-				var forms = document
-						.getElementsByClassName('needs-validation');
-				var validation = Array.prototype.filter.call(forms,
-						function(form) {
-							form.addEventListener('submit', function(
-									event) {
-								if (form.checkValidity() === false) {
-									event.preventDefault();
-									event.stopPropagation();
-								}
-								form.classList.add('was-validated');
-								valChk(event);
-							}, false);
-						});
-			}, false);
-		})();
-		function valChk(e) {
-			e.preventDefault();
-			var 
-			passwordRegex = /^[0-9A-Z_a-z]+$/, 
-			password = $("#user_pw"), 
-			passwordre = $("#user_pw2"); 
-			var valid = true;
-			valid = valid && checkMatch( password.val(), passwordre.val(), passwordre);
-			valid = valid && checkRegexp(password, passwordRegex, "비밀번호 입력 형식이 잘못되었습니다.");
-			valid = valid && checkLength(password, 5, 16, "비밀번호는 5-16 내로 입력해주세요.");
-
-			  //비밀번호 매칭
-			function checkMatch(p, pre, passre){
-				let pval = p;
-				console.log(pval);
-				let pvalre = pre;
-				console.log(pvalre);
-				let res = true;
-				if(pval != pvalre){
-					passre.nextAll("div.invalid-feedback").text("비밀번호가 일치하지 않습니다.").show();
-					passre.nextAll("div.valid-feedback").hide();
-				  	res = false;
-			  } else {
-				  passre.nextAll("div.valid-feedback").text("비밀번호가 일치합니다.").show();
-				  passre.nextAll("div.invalid-feedback").hide();
-			  }
-			  return res;
-			}
-			
-			//정규식 일치 여부 확인
-			function checkRegexp(o, regexp, n) {
-				let cnt = $("#" + o.attr('id')+ " ~ div.invalid-feedback").length;
-				console.log('o: ', o);
-				console.log('cnt: ', cnt);
-				console.log('o.val(): ', o.val());
-				console.log('regexp.test( o.val() ): ', regexp.test(o.val()));
-				if (!(regexp.test(o.val()))) {
-					if (cnt == 0) {
-						o.closest("div.row").nextAll("div.invalid-feedback").eq(0).text(n).show();
-					} else {
-						o.nextAll("div.invalid-feedback").eq(0).text(n).show();
-						o.nextAll("div.valid-feedback").eq(0).hide();
-					}
-					return false;
-				} else {
-					if (cnt == 0) {
-						o.closest("div.row").nextAll("div.invalid-feedback").eq(0).text(n).hide();
-					} else {
-						o.nextAll("div.invalid-feedback").eq(0).text(n).hide();
-					}
-					return true;
-				}
-			}
-
-			function checkLength(o, min, max, n) {
-				if (o.val().length > max || o.val().length < min) {
-					return false;
-					o.closest("div.row").nextAll("div.invalid-feedback").eq(0).text(n).show();
-				} else {
-					return true;
-				}
-			}
-			if (valid){
-				console.log('user 값 마지막 : ' + user);
-				e.target.submit();
-			}
 		}
 		
 		//유효성 검사
@@ -277,6 +179,7 @@
 	        var thisVal = $(this).val();
 	        var idRegex = /^[0-9A-Za-z]{4,10}$/;
 			var telRegex = /^010\d{4}\d{4}$/;
+			var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
 		               
 		        switch($(this).attr("name")){
 		            case "user_id":
@@ -303,14 +206,28 @@
 							  target.disabled = true;
 		                }
 		            	break;
+		            	
+		            case "user_pw":
+	                       if(thisVal.length != 0 && passwordRegex.test(thisVal) == false) {
+	                           checkText = "영문 대소문자, 숫자, 특수문자의 조합으로 최소 8자를 입력해주세요";
+	                        }else if(thisVal.length == 0) {
+	                        	checkText = "비밀번호를 입력해주세요.";
+	                        }
+	                        break;
+	                        
+	                     case "user_pw2":
+	                       if(thisVal.length != 0 && $("#user_pw").val() != thisVal) {
+	                           checkText = "비밀번호가 일치하지 않습니다.";
+	                        }
+	                        break;
 		            
 		        }
 		        if(checkText != ""){
-		            $(this).siblings("p").html(checkText);
-		            $(this).siblings("p").addClass("vali");
-		            $(this).siblings("p").slideDown();
+		            $(this).siblings(".info_ptag").html(checkText);
+		            $(this).siblings(".info_ptag").addClass("vali");
+		            $(this).siblings(".info_ptag").slideDown();
 		        } else {
-		            $(this).siblings("p").slideUp(function(){
+		            $(this).siblings(".info_ptag").slideUp(function(){
 		                $(this).removeClass("vali");
 		                
 						 if($("check").length == 0){

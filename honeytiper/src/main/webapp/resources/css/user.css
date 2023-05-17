@@ -41,12 +41,12 @@
    }
    
    .form_section_join button {
-       width: 120px;
-       height: 40px;
-       border: none;
-       border-radius: 3px;
-       font-weight: bolder;
-      color: #382407;
+		width: 120px;
+		height: 40px;
+		border: none;
+		border-radius: 3px;
+		font-weight: bolder;
+		color: #382407;
        
    }
    
@@ -54,13 +54,19 @@
       background-color: #ffd400;
    }
    
+   .join_info_table button:hover {
+      background-color: #E6B800;
+      cursor: pointer;
+   }
+   
    .join_info_table {
-      border-spacing: 0 5px;
+		border-collapse: inherit;
+      	border-spacing: 0 5px;
    }
    
    .join_info_table .td_left {
       text-align: left;
-      padding: 10px 30px;
+      padding: 0 30px;
       width: 180px;
       background-color: #efefef;
       border-radius: 5px;
@@ -75,7 +81,7 @@
    }
    
    .join_info_table .td_right {
-      padding: 10px 30px;
+      padding: 0 30px;
       border-bottom: 2px solid #efefef;
    }
    
@@ -85,6 +91,28 @@
    
    .form_section_join #commandCell {
       text-align: center;
+      margin-bottom: 20px;
+   }
+   
+   .editBtn_submit {
+   		background-color: #ffd400;
+   }
+   
+   .editBtn_submit:hover {
+   		background-color: #E6B800;
+   }
+   
+   .goBackToMyPage:hover {
+   		background-color: #dcdcdc;
+   }
+   
+   .td_right .no_edit {
+   		background-color: #efefef;
+   		margin-bottom: 5px;
+   }
+   
+   .td_right .no_edit:hover {
+   		background-color: #dcdcdc;
    }
    
    .edit_info_table input {
@@ -100,17 +128,60 @@
       border: none;
    }
    
+   .join_info_table .td_left label {
+   		margin-bottom: 0;
+   }
+   
    .join_info_table .edit_tel, .join_info_table .edit_email {
       margin-top: 8px;
    }
    
+   .join_radio_tr .td_right, .join_radio_tr .td_left {
+   		padding: 5px 30px;
+   }
    
    .td_right .findId_input {
       border: 2px solid #efefef;
    }
    
+   #commandCell button {
+   		margin: 0 5px;
+   }
+   
+   #commandCell button:hover {
+   		background-color: #dcdcdc;
+   }
+   
+   .userJoinBtn_join {
+   		background-color: #ffd400;
+   }
+   
+   #commandCell .userJoinBtn_join:hover {
+   		background-color: #E6B800;
+   }
+   
    .contents_findId {
       text-align: center;
+   }
+   
+   .login_Btn_admin {
+   		background-color: #ffd400;
+   }
+   
+   .admin_input_login button:hover {
+   		background-color: #dcdcdc;
+   }
+   
+   .loginBtn_section .loginPage_btn:hover {
+   		background-color: #dcdcdc;
+   }
+   
+   .loginBtn_section .kakaoLogin_login:hover {
+   		background-color: #E6B800;
+   }
+   
+   .loginBtn_section .login_Btn_admin:hover {
+   		background-color: #E6B800;
    }
    
    .findId_table {
@@ -148,28 +219,8 @@
       margin: 0 auto;
    }
    
-   .findId_table .content_info_findId {
-      font-size: 13px;
-      font-weight: bolder;
-   }
-   
-   .findId_table .content_input_findId {
-      border: none;
-      border: 2px solid #efefef;
-   }
-   
-   .findId_table .content_input_findId .td_right {
-      padding: 0 70px;
-      border: none;
-   }
-   
-   .contents_findId .h_findId {
-      text-align: left;
-      border-bottom: 2px solid #efefef;
-   }
-   
    .login_wrap {
-      width: 768px;
+      max-width: 768px;
       margin: 0 auto;
       margin-top: 50px;
    }
@@ -183,6 +234,7 @@
       border-radius: 7px;
       box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
    }
+   
    
    .form-input .login_input {
       width: 250px;
@@ -231,16 +283,189 @@
       color: #382407;
    }
    
+   .login_contents .join_Btn_section a:hover {
+		cursor: pointer;      
+   }
+   
    .loginBtn_section .kakaoLogin_login {
       background-color: #fee500;
       color: 
-   }
-   
-   .login_body {
-      background-color: #f5f6f7;
    }
    
    .login_wrap h3 {
       margin-bottom: 40px;
    }
    
+   .alert_loginError {
+   	color: red;
+   	font-size: 13px;
+   }
+   
+   
+   
+   .findId_body .findId_cover {
+   		width: 768px;
+   		margin: 0 auto;
+   }
+   
+    .findId_body #findId_wrap {
+   		width: 70%;
+   		margin: 0 auto;
+   		text-align: center;
+   		padding: 50px 0;
+   		background-color: white;
+   }
+   
+   #findId_wrap .findId_input_content {
+		margin: 0 auto;
+   }
+   
+   #findId_wrap .findId_show_content {
+   		margin: 0 auto;
+   		margin-top: 20px;
+   }
+   
+   .findId_show_content .page_btn {
+   		margin: 10px auto;
+   }
+   
+   .findId_show_content .show_id_div {
+   		font-weight: bolder;
+   }
+   
+   .findId_show_content .check {
+   		width: 300px;
+   		height: 40px;
+   		border-radius: 3px;
+   		border: 2px solid #efefef;
+   }
+   
+   .findId_show_content p {
+   		margin: 0;
+   		margin-bottom: 5px;
+   		text-align: left;
+   		font-weight: bolder;
+   		padding: 0 10px;
+   }
+   
+   .findId_show_content {
+   		width: 300px;
+   }
+   
+   #findId_wrap .findId_input_content input {
+	    width: 248px;
+	    height: 40px;
+	    border: 2px solid #efefef;
+	    border-radius: 5px;
+	    margin: 3px 0;
+	    padding: 0 15px;
+   }
+   
+   #findId_wrap .findId_input_content input:focus {
+   		outline: none;
+   		border: 2px solid #ffd400;
+   }
+   
+   #findId_wrap button {
+   		width: 123px;
+		height: 40px;
+		border: none;
+		border-radius: 3px;
+		font-weight: bolder;
+		color: #382407;
+		background-color: #ffd400;
+   }
+   
+   #findId_wrap button:hover {
+		background-color: #E6B800;
+   }
+   
+   #findId_wrap .goBack_findId {
+   		background-color: #efefef;
+   }
+   
+   #findId_wrap .goBack_findId:hover {
+   		background-color: #dcdcdc;
+   }
+   
+   .chg_pw_table {
+   		margin: 0 auto;
+   }
+   
+   .findId_input_content .login-input {
+   		width: 377px;
+   		margin: 0 auto;
+   		text-align: left;
+   }
+   
+   .findId_input_content .login-input p {
+   		margin: 0 0 5px 0;
+   		font-size: 16px;
+   		font-weight: bolder;
+   }
+   
+   #telcertification .findId_inputName {
+   		margin-bottom: 15px;
+   }
+   
+   .findId_input_content h3 {
+   		margin: 0 auto;
+	    margin-bottom: 40px;
+	    width: 377px;
+	    text-align: left;
+}
+   
+	.pwBtn .editPwBtn_edit {
+		margin: 5px;
+	}
+	
+	
+	
+	
+	
+	.password_check_edit {
+		width: 768px;
+		margin: 0 auto;
+		padding: 50px 0;
+	}
+	
+	.password_check_input {
+		width: 50%;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.password_check_input .pwChange_info {
+		color: gray;
+		font-size: 12px;
+	}
+	
+	.pwChange_info_div {
+		margin-bottom: 5px;
+	}
+	
+	.pwChange_form .pwChange_input {
+		height: 35px;
+		border-radius: 3px;
+		border: 2px solid #efefef;
+		padding-left: 5px;
+	}
+	
+	.pwChange_form .pwChange_input:focus {
+		border: 2px solid #ffd400;
+		outline: none;
+	}
+	
+	.pwChange_btn {
+		width: 100px;
+		height: 35px;
+		border: none;
+		background-color: #ffd400;
+		border-radius: 3px;
+		font-weight: bolder;
+	}
+	
+	.pwChange_btn:hover {
+		background-color: #E6B800;
+	}
+	

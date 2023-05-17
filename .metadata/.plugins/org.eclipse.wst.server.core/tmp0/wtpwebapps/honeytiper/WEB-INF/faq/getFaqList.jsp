@@ -7,9 +7,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <%@include file="../main/header.jsp"%>
 <style>
+.faqCont{
+	width: 65%;
+}
 mark{
 	border-radius: 50px;
 	background-color: lightblue;
@@ -50,7 +55,7 @@ text-align: right;
   cursor: pointer;
 }
 
-button.tlqkffha{
+button.allSearch{
 	border-style: none;
     background: #FFD400;
     color: #5c3b0c;
@@ -64,10 +69,19 @@ button.tlqkffha{
 	padding: 5px;
 	font-size: 14px;
 }
+
+@media ( max-width : 768px) {
+	.faqCont{
+		width:100%;
+	}
+}
 </style>
-<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script type="text/javascript">
+    
+var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
+
+
  $(function(){
      $(".moreList").slice(0, 7).show();
      if($(".moreList:hidden").length == 0){
@@ -80,18 +94,22 @@ button.tlqkffha{
              $("#btnMore").hide();
          }
      });
+     
+     
+ 	if(isMobile) {
+		$(".allSearch").text('전체');
+	}     
+     
  });
  </script>
 <body>
 <br>
-	<div class="container">
+	<div class="container faqCont">
 		<div class="divLeft" style="width:100%; margin: 0 auto;">
 		  <span style="font-size:17pt; font-weight: bolder;">자주찾는 도움말</span><br>
 		  <span>평소에 <strong>꿀티퍼에게 궁금한점이</strong> 있으시면 <strong>질문을 </strong>클릭해보세요.</span>
 			  <form action="faqList" style="float:right;">
-			  	<input type="text" name="faq_search" id="searchFaq" style="	padding: 5px; font-size: 14px; width: 200px;" placeholder="검색하실 제목을 입력하세요.">
-			  	<button type="submit" style="border:0; background:none;"><i class="fa fa-search" style="font-size:24px; color:#FFD400;"></i></button>
-			  	<button type="button" class="tlqkffha" onclick="location.href='faqList'" 
+			  	<button type="button" class="allSearch" onclick="location.href='faqList'" 
 				  	style="	border-style: none;
 				    background: #FFD400;
 				    color: #5c3b0c;
@@ -102,6 +120,8 @@ button.tlqkffha{
 				        font-size: 12pt;
     font-weight: bolder;">전체보기
 				 </button>
+			  	<input type="text" name="faq_search" id="searchFaq" style="	padding: 5px; font-size: 14px; width: 200px;" placeholder="검색하실 제목을 입력하세요.">
+			  	<button type="submit" style="border:0; background:none;"><i class="fa fa-search" style="font-size:24px; color:#FFD400;"></i></button>
 			  </form>
 		</div>
 		<br>
@@ -138,8 +158,13 @@ button.tlqkffha{
   
 <div style="display: flex; justify-content: center; ">
 	<button id="btnMore" type="button" style="border: 0; background: transparent;">
-		<i class='fas fa-angle-double-down' style='font-size:35px;'></i>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16" style="width: 35px; height: 35px;">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" style="color:#FFD400;"/>
+</svg>
 	</button>
+	</div>
+	<div style="cursor:pointer;" onclick="window.scrollTo(0,0);">
+		TOP
 	</div>
 	<br>
 </div>

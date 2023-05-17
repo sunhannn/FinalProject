@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ggul.zip.escrow.EscrowVO;
 import com.ggul.zip.lesson.LessonService;
 import com.ggul.zip.lesson.LessonVO;
 
@@ -47,9 +48,22 @@ public class LessonServiceImpl implements LessonService {
 		return lessonDAO.lessonMake(lessonVO);
 	}
 
-	
-	
-	//소연누나부분
+	@Override
+	public int selectLessonfromEscrow(LessonVO lessonVO) {
+		return lessonDAO.selectLessonfromEscrow(lessonVO);
+	}
+
+	@Override
+	public int lessonDelete(LessonVO lessonVO) {
+		return lessonDAO.lessonDelete(lessonVO);
+	}
+
+	@Override
+	public List<LessonVO> selectTiperInfoPage(LessonVO lessonVO) {
+		return lessonDAO.selectTiperInfoPage(lessonVO);
+	}
+
+	// 소연누나부분
 	@Override
 	public LessonVO getLesson(LessonVO vo) {
 		return lessonDAO.getLesson(vo);
@@ -59,16 +73,25 @@ public class LessonServiceImpl implements LessonService {
 	public List<LessonVO> getLessonList(LessonVO vo) {
 		return lessonDAO.getLessonList(vo);
 	}
-	
+
 	@Override
-	public ArrayList<LessonVO> getLessonListPostSearch(HashMap<String,Object> map){
+	public ArrayList<LessonVO> getLessonListPostSearch(HashMap<String, Object> map) {
 		return (ArrayList<LessonVO>) lessonDAO.getLessonListPostSearch(map);
 	}
-	
-	
-	//정성현 : 마이페이지
+
+	// 정성현 : 마이페이지
 	@Override
 	public List<LessonVO> getCompletedLessonList(LessonVO vo) {
 		return lessonDAO.getCompletedLessonList(vo);
+	}
+
+	@Override
+	public List<LessonVO> getPotentialLessonList(LessonVO vo) {
+		return lessonDAO.getPotentialLessonList(vo);
+	}
+
+	@Override
+	public void deleteEscrowLesson(EscrowVO evo) {
+		lessonDAO.deleteEscrowLesson(evo);
 	}
 }

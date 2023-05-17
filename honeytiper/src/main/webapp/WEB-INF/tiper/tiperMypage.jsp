@@ -43,6 +43,9 @@ if (tiperVO.getTiper_cate3() == null) {
 
 <style>
 @media ( min-width : 769px) {
+	.container {
+		width: 65%;
+	}
 	#mytip_sub1 {
 		font-size: 27px;
 		font-weight: bold;
@@ -78,6 +81,9 @@ if (tiperVO.getTiper_cate3() == null) {
 	.mytip_td4 {
 		width: 200px;
 		font-size: 15px;
+	}
+	.mytip_td5 {
+		text-align: center;
 	}
 	.mytip_btn1 {
 		background-color: #FFD400;
@@ -204,57 +210,23 @@ if (tiperVO.getTiper_cate3() == null) {
 		width: 40px;
 		height: 40px;
 	}
-	#sugar_img_container {
-		display: flex;
-		justify-content: space-between;
-		width: 70%;
-		margin: 0 auto;
-	}
-	#sugar_img_box {
-		vertical-align: middle;
-	}
-	#sugar_radio_container {
-		margin: 0 auto;
-		width: 70%;
-	}
-	#sugar_radio_box {
-		display: flex;
-		justify-content: space-between;
-		vertical-align: middle;
-	}
-	#sugar_button_box {
-		display: flex;
-		justify-content: center;
-	}
-	#sugar_button_box button {
-		margin: 0 10px;
-		width: 100px;
-		height: 30px;
-	}
-	#review_text {
-		width: 70%;
-		margin: 20px;
-		height: 35px;
-	}
-	.rev_span {
-		/*       font-size: 27px; */
-		font-size: 15px;
-		font-weight: bolder;
-		color: #382407;
-	}
 	.btn_submit {
 		background-color: #FFD400;
 		border: 0;
-		border-radius: 10%;
+		border-radius: 10px;
 		width: 200px;
 		font-size: 14px;
+		width: 200px;
+		height: 40px;
 	}
 	.btn_close {
 		background-color: #d8dee5;
 		border: 0;
-		border-radius: 10%;
+		border-radius: 10px;
 		width: 200px;
 		font-size: 14px;
+		width: 200px;
+		height: 40px;
 	}
 	#tiper_info:hover {
 		background: rgb(235, 235, 235);
@@ -317,6 +289,63 @@ if (tiperVO.getTiper_cate3() == null) {
 	}
 	#mytip_infosub {
 		font-weight: bold;
+	}
+	#mytip-leslist-tab {
+		width: 100%;
+	}
+	.mytip-leslist-tr {
+		height: 100px;
+		border-bottom: 2px solid #d8dee5;
+	}
+	.leslist-img {
+		width: 80px;
+		height: 80px;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+	.mytip-leslist-td1 {
+		width: 150px;
+	}
+	.mytip-leslist-td2 {
+		width: 180px;
+		font-size: 15px;
+		font-weight: bold;
+	}
+	.mytip-leslist-td3 {
+		width: 100px;
+		font-size: 15px;
+		font-weight: bold;
+	}
+	.mytip-leslist-td4 {
+		font-size: 15px;
+		font-weight: bold;
+	}
+	#mytip-leslist-sub {
+		font-size: 24px;
+		font-weight: bold;
+	}
+	.mytip-leslist-td5 {
+		text-align: right;
+		width: 150px;
+	}
+	.mytip-leslist-btn {
+		background-color: #FFD400;
+		border: 0;
+		border-radius: 10px;
+		width: 100px;
+		height: 50px;
+		font-weight: bold;
+	}
+	.mytip-leslist-info {
+		display: block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		width: 200px;
+		margin-left: 10px;
+	}
+	#mytip_table1 {
+		width: 100%;
 	}
 }
 
@@ -418,49 +447,12 @@ if (tiperVO.getTiper_cate3() == null) {
 		width: 40px;
 		height: 40px;
 	}
-	#sugar_img_container {
-		display: flex;
-		justify-content: space-between;
-		width: 70%;
-		margin: 0 auto;
-	}
-	#sugar_img_box {
-		vertical-align: middle;
-	}
-	#sugar_radio_container {
-		margin: 0 auto;
-		width: 70%;
-	}
-	#sugar_radio_box {
-		display: flex;
-		justify-content: space-between;
-		vertical-align: middle;
-	}
-	#sugar_button_box {
-		display: flex;
-		justify-content: center;
-	}
-	#sugar_button_box button {
-		margin: 0 10px;
-		width: 100px;
-		height: 30px;
-	}
-	#review_text {
-		width: 70%;
-		margin: 20px;
-		height: 35px;
-	}
-	.rev_span {
-		/*       font-size: 27px; */
-		font-size: 15px;
-		font-weight: bolder;
-		color: #382407;
-	}
 	.btn_submit {
 		background-color: #FFD400;
 		border: 0;
-		border-radius: 10%;
+		border-radius: 10px;
 		width: 200px;
+		height: 40px;
 		font-size: 14px;
 	}
 	.btn_close {
@@ -623,6 +615,57 @@ if (tiperVO.getTiper_cate3() == null) {
 		font-weight: bold;
 		margin-right: 6px;
 	}
+	.leslist-img {
+		width: 50px;
+		height: 50px;
+	}
+	.mytip-leslist-title {
+		font-size: 12px;
+		display: block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		font-weight: bold;
+	}
+	.mytip-leslist-info {
+		display: block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		width: 100px;
+	}
+	.mytip-leslist-tr {
+		height: 80px;
+		border-bottom: 2px solid #efefef;
+	}
+	.mytip-leslist-td1 {
+		width: 60px;
+	}
+	.mytip-leslist-cate {
+		font-size: 12px;
+		font-weight: bold;
+	}
+	.mytip-leslist-td3 {
+		display: none;
+	}
+	#mytip-leslist-tab {
+		width: 100%;
+	}
+	.mytip-leslist-td5 {
+		text-align: right;
+	}
+	.mytip-leslist-btn {
+		background-color: #FFD400;
+		border: 0;
+		border-radius: 10px;
+		width: 70px;
+		height: 45px;
+		font-weight: bold;
+	}
+	.mytip-leslist-info {
+		font-size: 12px;
+		font-weight: bold;
+	}
 }
 </style>
 <body>
@@ -673,7 +716,7 @@ if (tiperVO.getTiper_cate3() == null) {
 			<table id="mytip_tabpro">
 				<tr id="mytip_trpro">
 					<td id="mytip_tdpro1"><img alt="프로필"
-						src="front/<%=tiperVO.getTiper_img()%>" id="mytip_imgpro"></td>
+						src="front/profile/<%=tiperVO.getTiper_img()%>" id="mytip_imgpro"></td>
 
 					<td id="mytip_tdpro3"><span id="myip_catesub">내 카테고리</span> <br>
 						<br> <span id="mytip_catespan"><%=tiperVO.getTiper_cate1()%><br>
@@ -724,9 +767,37 @@ if (tiperVO.getTiper_cate3() == null) {
 
 		</table>
 		<br> <br>
-
-
 	</div>
+	<br>
+	<div class="container">
+		<p id="mytip-leslist-p">
+			<span id="mytip-leslist-sub">나의 꿀TIP들</span>
+		</p>
+		<br>
+		<table id="mytip-leslist-tab">
+			<c:forEach items="${lessonList}" var="leslist">
+				<tr class="mytip-leslist-tr">
+					<td class="mytip-leslist-td1"><img alt="강의 사진"
+						src="front/lesson/${leslist.lesson_img}" class="leslist-img"
+						title="${leslist.lesson_title}"
+						onclick="location.href='getLessonDetail?lesson_num=${leslist.lesson_num}'"></td>
+					<td class="mytip-leslist-td2"><span
+						class="mytip-leslist-title">${leslist.lesson_title}</span></td>
+					<td class="mytip-leslist-td3"><span class="mytip-leslist-cate">${leslist.lesson_cate}</span></td>
+					<td class="mytip-leslist-td4"><span class="mytip-leslist-info"
+						title="${leslist.lesson_info}">${leslist.lesson_info}</span></td>
+					<td class="mytip-leslist-td5">
+						<button type="button" class="mytip-leslist-btn"
+							onclick="deleteLesson(${leslist.lesson_num})">강의삭제</button>
+					</td>
+				</tr>
+
+			</c:forEach>
+		</table>
+	</div>
+	<br>
+	<br>
+	<br>
 
 	<!-- 신고하기 모달창  -->
 	<div class="modal1" id="modal1Singo">
@@ -789,7 +860,12 @@ if (tiperVO.getTiper_cate3() == null) {
     	   modal1Singo.style.display='none';
            });
        
-       
+       function deleteLesson(lessonNum) {
+    	    if (confirm("정말로 강의를 삭제하시겠습니까?")) {
+    	      // 확인 버튼을 클릭한 경우에만 삭제 동작을 수행
+    	      location.href = 'lessonDelete?lesson_num=' + lessonNum;
+    	    }
+    	  }
        // 신고버튼 누르면 색깔 변경
      const $myImage = $(".filemodal1_singo");
 const originalSrc = $myImage.attr("src"); // 원래 이미지의 src 저장

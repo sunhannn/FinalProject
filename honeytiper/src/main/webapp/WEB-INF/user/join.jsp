@@ -10,8 +10,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-   src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
    <link rel="stylesheet" media="screen and (min-width:769px)" href="front/user.css">
    <link rel="stylesheet" media="screen and (max-width:768px)" href="front/userJoinMobile.css">
 </head>
@@ -68,6 +67,7 @@
 
       window.onload = function() {
          $("#info_ptag").hide();
+         $(".telSubmit_info").hide();
       }
       function idCheck() {
 
@@ -111,10 +111,10 @@
                <tr>
                   <td class="td_left"><label for="user_id">아이디</label></td>
                   <td class="td_right">
-                     <input type="text" name="user_id" id="user_id" class="check join_id_input" placeholder="아이디를 입력해주세요." required>
+                     <input type="text" name="user_id" id="user_id" class="check join_id_input" placeholder="아이디를 입력해주세요" required>
                      <button type="button" onclick="idCheck()">아이디 중복체크</button>
                      <input type="hidden" id="checkBoxId" value="">
-                     <p id="info_ptag"></p>
+                     <p class="info_ptag"></p>
                   </td>
                </tr>
 
@@ -122,7 +122,7 @@
                   <td class="td_left"><label for="user_pw">비밀번호</label></td>
                   <td class="td_right">
                      <input name="user_pw" type="password" id="user_pw" class="check" placeholder="비밀번호를 입력해주세요." required>
-                     <p id="info_ptag"></p>
+                     <p class="info_ptag"></p>
                   </td>
                </tr>
 
@@ -130,7 +130,7 @@
                   <td class="td_left"><label for="user_pw2">비밀번호 확인</label></td>
                   <td class="td_right">
                      <input name="user_pw2" type="password" id="user_pw2" class="check" placeholder="비밀번호를 다시 입력해주세요." required>
-                     <p id="info_ptag"></p>
+                     <p class="info_ptag"></p>
                   </td>
                </tr>
 
@@ -138,16 +138,16 @@
                   <td class="td_left"><label for="user_name">이름</label></td>
                   <td class="td_right">
                      <input name="user_name" type="text" id="user_name" class="check" placeholder="이름을 입력해주세요." required>
-                     <p id="info_ptag"></p>
+                     <p class="info_ptag"></p>
                   </td>
                </tr>
 
                <tr>
                   <td class="td_left"><label for="user_addr">주소</label></td>
                   <td class="td_right">
-                     <input type="text" id="sample6_postcode" name="user_addr1" placeholder="우편번호" class="join_id_input" required>
+                     <input type="text" id="sample6_postcode" name="user_addr1" placeholder="우편번호" class="join_id_input" readonly required>
                      <button type="button" style="border-radius: 3px; margin: auto;" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">우편번호찾기</button>
-                     <input type="text" id="sample6_address" name="user_addr2" placeholder="주소" required><br> 
+                     <input type="text" id="sample6_address" name="user_addr2" placeholder="주소" readonly required>
                      <input type="text" id="sample6_detailAddress" name="user_addr3" placeholder="상세주소">
                      <input type="text" id="sample6_extraAddress" name="user_addr4" placeholder="참고항목">
                   </td>
@@ -158,11 +158,12 @@
                   <td class="td_right">
                      <input name="user_tel" type="text" id="user_tel" placeholder="(- 제외)숫자만 입력해주세요" class="check join_id_input" required>
                      <button type="button" id="telCheck" onclick="smsSend()" disabled>인증번호받기</button>
-                     <p id="info_ptag"></p>
+                     <p class="info_ptag"></p>
                      <div>
                      <input type="text" id="certificationTel" name="certificationTel" class="check join_id_input" placeholder="인증번호" readonly required>
                         <button type="button" id="telConfirmBtn" onclick="smsConfirm()">인증하기</button>
-                     <p id="info_ptag"></p>
+                     <p class="info_ptag"></p>
+                     <p class="telSubmit_info"></p>
                      </div>
                   </td>
                </tr>
@@ -172,18 +173,32 @@
                   </td>
                   <td class="td_right">
                      <input name="user_email" type="text" id="emailText" placeholder="(@)포함 주소" class="check" required>
-                     <p id="info_ptag"></p>
+                     <p class="info_ptag"></p>
                   </td>
                </tr>
-               <tr>
+               <tr class="join_radio_tr">
                   <td class="td_left">관심있는 분야</td> 
                   <td class="td_right join_radio">
-                     <input type="radio" name="user_cate" class="user_cate" value="예체능" required>예체능
-                     <input type="radio" name="user_cate" class="user_cate" value="공예">공예
-                     <input type="radio" name="user_cate" class="user_cate" value="사무">사무
-                     <input type="radio" name="user_cate" class="user_cate" value="라이프스타일">라이프스타일
-                     <input type="radio" name="user_cate" class="user_cate" value="IT">IT
-                     <input type="radio" name="user_cate" class="user_cate" value="기타">기타
+                  	<div class="row" style="text-align: left;">
+                  		<div class="col-xs-5 col-md-4 coldiv" style="padding-left: 27px;">
+		                     <input type="radio" name="user_cate" class="user_cate" value="예체능" required>예체능
+                  		</div>
+                  		<div class="col-xs-4 col-md-4 coldiv">
+		                     <input type="radio" name="user_cate" class="user_cate" value="공예">공예
+                  		</div>
+                  		<div class="col-xs-3 col-md-4 coldiv">
+		                     <input type="radio" name="user_cate" class="user_cate" value="사무">사무
+                  		</div>
+                  		<div class="col-xs-5 col-md-4 coldiv" style="padding-left: 27px;">
+		                     <input type="radio" name="user_cate" class="user_cate" value="라이프스타일">라이프스타일
+                  		</div>
+                  		<div class="col-xs-4 col-md-4 coldiv" id="id_div">
+		                     <input type="radio" name="user_cate" class="user_cate" value="IT">IT
+                  		</div>
+                  		<div class="col-xs-3 col-md-4 coldiv">
+		                     <input type="radio" name="user_cate" class="user_cate" value="기타">기타
+                  		</div>
+                  	</div>
                   </td>
                </tr>
 
@@ -191,9 +206,8 @@
             <br> <br>
 
             <section id="commandCell">
-               <button value="다시쓰기">다시쓰기</button>
-               <button value="회원가입">회원가입</button>
-               <button type="button" onclick="javascript:history.go(-1)">취소</button>
+               <button value="회원가입" class="userJoinBtn_join">회원가입</button>
+               <button type="button" onclick="location.href='/'">취소</button>
 
             </section>
 
@@ -216,8 +230,10 @@
                      if( $("#info_ptag").text() == "" ){
                         console.log("p태그 값 없음");
                         if( $("#checkBoxId").val() != "") {
-                           console.log("submit");
-                           event.target.submit();
+                        	if($(".telSubmit_info").text != "") {
+	                           console.log("submit");
+	                           event.target.submit();
+                        	}
                         }
                      }
                   } 
@@ -268,13 +284,26 @@
                   cache : false,
                   success: function(data) {
                      if (data.check == "success") { //controller에서 넘겨준 성공여부 코드
-                        console.log("성공");
+                    	 
+                    	 $(".telSubmit_info").css({
+                             "borderColor":"#009900"
+                          });
+                    	 
+                    	 if(confirmNum == "" && sendNum == ""){
+                         	alert("인증번호를 전송해주세요");
+                         }else if(confirmNum == "" && sendNum != "") {
+                         	alert("인증번호가 입력되지 않았습니다.");
+                         }else {
+	                        console.log("성공");
+	                     	$(".telSubmit_info").html("true");
+	                     	alert("인증되었습니다.");
+                         }
                      } else {
-                        console.log("실패");
+                     	alert("인증에 실패했습니다. 입력된 전화번호나 인증번호에 오차가 없는지 확인해주세요.");
                      }
                   },
                   error: function(request, status) {
-                     alert("오류가 발생했습니다.")
+                     alert("오류가 발생했습니다.");
                   }
                });
                mailData = "";
@@ -283,10 +312,10 @@
             $(".check").keyup (function(){
                var checkText = "";
                  var thisVal = $(this).val();
-                 var idRegex = /^[0-9A-Za-z]{6,12}$/;
+                 var idRegex = /^[0-9A-Za-z]{5,12}$/;
                  var codeRegex = /^[0-9]{6}$/;
                  var nameRegex = /^[가-힣]{2,4}$/;
-                 var passwordRegex = /^[0-9A-Z_a-z]{8,16}$/;
+                 var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
                  var telRegex = /^010\d{4}\d{4}$/;
                  var emailRegex =  /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
                  
@@ -299,7 +328,7 @@
                         
                     case "user_id":
                        if(thisVal.length != 0 && idRegex.test(thisVal) == false){
-                          checkText = "영문 대소문자와 숫자의 조합으로 6자부터 10자까지 가능합니다.";
+                          checkText = "영문 대소문자, 숫자의 조합으로 최소 6자, 최대 12자를 입력해주세요.";
                        }
                        break;
                        
@@ -326,7 +355,7 @@
                         
                     case "user_pw":
                        if(thisVal.length != 0 && passwordRegex.test(thisVal) == false) {
-                           checkText = "영문대소문자, 숫자, _ 의 조합으로 최소 8자, 최대 12자까지 입력해주세요.";
+                           checkText = "영문 대소문자, 숫자, 특수문자 포함 최소 8자를 입력해주세요.";
                         }
                         break;
                         
@@ -338,15 +367,15 @@
                         
                  }
                  if(checkText != ""){
-                     $(this).siblings("#info_ptag").html(checkText);
-                     $(this).siblings("#info_ptag").addClass("vali");
-                     $(this).siblings("#info_ptag").slideDown();
+                     $(this).siblings(".info_ptag").html(checkText);
+                     $(this).siblings(".info_ptag").addClass("vali");
+                     $(this).siblings(".info_ptag").slideDown();
                       $(this).css({
                          "borderColor":"red"
                       });
                  } else {
-                     $(this).siblings("#info_ptag").slideUp();
-                      $(this).siblings("#info_ptag").empty();
+                     $(this).siblings(".info_ptag").slideUp();
+                      $(this).siblings(".info_ptag").empty();
                       $(this).removeClass("vali");
                       if($(this).val() != $("#user_id").val()){
                          $(this).css({
@@ -361,7 +390,6 @@
                   }
             });
          </script>
-         <br><br><br><br>
       <%@include file="../main/footer.jsp"%>
 </body>
 </html>

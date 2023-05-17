@@ -10,7 +10,7 @@ body{
 
 }
 
-h3{
+#h3_title{
 	font-weight: bold;
 	margin-bottom: 30px;
 	font-size: 26px;
@@ -273,7 +273,7 @@ ul li.on a{
 <div id="container003">
   <div id="table003">
 	<div id="top_bar">
-		<h3>승급 관리</h3>
+		<h3 id="h3_title">승급 관리</h3>
   		<div id="search_wrapper">
   			<select class="search002" id="sel1" name="user_condition" style="display:inline-block!important;margin-right:10px;">
 				<option value="user_id">아이디</option>
@@ -345,7 +345,7 @@ function displayData(currentPage, dataPerPage) {
 			     i++
 			   ) {
 		  chartHtml +=
-			  '<div class="tdCenter_wrapper"><div class="tdCenter_cate003_img_name"><div class="tdCenter"><img src="${pageContext.request.contextPath}/front/'+dataList[i].tiper_img+'" alt="예체능카테고리"></div>'+
+			  '<div class="tdCenter_wrapper"><div class="tdCenter_cate003_img_name"><div class="tdCenter"><img src="${pageContext.request.contextPath}/front/profile/'+dataList[i].tiper_img+'" alt="예체능카테고리"></div>'+
 			 '<div class="tdCenter_name_date"><div class="tdCenter_name_id"><div class="tdCenter" id="name003">'+dataList[i].user_name+'</div>'+
 			  '<div class="tdCenter" id="id003">@'+dataList[i].user_id+'</div></div>'+
 			  '<div class="tdCenter" id="date003">'+dataList[i].tiper_date+'</div></div></div>'+
@@ -365,7 +365,7 @@ function displayData(currentPage, dataPerPage) {
     i++
   ) {
 	  chartHtml +=
-		  '<div class="tdCenter_wrapper"><div class="tdCenter_cate003_img_name"><div class="tdCenter"><img src="${pageContext.request.contextPath}/front/'+dataList[i].tiper_img+'" alt="예체능카테고리"></div>'+
+		  '<div class="tdCenter_wrapper"><div class="tdCenter_cate003_img_name"><div class="tdCenter"><img src="${pageContext.request.contextPath}/front/profile/'+dataList[i].tiper_img+'" alt="예체능카테고리"></div>'+
 		 '<div class="tdCenter_name_date"><div class="tdCenter_name_id"><div class="tdCenter" id="name003">'+dataList[i].user_name+'</div>'+
 		  '<div class="tdCenter" id="id003">@'+dataList[i].user_id+'</div></div>'+
 		  '<div class="tdCenter" id="date003">'+dataList[i].tiper_date+'</div></div></div>'+

@@ -67,17 +67,46 @@ public class TiperController {
 	// 상현이부분
 
 	// 강사 마이페이지 이동
-	@RequestMapping(value = "/tiperMypage")
-	public String tiperMypage(Model model, HttpSession session, UserVO vo, TiperVO tiperVO, LessonVO lessonVO) {
+		@RequestMapping(value = "/tiperMypage")
+		public String tiperMypage(Model model, HttpSession session, UserVO vo, TiperVO tiperVO, LessonVO lessonVO) {
+			tiperVO.setTiper_user_id((String) session.getAttribute("user_id"));
+			vo.setUser_id((String) session.getAttribute("user_id"));
+			vo.setUser_point(userService.pointSelect(vo));
+			model.addAttribute("user_point", vo.getUser_point());
+			tiperVO = tiperService.selectTiperInfo(tiperVO);
+			model.addAttribute("tiperVO", tiperVO);
+			lessonVO.setLesson_tiper_code(tiperVO.getTiper_code());
+			model.addAttribute("lessonTiper", lessonService.selectLessonTiper(lessonVO));
+			List<LessonVO> lessonList = lessonService.selectLessonName(lessonVO);
+			model.addAttribute("lessonList", lessonList);
+			return "tiper/tiperMypage";
+		}
+
+	// 강의 삭제
+	@RequestMapping(value = "/lessonDelete")
+	public String lessonDelete(Model model, HttpServletResponse response, HttpServletRequest request,
+			HttpSession session, UserVO vo, TiperVO tiperVO, LessonVO lessonVO) throws IOException {
 		tiperVO.setTiper_user_id((String) session.getAttribute("user_id"));
-		vo.setUser_id((String) session.getAttribute("user_id"));
-		vo.setUser_point(userService.pointSelect(vo));
-		model.addAttribute("user_point", vo.getUser_point());
+		lessonVO.setLesson_num(Integer.parseInt(request.getParameter("lesson_num")));
 		tiperVO = tiperService.selectTiperInfo(tiperVO);
-		model.addAttribute("tiperVO", tiperVO);
-		lessonVO.setLesson_tiper_code(tiperVO.getTiper_code());
-		model.addAttribute("lessonTiper", lessonService.selectLessonTiper(lessonVO));
-		return "tiper/tiperMypage";
+		lessonVO = lessonService.selectLessonNum(lessonVO);
+		if (lessonService.selectLessonfromEscrow(lessonVO) > 0) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println(
+					"<script type='text/javascript'>alert('아직 수강중인 수강생이 있습니다!');location.href='/tiperMypage';</script>");
+			writer.flush();
+
+		} else {
+			lessonService.lessonDelete(lessonVO);
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.println(
+					"<script type='text/javascript'>alert('꿀TIP삭제가 완료되었어요!');location.href='/tiperMypage';</script>");
+			writer.flush();
+		}
+
+		return "redirect:tiperMypage";
 	}
 
 	// 허니페이 정산창 이동
@@ -87,20 +116,21 @@ public class TiperController {
 
 	}
 
-	// 강사 정보 수정 페이지 이동
-	@RequestMapping(value = "/tiperUpdateGo")
-	public String tiperUpdateGo(Model model, HttpSession session, LessonVO lessonVO, TiperVO tiperVO, UserVO vo) {
-		String userId = (String) session.getAttribute("user_id");
-		vo.setUser_id(userId);
-		vo = userService.selectName(vo);
-		model.addAttribute("user_name", vo.getUser_name());
-		tiperVO.setTiper_user_id(userId);
-		tiperVO = tiperService.selectTiperInfo(tiperVO);
-		model.addAttribute("tiperVO", tiperVO);
-		lessonVO.setLesson_tiper_code(tiperVO.getTiper_code());
-		model.addAttribute("lessonTiper", lessonService.selectLessonName(lessonVO));
-		return "tiper/tiperInfoUpdate";
-	}
+	// 강사 정보 수정 페이지 이동 
+		@RequestMapping(value = "/tiperUpdateGo")
+		public String tiperUpdateGo(Model model, HttpSession session, LessonVO lessonVO, TiperVO tiperVO, UserVO vo) {
+			String userId = (String) session.getAttribute("user_id");
+			vo.setUser_id(userId);
+			vo = userService.selectName(vo);
+			model.addAttribute("user_name", vo.getUser_name());
+			tiperVO.setTiper_user_id(userId);
+			tiperVO = tiperService.selectTiperInfo(tiperVO);
+			model.addAttribute("tiperVO", tiperVO);
+			lessonVO.setLesson_tiper_code(tiperVO.getTiper_code());
+
+			model.addAttribute("lessonTiper", lessonService.selectTiperInfoPage(lessonVO));
+			return "tiper/tiperInfoUpdate";
+		}
 
 	// 강의 정보 수정 페이지 이동
 	@RequestMapping(value = "/lessonUpdateGo")
@@ -166,28 +196,18 @@ public class TiperController {
 		return msg;
 	}
 
-	// 포인트 정산 액션(수정함~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~)
+	// 포인트 정산 액션
 	@RequestMapping(value = "/honeyTakeAction")
-	public String honeyTakeAction(Model model, HttpServletResponse response, HttpSession session, UserVO vo,
-			PointVO pointVO) throws IOException {
+	public String honeyTakeAction(HttpServletRequest req, HttpServletResponse res, HttpSession session, UserVO vo) {
 		String userId = (String) session.getAttribute("user_id");
 		vo.setUser_id(userId);
-		vo = userService.selectName(vo);
-		pointVO.setPoint_price(vo.getUser_point());
-		vo.setUser_point(userService.pointSelect(vo));
-		if (vo.getUser_point() == 0) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('정산받을 포인트가 없습니다!'); history.back();</script>");
-			writer.flush();
-		}
-		pointVO.setPoint_id(userId);
-		pointService.honeyTakePoint(pointVO);
 		userService.pointTake(vo);
-		return "redirect:tiperMypage";
+		vo.setUser_point(userService.pointSelect(vo));
+		session.setAttribute("user_point", vo.getUser_point());
+		return "user/userMyPage";
 	}
 
-	// 강사 정보 수정 액션(수정함~~~~~~~~~~~~~~~~~~~~~~~~~~)
+	// 강사 정보 수정 액션
 	@RequestMapping(value = "/tiperUpdateAction")
 	public String tiperUpdateAction(HttpServletRequest req, HttpServletResponse res, HttpSession session,
 			TiperVO tiperVO) {
@@ -196,7 +216,7 @@ public class TiperController {
 		return "redirect:tiperMypage";
 	}
 
-	// 강의 정보 수정 액션(수정함~~~~~~~~~~~~~~~~~~~)
+	// 강의 정보 수정 액션
 	@RequestMapping(value = "/lessonUpdateAction")
 	public String lessonUpdateAction(HttpServletRequest req, HttpServletResponse res, HttpSession session,
 			LessonVO lessonVO) {
@@ -312,7 +332,6 @@ public class TiperController {
 	@RequestMapping(value = "/callEscrowListByStatus", method = RequestMethod.POST)
 	@ResponseBody
 	public List<EscrowVO> getEscrowListByStatus(EscrowVO vo) {
-		System.out.println("status: " + vo);
 		return escrowService.getEscrowListByStatus(vo);
 	}
 
@@ -338,29 +357,24 @@ public class TiperController {
 		}
 	}
 
-	// 프로필 사진 업로드
+	// 파일 업로드
+	// 프로필 사진 업로드 (5월 17일 수정함)
 	@PostMapping("/uploadProfile")
-	public ResponseEntity<String> uploadProfile(@RequestParam("tiper_img") MultipartFile file, Model model,
-			HttpServletRequest request) {
+	public ResponseEntity<String> uploadProFile(@RequestParam("tiper_img") MultipartFile file, Model model) {
+		// 파일 저장
 		try {
 			String fileName = file.getOriginalFilename();
 			model.addAttribute("filename", fileName);
-
-			String rootPath = request.getSession().getServletContext().getRealPath("/");
-			String savePath = rootPath + "resources/img/profile/";
-			System.out.println(savePath);
+			String savePath = "C:/apache-tomcat-9.0.73/webapps/honeytiper/resource/img/profile";
 			String filePath = savePath + fileName;
 			model.addAttribute("filename", fileName);
-
 			File saveDir = new File(savePath);
 			if (!saveDir.exists()) {
 				saveDir.mkdirs();
 			}
-
 			File saveFile = new File(filePath);
 			file.transferTo(saveFile);
 			System.out.println(fileName);
-
 			return ResponseEntity.ok().body("File uploaded successfully");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -370,26 +384,21 @@ public class TiperController {
 
 	// 강의 사진 업로드
 	@PostMapping("/uploadLesson")
-	public ResponseEntity<String> uploadLesson(@RequestParam("tiper_img") MultipartFile file, Model model,
-			HttpServletRequest request) {
+	public ResponseEntity<String> uploadLessonFile(@RequestParam("tiper_img") MultipartFile file, Model model) {
+		// 파일 저장
 		try {
 			String fileName = file.getOriginalFilename();
 			model.addAttribute("filename", fileName);
-
-			String rootPath = request.getSession().getServletContext().getRealPath("/");
-			String savePath = rootPath + "resources/img/lesson/";
+			String savePath = "C:/apache-tomcat-9.0.73/webapps/honeytiper/resource/img/lesson";
 			String filePath = savePath + fileName;
 			model.addAttribute("filename", fileName);
-
 			File saveDir = new File(savePath);
 			if (!saveDir.exists()) {
 				saveDir.mkdirs();
 			}
-
 			File saveFile = new File(filePath);
 			file.transferTo(saveFile);
 			System.out.println(fileName);
-
 			return ResponseEntity.ok().body("File uploaded successfully");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -397,16 +406,51 @@ public class TiperController {
 		}
 	}
 
+	// 마이페이지 : 강의신고 - 같은 학생-강의 간 중복된 신고 있는지 확인 후 신고.
+	@RequestMapping(value = "/reportLessonNum", method = RequestMethod.POST)
+	public void reportLessonNum(ReportVO vo, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter writer = response.getWriter();
+		int result = userService.isDupReport(vo); // 0 일 때 : 중복신고 없음, 1 일 때 이미 신고된 내용 있음.
+		if (result == 0) {
+			userService.reportLessonNum(vo);
+			writer.println(
+					"<script type='text/javascript'>alert('신고가 완료되었습니다.');location.href='/userMyPageGo';</script>");
+			writer.flush();
+		} else if (result == 1) {
+			writer.println(
+					"<script type='text/javascript'>alert('이미 신고한 강의입니다.');location.href='/userMyPageGo';</script>");
+			writer.flush();
+		}
+	}
+
 	// 리뷰 작성 액션
 	@ResponseBody
 	@RequestMapping(value = "/reviewAction")
 	public String reviewAction(HttpServletRequest req, HttpServletResponse res, HttpSession session, LessonVO lessonVO,
-			ReviewVO reviewVO, EscrowVO escrowVO) {
+			ReviewVO reviewVO, EscrowVO escrowVO, UserVO uvo) {
 		String message = "";
 		reviewVO.setReview_writer((String) session.getAttribute("user_id"));
 		System.out.println(reviewVO.getReview_lesson_num());
 		reviewService.reviewInsert(reviewVO);
 		escrowService.updateEscrowStatus12(escrowVO);
+
+		// 리뷰작성 시 (escrow_price*0.95)를 user_point에 insert
+
+		// escrow_price를 get한 후에 -> VO에 setReport_num
+		int amountForTiper = userService.getEscrowPrice(escrowVO);
+		uvo.setReport_num((int) Math.floor(amountForTiper * 0.95)); // *주의 : report_num에 보낼 포인트액수 set.
+
+		String lessonTitle = userService.getLessonTitle(lessonVO); // tiper table에서 강사코드=강사유저아이디로 조인
+		uvo.setReport_cont(lessonTitle); // *주의 : report_cont에 강의명 set.
+
+		String tiperUserId = userService.getTiperUserId(escrowVO); // tiper table에서 강사코드=강사유저아이디로 조인
+		uvo.setUser_id(tiperUserId);
+
+		// user_point(user테이블)에 insert, point테이블에 insert
+		userService.addUserPoint(uvo);
+		userService.insertLessonPrice(uvo);
+
 		message = "<script>location.href='userMyPageGo';</script>";
 		return message;
 	}
@@ -431,8 +475,34 @@ public class TiperController {
 		String completedLessonListJSON = new Gson().toJson(lessonService.getCompletedLessonList(lessonVO));
 		request.setAttribute("completedListJSON", completedLessonListJSON);
 
+		request.setAttribute("potentialLessonList", lessonService.getPotentialLessonList(lessonVO));
+
+		System.out.println(lessonService.getPotentialLessonList(lessonVO));
+
 		model.addAttribute("info", userService.getUserInfoMypage(vo));
 
+		// 0512통합 이후
+
+		int isTiper = userService.isTiper(vo);
+		int isTiperAgree = userService.isTiperAgree(vo);
+
+		model.addAttribute("isTiper", isTiper);
+		model.addAttribute("isTiperAgree", isTiperAgree);
+
 		return "user/userMyPage";
+	}
+
+	// 수강신청 : 수강신청한 강의를 수강취소하는 컨트롤러
+	@RequestMapping(value = "/deleteEscrowLesson")
+	public void deleteEscrowLesson(EscrowVO evo, HttpServletResponse response, HttpSession session) throws Exception {
+		String userId = (String) session.getAttribute("user_id");
+		evo.setEscrow_user_id(userId);
+
+		lessonService.deleteEscrowLesson(evo);
+
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script type='text/javascript'>alert('수강을 취소했습니다.');location.href='/userMyPageGo';</script>");
+		writer.flush();
 	}
 }

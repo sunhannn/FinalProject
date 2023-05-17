@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="QueenDAO">
+	<resultMap type="queen" id="queenMap">
+		<result property="sales_value" column="SALES_VALUE"/>
+		<result property="sales_date" column="SALES_DATE"/>
+	</resultMap>
+
+	<select id="getChart" resultMap="queenMap">
+			SELECT SALES_DATE, round(avg(sales_value),1) AS SALES_VALUE FROM sales 
+		<if test="chart_select == 'week' ">
+			WHERE SALES_DATE BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK ) AND NOW()
+		</if>
+		<if test="chart_select == 'month' ">
+			WHERE SALES_DATE BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW()
+		</if>
+			GROUP BY SALES_DATE 
+			ORDER BY SALES_DATE 
+	</select>
+	
+<!-- 	일주일값 -->
+	<select id="getWeekTop" resultType="String">
+		SELECT format(round(max(sales_value),1),1) AS SALES_VALUE FROM sales 
+		WHERE SALES_DATE BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK ) AND NOW()
+		GROUP BY SALES_DATE
+		HAVING max(sales_value)
+		ORDER BY sales_value DESC
+		LIMIT 1
+	</select>
+	
+	<select id="getWeekAvg" resultType="String">
+		SELECT format(ROUND(AVG(sales_value),1),1) AS SALES_VALUE FROM sales 
+		WHERE SALES_DATE BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK ) AND NOW()
+	</select>
+	
+	<select id="getWeekTotal" resultType="String">
+		SELECT format(SUM(sales_value),1) AS SALES_VALUE FROM sales 
+		WHERE SALES_DATE BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK ) AND NOW()
+	</select>
+	
+	
+<!-- 	한달값 -->
+	<select id="getMonthTop" resultType="String">
+		SELECT format(round(max(sales_value),1),1) AS SALES_VALUE FROM sales 
+		WHERE SALES_DATE BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW()
+		GROUP BY SALES_DATE
+		HAVING max(sales_value)
+		ORDER BY sales_value DESC
+		LIMIT 1
+	</select>
+	
+	<select id="getMonthAvg" resultType="String">
+		SELECT format(ROUND(AVG(sales_value),1), 1) AS SALES_VALUE FROM sales 
+		WHERE SALES_DATE BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW();
+	</select>
+	
+	<select id="getMonthTotal" resultType="String">
+		SELECT format(SUM(sales_value),1) AS SALES_VALUE FROM sales 
+		WHERE SALES_DATE BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW()
+	</select>
+	
+	
+	
+	   <!-- 소연이부분 -->
+   <update id="updateAdmin">
+      update users set
+      user_pw=#{user_pw},
+      user_email=#{user_email}
+      where user_id='admin'
+   </update>
+	
+</mapper>

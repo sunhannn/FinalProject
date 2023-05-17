@@ -27,6 +27,13 @@
 	        		group by 	MESSAGE_ROOM) and (MESSAGE_SEND_ID = #{user_id} or MESSAGE_RECV_ID = #{user_id})
     			order by 	FIELD(MESSAGE_ROOM, #{message_room}, 0, 0) desc;
         </when>
+        <when test="send_btn == 4">
+        		MESSAGE_NUM in
+	        		(select 	max(MESSAGE_NUM)
+	        		from 		message
+	        		group by 	MESSAGE_ROOM) and (MESSAGE_SEND_ID = #{user_id} or MESSAGE_RECV_ID = #{user_id})
+    			order by 	FIELD(MESSAGE_ROOM, #{message_room}, 0, 0) desc;
+        </when>
         <otherwise>
 		        MESSAGE_NUM in
 		        	(select 	max(MESSAGE_NUM)

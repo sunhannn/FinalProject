@@ -106,15 +106,16 @@ public class MessageDAO {
 		System.out.println("룸넘버***"+to.getMessage_room());
 		System.out.println("exist_chat***"+to.getExist_chat());
 		// 메세지리스트에서 보낸건지 프로필에서 보낸건지 구분하기 위함
+		int exist_chat = sqlSession.selectOne("exist_chat", to);
+			to.setExist_chat(exist_chat);
 		if (to.getMessage_room() == 0) { // room이 0이라면 프로필에서 보냄
-			int exist_chat = sqlSession.selectOne("exist_chat", to);
 			to.setExist_chat(exist_chat);
 			System.out.println("exist_chat셋팅값"+exist_chat);
 			// 프로필에서 보낸것중 메세지 내역이없어서 첫메세지가 될경우를 구분하기 위함
 			if (exist_chat == 0) { // 메세지 내역이 없어서 0이면 message 테이블의 room 최댓값을 구해서 to에 set 한다.
 				int max_room = sqlSession.selectOne("max_room", to);
 				to.setMessage_room(max_room + 1);
-				
+				System.out.println("방없어서 맥스방번호+1로 새로만듦");
 //				int exist_chat_fin = sqlSession.selectOne("exist_chat", to);
 //				to.setExist_chat(exist_chat_fin);
 				

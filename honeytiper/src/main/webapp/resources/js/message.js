@@ -22,9 +22,11 @@
 			},
 			success:function(data){
 				console.log("메세지 리스트 리로드 성공");
+				//console.log("data메세지리스트->",data);
 				//$('.inbox_chat').html(data.replaceAll("[<@강의명>]", "<pre class='lesson_title'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-receipt-cutoff' viewBox='0 0 16 16'><path d='M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zM11.5 4a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z'/><path d='M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293 2.354.646zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118l.137-.274z'/></svg>견적서<br>").replaceAll("[<@/강의명>]", "</pre>").replaceAll("[<@가격>]", "<br><p class='lesson_price'>").replaceAll("[<@/가격|버튼>]", "</p><button type='button' class='accept_btn'>수락하기</button><input class='escrow_lesson_num' type='hidden' value='").replaceAll("[<@/버튼|코드>]", "'><input class='escrow_tiper_code' type='hidden' value='").replaceAll("[<@/코드>]", "'><input class='escrow_status' value='").replaceAll("[<@status>]","' style='display: none;'>"));
-				$('.inbox_chat').html(data.replaceAll("[<@전수일>]","<p class='start_date'>꿀TIP 전수일<br>").replaceAll("[<@강의명>]", "</p><pre class='lesson_title'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-receipt-cutoff' viewBox='0 0 16 16'><path d='M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zM11.5 4a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z'/><path d='M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293 2.354.646zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118l.137-.274z'/></svg>견적서<br>").replaceAll("[<@/강의명>]", "</pre>").replaceAll("[<@가격>]", "<br><p class='lesson_price'>").replaceAll("[<@/전수일>]", "<br>").replaceAll("[<@/가격|버튼>]", "</p><button type='button' class='accept_btn'>수락하기</button><input class='escrow_lesson_num' type='hidden' value='").replaceAll("[<@/버튼|코드>]", "'><input class='escrow_tiper_code' type='hidden' value='").replaceAll("[<@/코드>]", "'><input class='escrow_status' value='").replaceAll("[<@status>]","' style='display: none;'>"));
 				//$('.lesson_title').prepend('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-receipt-cutoff" viewBox="0 0 16 16"><path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zM11.5 4a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/><path d="M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293 2.354.646zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118l.137-.274z"/></svg>');
+				$('.inbox_chat').html(data.replaceAll("[<@전수일>]","<p class='start_date'>꿀TIP 전수일<br>").replaceAll("[<@강의명>]", "</p><pre class='lesson_title'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-receipt-cutoff' viewBox='0 0 16 16'><path d='M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zM11.5 4a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z'/><path d='M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293 2.354.646zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118l.137-.274z'/></svg>견적서<br>").replaceAll("[<@/강의명>]", "</pre>").replaceAll("[<@가격>]", "<br><p class='lesson_price'>").replaceAll("[<@/전수일>]", "<br>").replaceAll("[<@/가격|버튼>]", "</p><button type='button' class='accept_btn'>수락하기</button><input class='escrow_lesson_num' type='hidden' value='").replaceAll("[<@/버튼|코드>]", "'><input class='escrow_tiper_code' type='hidden' value='").replaceAll("[<@/코드>]", "'><input class='escrow_status' value='").replaceAll("[<@status>]","' style='display: none;'>"));
+				//$('.inbox_chat').html(data);
 				
 				$('.write_msg').focus();
 								
@@ -56,7 +58,7 @@
 				      	
 				      	//가격 입력창 띄우는 버튼
 						if(user_role == 1){
-					      	send_msg +="<button id='price_btn' type='button' class='btn btn-secondary'>";
+					      	send_msg +="<button title='견적보내기' id='price_btn' type='button' class='btn btn-secondary'>";
 					      	send_msg +="<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-calculator' viewBox='0 0 16 16'>";
 					      	send_msg +="<path d='M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z'></path>";
 					      	send_msg +="<path d='M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-2zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-4z'></path>";
@@ -71,7 +73,7 @@
 						      	send_msg +="<div style='display: none' id='price_modal' data-backdrop='static' class='modal'>";
 							      	send_msg +="<select class='escrow_lesson_title' name='lesson_num' size='1' required='required'></select>";
 							      	send_msg +="<label class='escrow_start_lb' for='escrow_start'>꿀TIP 전수할 날짜:</label>";
-							      	send_msg +="<input type='date' id='escrow_start' class='escrow_start' required='required'>";
+							      	send_msg +="<input max='2123-12-31' type='date' id='escrow_start' class='escrow_start' required='required'>";
 							      	send_msg +="<button class='modal_close' type='button'><i class='fa fa-close' aria-hidden='true'></i></button>";
 							      	send_msg +="<div class='price_send_div'>";
 							      	send_msg +="<p class='price_p'>아래 입력란에 제시할 허니페이를<br>입력해주세요.</p>";
@@ -111,7 +113,7 @@
 					$('.write_msg').focus(function(){
 							var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
 							if(isMobile) {
-								$('.msg_history').css('height', '48%');	
+								//$('.msg_history').css('height', '48%');	
 								$(".msg_history").scrollTop($(".msg_history")[0].scrollHeight);
 							}
 						});
@@ -160,6 +162,10 @@
 				send_btn : send_btn
 			},
 			success:function(data){
+				var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
+					if(!isMobile) {
+						window.opener.parent_function();
+					}
 				console.log("메세지 내용 가져오기 성공");
 				
 				// 메세지 내용을 html에 넣는다
@@ -191,9 +197,9 @@
 		let message_cont = $('.write_msg').val();
 		message_cont = message_cont.trim();
 		
-		let plainText = message_cont.replace(/<[^>]*>/g, '');
-		let decodedText = $("<div/>").html(plainText).text();
-		message_cont = decodedText;
+		//let plainText = message_cont.replace(/<[^>]*>/g, '');
+		//let decodedText = $("<div/>").html(plainText).text();
+		//message_cont = decodedText;
 				
 		if(message_cont == ""){
 			//alert("저희는 텔레파시를 사용할 수 없어요!");
@@ -246,9 +252,6 @@
 				success:function(data){
 					console.log("강의목록 조회 성공");
 					console.log("강의목록data: ",data);
-					
-					$('.escrow_lesson_title').empty();
-					
 					$('.escrow_lesson_title').append(data);
 					$('.escrow_lesson_title').prepend('<option value="" disabled selected>꿀TIP을 선택해주세요.</option>');
 				},
@@ -273,6 +276,13 @@
 					console.log("escrow_tiper_code?",escrow_tiper_code);
 					console.log("escrow_status?",escrow_status);
 			
+			var messages = [
+			  "지킬 수 없는 약속은 하지 않는게 좋다고 생각해요!",
+			  "지금 당신이 계신곳은 지구가 맞나요?",
+			  "혹시.. 타임머신이 출시되었나요?",
+			  "우리의 기술과 재능의 끝은 어디일까요?"
+			];
+			
 				if($('.escrow_lesson_title').val() == null){
 					//alert("선택이 안되었습니다.");
 					$('.escrow_lesson_title').css("border","2px solid red");
@@ -292,6 +302,14 @@
 					$('#price_modal_input').focus();
 				}else{
 					 if(escrow_price != ""){
+					 	if ($('.escrow_start').val() >= '2040-01-01'){
+				 		    var randomIndex = Math.floor(Math.random()*messages.length);
+
+						    var randomMessage = messages[randomIndex];
+						
+						    alert(randomMessage);
+					 		//alert("지킬 수 없는 약속은 하지 않는게 좋다고 생각해요!");
+					 	}
 						if (confirm("전송후 변경이 가능하지만 상대방이 수락하면 변경이 불가해요.\n전송할까요?") == true){
 					$.ajax({
 					url:"update_price",
@@ -311,10 +329,11 @@
 						$('#price_modal').hide();
 						
 						// 가격모달창 입력칸 비우기
-						$('#price_modal_input').val("");
+							$('#price_modal_input').val("");
+							$('#escrow_start').val("");
+							$('.escrow_lesson_title').empty();
 						 	$('.inbox_people').css('pointer-events', 'auto');
 						 	$('.mesgs').css('pointer-events', 'auto');
-						
 						// 메세지 내용  리로드
 						MessageContentList(message_room, other_user_id, send_btn);
 						
@@ -332,6 +351,7 @@
 				$('.escrow_start').val("");
 				$('.inbox_people').css('pointer-events', 'auto');
 				$('.mesgs').css('pointer-events', 'auto');
+				$('.escrow_lesson_title').empty();
 			}
 		}
 	}
@@ -420,5 +440,8 @@
 		}
 	});
 
+	$(".message_logo").on("click", function() {
+      window.location.href = "/index";
+    });
 
 	

@@ -7,7 +7,7 @@ body {
 	padding: 0;
 }
 
-h3 {
+#h3_title {
 	margin: 0 auto;
 	margin-left: 19%;
 	font-size: 26px;
@@ -216,7 +216,7 @@ tr {
 	<div id="super_container">
 		<div class="table_wrapper">
 
-			<h3>신고처리</h3>
+			<h3 id="h3_title">신고처리</h3>
 			<table class="cont1_table">
 
 				<thead class="btn-primary">

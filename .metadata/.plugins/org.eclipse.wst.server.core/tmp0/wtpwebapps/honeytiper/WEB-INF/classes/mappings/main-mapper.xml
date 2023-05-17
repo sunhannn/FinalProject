@@ -28,7 +28,7 @@
    <!-- 인기강의 출력 -->
    <select id="getMainPop" resultType="lesson">
       SELECT l.lesson_img, l.lesson_num,
-      l.lesson_title, ROUND(AVG(r.review_sugar), 1) AS
+      l.lesson_title, ROUND(AVG(r.review_sugar), 2) AS
       review_score
       FROM
       lesson l
@@ -54,7 +54,6 @@
       lesson_date >
       adddate(DATE(SYSDATE()), INTERVAL -28 day)
       ORDER BY RAND()
-      LIMIT 15;
    </select>
    
    <!-- 신규강의 출력 앱 -->

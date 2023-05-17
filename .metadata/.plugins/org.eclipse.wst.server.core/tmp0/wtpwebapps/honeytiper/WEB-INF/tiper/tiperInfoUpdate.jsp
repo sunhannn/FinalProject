@@ -25,8 +25,7 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 	}
 	#tipup_sub2 {
 		font-size: 18px;
-		text-decoration-line: underline;
-		text-decoration-color: #FFD400;
+		font-weight: bold;
 	}
 	#tipup_tab1 {
 		width: 100%;
@@ -59,8 +58,7 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 	}
 	#tipup_sub3 {
 		font-size: 18px;
-		text-decoration-line: underline;
-		text-decoration-color: #FFD400;
+		font-weight: bold;
 	}
 	#tipup_tab2 {
 		width: 100%;
@@ -79,9 +77,11 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		background-color: #FFD400;
 		border-radius: 10px;
 		border: 0;
+		font-size: 12px;
 		width: 120px;
 		height: 30px;
 		font-weight: bold;
+		width: 100px;
 	}
 	#tipup_btn_div1 {
 		text-align: center;
@@ -99,18 +99,39 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		height: 140px;
 		border-radius: 10%;
 	}
+	.tipup-lesson-img {
+		width: 60px;
+		height: 60px;
+		border-radius: 10px;
+	}
+	.tipup_td4 {
+		font-size: 12px;
+		font-weight: bold;
+	}
+	.tipup-td6 {
+		font-size: 12px;
+		font-weight: bold;
+	}
+	.tipup-img-td {
+		width: 75px;
+	}
+	.tipup-review {
+		display: none;
+	}
 }
 
 @media ( min-width : 769px) {
+	.container {
+		width: 65%;
+	}
 	#tipup_sub1 {
 		font-size: 27px;
 		border: 0;
 		font-weight: bolder;
 	}
 	#tipup_sub2 {
-		font-size: 24px;
-		text-decoration-line: underline;
-		text-decoration-color: #FFD400;
+		font-size: 22px;
+		font-weight: bold;
 	}
 	#tipup_tab1 {
 		width: 100%;
@@ -141,18 +162,18 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 	}
 	#tipup_sub3 {
 		font-size: 22px;
-		text-decoration-line: underline;
-		text-decoration-color: #FFD400;
+		font-weight: bold;
 	}
 	#tipup_tab2 {
 		width: 100%;
 	}
 	.tipup_tr2 {
-		height: 100px;
+		height: 130px;
 		border-bottom: 1px solid #d8dee5;
 	}
 	.tipup_td4 {
-		font-size: 17px;
+		font-size: 15px;
+		font-weight: bold;
 	}
 	.tipup_td5 {
 		text-align: right;
@@ -161,7 +182,7 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		background-color: #FFD400;
 		border-radius: 10px;
 		border: 0;
-		width: 180px;
+		width: 150px;
 		height: 50px;
 		font-weight: bold;
 	}
@@ -180,6 +201,24 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 		width: 200px;
 		height: 200px;
 		border-radius: 10%;
+	}
+	.tipup-lesson-img {
+		width: 100px;
+		height: 100px;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+	.tipup-img-td {
+		width: 180px;
+	}
+	.tipup-td6 {
+		font-size: 15px;
+		font-weight: bold;
+		width: 220px;
+	}
+	.tipup-review {
+		font-size: 15px;
+		font-weight: bold;
 	}
 }
 </style>
@@ -225,7 +264,13 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 			<table id="tipup_tab2">
 				<c:forEach items="${lessonTiper}" var="lesson">
 					<tr class="tipup_tr2">
-						<td class="tipup_td4">강의명 : ${lesson.lesson_title }</td>
+						<td class="tipup-img-td"><img alt="강의사진 없음"
+							src="front/lesson/${lesson.lesson_img}"
+							title="${lesson.lesson_title }" class="tipup-lesson-img"
+							onclick="location.href='getLessonDetail?lesson_num=${lesson.lesson_num}'"></td>
+						<td class="tipup_td4">${lesson.lesson_title }</td>
+						<td class="tipup-td6">수강자 수 ${lesson.lesson_onoff}</td>
+						<td class="tipup-review">평균 리뷰 평점 : ${lesson.lesson_info }</td>
 						<td class="tipup_td5"><button type="button"
 								class="tipup_btn1"
 								onclick="location.href='lessonUpdateGo?lesson_num=${lesson.lesson_num}'">강의수정하기</button></td>
@@ -291,13 +336,6 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 			} else {
 				// 취소 버튼을 클릭한 경우 아무런 작업을 하지 않습니다.
 				return false;
-			}
-		}
-
-		function showDefault() {
-			var textarea = document.getElementById("tipup_info1");
-			if (!textarea.value) {
-				textarea.value = textarea.getAttribute("placeholder");
 			}
 		}
 

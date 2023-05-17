@@ -46,8 +46,8 @@
 	
 	<select id="getTotalReviewList" resultType="review">
 		SELECT * FROM REVIEW WHERE REVIEW_LESSON_NUM = #{lesson_num}
-		<if test="select_key == 'review_num' "> ORDER BY REVIEW_NUM desc;</if>
-		<if test="select_key == 'review_num_asc' "> ORDER BY REVIEW_NUM;</if>
+		<if test="select_key == 'review_num' "> ORDER BY REVIEW_DATE desc;</if>
+		<if test="select_key == 'review_num_asc' "> ORDER BY REVIEW_DATE;</if>
 		<if test="select_key == null"> ORDER BY REVIEW_NUM desc;</if>
 		<if test="select_key == 'review_sugar' "> ORDER BY REVIEW_SUGAR desc;</if>
 		<if test="select_key == 'review_sugar_asc' "> ORDER BY REVIEW_SUGAR;</if>

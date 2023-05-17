@@ -313,7 +313,7 @@ body {
 			let formData = new FormData();
 			formData.append('tiper_img', fparam);
 			$.ajax({
-				url : "/upload",
+				url : "/uploadProfile",
 				type : "post",
 				data : formData,
 				contentType : false,

@@ -33,7 +33,9 @@ public class EscrowDAO {
 	public List<EscrowVO> searchDispute(HashMap<String, Object> map) {
 		return mybatis.selectList("EscrowDAO.searchDispute", map);
 	}
-
+	public List<EscrowVO> searchAndStatus(EscrowVO vo) {
+		return mybatis.selectList("EscrowDAO.searchAndStatus", vo);
+	}
 	//상태거르기
 			public int checkStatus(EscrowVO vo) {
 				return mybatis.selectOne("EscrowDAO.checkStatus",vo);

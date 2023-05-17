@@ -3,6 +3,7 @@
 <%@page import="com.ggul.zip.user.UserVO"%>
 <%@page import="com.ggul.zip.tiper.TiperVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <%
@@ -26,6 +27,7 @@ String user_id1 = (String) session.getAttribute("user_id");
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <title>마이페이지</title>
 <%@include file="../main/header.jsp"%>
 
@@ -57,22 +59,12 @@ h4 {
 	font-size: 27px;
 }
 
-hr {
-	width: 100vw;
-	border: 0px;
-	border-top: 3px solid #E9E9E9;
-}
-
 .container0_grid {
 	display: flex;
 	flex-direction: column;
 	width: 90%;
 	margin: 0px auto;
 	gap: 4px;
-}
-
-h4 {
-	font-weight: bold;
 }
 
 #backgray {
@@ -85,9 +77,9 @@ h4 {
 	}
 
 .container1 {
-	width: 768px;
+	width: 65vw;
 	margin: 0 auto;
-	margin-top: 100px;
+	margin-top: 90px;
 }
 
 #sub_1 {
@@ -95,6 +87,7 @@ h4 {
 	display: block;
 	font-weight: bold;
 	font-size: 27px;
+	margin-left: 20px;
 }
 
 #sub_2 {
@@ -108,8 +101,8 @@ h4 {
 }
 
 .container0 {
-	width: 768px;
-	padding: 50px 0px;
+	width: 65vw;
+	padding: 50px 0px 25px 0px;
 	margin-bottom: -20px;
 	background-color: rgb(247, 247, 247);
 	margin: 0 auto;
@@ -149,14 +142,22 @@ h4 {
 	background: #FFD400;
 }
 
+#container0_grid003:hover{
+	background:#FFC70F;
+	cursor: pointer;
+}
+
 #container0_cont1 {
 	display: flex;
+	margin-bottom: 30px;
 }
 
 #container0_cont2 {
 	display: flex;
 	flex-direction: column;
 	margin-top: 30px;
+	margin-left: 24px;
+	
 }
 
 #container0_cont3 {
@@ -191,7 +192,7 @@ h4 {
 }
 
 #container0_cont6 {
-	padding: 3px 0px 3px 30px;
+	padding: 13px 130px 13px 25px;
 	font-size: 17px;
 	font-weight: bold;
 }
@@ -223,10 +224,6 @@ h4 {
 	line-height: 28px;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-}
-
-#modifyUserInfo {
-	color: #5c3b0c;
 }
 
 #tip_img1 {
@@ -269,7 +266,7 @@ h4 {
 }
 
 .grid002_title {
-	font-size: 10px;
+	font-size: 12px;
 	padding-bottom: 20px;
 }
 
@@ -290,7 +287,6 @@ h4 {
 .cont1_btn_wrapper {
 	display: flex;
 	align-items: center;
-	/* 	    margin: 0 auto; */
 	width: 190px;
 }
 
@@ -342,7 +338,7 @@ h4 {
 }
 
 .container2 {
-	width: 768px;
+	width: 65vw;
 	margin: 0 auto;
 	margin-top: 100px;
 }
@@ -361,7 +357,7 @@ h4 {
 	background-color: white;
 	position: relative;
 	width: 600px;
-	height: 50%;
+	height: 450px;
 	padding: 30px;
 	margin: auto;
 	margin-top: 20vh;
@@ -456,7 +452,6 @@ h4 {
 }
 
 .rev_span {
-	/*       font-size: 27px; */
 	font-size: 15px;
 	font-weight: bolder;
 	color: #382407;
@@ -478,6 +473,11 @@ h4 {
 	font-size: 14px;
 }
 
+#tiper_info:hover{
+	background:rgb(235, 235, 235);
+	cursor: pointer;
+}
+
 #singo_input1 {
 	height: 140px;
 	width: 70%;
@@ -493,6 +493,10 @@ h4 {
 	text-align: left;
 	margin: 0 0 40px 0;
 }
+#singo_input1:focus{
+	border: 2px solid #FFD400;
+	outline : none;
+}
 
 #singo_span_ps{
 	color: gray;
@@ -507,13 +511,13 @@ h4 {
 	padding-left: 0;
 }
 
-ul li {
+#pagingul li {
 	text-align: center;
 	float: left;
 	list-style: none;
 }
 
-ul li .a_tag {
+#pagingul li .a_tag {
 	display: block;
 	font-size: 14px;
 	color: black;
@@ -523,10 +527,6 @@ ul li .a_tag {
 	text-decoration-line: none;
 }
 
-#singo_input1:focus{
-	border: 2px solid #FFD400;
-	outline : none;
-}
 ul li.on {
 	background: #FFD400;
 }
@@ -536,7 +536,107 @@ ul li.on .a_tag {
 }
 
 #page_box {
-	margin: 0 auto;
+	display:flex;
+}
+
+#pagingul {
+  margin-top: 20px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+#pagingul li {
+  margin-right: 5px;
+}
+
+#pagingul li a {
+  display: block;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #333;
+  text-decoration: none;
+}
+
+#pagingul li.on a {
+  background-color: #FFD400;
+  color: #fff;
+}
+
+#pt_if_undefined{
+	text-align: center;
+	margin: 50px auto;
+}
+
+#pt_if_undefined span{
+	font-size: 1.65rem;
+}
+
+#if_undefined_completed{
+	text-align: center;
+	margin: 50px auto;
+}
+
+#if_undefined_completed span{
+	font-size: 1.65rem;
+}
+
+#if_undefined{
+	text-align: center;
+	margin: 50px auto;
+}
+
+#if_undefined span{
+	font-size: 1.65rem;
+}
+
+#container0_cont5 .container0_cont3_text{
+	border-right-style: none !important;
+}
+
+.tiper_rejected {
+	color: #8A8A8A;
+	font-size: 11px;
+	font-weight: lighter;	
+}
+
+.pt_cont1_btn_wrapper{
+	display: flex;
+   	align-items: center;
+   	width: 400px;
+   	justify-content: flex-end;
+}
+	
+.pt_mytab_4 {
+	width: 100px;
+	text-align: center;
+}
+
+.pt_mytab_5 {
+	width: 100px;
+	text-align: center;
+}
+
+.pt_btn_del{
+	width: 120px;
+	height: 33px;
+	background : #FFD400;
+	border: 0;
+    border-radius: 10%;
+    font-size: 1.3rem;
+    font-weight: bolder;
+}
+
+.pt_btn_msg{
+	width: 120px;
+	height: 33px;
+	background : #FFD400;
+	border: 0;
+    border-radius: 10%;
+    font-size: 1.3rem;
+    margin-left : 30px;
+    font-weight: bolder;
 }
 
 @media ( max-width : 769px) {   /*==========================================================*/
@@ -549,7 +649,7 @@ ul li.on .a_tag {
 	}
 	#cont1_username{
 		font-weight: bold;
-    	margin-left: 10px;
+    	margin-left: 20px;
   	 	 font-size: 18px;
     	line-height: inherit;
 	}
@@ -558,6 +658,7 @@ ul li.on .a_tag {
 		font-size: 17px;
 		font-weight: bold;
 	}
+	
 	#container0_grid001 {
 		padding: 50px 15px 30px;
 		grid-row: 1/3;
@@ -581,7 +682,7 @@ ul li.on .a_tag {
 		padding: 50px 15px 30px;
 		grid-row: 1/3;
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		-webkit-box-pack: justify;
 		justify-content: space-around;
 		background: rgb(255, 255, 255);
@@ -622,7 +723,7 @@ ul li.on .a_tag {
 	}
 	
 	#btn_complete{
-		width: 80px;
+		width: 100px;
 	}
 	
 	.filemodal1.singo{
@@ -634,9 +735,64 @@ ul li.on .a_tag {
     padding-top: 5px;
     padding-left: 0px ! important;
 	}
-	/*==========================================================*/
+	
+	#container0_cont5 .container0_cont3_text{
+	border-right-style: none !important;
+	}
+	
+	.pt_cont1_btn_wrapper{
+		flex-direction:column;
+	}
+	
+	.pt_btn_del{
+		margin-left: 0px !important;
+		width: 100px;
+	}
+	
+	.pt_btn_msg{
+		margin-left: 0px !important;
+		margin-top: 5px;
+		width: 100px;
+	}
+	.pt_mytab_5{
+	margin-top: 10px;
+	}
+	
+	.modal1 .modal1-window {
+	width: 95%;
+	margin-top: 15vh;
+	}
+	
+	#text_container {
+    width: 90%;
+    padding: 15px 0;
+}
+	.grid002_text {
+    font-size: 12px;
+	}
+	
+	.rev_span {
+    font-size: 12px;
+    font-weight: bolder;
+    color: #382407;
+    }
+    
+    #singo_span_ps {
+    color: gray;
+    margin-top: 20px;
+    font-size: 10px;
+    padding-left: 0px;
+}
+    
+    #singo_input1 {
+	height: 70px;
+	width: 100%;
+	resize:none;
+	}
+	
 }
 </style>
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/front/myPage.css"> --%>
 </head>
 <body>
 
@@ -649,15 +805,15 @@ ul li.on .a_tag {
 
 						<div id="container0_grid001">
 							<div id="container0_cont1">
-								<div class="container0_cont1_text">일반회원</div>
+<!-- 								<div class="container0_cont1_text">일반회원</div> -->
 								<span class="container0_cont1_text" id="cont1_username">${info[0].user_name}</span><span
 									class="container0_cont1_text">님</span>
 							</div>
 							<div id="container0_cont2">
-								<div class="container0_cont2_text">${info[0].user_tel}(전화번호
-									데이터 없음)</div>
+								<div class="container0_cont2_text">${info[0].user_tel}</div>
 								<span class="container0_cont2_text">${info[0].user_email}</span>
-								<span class="container0_cont2_text">${info[0].user_email}</span>
+								<span class="container0_cont2_text">
+								<fmt:formatDate value="${info[0].user_date}" pattern = "yyyy년 M월 d일"/>에 가입</span>
 							</div>
 						</div>
 
@@ -678,39 +834,114 @@ ul li.on .a_tag {
 									</div>
 								</div>
 							</div>
+							
+							
+							
 							<div id="container0_cont5">
-								<div class="container0_cont3_text">
+
+							<c:if test="${isTiper eq 0}">
+								<div class="container0_cont3_text" id="tiper_info" onclick="location.href='tiperSignUpMove'">
 									<div id="container0_cont5_text1">
-										<div class="grid002_title">관심 카테고리</div>
-										<span class="grid002_text">${info[0].user_cate}</span>
+										<div class="grid002_title">TIPer</div>
+									
+										<span class="grid002_text">티퍼신청하기 ></span>
 									</div>
 								</div>
 							</div>
+										</c:if>
+
+
+										<c:if test="${isTiper eq 1}">
+										
+										<div class="container0_cont3_text">
+									<div id="container0_cont5_text1">
+										<div class="grid002_title">TIPer</div>
+										
+											<c:if test="${isTiperAgree eq 0}">
+											<span class="grid002_text">승급진행중</span>
+											</c:if>
+										
+											<c:if test="${isTiperAgree eq 1}">
+											<span class="grid002_text">TIPer입니다</span>
+											</c:if>
+											
+											<c:if test="${isTiperAgree eq 2}">
+											<span class="grid002_text">거절됨</span>
+											</c:if>
+									
+									
+									
+									</div>
+								</div>
+							</div>
+										</c:if>
+
 						</div>
+						
+						
 						<div id="container0_grid003">
-							<div id="container0_cont6">
-								<a href="userUpdateGo" id="modifyUserInfo">회원정보 수정하러 가기 ></a>
+							<div id="container0_cont6" onclick="location.href='chkPassword'">
+								회원정보 수정하러 가기 >
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+			
+			<div class="container1" id="div_tab1">
+				<div id="cont1_table">
+					<h4>수강신청한 강의</h4>
+					<c:if test="${empty potentialLessonList}"><div id="pt_if_undefined"><span>수강신청한 강의가 없어요</span></div></c:if>
+					
+					<c:forEach items="${potentialLessonList}" var="potentialLesson">
+						<div class="mytab_tr">
+
+							<div id="cont1_img_title">
+								<div class="mytab_1">
+									<img alt="강의이미지" src="${pageContext.request.contextPath}/front/lesson/${potentialLesson.lesson_img}" id="tip_img1" onclick='location.href="getLessonDetail?lesson_num=${potentialLesson.lesson_num}"' style="cursor: pointer">
+								</div>
+
+
+								<div class="mytab_23" onclick='location.href="getLessonDetail?lesson_num=${potentialLesson.lesson_num}"' style="cursor: pointer">
+									<div class="mytab_2">${potentialLesson.lesson_user_name}강사의</div>
+									<div class="mytab_3">
+										<h5>${potentialLesson.lesson_title}</h5>
+									</div>
+								</div>
+							</div>
+
+							<div class="pt_cont1_btn_wrapper">
+								<div class="pt_mytab_4">
+									<button type="button" class="pt_btn_del"
+										onclick="location.href='deleteEscrowLesson?escrow_lesson_num=${potentialLesson.escrow_lesson_num}'">수강 취소</button>
+								</div>
+
+								<div class="pt_mytab_5">
+<%-- 									<button type="button" class="pt_btn_msg" value="${potentialLesson.lesson_num}" onclick="hsh(${potentialLesson.lesson_num}, '<%=user_id1%>')">쪽지</button> --%>
+										<button title="메세지 보내기" type="button" id="msg_button" onclick="open_popup()"><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>
+										<span style="display: none"; class="cont1-group-title" id="cont1-group-text">@${potentialLesson.tiper_user_id}</span>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 
 			<div class="container1" id="div_tab1">
 				<div id="cont1_table">
 					<h4>내가 듣고 있는 강의</h4>
+					<c:if test="${empty lessonList}"><div id="if_undefined"><span>듣고 있는 강의가 없어요</span></div></c:if>
+					
 					<c:forEach items="${lessonList}" var="lesson">
 						<div class="mytab_tr">
 
 							<div id="cont1_img_title">
 								<div class="mytab_1">
-									<img alt="강의이미지" src="front/${lesson.lesson_img}" id="tip_img1">
+									<img alt="강의이미지" src="${pageContext.request.contextPath}/front/lesson/${lesson.lesson_img}" onclick='location.href="getLessonDetail?lesson_num=${lesson.lesson_num}"' style="cursor: pointer" id="tip_img1">
 								</div>
 
 
-								<div class="mytab_23"
-									onclick='location.href="getLessonDetail?lesson_num=${lesson.lesson_num }"'
-									style="cursor: pointer">
+								<div class="mytab_23" onclick='location.href="getLessonDetail?lesson_num=${lesson.lesson_num}"' style="cursor: pointer">
 									<div class="mytab_2">${lesson.lesson_user_name}강사의</div>
 									<div class="mytab_3">
 										<h5>${lesson.lesson_title}</h5>
@@ -846,7 +1077,6 @@ ul li.on .a_tag {
 							</div>
 						</form>
 					</div>
-
 				</div>
 			</div>
 		</div>
@@ -863,6 +1093,7 @@ ul li.on .a_tag {
        
           //리뷰창 강의 번호 주기 함수
           function hsh(val1, val2) {
+        	  console.log(val1 + val2 + "이것이 val1과 val2");
              modal1.style.display='block';
                document.body.style.overflow = 'hidden';
                  document.getElementById("lessonNum").value = val1;
@@ -930,13 +1161,13 @@ function displayData(currentPage, dataPerPage) {
 			     i++
 			   ) {
 		  chartHtml +=
-			   '<div class="mytab_tr"><div class="cont2_img_title"><div class="mytab_1"><img alt="강사이미지"src="front/ '
-			  + dataList[i].lesson_img +'" id="tip_img1"></div>'+
+			  '<div class="mytab_tr"><div class="cont2_img_title"><div class="mytab_1"><img alt="강사이미지"src="${pageContext.request.contextPath}/front/lesson/'
+			  + dataList[i].lesson_img +'" id="tip_img1" onclick="location.href=\'getLessonDetail?lesson_num='+dataList[i].lesson_num +'\'" style="cursor: pointer"></div>'+
 			  '<div class="mytab_23" onclick="location.href=\'getLessonDetail?lesson_num='+dataList[i].lesson_num +'\'" style="cursor: pointer"><div class="mytab_2">' + dataList[i].lesson_user_name + '강사의</div><div class="mytab_3"><h5>'+
 			  dataList[i].lesson_title + '</h5></div></div></div><div class="mytab_6">'+
-			  dataList[i].escrow_start+'~</div><div class="cont1_btn_wrapper">'+
-    '<div class="mytab_5"><img src="front/siren.png" alt="신고" class="filemodal1_singo" onclick="hsh2('+
-  		  dataList[i].lesson_num +', '+ dataList[i].escrow_user_id +')" id="myimg_singo"></div></div></div>';
+			  moment(dataList[i].escrow_start).format("YYYY년 M월 D일")+'~'+moment(dataList[i].escrow_end).format("YYYY년 M월 D일")+'</div><div class="cont1_btn_wrapper">'+
+		'<div class="mytab_5"><img src="${pageContext.request.contextPath}/front/siren.png" alt="신고" class="filemodal1_singo" onclick="hsh2('+
+		  dataList[i].lesson_num +', \''+ dataList[i].escrow_user_id +'\')" id="myimg_singo"></div></div></div>';
 			   } 
  }else{ 
   
@@ -946,17 +1177,19 @@ function displayData(currentPage, dataPerPage) {
     i++
   ) {
 	   chartHtml +=
-		   '<div class="mytab_tr"><div class="cont2_img_title"><div class="mytab_1"><img alt="강사이미지"src="front/ '
-			  + dataList[i].lesson_img +'" id="tip_img1"></div>'+
+		   '<div class="mytab_tr"><div class="cont2_img_title"><div class="mytab_1"><img alt="강사이미지"src="${pageContext.request.contextPath}/front/lesson/'
+			  + dataList[i].lesson_img +'" id="tip_img1" onclick="location.href=\'getLessonDetail?lesson_num='+dataList[i].lesson_num +'\'" style="cursor: pointer"></div>'+
 			  '<div class="mytab_23" onclick="location.href=\'getLessonDetail?lesson_num='+dataList[i].lesson_num +'\'" style="cursor: pointer"><div class="mytab_2">' + dataList[i].lesson_user_name + '강사의</div><div class="mytab_3"><h5>'+
 			  dataList[i].lesson_title + '</h5></div></div></div><div class="mytab_6">'+
-			  dataList[i].escrow_start+'~</div><div class="cont1_btn_wrapper">'+
- '<div class="mytab_5"><img src="front/siren.png" alt="신고" class="filemodal1_singo" onclick="hsh2('+
-		  dataList[i].lesson_num +', '+ dataList[i].escrow_user_id +')" id="myimg_singo"></div></div></div>';
+			  moment(dataList[i].escrow_start).format("YYYY년 M월 D일")+'~'+moment(dataList[i].escrow_end).format("YYYY년 M월 D일")+'</div><div class="cont1_btn_wrapper">'+
+		'<div class="mytab_5"><img src="${pageContext.request.contextPath}/front/siren.png" alt="신고" class="filemodal1_singo" onclick="hsh2('+
+		  dataList[i].lesson_num +', \''+ dataList[i].escrow_user_id +'\')" id="myimg_singo"></div></div></div>';
   } //dataList는 임의의 데이터임.. 각 소스에 맞게 변수를 넣어주면 됨...
-  
 }
+ 
+ if( typeof chartHtml == "undefined" || chartHtml == ''){ chartHtml +=" <div id='if_undefined_completed'><span>지금까지 들은 강의가 없어요<span></div>"}
 
+ 
 document.getElementById("data_table_body").innerHTML=chartHtml;
 }
  
@@ -1033,6 +1266,7 @@ function paging(totalData, dataPerPage, pageCount, currentPage) {
 	    paging(totalData, dataPerPage, pageCount, globalCurrentPage);
 	  });
 	}
-
+	
 </script>
+<%@include file="../main/footer.jsp"%>
 </html>

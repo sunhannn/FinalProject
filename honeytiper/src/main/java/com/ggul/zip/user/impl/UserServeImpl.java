@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.ggul.zip.escrow.EscrowVO;
+import com.ggul.zip.lesson.LessonVO;
 import com.ggul.zip.user.ReportVO;
 import com.ggul.zip.user.UserService;
 import com.ggul.zip.user.UserVO;
@@ -79,6 +81,16 @@ public class UserServeImpl implements UserService {
 	@Override
 	public UserVO getUserByKakaoAccount(UserVO vo) {
 		return userDAO.getUserByKakaoAccount(vo);
+	}
+	
+	@Override
+	public boolean updateUserInfo(UserVO vo) {
+		return userDAO.updateUserInfo(vo);
+	}
+	
+	@Override
+	public String viewBlackList(UserVO vo) {
+		return userDAO.viewBlackList(vo);
 	}
 
 	
@@ -247,5 +259,40 @@ public class UserServeImpl implements UserService {
 		@Override
 		public void updateUserRole01(UserVO vo){
 			userDAO.updateUserRole01(vo);
+		}
+		
+		@Override
+		public int getEscrowPrice(EscrowVO evo){
+			return userDAO.getEscrowPrice(evo);
+		}
+		
+		@Override
+		public String getLessonTitle(LessonVO lvo){
+			return userDAO.getLessonTitle(lvo);
+		}
+		
+		@Override
+		public String getTiperUserId(EscrowVO evo){
+			return userDAO.getTiperUserId(evo);
+		}
+		
+		@Override
+		public void addUserPoint(UserVO vo){
+			userDAO.addUserPoint(vo);
+		}
+		
+		@Override
+		public void insertLessonPrice(UserVO vo){
+			userDAO.insertLessonPrice(vo);
+		}
+		
+		@Override
+		public int isTiper(UserVO tvo){
+			return userDAO.isTiper(tvo);
+		}
+		
+		@Override
+		public int isTiperAgree(UserVO uvo){
+			return userDAO.isTiperAgree(uvo);
 		}
 }

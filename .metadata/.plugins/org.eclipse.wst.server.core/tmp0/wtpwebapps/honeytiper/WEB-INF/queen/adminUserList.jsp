@@ -8,153 +8,109 @@
 <meta charset="UTF-8">
 <title>회원리스트</title>
 <style>
-body {
-	margin: 0;
-	padding: 0;
-}
-
-h3 {
+.container {
+	width: 65%;
 	margin: 0 auto;
-	margin-left: 16%;
-	font-size: 26px;
-	margin-bottom: 25px;
 }
-
-ul {
-	margin: 10px auto;
-	border-right: 0;
-	padding-left: 0;
-}
-
-ul li {
-	text-align: center;
-	float: left;
-	list-style: none;
-}
-
-ul li a {
-	display: block;
+/* 나머지 요소들은 기본값인 z-index: 1로 설정 */
+table {
+	border-collapse: collapse;
+	width: 100%;
+	z-index: 1;
 	font-size: 14px;
-	color: black;
-	padding: 9px 12px;
-	border-right: solid 1px #ccc;
-	box-sizing: border-box;
-	text-decoration-line: none;
 }
 
-ul li.on {
+th, td {
+	text-align: center;
+	vertical-align: middle;
+	border-bottom: 1px solid #ddd;
+	padding: 5px 15px;
+	z-index: 1;
+	height: 38px;
+}
+
+th {
+	height: 21px;
+	background: #f2f2f2;
+}
+
+#view-all-button, #search-button {
+	border-style: none;
 	background: #FFD400;
+	color: #5c3b0c;
+	margin: 5px;
+	padding: 5px 18px;
+	cursor: pointer;
+	border-radius: 5px;
+	font-size: 12pt;
+	font-weight: bolder;
 }
 
-ul li.on a {
+#sel3 {
+	border-style: none;
+	background: #FFD400;
+	color: #5c3b0c;
+	margin-left: 5px;
+	cursor: pointer;
+	border-radius: 5px;
+	font-size: 12pt;
+	font-weight: bolder;
+}
+
+#view-all-button:hover, #search-button:hover, #sel3:hover {
+	background-color: #E6B800;
+}
+
+.pagination-row {
+	background-color: #e8f0fe;
+}
+
+.pagination-row th {
+	font-size: 12pt;
+}
+
+#pagingul {
+	margin-top: 20px;
+	list-style: none;
+	display: flex;
+	justify-content: center;
+}
+
+#pagingul li {
+	margin-right: 5px;
+}
+
+#pagingul li a {
+	display: block;
+	padding: 5px 10px;
+	border: 1px solid #ddd;
+	background-color: #fff;
+	color: #333;
+	text-decoration: none;
+}
+
+#pagingul li.on a {
+	background-color: #FFD400;
 	color: #fff;
 }
 
-tr {
-	height: 24px;
-	padding: 18px 0px;
-}
-
-#super_container {
-	margin: 0 auto;
-	margin-top: 120px;
-	margin-left: 200px;
-}
-
-.table_wrapper {
-	display: flex;
-	flex-direction: column;
-}
-
-.cont1_table {
-	width: 65vw;
-	margin: 0 auto;
-	border-spacing: 0px !important;
-}
-
-.cont1_th {
-	background-color: #F0F0F0;
-}
-
-.thCenter1 {
-	margin: 10px 5px;
-	text-align: center;
-	padding: 12px 0;
-	border-bottom: 1px solid lightgray;
-	font-size: 0.85rem;
-}
-
-.tdCenter1 {
-	margin: 10px 5px;
-	text-align: center;
-	padding: 12px 0;
-	border-bottom: 1px solid lightgray;
-	font-size: 0.9rem;
-}
-
-.tdCenter1_btn1 {
-	border-style: none;
-	background: #ffdf48;
-	color: #5c3b0c;
-	margin: 5px;
-	padding: 5px 18px;
-}
-
-.tdCenter1_btn2 {
-	border-style: none;
-	background: #E9E9E9;
-	color: #5c3b0c;
-	margin: 5px;
-	padding: 5px 18px;
-}
-
-#top_bar {
-	width: 63vw;
-	margin: 0 auto;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-#top_bar h3 {
-	/* 	margin : 0 auto; */
-	margin-left: 0 !important;
-	float: left;
-	font-size: 26px;
-	margin: 25px 5px;
+#user-search {
+	width: 200px;
+	height: 17.5px; padding : 5px;
+	font-size: 14px;
+	padding: 5px;
 }
 
 #search_wrapper {
-	width: 75%;
 	display: flex;
-	justify-content: flex-end;
 	flex-wrap: wrap;
-	align-items: flex-end;
-	margin-bottom: -15px;
+	virtical-align: middle;
 }
 
 #search_wrapper select {
 	margin: 0 5px;
-	height: 30px;
+	height: 31.5px;
 	font-size: 13px;
-}
-
-#sel2 {
-	height: 24px !important;
-}
-
-#search_wrapper button {
-	margin: 0 5px;
-	width: 60px;
-	height: 30px;
-	font-size: 13px;
-}
-
-#if_undefined {
-	margin: 30 auto;
-	padding: 20px;
-	text-align: left;
-}
 }
 </style>
 </head>
@@ -163,55 +119,49 @@ tr {
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <%@include file="../queen/adminNavbar.jsp"%>
+
 <body>
-	<div class="jumbotron"></div>
-	<nav id="searchNav" class="navbar navbar-expand-sm navbar-dark">
-	</nav>
+	<div class="container">
+		<h2 style="margin: 40px 0px;">회원 리스트</h2>
+		<button id="view-all-button"
+			onclick="location.href='getUserListUser';">전체목록보기</button>
+		<br>
+		<br>
+		<div id="search_wrapper">
+			<select class="search002" id="sel1" name="user_condition"
+				style="display: inline-block !important; margin-right: 10px;">
 
-	<div id="container_top"></div>
-	<div id="super_container">
-			<div class="table_wrapper">
-			
-			<div id="top_bar">
-	<h3>회원리스트</h3>
-	
-			<div id="search_wrapper">		
-				<select class="search002" id="sel1" name="user_condition"
-					style="display: inline-block !important; margin-right: 10px;">
-
-					<option value="user_id">아이디</option>
-					<option value="user_name">이름</option>
-				</select> <input class="search002" type="text" name="user_search"
-					id="sel2" placeholder="검색어를 입력하세요.">
-				<button class="btn btn-success" type="button" id="sel3" class="search002">검색</button>
-			</div>
+				<option value="user_id">회원아이디</option>
+				<option value="user_name">회원명</option>
+			</select> <input class="search002" type="text" name="user_search"
+				id="sel2" placeholder="검색어를 입력해주세요.">
+			<button class="btn btn-success" type="button" id="sel3"
+				class="search002"
+				style="outline: none; border: none; background: transparent;">
+				<i class="fa fa-search" style="font-size: 24px; color: #FFD400;"></i>
+			</button>
 		</div>
-
-
-
-		<table class="cont1_table">
+		<hr class="hrFirst">
+		<br>
+		<span id="displayCount"></span>
+		<table class="cont1_table" style="table-layout: fixed;">
 			<thead class="btn-primary">
-				<tr class="cont1_th">
-					<th class="thCenter1">아이디</th>
-					<th class="thCenter1">이름</th>
-					<th class="thCenter1">주소</th>
-					<th class="thCenter1">전화번호</th>
-					<th class="thCenter1">이메일</th>
-					<th class="thCenter1">관심TIP</th>
+				<tr class="pagination-row">
+					<th style="width: 14%">아이디</th>
+					<th style="width: 9%">이름</th>
+					<th style="width: 40%">주소</th>
+					<th style="width: 12%">전화번호</th>
+					<th style="width: 18%">이메일</th>
+					<th style="width: 11%">관심TIP</th>
 				</tr>
 			</thead>
 			<tbody id="dataTableBody">
 
 			</tbody>
 		</table>
-		<br>
-		<br>
 
 		<ul id="pagingul">
 		</ul>
-	</div>
-
-	<div id="footer"></div>
 	</div>
 </body>
 
@@ -225,7 +175,7 @@ tr {
 
  $(document).ready(function () {
 //페이지 당 글 개수 
- dataPerPage = 5;
+ dataPerPage = 10;
  
  
  $.ajax({ // ajax로 데이터 가져오기
@@ -269,19 +219,19 @@ tr {
             ) {
                console.log("error : " + dataList[i].user_id);
               chartHtml +=
-            	  '<tr><td class="tdCenter1">' +
+            	  '<tr><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_id + '">' +
                 dataList[i].user_id +
-                '</td><td class="tdCenter1">' +
+                '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_name + '">' +
                 dataList[i].user_name +
-                '</td><td class="tdCenter1">' +
+                '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + (dataList[i].user_addr2 +  dataList[i].user_addr3 + dataList[i].user_addr4) + '">' +
                 (dataList[i].user_addr2 +  dataList[i].user_addr3 + dataList[i].user_addr4)+
-                '</td><td class="tdCenter1">' +
+                '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_tel + '">' +
                 (dataList[i].user_tel  || "") +
-                '</td><td class="tdCenter1">' +
+                '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_email + '">' +
                 (dataList[i].user_email  || "") +
-                '</td><td class="tdCenter1">' +
+                '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;"  title="' + dataList[i].user_cate + '">' +
                 (dataList[i].user_cate  || "") +
-                '</td><td class="tdCenter1">';
+                '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">';
             } 
          
      
@@ -293,24 +243,25 @@ tr {
      i++
    ) {
       chartHtml +=
-    	  '<tr><td class="tdCenter1">' +
+    	  '<tr><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_id + '">' +
           dataList[i].user_id +
-          '</td><td class="tdCenter1">' +
+          '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_name + '">' +
           dataList[i].user_name +
-          '</td><td class="tdCenter1">' +
+          '</td><td class="tdCenter1" style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;"  title="' + (dataList[i].user_addr2 +  dataList[i].user_addr3 + dataList[i].user_addr4) + '">' +
           (dataList[i].user_addr2 +  dataList[i].user_addr3 + dataList[i].user_addr4)+
-          '</td><td class="tdCenter1">' +
+          '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_tel + '">' +
           (dataList[i].user_tel  || "") +
-          '</td><td class="tdCenter1">' +
+          '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_email + '">' +
           (dataList[i].user_email  || "") +
-          '</td><td class="tdCenter1">' +
+          '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_cate + '">' +
           (dataList[i].user_cate  || "") +
-          '</td><td class="tdCenter1">';
+          '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">';
    }    
 }
 
 $("#dataTableBody").html(chartHtml);
 }
+
 
 
 

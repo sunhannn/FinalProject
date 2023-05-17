@@ -24,7 +24,10 @@ public class EscrowServiceImpl implements EscrowService {
 	 public List<EscrowVO>getDisputeResolutionList(EscrowVO vo){
 	 	return escrowDAO.getDisputeResolutionList(vo);
 	 }
-	 
+	 public List<EscrowVO>searchAndStatus(EscrowVO vo){
+		 return escrowDAO.searchAndStatus(vo);
+	 }
+
 	 public ArrayList<EscrowVO>searchDispute(HashMap<String, Object> map){
 		 return  (ArrayList<EscrowVO>)escrowDAO.searchDispute(map);
 	 }

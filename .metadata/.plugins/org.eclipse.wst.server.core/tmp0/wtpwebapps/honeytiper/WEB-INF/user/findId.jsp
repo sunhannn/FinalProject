@@ -1,66 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@include file="../main/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<style>
-	p {
-		color : red;
-	}	
-</style>
+   <link rel="stylesheet" media="screen and (min-width:769px)" href="front/user.css">
+   <link rel="stylesheet" media="screen and (max-width:768px)" href="front/userJoinMobile.css">
 </head>
-<body>
+<body class="login_body findId_body">
 
-	<body>
 	<script>
 		window.onload = function(){
 			$(".invalid-feedback").hide();
 			$("#telSuccess").hide();
 			$("#showID").hide();
+			$(".info_ptag").hide();
 		}
 	</script>
-    <div id="wrap">
-        <div class="logo"><img src="${pageContext.request.contextPath}/front/ggulTiper.png"></div>
-            <h3>아이디찾기</h3>
-            <div id="contents">
-                <label for="user_tel">전화번호 인증</label>
-                <div id="telcertification" class="input_wrap">
-                    <table class="find_table">
-                        <tr>
-                            <td class="td_right">
-						<div class="content">
-							<input type="text" name="user_name" id="user_name" class="check" placeholder="가입하신 이름을 입력해주세요.">
-							<p></p>
+    <div class="findId_cover login_wrap">
+    	<div id="findId_wrap" class="login_contents">
+			<div id="login_wrap" class="findId_wrap_content findId_input_content">
+				<h3>아이디찾기</h3>
+				<div id="telcertification" class="form-input find_id_form_input">
+					<div class="login-input">
+						<div class="login-input findId_inputName">
+							<p class="findId_info">이름</p>
+							<input type="text" name="user_name" id="user_name" class="check" placeholder="가입하신 이름을 입력해주세요." autofocus>
+							<p class="info_ptag"></p>
 						</div>
-						<div class="content">
-							<input type="text" name="user_tel" id="user_tel" class="check" placeholder="(- 제외)숫자만 입력해주세요">
-							<button type="button" id="telCheck" onclick="smsSend()" disabled>인증번호받기</button>
-							<p></p>
-						</div>
-						<div class="forTextLabel">인증번호</div> 
-						<div class="telConfirmDiv">
-							<input type="text" id="certificationTel">
-						</div>
-						
-						<div>
-							<button id="telConfirmBtn" onclick="smsConfirm()">인증하기</button>
-							<input type="hidden" id="checkTel" value="false">
-						</div>
-					</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        <div id="showID" class="input_wrap">
-            <h4>고객님의 아이디입니다</h4>
-            <div id="id"></div>
-        </div>
-	</div>
-		<button type="button" onclick="javascript:history.go(-1)">뒤로가기</button>
+						<p class="findId_info">핸드폰번호</p>
+						<input type="text" name="user_tel" id="user_tel" class="check" placeholder="(- 제외)숫자만 입력해주세요">
+						<button type="button" id="telCheck" onclick="smsSend()" disabled>인증번호받기</button>
+						<p class="info_ptag"></p>
+					</div>
+					<div class="telConfirmDiv">
+						<input type="text" id="certificationTel" placeholder="인증번호를 입력해주세요.">
+						<button id="telConfirmBtn" onclick="smsConfirm()">인증하기</button>
+						<p class="info_ptag"></p>
+						<input type="hidden" id="checkTel" value="false">
+					</div>
+				</div>
+			</div>
+			<div id="showID" class="input_wrap findId_show_content">
+				<h4>고객님의 아이디입니다</h4>
+				<div id="id" class="show_id_div"></div>
+				<div class="page_btn">
+					<button type="button" onclick="location.href='login'">로그인하기</button>
+					<button type="button" onclick="location.href='updatePW'" class="goBack_findId">비밀번호 찾기</button>
+				</div>
+			</div>
+			<div class="findId_show_content">
+				<button type="button" onclick="javascript:history.go(-1)" class="goBack_findId">뒤로가기</button>
+			</div>
+		</div>
+    </div>
 			
 		
 		<script>
@@ -206,11 +204,11 @@
 		            
 		        }
 		        if(checkText != ""){
-		            $(this).siblings("p").html(checkText);
-		            $(this).siblings("p").addClass("vali");
-		            $(this).siblings("p").slideDown();
+		            $(this).siblings(".info_ptag").html(checkText);
+		            $(this).siblings(".info_ptag").addClass("vali");
+		            $(this).siblings(".info_ptag").slideDown();
 		        } else {
-		            $(this).siblings("p").slideUp(function(){
+		            $(this).siblings(".info_ptag").slideUp(function(){
 		                $(this).removeClass("vali");
 		                
 						 if($("check").length == 0){

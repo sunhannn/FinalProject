@@ -1,5 +1,7 @@
 package com.ggul.zip.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ggul.zip.lesson.LessonVO;
 import com.ggul.zip.main.MainService;
@@ -53,12 +56,10 @@ public class MainController {
       return "search/searchAll";
    }
    
+   @ResponseBody
    @RequestMapping(value= "/selectPartSearch", method = RequestMethod.POST)
-   public String getSearch(LessonVO vo, Model model){
-      model.addAttribute("searchAll", searchService.getPartSearchList(vo));
-      String reportListJSON = new Gson().toJson(searchService.getPartSearchList(vo));
-      model.addAttribute("searchAllJSON", reportListJSON);
-      return "search/searchAll";
+   public List<LessonVO> getSearch(LessonVO vo){
+      return searchService.getPartSearchList(vo);
    }
    
    @RequestMapping(value= "/selectSearch", method = RequestMethod.POST)

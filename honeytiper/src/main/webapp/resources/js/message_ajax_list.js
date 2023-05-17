@@ -10,6 +10,7 @@ $(document).click(function(){
 });
 
 
+
 var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
 
 	$('.chat_list_box').click(function(){
@@ -28,9 +29,3 @@ var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userA
 		}
 	});
 	
-	$(document).on('popstate', function() {
-	  if(isMobile) {
-			$('.inbox_people').show(400);
-			$('.mesgs').hide(400);
-		}
-	});

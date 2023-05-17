@@ -17,18 +17,19 @@
 	</listener>
 
 	<!-- 필터객체 생성 -->
-   <filter>
-      <filter-name>characterEncoding</filter-name>
-      <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-      <init-param>
-         <param-name>encoding</param-name>
-         <param-value>UTF-8</param-value>
-      </init-param>
-   </filter>
-   <filter-mapping>
-      <filter-name>characterEncoding</filter-name>
-      <url-pattern>/*</url-pattern>
-   </filter-mapping>
+	<filter>
+		<filter-name>characterEncoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 
 	<!-- 서블렛객체 생성 -->
@@ -59,9 +60,17 @@
 	<!-- <url-pattern>*.do</url-pattern> -->
 	<!-- </servlet-mapping> -->
 
+
+	<!-- 예외처리관련 -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/error/errorException.jsp</location>
+	</error-page>
+
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+
 
 
 </web-app>

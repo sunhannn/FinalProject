@@ -12,7 +12,6 @@ $(document).click(function(){
 
 //가격 입력 모달
 $('#price_btn').click(function(event){
-    //event.stopPropagation();
     $('#price_modal').show();
     $('.inbox_people').css('pointer-events', 'none');
     $('.mesgs').css('pointer-events', 'none');
@@ -29,6 +28,7 @@ $('.modal_close').click(function(){
 	$('#price_modal_input').css("border","2px solid #FFD400");
 	$('.escrow_lesson_title').css("border","1px solid black");	
 	$('.escrow_start').css("border","none");	
+	$('.escrow_lesson_title').empty();
 });
 
 
@@ -40,7 +40,7 @@ $('#escrow_start').click(function(event){
 $('#price_send_btn').click(function(){
 	let price_modal_input = $('#price_modal_input').val();
 	let escrow_lesson_title = $('.escrow_lesson_title').val();
-	console.log("escrow_lesson_title??",escrow_lesson_title);
+	//console.log("escrow_lesson_title??",escrow_lesson_title);
 	
 	if(price_modal_input != ""){
 		if(escrow_lesson_title != null){
@@ -82,7 +82,6 @@ $('.accept_btn').click(function(){
 	//let price = $(this).siblings('.lesson_price').text();
 	let price;
 	
-	console.log("버튼클릭했을때 title",title);
 	
 	// lesson_num과 일치하는 .lesson_price 요소를 선택
   let matchedElement = $('.escrow_lesson_num').filter(function() {
@@ -96,10 +95,11 @@ $('.accept_btn').click(function(){
   }
   
 	AcceptPrice(tiper_code, lesson_num, price, title);
+	//$('.accept_btn').prop('disabled', true);
 });
 
 
-	
+
 document.getElementById("price_modal_input").addEventListener("keyup", function (e) {
     $(this).val($(this).val().replace(/\,/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
 });
@@ -120,14 +120,14 @@ var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userA
 	
 	$('.write_msg').focus(function(){
 		if(isMobile) {
-			$('.msg_history').css('height', '48%');	
+			//$('.msg_history').css('height', '48%');	
 			$(".msg_history").scrollTop($(".msg_history")[0].scrollHeight);
 		}
 	});
 	
 	$('.write_msg').blur(function(){
 		if(isMobile) {
-			$('.msg_history').css('height', '84%');	
+			//$('.msg_history').css('height', '84%');	
 			$(".msg_history").scrollTop($(".msg_history")[0].scrollHeight);
 		}
 	});

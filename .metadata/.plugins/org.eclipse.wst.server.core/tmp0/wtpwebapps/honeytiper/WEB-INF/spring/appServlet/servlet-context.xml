@@ -3,7 +3,6 @@
 	xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
@@ -14,7 +13,7 @@ http://www.springframework.org/schema/context https://www.springframework.org/sc
 		base-package="com.ggul.zip" />
 	<!-- @ResponseBody, @ControllerAdvice, @ExceptionHandler 객체생성관련 -->
 	<!-- context:component-scan 태그로 처리하지 못하는 어노테이션을 객체생성할 때 사용하는 태그 -->
-	<mvc:annotation-driven />
+	<annotation-driven />
 
 	<!-- 파일업로드 객체 생성 5MB정도 1024KB = 1MB > 1024MB > 1GB -->
 	<!-- <bean id="multipartResolver" -->
@@ -45,23 +44,18 @@ http://www.springframework.org/schema/context https://www.springframework.org/sc
 	</beans:bean>
 
 
-	<!-- interceptors -->
-	<!-- <interceptors> -->
-	<!-- <interceptor> -->
+	<!-- 캐시삭제 인터셉터 (로그인-로그아웃-뒤로가기시 방지) -->
+	<beans:bean id="cacheControlInterceptor" class="com.ggul.zip.interceptor.CacheControlInterceptor" />
+	<interceptors>
+	    <interceptor>
+	        <mapping path="/**" />
+	        <exclude-mapping path="/resources/**" /> <!-- 리소스 경로 제외 -->
+	        <beans:ref bean="cacheControlInterceptor" />
+	    </interceptor>
+	</interceptors>
 
-	<!-- <mapping path="/user/login.jsp" /> -->
-	<!-- <mapping path="/main*" /> -->
-	<!-- <mapping path="/join*" /> -->
-	<!-- <exclude-mapping path="/login*" /> -->
-	<!-- <exclude-mapping path="/join*" /> -->
-	<!-- <exclude-mapping path="/home*" /> -->
-	<!-- <exclude-mapping path="/front/**" /> -->
-	<!-- <exclude-mapping path="/pathvar/**" /> -->
-	<!-- <exclude-mapping path="/pathvar/**" /> -->
-	<!-- <beans:bean class="com.ggul.zip.interceptor.Interceptor" /> -->
 
-	<!-- </interceptor> -->
-	<!-- </interceptors> -->
+
 
 
 </beans:beans>

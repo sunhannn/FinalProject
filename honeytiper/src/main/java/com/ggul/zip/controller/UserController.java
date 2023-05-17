@@ -59,15 +59,18 @@ public class UserController {
 	}
 
 	// 이메일 전송
-	@ResponseBody
-	@RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
-	public String sendEmail(String userEmail, Model model) {
-		userService.mailSend(userEmail, model);
+		@ResponseBody
+		@RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
+		public String sendEmail(UserVO vo, Model model) {
+			String userEmail = vo.getUser_email();
+			System.out.println("user_email출력 : " + userEmail);
+			
+			userService.mailSend(userEmail, model);
 
-		String sendNum = (String) model.getAttribute("sendNum");
-		return sendNum;
+			String sendNum = (String) model.getAttribute("sendNum");
+			return sendNum;
 
-	}
+		}
 
 
 	// 인증번호 확인
@@ -96,42 +99,59 @@ public class UserController {
 	}
 
 	//카카오 로그인 : 로그인하기
-		@ResponseBody
-		@RequestMapping("/loginByKakao")
-		public Object loginByKakao(UserVO vo, HttpSession session) {
-			Map<String, String> chkVal = new HashMap<String, String>();
-
-			UserVO user = userService.getUserByKakaoAccount(vo);
-
-			if (user != null) {
-				session.setAttribute("user_id", user.getUser_id());
-				session.setAttribute("user_name", user.getUser_name());
-				chkVal.put("check", "success");
-			} else {
-				chkVal.put("check", "failed");
-			}
-			return chkVal;
-		}
-		
-		//카카오 회원가입
-		@ResponseBody
-		@RequestMapping("/joinByKakao")
-		public String joinByKakao(UserVO vo, HttpSession session) {
-			
-			if(vo.getUser_id() != null) {
+			@ResponseBody
+			@RequestMapping("/loginByKakao")
+			public Object loginByKakao(UserVO vo, HttpSession session) {
+				Map<String, String> chkVal = new HashMap<String, String>();
 				
-				String hashedPw = userService.hashedChk(vo.getUser_pw());
-				vo.setUser_pw(hashedPw);
-				UserVO user = userService.joinKakaoUser(vo);
-				
-				session.setAttribute("user_id", user.getUser_id());
-				session.setAttribute("user_name", user.getUser_name());
-				return "success";
-			}else {
-				return "failed";
+				UserVO user = userService.getUserByKakaoAccount(vo);
+
+				if (user != null) {
+					session.setAttribute("user_id", user.getUser_id());
+					session.setAttribute("user_name", user.getUser_name());
+					session.setAttribute("user_role", userService.getUser(vo).getUser_role());
+					chkVal.put("check", "success");
+				} else {
+					chkVal.put("check", "failed");
+				}
+				return chkVal;
 			}
 			
-		}
+			//카카오 회원가입
+			@RequestMapping("/joinByKakao")
+			public String joinByKakao(UserVO vo, Model model) {
+				System.out.println("vo값 " + vo.getUser_id());
+				model.addAttribute("user_id", vo.getUser_id());
+				model.addAttribute("user_name", vo.getUser_name());
+				model.addAttribute("user_email", vo.getUser_email());
+				
+				return "user/kakaoJoin";
+			}
+
+	//회원정보 수정
+		   @RequestMapping("/userEdit")
+		   public String userEdit(UserVO vo, @RequestParam("show_user_tel") String tel, @RequestParam("show_user_email") String email, @RequestParam("show_pw") String pw) {
+			   
+			   if(vo.getUser_email() == "") {vo.setUser_email(email);}
+			   if(vo.getUser_tel() == "") {vo.setUser_tel(tel);}
+			   if(vo.getUser_pw() == "") {
+				   vo.setUser_pw(pw);
+				   System.out.println("pw : " + pw);
+			   }else {
+				   System.out.println("user_pw : " + vo.getUser_pw());
+				   String hashedPw = userService.hashedChk(vo.getUser_pw());
+				   vo.setUser_pw(hashedPw);
+			   }
+			   
+			   
+			   boolean done = userService.updateUserInfo(vo);
+			   
+			   if(done) {
+				   return "redirect:userMyPageGo";
+			   }else {
+				   return "user/userEdit";
+			   }
+		   }
 
 	//로그인으로이동
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -140,34 +160,43 @@ public class UserController {
 	}
 	
 	// 로그인
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(UserVO vo, HttpSession session) {
+		@RequestMapping(value = "/login", method = RequestMethod.POST)
+		public String login(UserVO vo, HttpSession session) {
 
-		// parameter로 받은값
-		String user_pw = vo.getUser_pw();
+			// parameter로 받은값
+			String user_pw = vo.getUser_pw();
 
-		if (userService.getUser(vo) != null) {
-			// db 값
-			String chkPassword = userService.getUser(vo).getUser_pw();
+			if (userService.getUser(vo) != null) {
+				// db 값
+				String chkPassword = userService.getUser(vo).getUser_pw();
 
-			boolean chk = false;
-			if (user_pw != null) {
-				// db값과 parameter값이 일치하는지 확인
-				chk = userService.pwMatchChk(user_pw, chkPassword);
-			}
+				boolean chk = false;
+				if (user_pw != null) {
+					// db값과 parameter값이 일치하는지 확인
+					chk = userService.pwMatchChk(user_pw, chkPassword);
+				}
+				String blackChk = userService.viewBlackList(vo);
 
-			if (chk) {
-				session.setAttribute("user_id", userService.getUser(vo).getUser_id());
-				session.setAttribute("user_name", userService.getUser(vo).getUser_name());
-				session.setAttribute("user_role", userService.getUser(vo).getUser_role());
-				return "redirect:/index";
+				if (chk) {
+					
+					if(blackChk.equals("로그인")) {
+						session.setAttribute("user_id", userService.getUser(vo).getUser_id());
+						session.setAttribute("user_name", userService.getUser(vo).getUser_name());
+						session.setAttribute("user_role", userService.getUser(vo).getUser_role());
+						return "redirect:/index";
+					}else if(blackChk.equals("탈퇴")) {
+						return "redirect:login?error=1";
+					}else {
+						return "redirect:login?error=2";
+					}
+					
+				} else {
+					return "redirect:login?error=1";
+				}
 			} else {
 				return "redirect:login?error=1";
 			}
-		} else {
-			return "redirect:login?error=1";
 		}
-	}
 
 	//로그인 페이지 이동
 	@RequestMapping("/loginBtn")
@@ -195,29 +224,75 @@ public class UserController {
 	}
 
 	//전화번호로 id 찾기
-	@RequestMapping("/findUser")
-	@ResponseBody
-	public String findUser(UserVO vo, Model model) {
-		userService.findUser(vo, model);
-
-		String user_id = (String)model.getAttribute("user_id");
-
-		return user_id;
-	}
-	
-	//전화번호, 아이디로 개인정보 가져오기
-	@RequestMapping("/findUserPW")
-	@ResponseBody
-	public String findUserPW(UserVO vo, Model model) {
-		boolean user = userService.findUserPW(vo);
-		
-		if(user) {
-			return "true";
-		}else {
-			return "false";
+		@RequestMapping("/findUser")
+		@ResponseBody
+		public String findUser(UserVO vo, Model model) {
+			userService.findUser(vo, model);
+			
+			String user_role = (String)model.getAttribute("user_role");
+			
+			if(user_role.equals("3") || user_role.equals("4")) {
+				return "";
+			}else {
+				String user_id = (String)model.getAttribute("user_id");
+				return user_id;
+			}
 		}
 		
-	}
+		//전화번호, 아이디로 개인정보 가져오기
+		@RequestMapping("/findUserPW")
+		@ResponseBody
+		public String findUserPW(UserVO vo, Model model) {
+			boolean user = userService.findUserPW(vo);
+			
+			if(user) {
+				return "true";
+			}else {
+				return "false";
+			}
+			
+		}
+
+	//비밀번호 일치 확인
+		   @RequestMapping(value = "/checkPW")
+		   public String checkPW(UserVO vo, HttpSession session, Model model) {
+		      UserVO user = null;
+		      String user_id = (String)session.getAttribute("user_id");
+		      vo.setUser_id(user_id);
+		      
+		      // parameter로 받은값
+		      String user_pw = vo.getUser_pw();
+		      
+		      if (userService.getUser(vo) != null) {
+		         System.out.println("null 아님");
+		         // db 값
+		         user = userService.getUser(vo);
+		         String chkPassword = user.getUser_pw();
+		         
+		         boolean chk = false;
+		         if (user_pw != null) {
+		            // db값과 parameter값이 일치하는지 확인
+		            chk = userService.pwMatchChk(user_pw, chkPassword);
+		         }
+		         
+		         if (chk) {
+		            System.out.println("success");
+		            model.addAttribute("edit", user);
+		            System.out.println("user model : " + ((UserVO) model.getAttribute("edit")).getUser_tel());
+		            return "user/userEdit";
+		         } else {
+		            return "redirect:chkPassword?error=1";
+		         }
+		      } else {
+		         return "redirect:chkPassword?error=1";
+		      }
+		   }
+		   
+		   //비밀번호 확인 이동
+		   @RequestMapping("/chkPassword")
+		   public String chkPassword() {
+		      return "user/pwCheck";
+		   }
 
 
 	// 아이디 중복확인
@@ -284,48 +359,6 @@ public class UserController {
 		return "redirect:/index";
 	}
 
-	//비밀번호 일치 확인
-	   @RequestMapping(value = "/checkPW", method = RequestMethod.POST)
-	   public String checkPW(UserVO vo, HttpSession session, Model model) {
-	      UserVO user = null;
-	      String user_id = (String)session.getAttribute("user_id");
-	      vo.setUser_id(user_id);
-	      
-	      // parameter로 받은값
-	      String user_pw = vo.getUser_pw();
-	      
-	      if (userService.getUser(vo) != null) {
-	         System.out.println("null 아님");
-	         // db 값
-	         user = userService.getUser(vo);
-	         String chkPassword = user.getUser_pw();
-	         
-	         boolean chk = false;
-	         if (user_pw != null) {
-	            // db값과 parameter값이 일치하는지 확인
-	            chk = userService.pwMatchChk(user_pw, chkPassword);
-	         }
-	         
-	         if (chk) {
-	            System.out.println("success");
-	            model.addAttribute("edit", user);
-	            System.out.println("user model : " + ((UserVO) model.getAttribute("edit")).getUser_tel());
-	            return "user/userEdit";
-	         } else {
-	            return "redirect:pwCheck?error=1";
-	         }
-	      } else {
-	         return "redirect:pwCheck?error=1";
-	      }
-	   }
-	   
-	   //비밀번호 확인 이동
-	   @RequestMapping("/chkPassword")
-	   public String chkPassword() {
-	      return "user/pwCheck";
-	   }
-
-	
 	
 	
 	

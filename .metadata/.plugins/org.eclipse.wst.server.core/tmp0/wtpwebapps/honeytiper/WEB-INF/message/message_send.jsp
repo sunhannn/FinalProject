@@ -115,7 +115,7 @@
 				send_btn : send_btn
 			},
 			success:function(data){
-				
+// 				window.opener.parent_function();
 				console.log("메세지 리스트 리로드 성공");
 				console.log('data: ',data);
 				
@@ -152,7 +152,7 @@
 				      	
 				      	//가격 입력창 띄우는 버튼
 						if(user_role == 1){
-					      	send_msg +="<button id='price_btn' type='button' class='btn btn-secondary'>";
+					      	send_msg +="<button title='견적보내기' id='price_btn' type='button' class='btn btn-secondary'>";
 					      	send_msg +="<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-calculator' viewBox='0 0 16 16'>";
 					      	send_msg +="<path d='M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z'></path>";
 					      	send_msg +="<path d='M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-2zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-4z'></path>";
@@ -167,7 +167,7 @@
 						      	send_msg +="<div style='display: none' id='price_modal' data-backdrop='static' class='modal'>";
 							      	send_msg +="<select class='escrow_lesson_title' name='lesson_num' size='1' required='required'></select>";
 							      	send_msg +="<label class='escrow_start_lb' for='escrow_start'>꿀TIP 전수할 날짜:</label>";
-							      	send_msg +="<input type='date' id='escrow_start' class='escrow_start' required='required'>";
+							      	send_msg +="<input max='2123-12-31' type='date' id='escrow_start' class='escrow_start' required='required'>";
 							      	send_msg +="<button class='modal_close' type='button'><i class='fa fa-close' aria-hidden='true'></i></button>";
 							      	send_msg +="<div class='price_send_div'>";
 							      	send_msg +="<p class='price_p'>아래 입력란에 제시할 허니페이를<br>입력해주세요.</p>";
@@ -229,6 +229,7 @@
 					$('.chat_list').on('click', function(){
 						//alert('room : '+ $(this).attr('message_room'));
 // 						$('.chat_ib svg').remove();
+// 						window.opener.parent_function();
 						let message_room = $(this).attr('message_room');
 						let other_user_id = $(this).attr('other-user_id'); //**ohter-nick
 						let user_role = $(this).attr('user_role');
@@ -257,7 +258,7 @@
 					      	
 					      	//가격 입력창 띄우는 버튼
 							if(user_role == 1){
-						      	send_msg +="<button id='price_btn' type='button' class='btn btn-secondary'>";
+						      	send_msg +="<button title='견적보내기' id='price_btn' type='button' class='btn btn-secondary'>";
 						      	send_msg +="<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-calculator' viewBox='0 0 16 16'>";
 						      	send_msg +="<path d='M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z'></path>";
 						      	send_msg +="<path d='M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-2zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-4z'></path>";
@@ -272,7 +273,7 @@
 							      	send_msg +="<div style='display: none' id='price_modal' data-backdrop='static' class='modal'>";
 								      	send_msg +="<select class='escrow_lesson_title' name='lesson_num' size='1' required='required'></select>";
 								      	send_msg +="<label class='escrow_start_lb' for='escrow_start'>꿀TIP 전수할 날짜:</label>";
-								      	send_msg +="<input type='date' id='escrow_start' class='escrow_start' required='required'>";
+								      	send_msg +="<input max='2123-12-31' type='date' id='escrow_start' class='escrow_start' required='required'>";
 								      	send_msg +="<button class='modal_close' type='button'><i class='fa fa-close' aria-hidden='true'></i></button>";
 								      	send_msg +="<div class='price_send_div'>";
 								      	send_msg +="<p class='price_p'>아래 입력란에 제시할 허니페이를<br>입력해주세요.</p>";

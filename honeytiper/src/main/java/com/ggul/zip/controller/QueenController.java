@@ -69,49 +69,120 @@ public class QueenController {
     
 
     
-    //승희님부분
-	//admin 로그인
-	@RequestMapping(value = "/adminLogin")
-	public String adminLogin(UserVO vo, HttpSession session) {
-		
-		
-		if(!vo.getUser_id().equals("admin")) {
-			System.out.println("admin 아님");
-			return "redirect:adminLoginBtn?error=1";
-		}else {
-			// parameter로 받은값
-			String user_pw = vo.getUser_pw();
-			if (userService.getUser(vo) != null) {
-				// db 값
-				String chkPassword = userService.getUser(vo).getUser_pw();
-				System.out.println("비밀번호 확인 : " + chkPassword);
-				boolean chk = false;
-				if (user_pw != null) {
-					// db값과 parameter값이 일치하는지 확인
-					chk = userService.pwMatchChk(user_pw, chkPassword);
-				}
-				if (chk) {
-					System.out.println("일치함");
-					session.setAttribute("user_id", userService.getUser(vo).getUser_id());
-					session.setAttribute("user_name", userService.getUser(vo).getUser_name());
-					session.setAttribute("user_role", userService.getUser(vo).getUser_role());
-					return "redirect:goChart";
-				} else {
-					System.out.println("일치하지 않음");
-					System.out.println("일치하지 않음");
-					return "redirect:adminLoginBtn?error=1";
-				}
-			} else {
-				return "adminLogin";
-			}
-		}
-	}
-	
-//admin 로그인 페이지 이동
-@RequestMapping("/adminLoginBtn")
-public String adminLoginBtn() {
-	return "queen/adminLogin";
-}
+  //승희님부분
+  	//admin 로그인
+  	@RequestMapping(value = "/adminLogin")
+  	public String adminLogin(UserVO vo, HttpSession session) {
+  		
+  		
+  		if(!vo.getUser_id().equals("admin")) {
+  			System.out.println("admin 아님");
+  			return "redirect:adminLoginBtn?error=1";
+  		}else {
+  			// parameter로 받은값
+  			String user_pw = vo.getUser_pw();
+  			if (userService.getUser(vo) != null) {
+  				// db 값
+  				String chkPassword = userService.getUser(vo).getUser_pw();
+  				System.out.println("비밀번호 확인 : " + chkPassword);
+  				boolean chk = false;
+  				if (user_pw != null) {
+  					// db값과 parameter값이 일치하는지 확인
+  					chk = userService.pwMatchChk(user_pw, chkPassword);
+  				}
+  				if (chk) {
+  					System.out.println("일치함");
+  					session.setAttribute("user_id", userService.getUser(vo).getUser_id());
+  					session.setAttribute("user_name", userService.getUser(vo).getUser_name());
+  					session.setAttribute("user_role", userService.getUser(vo).getUser_role());
+  					return "queen/adminMain";
+  				} else {
+  					System.out.println("일치하지 않음");
+  					return "redirect:adminLoginBtn?error=1";
+  				}
+  			} else {
+  				return "adminLogin";
+  			}
+  		}
+  	}
+  	
+  	//admin 로그인 페이지 이동
+  	@RequestMapping("/adminLoginBtn")
+  	public String adminLoginBtn() {
+  		return "queen/adminLogin";
+  	}
+      
+  	
+  	//admin정보 수정
+  	   @RequestMapping("/adminEdit")
+  	   public String adminEdit(UserVO vo, @RequestParam("show_user_email") String email, @RequestParam("show_pw") String pw) {
+  		   
+  		   if(vo.getUser_email() == "") {vo.setUser_email(email);}
+  		   if(vo.getUser_pw() == "") {
+  			   vo.setUser_pw(pw);
+  			   System.out.println("pw : " + pw);
+  		   }else {
+  			   System.out.println("user_pw : " + vo.getUser_pw());
+  			   String hashedPw = userService.hashedChk(vo.getUser_pw());
+  			   vo.setUser_pw(hashedPw);
+  		   }
+  		   
+  		   
+  		   boolean done = userService.updateUserInfo(vo);
+  		   
+  		   if(done) {
+  			   return "queen/adminMain";
+  		   }else {
+  			   return "queen/adminEdit";
+  		   }
+  	   }
+  	
+  	 //관리자 수정 비밀번호 일치 확인
+  	   @RequestMapping(value = "/adminChkPassword", method = RequestMethod.POST)
+  	   public String checkPW(UserVO vo, HttpSession session, Model model) {
+  	      UserVO user = null;
+  	      String user_id = (String)session.getAttribute("user_id");
+  	      vo.setUser_id(user_id);
+  	      
+  	      // parameter로 받은값
+  	      String user_pw = vo.getUser_pw();
+  	      
+  	      if (userService.getUser(vo) != null) {
+  	         System.out.println("null 아님");
+  	         // db 값
+  	         user = userService.getUser(vo);
+  	         String chkPassword = user.getUser_pw();
+  	         
+  	         boolean chk = false;
+  	         if (user_pw != null) {
+  	            // db값과 parameter값이 일치하는지 확인
+  	            chk = userService.pwMatchChk(user_pw, chkPassword);
+  	         }
+  	         
+  	         if (chk) {
+  	            System.out.println("success");
+  	            model.addAttribute("edit", user);
+  	            System.out.println("user model : " + ((UserVO) model.getAttribute("edit")).getUser_tel());
+  	            return "queen/adminEdit";
+  	         } else {
+  	            return "redirect:adminChkBtn?error=1";
+  	         }
+  	      } else {
+  	         return "redirect:adminChkBtn?error=1";
+  	      }
+  	   }
+  	   
+  	   //비밀번호 확인 이동
+  	   @RequestMapping("/adminUpdateGo")
+  	   public String chkPassword() {
+  	      return "queen/adminPwCheck";
+  	   }
+  	   
+  	 //admin 메인페이지 이동
+  	   @RequestMapping("adminMyPageGO")
+  	   public String adminMyPageGO() {
+  		   return "queen/adminMain";
+  	   }
     
     
     
@@ -146,22 +217,6 @@ public String adminLoginBtn() {
 	public String getLessonListPost(LessonVO vo, Model model) {
 		model.addAttribute("lessonList", lessonService.getLessonList(vo));
 		return "queen/adminTiperList";
-	}
-	
-	// 관리자 정보 수정하기
-	@RequestMapping(value = "/adminUpdateAction")
-	public String adminUpdateAction(UserVO vo){
-		String hashedPw = userService.hashedChk(vo.getUser_pw());
-		vo.setUser_pw(hashedPw);
-		queenService.updateAdmin(vo);
-	
-		return "queen/adminInfoUpdate";
-	}
-
-	// 관리자정보수정 페이지 이동
-	@RequestMapping(value = "/adminUpdateGo")
-	public String userUpdateGo() {
-		return "queen/adminInfoUpdate";
 	}
 	
 	// 브랜드소개 페이지 이동
@@ -329,6 +384,12 @@ public String adminLoginBtn() {
 					return "redirect:getPotentialTiperList";
 				}
 //-------------------------------보영-------------------------------------------------------
+				@RequestMapping(value = "/searchAndStatus", method = RequestMethod.POST)
+				@ResponseBody
+				public List<EscrowVO> searchAndStatus(EscrowVO vo){
+					System.out.println("여기왔으면 좋겠다");
+						return escrowService.searchAndStatus(vo);
+				}
 
 				//분쟁해결관리- 전체리스트 가져오기 상태가 0또는 1만 가져옴
 			@RequestMapping("/getDisputeResolutionList")

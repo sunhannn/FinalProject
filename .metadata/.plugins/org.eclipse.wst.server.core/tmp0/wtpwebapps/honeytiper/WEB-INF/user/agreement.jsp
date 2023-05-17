@@ -4,141 +4,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Insert title here</title>
-<style>
-	* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  height: 100%;
-}
-
-body {
-  display: flex;
-  margin: 0;
-  background-color: #f5f6f7;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.wrap {
-  margin: auto;
-}
-
-.wrap .logo {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.wrap .logo h1 {
-  margin: 0;
-  font-size: 50px;
-}
-
-.wrap .contents {
-  padding: 50px;
-  background-color: #ffffff;
-  border: 1px solid #dadada;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-#form__wrap {
-  margin: 0 auto;
-  width: 460px;
-  font-size: 14px;
-}
-
-#form__wrap .terms__check__all {
-  display: flex;
-  margin-bottom: 35px;
-}
-
-#form__wrap .terms__check__all label {
-  margin-left: 3px;
-  text-decoration: underline;
-}
-
-.terms__list .terms__box {
-  margin: 20px 0;
-}
-
-.contents label {
-  font-weight: 700;
-}
-
-label.required::after {
-  margin-left: 4px;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 24px;
-  color: #0086ff;
-  content: "(필수)";
-}
-
-.terms__list .terms__content {
-  height: 88px;
-  overflow: auto;
-  margin-top: 8px;
-  padding: 12px;
-  border: 1px solid #dadada;
-  background: #fff;
-  font-size: 12px;
-}
-
-.next-button {
-  width: 100%;
-  height: 40px;
-  outline: none;
-  cursor: pointer;
-  background-color: #242222;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  transition-duration: 0.2s;
-}
-
-.next-button:hover:enabled {
-  background-color: #a3a2a2;
-}
-
-.next-button:disabled {
-  opacity: 0.2;
-  cursor: not-allowed;
-}
-
-@media (max-width: 768px) {
-  .wrap {
-    min-width: 280px;
-    padding: 20px;
-  }
-
-  #form__wrap {
-    max-width: 460px;
-    width: auto;
-  }
-}
-	
-</style>
+<link rel="stylesheet" media="screen and (min-width:769px)" href="front/agreement.css">
+   <link rel="stylesheet" media="screen and (max-width:768px)" href="front/agreementMobile.css">
 </head>
 <body>
     <div class="wrap">
-      <div class="logo"><img src="${pageContext.request.contextPath}/front/ggulTiper.png"></div>
+      <div class="agreement_logo"><a href="/"><img src="${pageContext.request.contextPath}/front/ggulTiper.png" title="Logo"></a></div>
       <div class="contents">
         <form action="/joinBtn" method="POST" id="form__wrap">
           <div class="terms__check__all">
             <input type="checkbox" name="checkAll" id="checkAll">
             <label for="checkAll"
               >꿀TIPer 이용약관, 개인정보 수집 및 이용, 프로모션 정보
-              수신(선택)에<br />모두 동의합니다.</label
+              수신(선택)에 모두 동의합니다.</label
             >
           </div>
           <ul class="terms__list">
