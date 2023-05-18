@@ -28,4 +28,5 @@
     <fullyQualifiedTypeName name="org.springframework.web.context.support.ServletContextResource"/>
     <fullyQualifiedTypeName name="org.springframework.core.io.Resource"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+    <fullyQualifiedTypeName name="java.net.MulticastSocket"/>
 </qualifiedTypeNameHistroy>

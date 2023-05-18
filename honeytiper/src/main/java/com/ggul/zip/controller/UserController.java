@@ -2,6 +2,7 @@ package com.ggul.zip.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -367,48 +368,35 @@ public class UserController {
 		
 		
 		
-		
-		//소연누나부분
-		
-		// 회원 목록
-		@RequestMapping("/getUserListUser")
-		public String getUserListPost(UserVO vo, Model model) {
-			model.addAttribute("userList", userService.getUserList(vo));
-			return "queen/adminUserList";
-		}
+    //소연누나부분
+    
+    //회원리스트 호출
+    @RequestMapping(value = "/listuser", method = RequestMethod.GET)
+    public String listUser() {
+       return "queen/adminUserList";
+    }
 
-		// 회원 목록 Ajax
-		@RequestMapping("/getUserListUserAjax")
-		@ResponseBody
-		public ArrayList<UserVO> getUserListPostAjax(UserVO vo, Model model) {
+    //회원리스트
+    @RequestMapping(value = "/listuser", method = RequestMethod.POST)
+    @ResponseBody
+    public List<UserVO> listUser(UserVO vo, Model model) {
+       model.addAttribute("userList", userService.getUserList(vo));
+       return userService.getUserList(vo);
+    }
 
-			ArrayList<UserVO> userListAjax = (ArrayList<UserVO>) userService.getUserList(vo);
-			System.out.println("유저목록Ajax 컨트롤러도착" + userListAjax);
-
-			return userListAjax;
-		}
-
-		// 회원 목록 검색
-		@RequestMapping("/getUserListPostSearch")
-		@ResponseBody
-		public ArrayList<UserVO> getUserListPostSearch(@RequestParam("userSearch") Object user_search,
-				@RequestParam("userCondition") Object user_condition, Model model) {
-
-			String userSearch1 = (String) user_search;
-			String userCondition1 = (String) user_condition;
-
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("user_search", userSearch1);
-			map.put("user_condition", userCondition1);
-
-			ArrayList<UserVO> userSearchList = (ArrayList<UserVO>) userService.getUserListPostSearch((HashMap<String, Object>) map);
-
-			return userSearchList;
-		}
-
+    //회원상세보기
+    @RequestMapping("/updateMoveUser")
+    public String updateMoveUser(UserVO vo, Model model) {
+       model.addAttribute("getUser", userService.getUserSY(vo));
+       return "queen/adminUserDetail";
+    }
 		
 		
 		
+    
+    
+    
+    
 		//상현이 부분
 		
 		// 강사 신청 창이동

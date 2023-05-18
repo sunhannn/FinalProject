@@ -1,11 +1,13 @@
 package com.ggul.zip.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -25,6 +27,8 @@ import com.ggul.zip.lesson.LessonService;
 import com.ggul.zip.lesson.LessonVO;
 import com.ggul.zip.queen.QueenService;
 import com.ggul.zip.queen.QueenVO;
+import com.ggul.zip.tiper.TiperService;
+import com.ggul.zip.tiper.TiperVO;
 import com.ggul.zip.user.ReportVO;
 import com.ggul.zip.user.UserService;
 import com.ggul.zip.user.UserVO;
@@ -44,6 +48,9 @@ public class QueenController {
 	@Autowired
 	private EscrowService escrowService;
 	
+	@Autowired
+	private TiperService tiperService;
+	
 	/*------------------------------------구글차트----------------------------------------*/
 	//차트보기 아약스
 	@RequestMapping(value="/chartAjax", method=RequestMethod.POST)
@@ -56,7 +63,7 @@ public class QueenController {
     @RequestMapping("/goChart")
     public String moveChart(QueenVO vo, Model model) {
     	vo.setWeektop_sales(queenService.weekTop());
-    	System.out.println("컨트롤러에서 vo weekTop의 값은? " + vo.getWeektop_sales());
+    	System.out.println("컨트롤러에서 값은 가져왔니? " + vo.getWeektop_sales());
     	vo.setWeekavg_sales(queenService.weekAvg());
     	vo.setWeektotal_sales(queenService.weekTotal());
     	vo.setMonthtop_sales(queenService.monthTop());
@@ -95,13 +102,13 @@ public class QueenController {
   					session.setAttribute("user_id", userService.getUser(vo).getUser_id());
   					session.setAttribute("user_name", userService.getUser(vo).getUser_name());
   					session.setAttribute("user_role", userService.getUser(vo).getUser_role());
-  					return "queen/adminMain";
+  					return "redirect:goChart";
   				} else {
   					System.out.println("일치하지 않음");
   					return "redirect:adminLoginBtn?error=1";
   				}
   			} else {
-  				return "adminLogin";
+  				return "goChart";
   			}
   		}
   	}
@@ -128,7 +135,7 @@ public class QueenController {
   		   }
   		   
   		   
-  		   boolean done = userService.updateUserInfo(vo);
+  		   boolean done = queenService.updateAdminInfo(vo);
   		   
   		   if(done) {
   			   return "queen/adminMain";
@@ -173,7 +180,7 @@ public class QueenController {
   	   }
   	   
   	   //비밀번호 확인 이동
-  	   @RequestMapping("/adminUpdateGo")
+  	   @RequestMapping("/adminChkBtn")
   	   public String chkPassword() {
   	      return "queen/adminPwCheck";
   	   }
@@ -187,47 +194,60 @@ public class QueenController {
     
     
     
-    //소연누나부분
-    
-    // 강의 목록 Ajax
-    @RequestMapping("/getLessonListLessonAjax")
-    @ResponseBody
-    public ArrayList<LessonVO> getLessonListPastAjax(LessonVO vo, Model model) {
-       ArrayList<LessonVO> lessonListAjax = (ArrayList<LessonVO>) lessonService.getLessonList(vo);
-       return lessonListAjax;
-    }
+  	   // 소연누나부분
 
-    // 강의 목록 검색
-    @RequestMapping("/getLessonListPostSearch")
-    @ResponseBody
-    public ArrayList<LessonVO> getLessonListPostSearch(@RequestParam("lessonSearch") Object lesson_search,
-          @RequestParam("lessonCondition") Object lesson_condition, Model model) {
-       String lessonSearch1 = (String) lesson_search;
-       String lessonCondition1 = (String) lesson_condition;
-       Map<String, Object> map = new HashMap<String, Object>();
-       map.put("lesson_search", lessonSearch1);
-       map.put("lesson_condition", lessonCondition1);
-       ArrayList<LessonVO> lessonSearchList = (ArrayList<LessonVO>) lessonService.getLessonListPostSearch((HashMap<String, Object>) map);
+  	   // 강의리스트 호출
+  	   @RequestMapping(value = "/listlesson", method = RequestMethod.GET)
+  	   public String listLesson() {
+  	      return "queen/adminLessonList";
+  	   }
 
-       return lessonSearchList;
-    }
-    
-	// 강의 목록
-	@RequestMapping("/getLessonListLesson")
-	public String getLessonListPost(LessonVO vo, Model model) {
-		model.addAttribute("lessonList", lessonService.getLessonList(vo));
-		return "queen/adminTiperList";
-	}
-	
-	// 브랜드소개 페이지 이동
-    @RequestMapping(value = "/getBrand")
-    public String getBrand() {
-       return "queen/getBrand";
-    }
+  	   // 강의리스트
+  	   @RequestMapping(value = "/listlesson", method = RequestMethod.POST)
+  	   @ResponseBody
+  	   public List<LessonVO> listLesson(LessonVO vo, Model model) {
+  	      model.addAttribute("lessonList", lessonService.getLessonList(vo));
+  	      return lessonService.getLessonList(vo);
+  	   }
+
+  	   // 강의상세보기
+  	   @RequestMapping("/updateMoveLesson")
+  	   public String updateMoveLesson(LessonVO vo, Model model) {
+  	      model.addAttribute("getLesson", lessonService.getLesson(vo));
+  	      return "queen/adminLessonDetail";
+  	   }
+
+  	   // 강의 삭제
+  	   @RequestMapping(value = "/deleteLesson")
+  	   public void lessonDelete(Model model, HttpServletResponse response, HttpServletRequest request,
+  	                              HttpSession session, UserVO vo, TiperVO tiperVO, LessonVO lessonVO) throws IOException {
+  	       tiperVO.setTiper_user_id((String) session.getAttribute("user_id"));
+  	       lessonVO.setLesson_num(Integer.parseInt(request.getParameter("lesson_num")));
+  	       tiperVO = tiperService.selectTiperInfo(tiperVO);
+  	       lessonVO = lessonService.selectLessonNum(lessonVO);
+
+  	       if (lessonService.selectLessonfromEscrow(lessonVO) > 0) {
+  	           response.setContentType("text/html; charset=UTF-8");
+  	           PrintWriter writer = response.getWriter();
+  	           writer.println("<script type='text/javascript'>alert('아직 수강중인 수강생 혹은 신청자가 있습니다!'); history.back();</script>");
+  	           writer.flush();
+  	       } else {
+  	           lessonService.lessonDelete(lessonVO);
+  	           response.setContentType("text/html; charset=UTF-8");
+  	           PrintWriter writer = response.getWriter();
+  	           writer.println("<script type='text/javascript'>alert('꿀TIP삭제가 완료되었어요!'); location.href='/listlesson';</script>");
+  	           writer.flush();
+  	       }
+
+  	   }
 
 	
 	
-	
+  	// 브랜드소개 페이지 이동
+  	    @RequestMapping(value = "/getBrand")
+  	    public String getBrand() {
+  	       return "queen/getBrand";
+  	    }
 	
 	
 	

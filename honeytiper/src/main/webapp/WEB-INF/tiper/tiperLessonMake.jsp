@@ -175,10 +175,11 @@ if (cateCheck2 == false) {
 		border-radius: 10px;
 	}
 	.lesmake_td1 {
-		font-size: 18px;
+		font-size: 16px;
 		width: 200px;
 		background-color: #efefef;
 		border-bottom: 10px solid white;
+		font-weight: bold;
 	}
 	.lesmake_td2 {
 		width: 500px;

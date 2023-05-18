@@ -118,25 +118,180 @@ th {
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script>
+ var totalData; //총 데이터 수
+ var dataPerPage = 10; //한 페이지에 나타낼 글 수
+ var pageCount = 5; //페이징에 나타낼 페이지 수
+ var globalCurrentPage= 1; //현재 페이지
+ var dataList; //표시하려하는 데이터 리스트
+ var search = $("#user-search").val();
+ var condition = $("#user-condition").val();
+
+	function selTr(val){
+	location.href="updateMoveUser?user_id="+val;
+	}
+ 
+ 
+	// 검색 버튼 클릭 이벤트
+	function btnSFnc() {
+	search = $("#user-search").val();
+	condition = $("#user-condition").val();
+	    ajaxFnc();
+	}
+
+	// 전체보기 버튼 클릭 이벤트
+	function viewAllFnc() {
+	    location.reload();
+	}
+
+//아약스 함수
+ function ajaxFnc() {
+     $.ajax({
+         method: "POST",
+         url: 'listuser',
+         data:{
+        	 'user_search' : search,
+        	 'user_condition' : condition	 
+         },
+         success: function (res) {
+         
+             totalData = res.length;
+             displayData(globalCurrentPage, dataPerPage, res);
+             paging(totalData, dataPerPage, pageCount, globalCurrentPage);
+         }
+     });
+ }
+
+ $(document).ready(function () {
+	 ajaxFnc();
+ });
+
+
+ function displayData(currentPage, dataPerPage, dataList) {
+
+	 let chartHtml = "";	
+
+	 currentPage = Number(currentPage);
+	 dataPerPage = Number(dataPerPage);
+	 let startPage = (currentPage - 1) * dataPerPage; //15
+	 let endPage = (currentPage - 1) * dataPerPage + dataPerPage;
+	 if(endPage > (dataList.length)) endPage = dataList.length;
+
+	 function formatDate(date) {
+	     var d = new Date(date); 
+	     var month = '' + (d.getMonth() + 1);
+	     var day = '' + d.getDate();
+	     var year = d.getFullYear();
+
+	     if (month.length < 2) month = '0' + month;
+	     if (day.length < 2) day = '0' + day;
+
+	     return [year, month, day].join('-');
+	 }
+
+	 for (var i = startPage; i < endPage; i++) {
+	 	
+	     var formattedEscrowStart = formatDate(dataList[i].notice_start) || "";
+	     var formattedEscrowEnd = formatDate(dataList[i].notice_end) || "";
+     
+ 	 chartHtml +=
+ 	 "<tr onclick=\"selTr(  \'"+dataList[i].user_id +"\'  )\" style='cursor: pointer'><td  style='text-overflow:ellipsis; overflow:hidden; white-space:nowrap;'>"+ dataList[i].user_id +
+ 	 "</td><td  style='text-overflow:ellipsis; overflow:hidden; white-space:nowrap;'>" + dataList[i].user_name +
+ 	 "</td><td style='text-overflow:ellipsis; overflow:hidden; white-space:nowrap;'>" + (dataList[i].user_addr2 +  dataList[i].user_addr3 + dataList[i].user_addr4)+
+ 	 "</td><td  style='text-overflow:ellipsis; overflow:hidden; white-space:nowrap;'>" + (dataList[i].user_tel || "")+
+ 	 "</td><td  style='text-overflow:ellipsis; overflow:hidden; white-space:nowrap;'>" + (dataList[i].user_email || "")+
+ 	 "</td><td  style='text-overflow:ellipsis; overflow:hidden; white-space:nowrap;'>" + (dataList[i].user_cate || "");
+ 	 
+  }
+  
+ $("#dataTableBody").html(chartHtml);
+
+ }
+
+ //페이징함수
+ function paging(totalData, dataPerPage, pageCount, currentPage) {
+ totalPage = Math.ceil(totalData / dataPerPage); //총 페이지 수
+  
+ if(totalPage<pageCount){
+   pageCount=totalPage;
+ }
+  
+ let pageGroup = Math.ceil(currentPage / pageCount); // 페이지 그룹
+ let endPage = pageGroup * pageCount; //화면에 보여질 마지막 페이지 번호
+
+ if (endPage > totalPage) {
+   endPage = totalPage;
+ }
+
+ let startPage = endPage - (pageCount - 1); //화면에 보여질 첫번째 페이지 번호
+ let next = Number(currentPage)+1;
+ let prev = Number(currentPage)-1;
+
+ let pageHtml = "";
+
+ if (prev > 0) {
+   pageHtml += "<li><a href='javascript:void(0)' id='prev'> 이전 </a></li>";
+ }
+
+ //페이징 번호 표시 
+ for (var i = startPage; i <= endPage; i++) {
+ 	if (currentPage == i) {
+ 	  pageHtml +=
+ 	    '<li class="on"><a href="javascript:void(0)" id="' + i + '">' + i + '</a></li>';
+ 	} else {
+ 	  pageHtml += "<li><a href='javascript:void(0)' id='" + i + "'>" + i + "</a></li>";
+ 	}
+ }
+
+ if (next <= totalPage) {
+   pageHtml += '<li><a href="javascript:void(0);" id="next"> 다음 </a></li>';
+ }
+
+ $("#pagingul").html(pageHtml);
+ let displayCount = "";
+ displayCount = "현재 1 - " + totalPage + " 페이지 / " + totalData + "건";
+ $("#displayCount").text(displayCount);
+
+
+  //페이징 번호 클릭 이벤트 
+ $("#pagingul li a").click(function () {
+ 	let $id = $(this).attr("id");
+ 	selectedPage = $(this).text();
+ 	
+ 	if ($id == "next") selectedPage = next;
+ 	if ($id == "prev") selectedPage = prev;
+ 	
+ 	
+ 	//전역변수에 선택한 페이지 번호를 담는다...
+ 	globalCurrentPage = selectedPage;
+ 	ajaxFnc();
+ });
+   
+ }
+ 
+ 
+
+
+</script>
 <%@include file="../queen/adminNavbar.jsp"%>
 
 <body>
 	<div class="container">
 		<h2 style="margin: 40px 0px;">회원 리스트</h2>
 		<button id="view-all-button"
-			onclick="location.href='getUserListUser';">전체목록보기</button>
+			onclick="viewAllFnc()">전체목록보기</button>
 		<br>
 		<br>
 		<div id="search_wrapper">
-			<select class="search002" id="sel1" name="user_condition"
+			<select class="search002" id="user-condition" name="user_condition"
 				style="display: inline-block !important; margin-right: 10px;">
 
 				<option value="user_id">회원아이디</option>
 				<option value="user_name">회원명</option>
 			</select> <input class="search002" type="text" name="user_search"
-				id="sel2" placeholder="검색어를 입력해주세요.">
-			<button class="btn btn-success" type="button" id="sel3"
-				class="search002"
+				id="user-search" placeholder="검색어를 입력해주세요.">
+			<button class="btn btn-success" type="button"
+				class="search002"  onclick="btnSFnc()"
 				style="outline: none; border: none; background: transparent;">
 				<i class="fa fa-search" style="font-size: 24px; color: #FFD400;"></i>
 			</button>
@@ -166,211 +321,6 @@ th {
 </body>
 
 
-<script>
- var totalData; //총 데이터 수
- var dataPerPage; //한 페이지에 나타낼 글 수
- var pageCount = 5; //페이징에 나타낼 페이지 수
- var globalCurrentPage= 1; //현재 페이지
- var dataList; //표시하려하는 데이터 리스트
 
- $(document).ready(function () {
-//페이지 당 글 개수 
- dataPerPage = 10;
- 
- 
- $.ajax({ // ajax로 데이터 가져오기
-   method: "POST",
-   url: "getUserListUserAjax",
-   dataType: "json",
-   async:false,
-   success: function (data) {
-      //alert("data: " + JSON.stringify(d));
-      //totalData(총 데이터 수) 구하기
-      totalData = data.length;
-       //데이터 대입
-       dataList=data;
-       }
- });      
-      
- //글 목록 표시 호출 (테이블 생성)
- displayData(1, dataPerPage);
-
- //페이징 표시 호출
- paging(totalData, dataPerPage, pageCount, 1);
- 
-});
-
-//현재 페이지(currentPage)와 페이지당 글 개수(dataPerPage) 반영
- function displayData(currentPage, dataPerPage) {
-
-   let chartHtml = "";
-
- //Number로 변환하지 않으면 아래에서 +를 할 경우 스트링 결합이 되어버림.. 
-   currentPage = Number(currentPage);
-   dataPerPage = Number(dataPerPage);
-   
-   
-  if (totalData < (currentPage - 1) * dataPerPage + dataPerPage){
-   
-     for (
-      var i = (currentPage - 1) * dataPerPage;
-          i < totalData;
-              i++
-            ) {
-               console.log("error : " + dataList[i].user_id);
-              chartHtml +=
-            	  '<tr><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_id + '">' +
-                dataList[i].user_id +
-                '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_name + '">' +
-                dataList[i].user_name +
-                '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + (dataList[i].user_addr2 +  dataList[i].user_addr3 + dataList[i].user_addr4) + '">' +
-                (dataList[i].user_addr2 +  dataList[i].user_addr3 + dataList[i].user_addr4)+
-                '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_tel + '">' +
-                (dataList[i].user_tel  || "") +
-                '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_email + '">' +
-                (dataList[i].user_email  || "") +
-                '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;"  title="' + dataList[i].user_cate + '">' +
-                (dataList[i].user_cate  || "") +
-                '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">';
-            } 
-         
-     
-  }else{ 
-   
-   for (
-     var i = (currentPage - 1) * dataPerPage;
-     i < (currentPage - 1) * dataPerPage + dataPerPage;
-     i++
-   ) {
-      chartHtml +=
-    	  '<tr><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_id + '">' +
-          dataList[i].user_id +
-          '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_name + '">' +
-          dataList[i].user_name +
-          '</td><td class="tdCenter1" style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;"  title="' + (dataList[i].user_addr2 +  dataList[i].user_addr3 + dataList[i].user_addr4) + '">' +
-          (dataList[i].user_addr2 +  dataList[i].user_addr3 + dataList[i].user_addr4)+
-          '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_tel + '">' +
-          (dataList[i].user_tel  || "") +
-          '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_email + '">' +
-          (dataList[i].user_email  || "") +
-          '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + dataList[i].user_cate + '">' +
-          (dataList[i].user_cate  || "") +
-          '</td><td class="tdCenter1"  style="width:15%; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">';
-   }    
-}
-
-$("#dataTableBody").html(chartHtml);
-}
-
-
-
-
-function paging(totalData, dataPerPage, pageCount, currentPage) {
-     console.log("currentPage : " + currentPage);
-     console.log("pageCount : " + pageCount);
-     console.log("totalData : " + totalData);
-
-     totalPage = Math.ceil(totalData / dataPerPage); //총 페이지 수
-     
-     if(totalPage<pageCount){
-       pageCount=totalPage;
-     }
-     
-     let pageGroup = Math.ceil(currentPage / pageCount); // 페이지 그룹
-     let endPage = pageGroup * pageCount; //화면에 보여질 마지막 페이지 번호
-     
-     if (endPage > totalPage) {
-       endPage = totalPage;
-     }
-
-     let startPage = endPage - (pageCount - 1); //화면에 보여질 첫번째 페이지 번호
-     let next = Number(currentPage)+1;
-//      let next = endPage +1;
-     let prev = Number(currentPage)-1;
-//      let prev = startPage - 1;
-
-     let pageHtml = "";
-
-     if (prev > 0) {
-       pageHtml += "<li><a href='javascript:void(0)' id='prev'> 이전 </a></li>";
-     }
-
-    //페이징 번호 표시 
-     for (var i = startPage; i <= endPage; i++) {
-       if (currentPage == i) {
-         pageHtml +=
-           '<li class="on"><a href="javascript:void(0)" id="' + i + '">' + i + '</a></li>';
-//            '<li class="on"><a href="javascript:displayData('+2+',5)" id="' + i + '">' + i + '</a></li>';
-       } else {
-         pageHtml += "<li><a href='javascript:void(0)' id='" + i + "'>" + i + "</a></li>";
-       }
-     }
-    
-       console.log("토탈 : "+ totalPage);
-       console.log("엔드 : "+ endPage);
-       console.log("지금 : "+ currentPage);
-       console.log("다음 : "+ next);
-    
-     if (next <= totalPage) {
-       pageHtml += '<li><a href="javascript:void(0);" id="next"> 다음 </a></li>';
-     }
-
-     $("#pagingul").html(pageHtml);
-     let displayCount = "";
-     displayCount = "현재 1 - " + totalPage + " 페이지 / " + totalData + "건";
-     $("#displayCount").text(displayCount);
-
-
-     //페이징 번호 클릭 이벤트 
-     $("#pagingul li a").click(function () {
-       let $id = $(this).attr("id");
-       selectedPage = $(this).text();
-
-       if ($id == "next") selectedPage = next;
-       if ($id == "prev") selectedPage = prev;
-       
-       
-       //전역변수에 선택한 페이지 번호를 담는다...
-       globalCurrentPage = selectedPage;
-    
-       console.log("클릭시 글로벌 "+globalCurrentPage);
-       
-       //글 목록 표시 재호출
-       displayData(globalCurrentPage, dataPerPage);
-       //페이징 표시 재호출
-       paging(totalData, dataPerPage, pageCount, globalCurrentPage);
-     });
-     
-   }
-   
-   $("#sel3").click(function(){
-   
-      var user_condition=$('#sel1').val();
-      var user_search=$('#sel2').val();
-      
-      $.ajax({ // ajax로 데이터 가져오기
-         method: "POST",
-         url: "getUserListPostSearch",
-          data: {userSearch:user_search, userCondition:user_condition},
-         dataType: "json",
-         async:false,
-         success: function (data) {
-//              alert("data: " + JSON.stringify(data));
-            //totalData(총 데이터 수) 구하기
-            totalData = data.length;
-             //데이터 대입
-             dataList=data;
-             }
-       });      
-      
-       //글 목록 표시 재호출
-       displayData(1, 5);
-       //페이징 표시 재호출
-       paging(totalData, 5, pageCount, 1);
-       
-      
-   });
-   
-</script>
 
 </html>

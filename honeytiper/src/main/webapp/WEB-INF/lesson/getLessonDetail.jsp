@@ -577,7 +577,8 @@ img {
 						<button type="button" id="msg_button_escrow" class="cont1_button"
 							onclick="location.href='/insertEscrow?escrow_lesson_num=${lessonDetail.lesson_num}&escrow_tiper_code=${lessonDetail.tiper_code}&escrow_user_id=<%=user_idd%>&tiper_user_id=${lessonDetail.tiper_user_id}'">꿀TIP 전수 받기</button>
 							<%if(user_idd != null) {%>
-						<button title="메세지 보내기" type="button" id="msg_button" onclick="open_popup()"><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>
+						<button title="메세지 보내기" type="button" id="msg_button" onclick="open_popup(this)"><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>
+						<span style="display: none;" class="cont1-group-title">@${lessonDetail.tiper_user_id}</span>
 						<%} %>
 					</div>
 					<%-- 					<div id="button_box"><button type="button" id="msg_button" onclick="location.href='/insertEscrow?escrow_lesson_num=${lessonDetail.lesson_num}&escrow_tiper_code=${lessonDetail.tiper_code}&escrow_user_id=<%=user_idd%>>쪽지</button></div> --%>

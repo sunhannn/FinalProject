@@ -5,86 +5,98 @@
 <mapper namespace="UserDAO">
 
 	<insert id="joinUser">
-		INSERT INTO users values(#{user_id},#{user_name},#{user_pw},#{user_addr1}, #{user_addr2},#{user_addr3},#{user_addr4},#{user_tel},
+		INSERT INTO users
+		values(#{user_id},#{user_name},#{user_pw},#{user_addr1},
+		#{user_addr2},#{user_addr3},#{user_addr4},#{user_tel},
 		#{user_email},default,default,#{user_cate},default)
 	</insert>
 	<update id="updatePW">
-		UPDATE USERS set user_pw = #{user_pw} where user_id = #{user_id}
+		UPDATE USERS set user_pw = #{user_pw} where user_id =
+		#{user_id}
 	</update>
 	<select id="getUser" resultType="users">
 		SELECT * FROM users
 		WHERE
 		user_id=#{user_id} and user_pw=#{user_pw}
 	</select>
-	
+
 	<select id="kakaoUser" resultType="users">
 		SELECT * FROM users
 		WHERE
 		user_email = #{user_email} and user_id = #{user_id}
 	</select>
 	<select id="viewUser" resultType="users">
-		SELECT * FROM users WHERE user_id = #{user_id}
+		SELECT * FROM users WHERE
+		user_id = #{user_id}
 	</select>
-	
+
 	<select id="getUserList" resultType="users">
-		SELECT * FROM users where user_id
+		SELECT * FROM users where
+		user_id
 		like concat('%',?,'%') order by user_id
 	</select>
-	
+
 	<select id="findUser" resultType="users">
-		SELECT * FROM users where user_tel = #{user_tel} and user_name=#{user_name}
+		SELECT * FROM users where
+		user_tel = #{user_tel} and user_name=#{user_name}
 	</select>
-	
+
 	<select id="findUserPW" resultType="users">
-		SELECT * FROM users where user_tel = #{user_tel} and user_id=#{user_id}
+		SELECT * FROM users where
+		user_tel = #{user_tel} and user_id=#{user_id}
 	</select>
-	
+
 	<insert id="joinKakaoUser">
-		INSERT INTO users (user_id, user_name, user_pw, user_email, user_date, user_role, user_point) 
-		values(#{user_id},#{user_name},#{user_pw},#{user_email}, default, default, default)
+		INSERT INTO users (user_id, user_name, user_pw,
+		user_email, user_date, user_role, user_point)
+		values(#{user_id},#{user_name},#{user_pw},#{user_email}, default,
+		default, default)
 	</insert>
-	
+
+	<!-- <update id="updateUserInfo"> -->
+	<!-- UPDATE users set user_pw =#{user_pw}, user_addr1=#{user_addr1}, user_addr2=#{user_addr2}, 
+		user_addr3=#{user_addr3}, user_addr4=#{user_addr4}, -->
+	<!-- user_tel=#{user_tel}, user_email=#{user_email}, user_cate=#{user_cate} -->
+	<!-- </update> -->
+
 	<update id="updateUserInfo">
-		UPDATE users set user_pw =#{user_pw}, user_addr1=#{user_addr1}, user_addr2=#{user_addr2}, user_addr3=#{user_addr3}, user_addr4=#{user_addr4},
+		Update users set user_pw=#{user_pw},
+		user_addr1=#{user_addr2}, user_addr2=#{user_addr2},
+		user_addr3=#{user_addr3}, user_addr4=#{user_addr4},
 		user_tel=#{user_tel}, user_email=#{user_email}, user_cate=#{user_cate}
+		where user_id = #{user_id}
 	</update>
-	
-	
-	
-	
-	
-	
-<!-- 	소연누나부분 -->
+
+
+
+
+	<!-- 소연누나부분 -->
 	<select id="getUserSY" resultType="users">
-		SELECT * FROM users
-		WHERE
-		user_id=#{user_id}
+		SELECT *
+		FROM users
+		WHERE user_id = #{user_id}
 	</select>
 
 	<select id="getUserListSY" resultType="users">
-		SELECT * FROM users
+		SELECT *
+		FROM users
 		WHERE 1=1
+		<if test="user_condition == 'user_id' "> AND USER_ID LIKE CONCAT('%', #{user_search}, '%')</if>
+		<if test="user_condition == 'user_name' "> AND USER_NAME LIKE CONCAT('%', #{user_search}, '%')</if>
 		ORDER BY user_date DESC
 	</select>
 
-<select id="getUserListPostSearch" resultType="users">
-		SELECT * FROM users
-		WHERE 1=1
-		<if test="user_condition == 'user_id' ">AND USER_ID LIKE CONCAT('%', #{user_search}, '%')</if>
-		<if test="user_condition == 'user_name' ">AND USER_NAME LIKE CONCAT('%', #{user_search}, '%')</if>
-	</select>
-	
-	
-	
-	
-	
-<!-- 	상현이부분 -->
-		<select id="pointSelect" resultType="_int">
+
+
+
+
+	<!-- 상현이부분 -->
+	<select id="pointSelect" resultType="_int">
 		select user_point from users
 		where user_id=#{user_id}
 	</select>
-	
-		<update id="updateUser">
+
+	<update id="updateUser">
 		update users
 		set user_name = #{user_name},
 		user_pw=#{user_pw}, user_addr1=#{user_addr1},
@@ -93,28 +105,28 @@
 		user_email=#{user_email}
 		where user_id=#{user_id}
 	</update>
-	
-		<select id="selectName" resultType="users">
+
+	<select id="selectName" resultType="users">
 		select * from users
 		where
 		user_id=#{user_id}
 	</select>
-	
-		<update id="pointTake">
+
+	<update id="pointTake">
 		update users set user_point = 0 where user_id =
 		#{user_id}
 	</update>
-	
-		<update id="deleteUser">
+
+	<update id="deleteUser">
 		update users set user_id = concat(#{user_id},
 		'(탈퇴회원)'), user_role = 4 where user_id = #{user_id}
 	</update>
-	
-	
-	<!-- ========================================== -->
-<!-- 정성현 : 블랙리스트, 승급관리===================== -->
 
-<select id="getPotentialTiperList" resultType="users">
+
+	<!-- ========================================== -->
+	<!-- 정성현 : 블랙리스트, 승급관리===================== -->
+
+	<select id="getPotentialTiperList" resultType="users">
 		SELECT a.USER_ID,
 		b.TIPER_IMG, a.USER_NAME, b.TIPER_DATE, b.TIPER_CATE1 FROM USERS a
 		INNER JOIN TIPER b ON a.USER_ID = b.TIPER_USER_ID WHERE TIPER_AGREE=0;
@@ -207,11 +219,13 @@
 	</select>
 
 	<select id="searchBlackList" resultType="users">
-			SELECT U.USER_NAME,
-		U.USER_ID, R.REPORT_NUM, R.REPORT_CONT, R.REPORT_DATE,
+		SELECT U.USER_NAME,
+		U.USER_ID, R.REPORT_NUM, R.REPORT_CONT,
+		R.REPORT_DATE,
 		R.REPORT_LESSON_NUM FROM
 		users U INNER JOIN tiper
-		T ON U.USER_ID =
+		T ON
+		U.USER_ID =
 		T.TIPER_USER_ID INNER JOIN
 		lesson L ON
 		L.LESSON_TIPER_CODE=T.TIPER_CODE
@@ -222,10 +236,11 @@
 		<if test="search_condition == 'user_name' "> AND USER_NAME LIKE CONCAT('%', #{search_keyword}, '%')
 		</if>
 	</select>
-	
-		<insert id="reportLessonNum">
+
+	<insert id="reportLessonNum">
 		INSERT INTO REPORT (REPORT_LESSON_NUM,
-		REPORT_USER_ID, REPORT_CONT) VALUES (#{report_lesson_num}, #{report_user_id} ,#{report_cont});
+		REPORT_USER_ID, REPORT_CONT) VALUES (#{report_lesson_num},
+		#{report_user_id} ,#{report_cont});
 	</insert>
 
 	<select id="isDupReport" resultType="users">
@@ -236,45 +251,62 @@
 
 	<select id="getUserInfoMypage" resultType="users">
 		SELECT * FROM
-		USERS WHERE USER_ID = #{user_id}
+		USERS
+		WHERE USER_ID = #{user_id}
 	</select>
-	
+
 	<update id="updateUserRole01">
 		UPDATE USERS SET USER_ROLE = 1 WHERE USER_ID =
 		#{user_id};
 	</update>
-	
-		<select id="getEscrowPrice" resultType="_int">
+
+	<select id="getEscrowPrice" resultType="_int">
 		SELECT ESCROW_PRICE FROM
-		ESCROW WHERE ESCROW_USER_ID = #{escrow_user_id} and ESCROW_LESSON_NUM=#{escrow_lesson_num}
+		ESCROW WHERE ESCROW_USER_ID = #{escrow_user_id} and
+		ESCROW_LESSON_NUM=#{escrow_lesson_num}
 	</select>
-	
+
 	<select id="getLessonTitle" resultType="String">
-		SELECT LESSON_TITLE FROM LESSON WHERE LESSON_NUM = (SELECT ESCROW_LESSON_NUM FROM ESCROW WHERE ESCROW_LESSON_NUM = #{escrow_lesson_num} AND ESCROW_USER_ID = #{escrow_user_id}); 
+		SELECT LESSON_TITLE FROM
+		LESSON WHERE LESSON_NUM = (SELECT ESCROW_LESSON_NUM FROM ESCROW WHERE
+		ESCROW_LESSON_NUM = #{escrow_lesson_num} AND ESCROW_USER_ID =
+		#{escrow_user_id});
 	</select>
-	
+
 	<select id="getTiperUserId" resultType="String">
-		SELECT TIPER_USER_ID FROM TIPER WHERE TIPER_CODE = (SELECT ESCROW_TIPER_CODE FROM ESCROW WHERE ESCROW_LESSON_NUM = #{escrow_lesson_num} AND ESCROW_USER_ID = #{escrow_user_id}); 
+		SELECT TIPER_USER_ID FROM
+		TIPER WHERE TIPER_CODE = (SELECT ESCROW_TIPER_CODE FROM ESCROW WHERE
+		ESCROW_LESSON_NUM = #{escrow_lesson_num} AND ESCROW_USER_ID =
+		#{escrow_user_id});
 	</select>
-	
-	
+
+
 	<update id="addUserPoint">
-		update USERS set USER_POINT = USER_POINT+ #{report_num} WHERE USER_ID = #{user_id}
+		update USERS set USER_POINT = USER_POINT+
+		#{report_num} WHERE USER_ID = #{user_id}
 	</update> <!-- report_num에 userPoint*0.95값 set되어있음. -->
-	
+
 	<insert id="insertLessonPrice">
-		INSERT INTO POINT (POINT_ID, POINT_PRICE, POINT_HISTORY, POINT_TIME) VALUES (#{user_id}, #{report_num}, #{report_cont}, SYSDATE())
+		INSERT INTO POINT (POINT_ID, POINT_PRICE,
+		POINT_HISTORY, POINT_TIME) VALUES (#{user_id}, #{report_num},
+		#{report_cont}, SYSDATE())
 	</insert> <!-- report_num에 userPoint*0.95값 set되어있음. -->
-	
+
 	<select id="isTiper" resultType="users">
-			SELECT TIPER_AGREE FROM
+		SELECT TIPER_AGREE FROM
 		TIPER WHERE TIPER_USER_ID = #{user_id}
 	</select>
-	
+
 	<select id="isTiperAgree" resultType="_int">
 		SELECT TIPER_AGREE FROM
 		TIPER WHERE TIPER_USER_ID = #{user_id}
 	</select>
+
+	<update id="updateEscrowReportStatus">
+		update ESCROW set ESCROW_REPORT_STATUS = 1 WHERE
+		ESCROW_USER_ID = #{escrow_user_id} AND ESCROW_LESSON_NUM =
+		#{escrow_lesson_num}
+	</update>
 </mapper>
 
 

@@ -10,6 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <link rel="stylesheet" media="screen and (min-width:769px)" href="front/user.css">
    <link rel="stylesheet" media="screen and (max-width:768px)" href="front/userJoinMobile.css">
+   <script src="${pageContext.request.contextPath}/front/userCertification.js"></script>
 <style>
 </style>
 </head>
@@ -36,12 +37,13 @@
 						</div>
 						<p>이메일</p>
 						<input type="text" name="user_email" id="user_email" class="check" placeholder="이메일을 입력하세요.">
-						<button type="button" id="telCheck" onclick="emailSend()" disabled>인증번호받기</button>
+						<button type="button" id="telCheck" class="btn_recive_num" onclick="emailSend()" disabled>인증번호받기</button>
 						<p class="info_ptag"></p>
 					</div>
-					<div class="telConfirmDiv">
-						<input type="text" id="certificationEmail" placeholder="인증번호를 입력해주세요.">
-						<button id="telConfirmBtn" onclick="smsConfirm()">인증하기</button>
+					<div class="telConfirmDiv certification_cover">
+						<input type="text" id="certificationEmail" placeholder="인증번호">
+						<span class="time"></span>
+						<button id="telConfirmBtn" class="btn_chk" onclick="smsConfirm()">인증하기</button>
 						<p class="info_ptag"></p>
 						<input type="hidden" id="checkTel" value="false">
 					</div>

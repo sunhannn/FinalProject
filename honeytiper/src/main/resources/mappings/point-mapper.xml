@@ -29,28 +29,28 @@
 	</update>
 
 	<select id="getPointList" resultType="point">
-		SELECT point_time, point_history, point_price
-		FROM point
-		WHERE point_id = #{point_id}
-		<if test="startDate != null and startDate != ''">
-			AND point_time &gt;= #{startDate}
-		</if>
-		<if test="endDate != null and endDate != ''">
-			AND point_time &lt;= DATE_ADD(#{endDate}, INTERVAL 1 DAY)
-		</if>
-		<if test="search_condition == 'point_history' ">
-			AND point_history LIKE CONCAT('%', #{search_keyword}, '%')
-		</if>
-		<choose>
-			<when test="price_type == 'negative'">
-				AND point_price &lt; 0
-			</when>
-			<when test="price_type == 'non-negative'">
-				AND point_price &gt;= 0
-			</when>
-		</choose>
-		ORDER BY point_num DESC
-	</select>
+      SELECT point_time, point_history, point_price
+      FROM point
+      WHERE point_id = #{point_id}
+      <if test="startDate != null and startDate != ''">
+         AND point_time &gt;= #{startDate}
+      </if>
+      <if test="endDate != null and endDate != ''">
+         AND point_time &lt;= DATE_ADD(#{endDate}, INTERVAL 1 DAY)
+      </if>
+      <if test="search_condition == 'point_history' ">
+         AND point_history LIKE CONCAT('%', #{search_keyword}, '%')
+      </if>
+      <choose>
+         <when test="price_type == 'negative'">
+            AND point_price &lt; 0
+         </when>
+         <when test="price_type == 'non-negative'">
+            AND point_price &gt;= 0
+         </when>
+      </choose>
+      ORDER BY point_time DESC
+   </select>
 
 	<select id="callTotalPoint" resultType="point">
 		SELECT user_point
@@ -61,20 +61,9 @@
 	<insert id="insertRefundPoint">
 		INSERT INTO point (point_id, point_price,
 		point_history, point_time)
-		SELECT #{point_id}, (-1 *
-		u.user_point),CONCAT('환불계좌 : ', #{point_history}), SYSDATE()
-		FROM users
-		u
-		WHERE u.user_id = #{point_id};
-	</insert>
-
-	<insert id="honeyTakePoint">
-		INSERT INTO point (point_id, point_price, point_history, point_time)
-		SELECT
-		#{point_id}, (-1 *u.user_point),CONCAT('정산계좌 : ', #{point_history}),
-		SYSDATE()
+		SELECT #{point_id}, (-1 * u.user_point),CONCAT('강의료 정산계좌 : ', #{point_history}), SYSDATE()
 		FROM users u
 		WHERE u.user_id = #{point_id};
-
 	</insert>
+	
 </mapper>

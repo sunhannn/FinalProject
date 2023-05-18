@@ -17,10 +17,13 @@
 		font-weight: bold;
 	}
 	#myhoney_span1 {
-		font-size: 18px;
+		font-size: 17px;
+		margin-right: 100px;
+		font-weight: bold;
 	}
 	#honeyTake_point {
-		border: 1px solid #efefef; border-radius : 10px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
 		width: 300px;
 		height: 45px;
 		border-radius: 10px;
@@ -35,7 +38,7 @@
 		border: 0;
 		border-radius: 10px;
 		width: 150px;
-		height: 30px;
+		height: 45px;
 		font-weight: bold;
 	}
 	#honeyTake_div2 {
@@ -53,12 +56,17 @@
 		font-weight: bold;
 	}
 	#myhoney_span1 {
-		font-size: 18px;
+		font-size: 20px;
+		width: 500px;
+		text-align: right;
+		font-weight: bold;
+		margin-left: 30px;
 	}
 	#honeyTake_point {
-		border: 1px solid #efefef; border-radius : 10px; width : 300px;
-		height: 45px;
-		width: 300px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+		width: 500px;
+		height: 50px;
 		border-radius: 10px;
 	}
 	#honeyTake_point:focus {
@@ -70,8 +78,8 @@
 		background-color: #FFD400;
 		border: 0;
 		border-radius: 10px;
-		width: 150px;
-		height: 30px;
+		width: 250px;
+		height: 45px;
 		font-weight: bold;
 	}
 	#honeyTake_div2 {
@@ -95,9 +103,9 @@
 	<div class="container" id="honeyTake_div1">
 		<form action="honeyTakeAction" id="honeyTake_form">
 			<div id="honeyTake_div2">
-				<span id="myhoney_span1">정산 받을 계좌번호 입력</span> <br> <input
-					type="text" id="honeyTake_point" name="point_history"
-					required="required">
+				<p id="myhoney_span1">정산 받을 계좌번호 입력</p>
+				<br> <br> <input type="text" id="honeyTake_point"
+					name="point_history" required="required">
 			</div>
 			<br> <br>
 			<div id="honeyTake_div3">
@@ -109,6 +117,26 @@
 	<br>
 	<br>
 	<%@include file="../main/footer.jsp"%>
+
+	<script>
+		document.getElementById("honeyTake_form")
+				.addEventListener(
+						"submit",
+						function(event) {
+							event.preventDefault();
+
+							var inputValue = document
+									.getElementById("honeyTake_point").value;
+							var confirmed = confirm("입금될 계좌: " + inputValue
+									+ " 가 맞으신가요? 보유중인 모든 포인트가 입금됩니다.");
+
+							if (confirmed) {
+								alert("해당 계좌로 입금되었습니다.");
+							} else {
+								alert("좋아요 포인트로 여러 강의를 들어보세요.");
+							}
+						});
+	</script>
 </body>
 
 </html>

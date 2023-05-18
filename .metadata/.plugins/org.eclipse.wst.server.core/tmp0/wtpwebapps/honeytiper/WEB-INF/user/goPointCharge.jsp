@@ -189,18 +189,16 @@ margin:30px 10px;
 	 <div class="allSize">
 		<p style="font-size:27px; margin:40px 0px 20px 0px; font-weight:bold;">허니페이 충전하기</p>
 		<br>
-		<p class="totalPay">잔여허니페이: <fmt:formatNumber value="${totalPoint.user_point}" groupingUsed="true" /> point</p>
+		<p class="totalPay">잔여 허니페이: <fmt:formatNumber value="${totalPoint.user_point}" groupingUsed="true" /> point</p>
 		<button onclick="document.getElementById('id01').style.display='block'" class="info-button">허니페이란 <i class='fas fa-question-circle'></i></button>
 		
 <div class="w3-container">
   <div id="id01" class="w3-modal">
     <div class="w3-modal-content w3-card-4">
-      <header class="container teal" style="background-color:#ffd400;"> 
         <span onclick="document.getElementById('id01').style.display='none'" 
-        class="w3-button w3-display-topright">✖</span>
-        
-      </header>
+        class="w3-button w3-display-topright" style="background-color:#ffd400;">✖</span>
       <div class="w3-container">
+      <br><br>
         <h4><b>허니페이 안전결제는 </b></h4>
 <h4><b>티퍼와 고객 간 거래시 사용하는 결제수단입니다</b></h4>
 <br>
@@ -250,6 +248,19 @@ margin:30px 10px;
 		<div style="padding:50px 0px"></div>
 	</div>
 	</div>
+	<script>
+  // Get the modal
+  var modal = document.getElementById('id01');
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+  
+
+</script>
 <%@include file="../main/footer.jsp"%>
 
 </body>

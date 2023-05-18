@@ -41,7 +41,7 @@ public class FaqController {
 	//자묻질 등록 이동
 	@RequestMapping("/insertMoveFaq")
 	public String insertMoveFaq(FaqVO vo) {
-		return "queen/insertFaq";
+		return "queen/adminFaqInsert";
 	}
 	
 	//자묻질 삭제

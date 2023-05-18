@@ -24,7 +24,7 @@
 
 <body>
 	
-	<div class="password_check_edit login_wrap">
+	<div class="password_check_edit_admin login_wrap">
 		<div class="password_check_input login_contents">
 			<div class="pwChange_info_div">
 				<h3>비밀번호 입력</h3>

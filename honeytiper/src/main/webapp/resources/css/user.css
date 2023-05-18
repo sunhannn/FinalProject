@@ -5,7 +5,6 @@
    }
    
    html, body {
-      height: 100%;
       margin: 0px;
    }
    
@@ -222,7 +221,7 @@
    .login_wrap {
       max-width: 768px;
       margin: 0 auto;
-      margin-top: 50px;
+      margin-top: 10%;
    }
    
    .login_wrap .login_contents {
@@ -235,6 +234,9 @@
       box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
    }
    
+   .login_wrap .admin_logo {
+   		text-align: center;
+   }
    
    .form-input .login_input {
       width: 250px;
@@ -426,7 +428,7 @@
 	.password_check_edit {
 		width: 768px;
 		margin: 0 auto;
-		padding: 50px 0;
+		padding: 70px 0;
 	}
 	
 	.password_check_input {
@@ -467,5 +469,31 @@
 	
 	.pwChange_btn:hover {
 		background-color: #E6B800;
+	}
+	
+	.password_check_edit_admin {
+		margin-top: 15%;
+	}
+	
+	.admin_editContent {
+		margin-top: 10%;
+	}
+	
+	.certification_cover {
+		position: relative;
+	}
+	
+	.certification_cover .time {
+		position: absolute; 
+		top: 15px; 
+		right: 245px; 
+		font-size: 12px; 
+		font-weight: bolder;
+	}
+	
+	.admin_editContent {
+		padding: 30px;
+		border-radius: 7px;
+      	box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 	}
 	

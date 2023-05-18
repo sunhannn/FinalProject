@@ -11,6 +11,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <link rel="stylesheet" media="screen and (min-width:769px)" href="front/user.css">
    <link rel="stylesheet" media="screen and (max-width:768px)" href="front/userJoinMobile.css">
+   <script src="${pageContext.request.contextPath}/front/userCertification.js"></script>
 </head>
 <body class="login_body findId_body">
 
@@ -35,12 +36,13 @@
 						</div>
 						<p class="findId_info">핸드폰번호</p>
 						<input type="text" name="user_tel" id="user_tel" class="check" placeholder="(- 제외)숫자만 입력해주세요">
-						<button type="button" id="telCheck" onclick="smsSend()" disabled>인증번호받기</button>
+						<button type="button" id="telCheck" class="btn_recive_num" onclick="smsSend()" disabled>인증번호받기</button>
 						<p class="info_ptag"></p>
 					</div>
-					<div class="telConfirmDiv">
-						<input type="text" id="certificationTel" placeholder="인증번호를 입력해주세요.">
-						<button id="telConfirmBtn" onclick="smsConfirm()">인증하기</button>
+					<div class="telConfirmDiv certification_cover">
+						<input type="text" id="certificationTel" placeholder="인증번호">
+						<span class="time">11111</span>
+						<button id="telConfirmBtn" class="btn_chk" onclick="smsConfirm()">인증하기</button>
 						<p class="info_ptag"></p>
 						<input type="hidden" id="checkTel" value="false">
 					</div>

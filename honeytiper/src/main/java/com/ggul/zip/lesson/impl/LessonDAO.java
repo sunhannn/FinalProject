@@ -53,21 +53,31 @@ public class LessonDAO {
 
 	}
 
+	int selectEscrowStatus(LessonVO lessonVO) {
+
+		return mybatis.selectOne("lessonDAO.selectEscrowStatus", lessonVO);
+
+	}
+
 	// 소연누나부분
 	// 강의상세 조회
 	public LessonVO getLesson(LessonVO vo) {
-//		mybatis.update("lessonDAO.LessonCountUp", vo);
 		return mybatis.selectOne("lessonDAO.getLesson", vo);
 	}
 
-	// 강의목록 조회
+	// 강의목록
 	public List<LessonVO> getLessonList(LessonVO vo) {
 		return mybatis.selectList("lessonDAO.getLessonList", vo);
 	}
 
-	// 강의정보 검색
-	public List<LessonVO> getLessonListPostSearch(HashMap<String, Object> map) {
-		return mybatis.selectList("lessonDAO.getLessonListPostSearch", map);
+	// 강의 삭제
+	public void deleteLesson(LessonVO vo) {
+		mybatis.delete("lessonDAO.deleteLesson", vo);
+	}
+
+	// 강의 삭제
+	public void deleteReview(LessonVO vo) {
+		mybatis.delete("lessonDAO.deleteReview", vo);
 	}
 
 	// 정성현: 마이페이지

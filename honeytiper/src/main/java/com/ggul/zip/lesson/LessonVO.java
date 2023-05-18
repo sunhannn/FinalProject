@@ -42,7 +42,25 @@ public class LessonVO {
 	private Date escrow_end;
 	private int escrow_lesson_num;
 	private String escrow_user_id;
+	private String escrow_price;
+	private int escrow_status;
 	
+	public String getEscrow_price() {
+		return escrow_price;
+	}
+
+	public void setEscrow_price(String escrow_price) {
+		this.escrow_price = escrow_price;
+	}
+
+	public int getEscrow_status() {
+		return escrow_status;
+	}
+
+	public void setEscrow_status(int escrow_status) {
+		this.escrow_status = escrow_status;
+	}
+
 	public MultipartFile getUploadFile() {
 		return uploadFile;
 	}

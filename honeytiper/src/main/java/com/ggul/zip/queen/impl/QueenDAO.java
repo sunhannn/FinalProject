@@ -53,6 +53,17 @@ public class QueenDAO {
 	}
 	
 
+	//admin 정보 수정
+		public boolean updateAdminInfo(UserVO vo) {
+			int i = mybatis.update("QueenDAO.updateAdminInfo", vo);
+			
+			if(i < 0) {
+				return false;
+			}else {
+				return true;
+			}
+		}
+	
 	
 	//소연
 	public UserVO updateAdmin(UserVO vo) {

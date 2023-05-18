@@ -490,6 +490,7 @@ div .modal:hover{
     width: inherit;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-size: 16px;
 }	
 
 #price_modal_input{
@@ -631,6 +632,7 @@ html, body, .msg-container, .messaging, .inbox_msg, .inbox_people, .inbox_chat {
 
 .escrow_lesson_title{
 	margin-top: 50px;	
+	font-size: 16px;
 }
 
 .inbox_chat{
@@ -668,7 +670,7 @@ html, body, .msg-container, .messaging, .inbox_msg, .inbox_people, .inbox_chat {
 .write_msg{
 	left: 13px;
 	width: 76%;
-	font-size: smaller;
+	font-size: 16px;
 }
 
 #price_modal{
@@ -682,6 +684,7 @@ html, body, .msg-container, .messaging, .inbox_msg, .inbox_people, .inbox_chat {
     margin-left: 17%;
     margin-top: 5%;
     width: 55%;
+    font-size: 16px;
 }
 
 #price_send_btn{
@@ -716,6 +719,7 @@ html, body, .msg-container, .messaging, .inbox_msg, .inbox_people, .inbox_chat {
     position: static;
    	margin: 0 auto;
     width:50%;
+    font-size: 16px;
 }
 
 .price_p{

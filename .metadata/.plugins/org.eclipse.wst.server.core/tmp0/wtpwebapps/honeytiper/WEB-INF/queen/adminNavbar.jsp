@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+
+*{
+	font-family: none;
+}
 .menu-bar {
   position: fixed;
   left: -190px;
@@ -68,8 +72,8 @@ color: #ffd400;
 <a href="index" style="margin:0px 20px;"><img src="${pageContext.request.contextPath}/front/LOGOy.png" style="width:140px; hight: auto;" title="꿀팁홈페이지로가기"></a>
 <p class="p"style="margin-bottom:40px;">관리자님 반갑습니다</p>
 <h3 class="h3"><a style="font-size:18.72px; font-weight:bold;" href="goChart">메인으로가기</a></h3>
-  <a href="getUserListUser">회원리스트</a>
-  <a href="getLessonListLesson">강의리스트</a>
+  <a href="listuser">회원리스트</a>
+  <a href="listlesson">강의리스트</a>
   <a href="getReportList">블랙리스트관리</a>
   <a href="getPotentialTiperList">승급요청처리</a>
   <a href="adminNoticeList">공지사항 관리</a>

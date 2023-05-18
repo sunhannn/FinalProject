@@ -25,12 +25,13 @@ public interface QueenService {
 	String monthTotal();
 	
 	
+	//승희
+	public boolean updateAdminInfo(UserVO vo);
+	
 	
 	
 	
 	//소연
-	public UserVO updateAdmin(UserVO vo);
-
 	public String hashedChk(String password);
 
 }

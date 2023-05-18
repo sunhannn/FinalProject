@@ -63,6 +63,11 @@ public class LessonServiceImpl implements LessonService {
 		return lessonDAO.selectTiperInfoPage(lessonVO);
 	}
 
+	@Override
+	public int selectEscrowStatus(LessonVO lessonVO) {
+		return lessonDAO.selectEscrowStatus(lessonVO);
+	}
+
 	// 소연누나부분
 	@Override
 	public LessonVO getLesson(LessonVO vo) {
@@ -72,11 +77,6 @@ public class LessonServiceImpl implements LessonService {
 	@Override
 	public List<LessonVO> getLessonList(LessonVO vo) {
 		return lessonDAO.getLessonList(vo);
-	}
-
-	@Override
-	public ArrayList<LessonVO> getLessonListPostSearch(HashMap<String, Object> map) {
-		return (ArrayList<LessonVO>) lessonDAO.getLessonListPostSearch(map);
 	}
 
 	// 정성현 : 마이페이지

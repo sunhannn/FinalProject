@@ -59,7 +59,8 @@ $(document).ready(function(){
 
 	<div class="alert alert-danger" style="text-align:center; margin: o auto;">
 		<h3>서비스 처리 과정에서 에러가 발생하였습니다.</h3>
-		<br>${exception.message}
+		<br>
+<%-- 		<br>${exception.message} --%>
 	<img src="${pageContext.request.contextPath}/front/error_img.png"	id="error_img" alt="error_img">
 <div style="text-align:center; margin: o auto;">
 		<button type="button" id="goBack" class="btn btn-primary">돌아가기</button></div>

@@ -23,9 +23,8 @@ public interface PointService {
 	// 포인트내역에서 my허니페이 select
 	public PointVO callTotalPoint(PointVO vo);
 
-	// 포인트 환불시 내역insert
+	// 강사포인트 정산 내역insert
 	public void insertRefundPoint(PointVO vo);
 
-	// 강사 포인트 정산 insert
-	public void honeyTakePoint(PointVO vo);
+
 }

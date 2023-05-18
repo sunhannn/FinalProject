@@ -46,14 +46,16 @@ public class QueenServiceImpl implements QueenService{
 		return mybatis.monthTotal();
 		
 	}
+	
+	
+	//승희
+	@Override
+	public boolean updateAdminInfo(UserVO vo) {
+		return mybatis.updateAdminInfo(vo);
+	}
 
 
 	//소연
-	@Override
-	public UserVO updateAdmin(UserVO vo) {
-		return mybatis.updateAdmin(vo);
-	}
-
 	@Override
 	public String hashedChk(String password) {
 		return mybatis.hashedChk(password);

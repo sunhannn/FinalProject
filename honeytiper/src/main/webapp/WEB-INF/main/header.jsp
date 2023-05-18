@@ -39,7 +39,9 @@
 <style>
 /* # Header, Main Menu
 ================================ */
-
+*{
+	font-family: none;
+}
 .menu_hr{
 	margin: 0 0 7px 0;
 	width: 100%;
@@ -117,7 +119,7 @@
    
    .navbar .navbar-nav li a {
     font-weight: bolder;
-    font-size: 16px;
+    font-size: 18px;
     text-transform: capitalize;
     color: #2e1c05;
     transition: all 0.2s ease-out;
@@ -215,7 +217,7 @@
    }
 }
 
-@media ( max-width : 995px) {
+@media ( max-width : 1100px) {
    .main{
       display: none;
    }
@@ -530,7 +532,7 @@
                            <form action="selectSearch" method="post" name="lesson_search">
                               <div class="search-container">
                                  <input type="text" name="lesson_search" id="lesson_search"
-                                    class="search-input" placeholder="  강의 강사 지역을 검색해보세요" />
+                                    class="search-input" placeholder="  강의 강사 지역을 입력해보세요" />
                                  <button type="submit" class="search-button"
                                     onclick="document.lesson_search.submit();">
                                     <i class="fas fa-search"></i>
@@ -801,9 +803,7 @@ function openNav() {
   }
 
   
-  function parent_function(){
-	  Message_chk();
-  }
+  function parent_function(){}
   
   // 헤더에서 메세지 미열람 체크
   const Message_chk = function(){

@@ -12,19 +12,18 @@
 </head>
 <%@include file="../main/header.jsp"%>
 <style>
+body{
+	font-family: none;
+}
 .faqCont{
 	width: 65%;
 }
-mark{
-	border-radius: 50px;
-	background-color: lightblue;
-}
 
-.panel-heading{
-	background-image: url('');
-	background-repeat: no-repeat;
-	background-color: white;
-}
+/* .panel-heading{ */
+/* 	background-image: url(''); */
+/* 	background-repeat: no-repeat; */
+/* 	background-color: white; */
+/* } */
 .panel{
 	-webkit-box-shadow : none;
 	box-shadow: 0em;
@@ -35,25 +34,33 @@ text-align: right;
 }
 .LBLquestion{
 	border-radius: 30px;
+	cursor: pointer;
+    font-size: 16px;
+    font-weight: bolder;
+    position: relative;
 }
-	label.LBLanswer{
-	background-color:#FFD400;
-	border-radius: 30px;
+
+.LBLquestion em{
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	width:30px;
+	height:30px;
+	margin-top: -15px;
+	display: inline-block;
+	background:url('front/down.png') 0 0 norepeat;
 }
+
+.LBLanswer{
+	display: none;
+	margin-top: 10px;
+}
+
+
 .panel-body{
 	border:0;
 }
 
-#btnMore {
-  display: block;
-  margin: 10px auto;
-  background-color: lightblue;
-  color: white;
-  border-radius: 20px;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-}
 
 button.allSearch{
 	border-style: none;
@@ -70,11 +77,37 @@ button.allSearch{
 	font-size: 14px;
 }
 
+
+.menu li{
+	list-style: none;
+	padding: 20px 5px;
+    border-bottom: 1px solid #efefef;
+}
+.menu{
+	padding: 0;
+	display: none;
+}
+
+a#topBtn { 
+	position: fixed; 
+	right: 5%; 
+	bottom: 15%; 
+	display: none; 
+	z-index: 9999; 
+}
+
+.toggleCheck{
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
 @media ( max-width : 768px) {
 	.faqCont{
 		width:100%;
 	}
 }
+
 </style>
 
 <script type="text/javascript">
@@ -83,24 +116,59 @@ var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userA
 
 
  $(function(){
-     $(".moreList").slice(0, 7).show();
-     if($(".moreList:hidden").length == 0){
+	 
+	 
+	 //더보기
+     $(".menu").slice(0, 7).show();
+     if($(".menu:hidden").length == 0){
          $("#btnMore").hide();
      }
      $("#btnMore").click(function(e){
          e.preventDefault();
-         $(".moreList:hidden").slice(0, 3).show();
-         if($(".moreList:hidden").length == 0){
+         $(".menu:hidden").slice(0, 4).show();
+         if($(".menu:hidden").length == 0){
              $("#btnMore").hide();
          }
      });
      
      
+     
+    //모바일반응형 
  	if(isMobile) {
 		$(".allSearch").text('전체');
 	}     
      
+    //탑버튼
+    $(window).scroll(function() {
+	    if ($(this).scrollTop() > 200) { //250 넘으면 버튼이 보여짐니다. 
+	      $('#topBtn').fadeIn();
+	    } else {
+	      $('#topBtn').fadeOut();
+	    }
+	  }); // 버튼 클릭시 
+	  $("#topBtn").click(function() { 
+	  	$('html, body').animate({ scrollTop : 0 // 0 까지 animation 이동합니다. 
+	  	}, 400); // 속도 400 
+	  	return false; 
+	  }); 
+	  
+	  
+	  
+	    //아코디언
+	    $(".menu>li>a").click(function(){
+	        $(this).next("pre").slideToggle(200);
+// 	        $(this).parent("li").siblings("li").children("pre").slideUp(200);
+			if($(this).children("span").children("span").children("img").attr("src") == "front/down.png"){
+				$(this).children("span").children("span").children("img").attr("src","front/up.png");
+			}else{
+				$(this).children("span").children("span").children("img").attr("src","front/down.png");
+			}
+			
+	        });
+ 	
  });
+ 
+ 
  </script>
 <body>
 <br>
@@ -117,8 +185,8 @@ var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userA
 				    padding: 5px 18px;
 				    cursor: pointer;
 				    border-radius: 5px;
-				        font-size: 12pt;
-    font-weight: bolder;">전체보기
+				    font-size: 12pt;
+    				font-weight: bolder;">전체보기
 				 </button>
 			  	<input type="text" name="faq_search" id="searchFaq" style="	padding: 5px; font-size: 14px; width: 200px;" placeholder="검색하실 제목을 입력하세요.">
 			  	<button type="submit" style="border:0; background:none;"><i class="fa fa-search" style="font-size:24px; color:#FFD400;"></i></button>
@@ -126,7 +194,7 @@ var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userA
 		</div>
 		<br>
 		<hr>
-		<br><br>
+		<br>
 
 <!--  표현태그방식   -->
   <%
@@ -134,23 +202,19 @@ var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userA
   if(faqList != null){
      for(FaqVO faq : faqList){
   %>
-	<div class="panel-group moreList" id="accordion" style="width:100%; margin: 0 auto; display: none; ">
- 		<div class="panel panel-default" style="border:0;" id="accordion2">
-			<div class="panel-heading" style="background-image: url(''); background-color: white; font-size: 16px; font-weight: bolder;" id="accordion3">
-				<a data-toggle="collapse" data-parent="#accordion" href="#collapse<%=faq.getFaq_question_num() %>" aria-expanded="false">
-  		 			<span class="LBLquestion" style="cursor: pointer;"><%=faq.getFaq_question() %></span>
-  		 			<span style="float:right;"><i class='fas fa-angle-down' style='font-size:30px'></i></span>
-  		 		</a>
-			</div>
-  		 	<div id="collapse<%=faq.getFaq_question_num() %>" class="panel-collapse collapse">
-	  		 	<div class="panel-body" style="border:0;">
-	  		 		<pre class="LBLanswer" style="padding:25px; background-color:rgba(255,212,0,0.1); border-radius: 5px; width: 100%; border:0;
-	white-space: pre-wrap; text-align: left; font-size: 12pt;"><%=faq.getFaq_answer() %></pre>
-	  		 	</div>
-  		 	</div>
-		</div>
-  		 	<hr>
-	</div>
+<ul class="menu">
+      <li>
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%=faq.getFaq_question_num() %>" aria-expanded="false">  
+        	<span class="LBLquestion" style="cursor: pointer;"><%=faq.getFaq_question() %>
+        		<span style="float:right;">
+        			<img src="front/down.png" style="width:40px; height: 40px;"> 
+        		</span>
+        	</span>
+		</a>
+        <pre class="LBLanswer" style="padding:25px; background-color:rgba(255,212,0,0.1); border-radius: 5px; width: 100%; border:0;
+        	white-space: pre-wrap; text-align: left; font-size: 12pt;"><%=faq.getFaq_answer() %></pre>
+      </li>
+  </ul>  
   <%
      }
   }
@@ -158,14 +222,16 @@ var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userA
   
 <div style="display: flex; justify-content: center; ">
 	<button id="btnMore" type="button" style="border: 0; background: transparent;">
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16" style="width: 35px; height: 35px;">
-  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" style="color:#FFD400;"/>
-</svg>
+		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16" style="width: 35px; height: 35px;">
+		  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" style="color:#FFD400;"/>
+		</svg>
 	</button>
 	</div>
-	<div style="cursor:pointer;" onclick="window.scrollTo(0,0);">
-		TOP
-	</div>
+		<a id="topBtn" href="#">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16" style="width: 35px; height: 35px;">
+  				<path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+			</svg>
+		</a>
 	<br>
 </div>
 	<%@include file="../main/footer.jsp"%>

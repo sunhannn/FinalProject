@@ -1,0 +1,749 @@
+@charset "UTF-8";
+
+.price_p{
+    text-align: center;
+    font-weight: bold;
+}
+
+#admin_msg{
+	width: 100%;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* .send_msg{ */
+/*     cursor: pointer; */
+/*     height: 30px; */
+/* } */
+
+.list_img{
+	/*글쓴이의 메세지리스트 프로필 사진*/
+	width: 40px;
+	height: 40px;
+	border: 0px;
+	border-radius: 50%;
+	margin-left: 4px;
+    margin-top: 4px;
+}
+.content_img{
+	/*글쓴이의 컨텐츠리스트 프로필 사진*/
+	width: 40px;
+	height: 40px;
+	border: 0px;
+	border-radius: 50%;
+	margin-left: 4px;
+	cursor: pointer;
+}
+
+.list_img:hover, .content_img:hover{
+  transform: scale(1.1);
+}
+
+pre {
+	font-size: 20px;
+}
+
+.badge, .badge:hover{
+	background-color: #FFD400;	
+}
+
+.msg-container{max-width:1170px; margin:auto;}
+/* img{ max-width:100%;} */
+.inbox_people {
+  background: #f8f8f8 none repeat scroll 0 0;
+  float: left;
+  overflow: hidden;
+  width: 50%; border-right:1px solid #f7f7f7;
+}
+.inbox_msg {
+  border: 1px solid #f7f7f7;
+  border-radius: 15px;
+  clear: both;
+  overflow: hidden;
+/*   max-width: 90%; */
+}
+.top_spac{ margin: 20px 0 0;}
+
+
+.recent_heading {float: left; width:40%;}
+.srch_bar {
+  display: inline-block;
+  text-align: right;
+  width: 60%;
+}
+.headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #f7f7f7;}
+
+.recent_heading h4 {
+  color: #FFD400;
+  font-size: 30px;
+  margin: auto;
+}
+.srch_bar input{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none; font-size:20px;}
+.srch_bar .input-group-addon button {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  padding: 0;
+  color: #707070;
+  font-size: 18px;
+}
+.srch_bar .input-group-addon { margin: 0 0 0 -27px;}
+
+.chat_ib h5{ font-size:20px; color:#382407; margin:0 0 8px 0;}
+.chat_ib h5 span{ font-size:17px; float:right;}
+.chat_ib pre{
+	font-size:14px;
+	color:#989898;
+	margin:auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow-y: hidden; 
+    white-space: pre-wrap;
+    font-family: none;
+    overflow-wrap: anywhere;
+}
+
+.chat_img {
+  float: left;
+  width: 11%;
+}
+.chat_ib {
+  float: left;
+  padding: 0 0 0 15px;
+  width: 88%;
+}
+
+.chat_people{
+	overflow:hidden;
+	clear:both;
+	}
+	
+.chat_list {
+  border-bottom: 1px solid #f7f7f7;
+  margin: 0;
+  padding: 18px 16px 10px;
+}
+
+
+.chat_list_box :hover{
+	background-color: #FFF7CE;
+}
+
+.inbox_chat { height: 550px; overflow-y: scroll;}
+
+.active_chat{ background:#FFF7CE;}
+
+.incoming_msg_img {
+  display: inline-block;
+/*   width: 10%; */
+}
+
+.received_msg {
+  display: inline-block;
+  padding: 0 0 0 10px;
+  vertical-align: top;
+  width: auto;
+ }
+ 
+ .received_withd_msg pre {
+  background: none repeat scroll 0 0;
+  background-color: rgba(176, 140, 126, 0.3);
+  border-radius: 7px;
+  color: #382407;
+  font-size: 14px;
+  margin: 0;
+  padding: 10px 10px 10px 12px;
+  width: 100%;
+  font-family: none;
+  white-space: pre-wrap;
+}
+
+.incoming_msg{
+	width: 80%;
+}
+
+.time_date {
+  color: #382407;
+  display: block;
+  font-size: 12px;
+  margin: 5px 0 8px;
+  float: inherit;
+}
+
+.received_withd_msg {
+    overflow-wrap: anywhere;
+	}
+
+
+
+.mesgs {
+  float: left;
+/*   display: inline; */
+  padding: 30px 15px 0 15px;
+  width: 50%;
+}
+
+
+ .sent_msg pre {
+  background: #FFF7CE none repeat scroll 0 0;
+  border-radius: 7px;
+  font-size: 14px;
+  margin: 0; color:#382407;
+  padding: 10px 10px 10px 12px;
+  width:100%;
+  font-family: none;
+  white-space: pre-wrap;
+}
+
+.outgoing_msg {
+	overflow:hidden;
+	margin:26px 0 26px;
+/* 	display: inline; */
+}
+
+.sent_msg {
+  float: right;
+  margin-right: 20px;
+  overflow-wrap: anywhere;
+  width: auto;
+}
+
+.input_msg_write input {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  color: #4c4c4c;
+  font-size: 15px;
+  min-height: 48px;
+  width: 100%;
+}
+
+.type_msg {border-top: 1px solid #dfdfdf;position: relative;}
+
+#escrow_start{
+    width: 30%;
+    text-align: center;
+    font-family: none;
+}
+
+.escrow_start_lb{
+	margin-left: 20%;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.msg_send_btn {
+  background: #FFE775 none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 17px;
+  height: 33px;
+  position: absolute;
+  top: 19px;
+  right: -20px;
+  width: 33px;
+}
+
+#price_send_btn {
+  background: #FFE775 none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 17px;
+  height: 33px;
+  position: absolute;
+  width: 33px;
+  display: block;
+  right: 70px;
+  bottom: 19%;
+}
+
+.price_btn{
+  background: #FFE775 none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 17px;
+  height: 33px;
+  position: absolute;
+  width: 33px;
+  top: 17px;
+  left: 20px;
+}
+
+#price_btn{
+    position: sticky;
+    bottom: 15px;
+}
+
+.col-11{
+    height: 70px;
+}
+
+.msg_send_btn:hover, #price_send_btn:hover {
+	background: #FFD400 none repeat scroll 0 0;
+}
+
+.msg_send_btn:focus, #price_send_btn:focus {
+	outline: none;
+}
+
+.messaging { padding: 0;}
+.msg_history {
+  height: 516px;
+  overflow-y: auto;
+  padding-left: 10px;
+}
+
+.write_msg{
+	resize: none;
+	width: 82%;
+	border: none;
+	margin: 5px 0 2px 0px;
+	white-space: pre-wrap;
+    display: inline-block;
+    position: inherit;
+    left: 16px;
+}
+
+.form-control:focus, .form-control:hover{
+	border-color: none; 
+    outline: 2px solid #FFD400;
+    box-shadow: none;
+}
+
+i.fa.fa-search{
+    font-size: x-large;
+}
+
+.modal_close:hover, .modal_close:focus, .modal_close{
+	background-color: rgba(0,0,0,0);
+	border: none;
+/*     float: right; */
+    outline: none;
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+i.fa.fa-close{
+	background-color: rgba(0,0,0,0);
+    border: none;
+    font-size: xx-large;
+}
+
+div .modal{
+    margin: auto;
+    width: auto;
+    height: auto;
+    max-width: 1000px;
+    border-radius: 10px;
+    padding-top: 2%;
+    background-color:rgba(0, 0, 0, 0.75);
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    right: 5%;
+    bottom: 5%;
+    cursor: default;
+}
+
+div .modal:hover{
+	background-color:rgba(0, 0, 0, 0.75);
+}
+
+ .modal_img:hover{
+ 	background-color:rgba(0, 0, 0, 0);
+ }
+ 
+.modal_img{
+    display: block;
+    margin: auto;
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+.form-control:disabled, .form-control[readonly]{
+	color:#B08C7E;
+	background-color: white;
+	font-weight: bolder;
+}
+ 
+  td.tdCenter {text-align:center!important;} 
+  .input-group {margin-bottom:0px!important;}
+  .innm {background-color:#fff!important;}
+  .btn:not(.btn:first-child){border-left:1px solid #fff!important;border-right:1px solid #fff!important;}
+  .btn:not(.btn:last-child){border-left:1px solid #fff!important;border-right:1px solid #fff!important;}
+  
+  .btn-secondary{
+  	background-color: #C1C1C1;
+  	color: white;
+  	border: none;
+  }
+  
+  .btn-secondary:hover{
+  	background-color: white;
+  	color: #382407;
+  	border: none;
+  }
+  
+  .bi{
+	width: 1em;
+	height: 1em;
+  }
+  
+#price_modal{
+	background-color: white;
+	width: 50%;
+    height: 55%;
+    position: fixed;
+}  
+
+
+.sent_msg .accept_btn{
+	display: none;
+}
+.chat_ib .accept_btn{
+	display: none;
+}
+
+.sent_msg .lesson_title{
+    white-space: pre-wrap;
+    background-color: #F8F8F8;
+    font-size: large;
+    text-align: center;
+    font-family: none;
+}
+
+.sent_msg .lesson_price{
+    text-align: right;
+    font-weight: bold;
+    font-size: initial;
+    font-family: none;
+}
+
+.sent_msg .start_date{
+	text-align: center;
+    font-weight: bold;
+    font-size: initial;
+    font-family: none;
+}
+
+.received_withd_msg .start_date{
+	text-align: center;
+    font-weight: bold;
+    font-size: initial;
+    font-family: none;
+}
+
+
+.received_withd_msg .lesson_title{
+	white-space: pre-wrap;
+    background-color: #F8F8F8;
+    font-size: large;
+    text-align: center;
+    font-family: none;
+}
+
+.received_withd_msg .lesson_price{
+	text-align: right;
+    font-weight: bold;
+    font-size: initial;
+    font-family: none;
+}
+
+.received_withd_msg .accept_btn{
+	width: 100%;
+    height: 35px;
+    border: none;
+    background-color: #FFE775;
+    border-radius: 5px;
+    font-size: large;
+    font-weight: bolder;
+    color: #382407;
+    font-family: none;
+}
+
+.received_withd_msg .accept_btn:focus{
+	outline: none;
+}
+
+.received_withd_msg .accept_btn:hover{
+    transform: scale(0.9);
+    background-color: #FFD400;
+}
+
+.escrow_lesson_title{
+	display: block;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 5px;
+    width: inherit;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}	
+
+#price_modal_input{
+	width: 50%;
+    margin: 30px auto;
+    display: block;
+    text-align: center;
+    height: 40px;
+    border: 2px solid #FFD400;
+	text-align: right;
+	border-radius: 5px;
+}
+	
+#price_modal_input::placeholder {
+	text-align: center;
+}	
+	
+#price_modal_input:hover, #price_modal_input:focus{
+    outline: 3px solid #FFD400;
+}
+
+.chat_ib svg{
+	margin-right: 10px;
+}
+
+.msg_history svg{
+	margin-right: 10px;
+}
+
+.msg_reload{
+	width: 20px;
+	transition: all 0.5s linear;
+    margin-top: 5px;
+}
+
+.msg_reload:hover{
+	cursor: pointer;
+	transform: rotate(720deg);
+}
+
+#msg_img {
+  cursor: pointer;
+  height: 30px;
+  margin-top: 3px;
+}
+
+#msg_button{
+    width: 40px;
+    height: 30px;
+    background-color: #ffdf48;
+    color: #5c3b0c;
+    border-style: none;
+    border-radius: 5px;
+}
+
+
+.image-container {
+  position: relative;
+}
+
+#msg_img2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  height: 30px;
+  cursor: pointer;
+}
+
+#msg_img2:hover{
+  opacity: 1;
+}
+
+
+#msg_img_m{
+	height: 30px;
+	margin-top: 3px;
+	cursor: pointer;
+}
+
+#msg_img_m2{
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  height: 30px;
+  cursor: pointer;
+  right: 0px;
+}
+
+#msg_img_m2:hover {
+  opacity: 1;
+}
+
+.msg_list_reload{
+	width: 30px;
+    position: absolute;
+    top: 20px;
+    left: 15%;
+    transition: all 0.5s linear;
+}
+
+.msg_list_reload:hover{
+	cursor: pointer;
+    transform: rotate(720deg);
+}
+
+#msg_button .fa{
+	font-size: large;
+}
+
+.msg_send_id{
+	text-align: center;
+	font-family: none;
+	color: #382407;
+	font-size: 12px;
+}
+/* ============================================================================================= */
+
+@media ( max-width : 768px) {
+	
+html, body, .msg-container, .messaging, .inbox_msg, .inbox_people, .inbox_chat {
+	height: 100%
+}
+
+.srch_bar{
+	margin-top: 14%;	
+}
+
+.recent_heading h4{
+	margin-left: 10px;
+	font-size: 25px;
+}
+
+.message_logo{
+	width: 84%;
+}
+
+
+.escrow_lesson_title{
+	margin-top: 50px;	
+}
+
+.inbox_chat{
+   height: 80%;
+}
+
+.headind_srch{
+/*    position: fixed; */
+}
+
+.inbox_people{	
+    width: 100%;
+}
+
+.msg_list_reload{
+    position: relative;
+    top: -28px;
+    left: 95%;
+}
+
+.mesgs{
+    width: 100%;
+    height: 100%;	
+}
+
+#price_btn{
+    position: relative;
+    top: -40%;
+}
+
+.msg_send_btn{
+	right: -10px;
+}
+
+.write_msg{
+	left: 13px;
+	width: 76%;
+	font-size: smaller;
+}
+
+#price_modal{
+	width: 90%;
+    top: -35%;
+}
+
+#price_modal_input{
+    display: inline;
+    margin-right: 15px;
+    margin-left: 17%;
+    margin-top: 5%;
+    width: 55%;
+}
+
+#price_send_btn{
+    display: inline;
+    margin-bottom: -29%;
+    position: static;
+}
+
+.bi-arrow-left-square-fill{
+	color: #C1C1C1;
+	width: 2em;
+    height: 2em;
+}
+
+.msg_history{
+/* 	height: 55%;	 */
+	height: 84%;	
+	transition: height 0.5s ease 0s;
+	position: relative;
+	overflow-x: hidden;
+}
+
+.escrow_start_lb{
+    width: 100%;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+#escrow_start{
+    display: block;
+    margin-top: -20%;
+    position: static;
+   	margin: 0 auto;
+    width:50%;
+}
+
+.price_p{
+    position: static;
+    margin-bottom: 0;
+    display: inline-block;
+    margin-top: 60%;
+    width: 100%
+}
+
+.price_send_div{
+    height: 100%;
+    width: 90%;
+    position: inherit;
+    top: 5%;
+    display: inline;
+    right: 5%;
+    z-index: -1;
+}
+
+.price_input_div{
+    width: 100%;
+}
+
+div .modal{
+	position: fixed;
+/* 	display: flex; */
+}
+
+
+}

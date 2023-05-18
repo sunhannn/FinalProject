@@ -13,6 +13,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
    <link rel="stylesheet" media="screen and (min-width:769px)" href="front/user.css">
    <link rel="stylesheet" media="screen and (max-width:768px)" href="front/userJoinMobile.css">
+   <script src="${pageContext.request.contextPath}/front/userCertification.js"></script>
 </head>
 <body>
    <script>
@@ -66,7 +67,7 @@
       }
 
       window.onload = function() {
-         $("#info_ptag").hide();
+         $(".info_ptag").hide();
          $(".telSubmit_info").hide();
       }
       function idCheck() {
@@ -157,11 +158,12 @@
                   <td class="td_left"><label for="user_tel">전화번호</label></td>
                   <td class="td_right">
                      <input name="user_tel" type="text" id="user_tel" placeholder="(- 제외)숫자만 입력해주세요" class="check join_id_input" required>
-                     <button type="button" id="telCheck" onclick="smsSend()" disabled>인증번호받기</button>
+                     <button type="button" id="telCheck" class="btn_recive_num" onclick="smsSend()" disabled>인증번호받기</button>
                      <p class="info_ptag"></p>
-                     <div>
-                     <input type="text" id="certificationTel" name="certificationTel" class="check join_id_input" placeholder="인증번호" readonly required>
-                        <button type="button" id="telConfirmBtn" onclick="smsConfirm()">인증하기</button>
+                     <div class="certification_cover">
+	                     <input type="text" id="certificationTel" name="certificationTel" class="check join_id_input" placeholder="인증번호" readonly required>
+	                     <span class="time certi_time"></span>
+                        <button type="button" id="telConfirmBtn" class="btn_recive_num btn_chk" onclick="smsConfirm()">인증하기</button>
                      <p class="info_ptag"></p>
                      <p class="telSubmit_info"></p>
                      </div>
@@ -193,7 +195,7 @@
 		                     <input type="radio" name="user_cate" class="user_cate" value="라이프스타일">라이프스타일
                   		</div>
                   		<div class="col-xs-4 col-md-4 coldiv" id="id_div">
-		                     <input type="radio" name="user_cate" class="user_cate" value="IT">IT
+		                     <input type="radio" name="user_cate" class="user_cate" value="IT">&nbspIT
                   		</div>
                   		<div class="col-xs-3 col-md-4 coldiv">
 		                     <input type="radio" name="user_cate" class="user_cate" value="기타">기타
@@ -297,6 +299,8 @@
 	                        console.log("성공");
 	                     	$(".telSubmit_info").html("true");
 	                     	alert("인증되었습니다.");
+	                     	clearInterval(timer);
+	                 		$(".time").html("");
                          }
                      } else {
                      	alert("인증에 실패했습니다. 입력된 전화번호나 인증번호에 오차가 없는지 확인해주세요.");

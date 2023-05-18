@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -8,210 +8,227 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet"
-   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>Insert title here</title>
 <%@include file="../main/header.jsp"%>
 </head>
 <style>
 .pagination-row {
-   background-color: #e8f0fe;
+	background-color: #e8f0fe;
 }
 
 .pagination-row th {
-   font-size: 12pt;
+	font-size: 12pt;
 }
 
 #pagingul {
-   margin-top: 20px;
-   list-style: none;
-   display: flex;
-   justify-content: center;
+	margin-top: 20px;
+	list-style: none;
+	display: flex;
+	justify-content: center;
 }
 
 #pagingul li {
-   margin-right: 5px;
+	margin-right: 5px;
 }
 
 #pagingul li a {
-   display: block;
-   padding: 5px 10px;
-   border: 1px solid #ddd;
-   background-color: #fff;
-   color: #333;
-   text-decoration: none;
+	display: block;
+	padding: 5px 10px;
+	border: 1px solid #ddd;
+	background-color: #fff;
+	color: #333;
+	text-decoration: none;
 }
 
 #pagingul li.on a {
-   background-color: #FFD400;
-   color: #fff;
+	background-color: #FFD400;
+	color: #fff;
 }
 
 .searchAll {
-   padding: 0;
-   width: 65%;
-   margin: 0 auto;
+	padding: 0;
+	width: 65%;
+	margin: 0 auto 50px auto;
 }
 
 #spnList {
-   font-size: 17pt;
-   font-weight: bolder;
+	font-size: 17pt;
+	font-weight: bolder;
 }
 
 #searchBox, #super_container {
-   width: 100%;
+	width: 100%;
 }
 
 #searchBox {
-   display: flex;
-   justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
 
 .cont1_table {
-   width: 100%;
-   margin: 0 auto;
-   border-spacing: 0px !important;
+	width: 100%;
+	margin: 0 auto;
+	border-spacing: 0px !important;
 }
 
 .cont1_th {
-   background-color: #F0F0F0;
+	background-color: #F0F0F0;
 }
 
 .th1 {
-   width: 35%;
+	width: 35%;
 }
 
 .th2 {
-   width: 40%;
+	width: 40%;
 }
 
 .th3 {
-   width: 25%;
+	width: 25%;
 }
 
 .thCenter1 {
-   margin: 10px 5px;
-   padding: 10px 0;
-   border-bottom: 1px solid lightgray;
-   color: #333;
+	margin: 10px 5px;
+	padding: 10px 0;
+	border-bottom: 1px solid lightgray;
+	color: #333;
 }
 
 .tdCenter1 {
-   margin: 10px 5px;
-   text-align: left;
-   border-bottom: 1px solid lightgray;
-   font-size: 15px;
+	margin: 10px 5px;
+	text-align: left;
+	border-bottom: 1px solid lightgray;
+	font-size: 15px;
 }
 
 .ImgBorder {
-   margin: 20px 0px;
-   width: 150px;
-   height: 150px;
-   border: 1px solid #ddd;
+	margin: 20px 0px;
+	width: 150px;
+	height: 150px;
+	border: 1px solid #ddd;
 }
 
 .lessonDetail {
-   border-style: none;
-   background: #FFD400;
-   color: #5c3b0c;
-   margin: 5px;
-   padding: 5px 18px;
-   cursor: pointer;
-   border-radius: 5px;
-   font-size: 12pt;
-   font-weight: bolder;
+	border-style: none;
+	background: #FFD400;
+	color: #5c3b0c;
+	margin: 5px;
+	padding: 5px 18px;
+	cursor: pointer;
+	border-radius: 5px;
+	font-size: 12pt;
+	font-weight: bolder;
 }
 
 .searchForm1, .searchForm2, .searchForm3, .searchFormButton {
-   float: left;
-   margin-left: 5px;
+	float: left;
+	margin-left: 5px;
 }
 
 #lesson_cate, #search_detail, #search_keyword {
-   height: 30px;
-   width: 100%;
+	height: 30px;
+	width: 100%;
 }
 
 @media ( max-width : 767px) {
-   .th3, .td3 {
-      display: none;
-   }
-   .searchAll {
-      width: 100vw;
-      margin: 0 auto;
-      margin-top: 50px;
-   }
-   .tdCenter1 {
-      text-align: center;
-   }
+	.th3, .td3 {
+		display: none;
+	}
+	.searchAll {
+		width: 95%;
+		margin: 0 auto 30px auto;
+	}
+	.tdCenter1 {
+		text-align: center;
+	}
+	
+ 	#spnList { 
+ 		margin-left: 10px;
+ 	}
+ 	
+ 	.searchBox {
+ 		width: 100%;
+ 	}
+ 	
+ 	.searchForm1, .searchForm2, .searchForm3, .searchFormButton {
+	margin-left: 0px;
+}
+ 	
 }
 </style>
 
 <body>
-   <div class="container searchAll">
-      <br>
-      <div class="divLeft" style="width: 150px; text-align: left;">
-         <span id="spnList" style="text-align: left;"> 꿀TIP 리스트</span>
-      </div>
-      <div id="searchBox" style="margin-top: 0px;">
-         <!--          <form action="selectPartSearch" method="post" name="lesson_cate"> -->
-         <div class="searchForm1">
-            <label for="lesson_cate"></label> <select name="lesson_cate"
-               id="lesson_cate" required>
-               <option value="" disabled>카테고리</option>
-               <option value="예체능">예체능</option>
-               <option value="공예">공예</option>
-               <option value="사무">사무</option>
-               <option value="라이프스타일">라이프스타일</option>
-               <option value="IT">IT</option>
-               <option value="기타">기타</option>
-            </select>
-         </div>
-         <div class="searchForm2">
-            <label for="search_detail"></label> <select name="search_detail"
-               id="search_detail" required>
-               <option value="선택" disabled>선택</option>
-               <option value="lesson_title">강의</option>
-               <option value="user_name">강사</option>
-               <option value="tiper_addr">지역</option>
-            </select>
-         </div>
-         <div class="searchForm3">
-            <label for="search_keyword"></label> <input type="text"
-               name="search_keyword" id="search_keyword" placeholder="검색어를 입력해주세요" />
-         </div>
+	<div class="container searchAll">
+		<br>
+		<div class="divLeft" style="width: 150px; text-align: left;">
+			<span id="spnList" style="text-align: left;">      꿀TIP 리스트</span>
+		</div>
+		<div id="searchBox" style="margin-top: 0px;">
+			<div class="searchForm1">
+				<label for="lesson_cate"></label> <select name="lesson_cate"
+					id="lesson_cate" required>
+					<option value="" disabled>카테고리</option>
+					<option value="예체능">예체능</option>
+					<option value="공예">공예</option>
+					<option value="사무">사무</option>
+					<option value="라이프스타일">라이프스타일</option>
+					<option value="IT">IT</option>
+					<option value="기타">기타</option>
+				</select>
+			</div>
+			<div class="searchForm2">
+				<label for="search_detail"></label> <select name="search_detail"
+					id="search_detail" required>
+					<option value="선택" disabled>선택</option>
+					<option value="lesson_title">강의</option>
+					<option value="user_name">강사</option>
+					<option value="tiper_addr">지역</option>
+				</select>
+			</div>
+			<div class="searchForm3">
+				<label for="search_keyword"></label> <input type="text"
+					name="search_keyword" id="search_keyword" placeholder="검색어 입력해주세요" />
+			</div>
+			<div class="searchFormButton">
+				<button type="submit" id="search-button"
+					style="outline: none; border: none; background: transparent;">
+					<i class="fa fa-search searchBtn"
+						style="font-size: 24px; color: #FFD400; margin-top: 20px;"></i>
+				</button>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		
+		
+<!-- 		<div name="lesson_choice" id="lesson_choice"> -->
+<!-- 			<label><input  -->
+<!-- 			type="checkbox" name="sorting" value="random">랜덤</label> -->
+<!-- 			<label><input type="checkbox" name="sorting" value="sweetness">당도높은순</label> -->
+<!-- 			<label><input type="checkbox" name="sorting" value="latest">최신등록순</label> -->
+<!-- 		</div> -->
 
-         <div class="searchFormButton">
-            <button type="submit" id="search-button"
-               style="outline: none; border: none; background: transparent;">
-               <i class="fa fa-search searchBtn"
-                  style="font-size: 24px; color: #FFD400; margin-top: 20px;"></i>
-            </button>
-         </div>
-         <div style="clear: both;"></div>
-         <!--          </form> -->
-      </div>
-
-      <div id="container_top"></div>
-      <div id="super_container">
-         <h4>
-            <button class="lessonDetail" type="button" id="searchListBtn"
-               onclick="location.href='allSearch';">전체 리스트</button>
-         </h4>
-         <table class="cont1_table">
-            <thead class="btn-primary">
-               <tr class="cont1_th">
-                  <th class="thCenter1 th1">&nbsp;&nbsp;강의정보</th>
-                  <th class="thCenter1 th2"></th>
-                  <th class="thCenter1 th3">&nbsp;&nbsp;강의상세</th>
-               </tr>
-            </thead>
-            <tbody id="dataTableBody">
-            </tbody>
-         </table>
-         <ul id="pagingul">
-         </ul>
-      </div>
-   </div>
+		<div id="container_top"></div>
+		<div id="super_container">
+			<h4>
+				<button class="lessonDetail" type="button" id="searchListBtn"
+					onclick="location.href='allSearch';">전체 리스트</button>
+			</h4>
+			<table class="cont1_table">
+				<thead class="btn-primary">
+					<tr class="cont1_th">
+						<th class="thCenter1 th1">&nbsp;&nbsp;강의정보</th>
+						<th class="thCenter1 th2"></th>
+						<th class="thCenter1 th3">&nbsp;&nbsp;강의상세</th>
+					</tr>
+				</thead>
+				<tbody id="dataTableBody">
+				</tbody>
+			</table>
+			<ul id="pagingul">
+			</ul>
+		</div>
+	</div>
 </body>
 <script>
     var totalData; //총 데이터 수
@@ -367,36 +384,35 @@
        };
     
        
-       
-     $("#search-button").click(function(){
-        console.log("onclick실행");
-        var search_cate=$('#lesson_cate').val();
-        var search_detail=$('#search_detail').val();
-        var search_keyword=$('#search_keyword').val();
+       $("#search-button").click(function(){
+     		console.log("onclick실행");
+     		var search_cate=$('#lesson_cate').val();
+     		var search_detail=$('#search_detail').val();
+     		var search_keyword=$('#search_keyword').val();
 
-        
-        $.ajax({ // ajax로 데이터 가져오기
-           method: "POST",
-           url: "selectPartSearch",
-           data: {lesson_cate:search_cate, search_detail:search_detail, search_keyword:search_keyword},
-           dataType: "json",
-           async:false,
-           success: function (data) {
-              console.log("onclick실행2"+data);
-              totalData = data.length;
-               //데이터 대입
-               dataList=data;
+     		
+     		$.ajax({ // ajax로 데이터 가져오기
+     			method: "POST",
+     			url: "selectPartSearch",
+     			data: {lesson_cate:search_cate, search_detail:search_detail, search_keyword:search_keyword},
+     			dataType: "json",
+     			async:false,
+     			success: function (data) {
+     				console.log("onclick실행2"+data);
+     			   totalData = data.length;
+     		       //데이터 대입
+     		       dataList=data;
 
-               if(typeof totalData == "undefined" || totalData == null || totalData == ""){ alert("검색결과가 없어요.");}
-               }
-         });      
-        
-         //글 목록 표시 재호출
-         displayData(1, 5);
-         //페이징 표시 재호출
-         paging(totalData, 5, pageCount, 1);
-        
-     });     
+     		       if(typeof totalData == "undefined" || totalData == null || totalData == ""){ alert("검색결과가 없어요.");}
+     				 }
+     		 });		
+     		
+     		 //글 목록 표시 재호출
+     	    displayData(1, 5);
+     	    //페이징 표시 재호출
+     	    paging(totalData, 5, pageCount, 1);
+     		
+     	}); 
        
 
 </script>

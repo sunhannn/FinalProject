@@ -53,27 +53,31 @@
 
 
 	<!-- 상현이부분 -->
-	<select id="selectLessonTiper" resultType="lesson"> <!-- 5월 17일 수정 -->
+	<select id="selectLessonTiper" resultType="lesson"> <!-- 5월 18일 수정함 -->
 		select
-		lesson.LESSON_DATE, lesson.LESSON_TITLE, escrow.ESCROW_USER_ID
-		as
-		lesson_info, FORMAT(escrow.ESCROW_PRICE, 0) AS lesson_cate,
-		lesson.lesson_num
+		escrow.ESCROW_START, lesson.LESSON_TITLE, escrow.ESCROW_USER_ID,
+		FORMAT(escrow.ESCROW_PRICE, 0) AS escrow_price,
+		lesson.lesson_num,
+		escrow.ESCROW_STATUS
 		FROM escrow, lesson
 		WHERE #{lesson_tiper_code} =
 		escrow.ESCROW_tiper_code AND
 		lesson.LESSON_NUM =
-		escrow.ESCROW_LESSON_NUM;
+		escrow.ESCROW_LESSON_NUM AND escrow.ESCROW_STATUS &lt; 2 ORDER BY
+		escrow.ESCROW_STATUS, escrow.ESCROW_START
 	</select>
-	<!-- 5월 17일 새로만든 쿼리 -->
+
 	<select id="selectTiperInfoPage" resultType="lesson">
 		SELECT
 		(select
 		count(*)
-		from escrow where escrow_lesson_num = lesson_num) AS
+		from escrow where escrow_lesson_num = lesson_num and
+		escrow_status = 1) AS
 		lesson_onoff,
-		lesson_img, lesson_title, lesson_num, (SELECT
-		AVG(review_sugar) FROM review WHERE review_lesson_num = #{lesson_num})
+		lesson_img, lesson_title,
+		lesson_num, (SELECT
+		AVG(review_sugar) FROM review WHERE
+		review_lesson_num = #{lesson_num})
 		as lesson_info
 		FROM lesson
 		WHERE
@@ -108,17 +112,22 @@
 		#{lesson_title}, #{lesson_info},
 		#{lesson_cate}, #{lesson_img}, #{lesson_user_name})
 	</insert>
-	<!-- 여기 2개 추가(5월 17일) -->
+
 	<delete id="lessonDelete">
 		delete from lesson where lesson_num = #{lesson_num}
 	</delete>
 
-	<select id="selectLessonfromEscrow" resultType="_int">
+	<select id="selectLessonfromEscrow" resultType="_int"><!-- 5월 18일 수정함 -->
 		select count(*)
-		from escrow where escrow_lesson_num = #{lesson_num}
+		from escrow where escrow_lesson_num = #{lesson_num} and
+		(escrow_status = 1 or escrow_status = 0)
 	</select>
 
-
+	<select id="selectEscrowStatus" resultType="_int"><!-- 5월 18일 수정함 -->
+		select escrow_status as lesson_onoff from escrow where
+		escrow_lesson_num =
+		#{lesson_num} and escrow_user_id = #{lesson_user_id}
+	</select>
 
 	<!-- 정성현 : 마이페이지======================================== -->
 	<select id="getUserLessonList" resultType="lesson">

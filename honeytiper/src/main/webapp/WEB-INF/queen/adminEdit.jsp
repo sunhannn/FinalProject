@@ -1,38 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@include file="../queen/adminNavbar.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" media="screen and (min-width:769px)" href="front/user.css">
    <link rel="stylesheet" media="screen and (max-width:768px)" href="front/userJoinMobile.css">
    <style>
-   	.admin_edit_body #writeForm {
-   		height: 100%;
-   		position: relative;
-   	}
-   	
-   	.admin_formWrap .admin_editContent {
-   		height: 100%;
-	    position: absolute;
-	    top: 25%;
-	    left: 20%;
-   	}
-   	
-   	.admin_formWrap button {
-   		background-color: #efefef;
-   	}
-   	
-   	.admin_formWrap button:hover {
-   		background-color: #dcdcdc;
-   	}
-   	
    	#commandCell button {
    		margin-top : 20px;
    	}
+   	
+   	#commandCell .editBtn_submit:hover {
+   		background-color: e6b800;
+   	}
+   	
    </style>
 </head>
 <body class="admin_edit_body">
@@ -127,6 +112,69 @@
          </form>         
          </div>
       </div>
-
+		<script>
+		
+		//preventDefault
+        document.addEventListener('submit', function(event){
+           console.log("prevent");
+           event.preventDefault();
+              if($("#checkBoxId").val() == ""){
+                 alert("아이디중복확인 필요");
+              }
+              
+              if($("#submitCode").val() != ""){
+                 if( $("#info_ptag").text() == "" ){
+                    if( $("#checkBoxId").val() != "") {
+                    		if(!($(".edit_email").hasClass("editRequired"))){
+   		                 		if(!($(".edit_pw").hasClass("editRequired"))){
+			                           console.log("submit");
+			                           event.target.submit();
+	                     		}else{
+	                     			alert("변경하실 비밀번호를 입력해주세요. 변경을 원하지 않으실 경우 확장된 변경란의 '취소'를 눌러주세요.");
+                    			}
+                    		}else{
+                   				alert("변경하실 이메일의 인증절차를 완료해주세요. 변경을 위치 않으실 경우 확장된 변경란의 '취소'를 눌러주세요.");
+                    		}
+                    	}
+                    }
+              	}
+        	}); 
+		
+		$(".check").keyup (function(){
+            var checkText = "";
+              var thisVal = $(this).val();
+              
+                 switch($(this).attr("name")){
+                  case "user_pw2":
+                    if(thisVal.length != 0 && $("#user_pw").val() != thisVal) {
+                        checkText = "비밀번호가 일치하지 않습니다.";
+                     }
+                     break;
+                     
+              }
+              if(checkText != ""){
+                  $(this).siblings(".info_ptag").html(checkText);
+                  $(this).siblings(".info_ptag").addClass("vali");
+                  $(this).siblings(".info_ptag").slideDown();
+                   $(this).css({
+                      "borderColor":"red"
+                   });
+              } else {
+                  $(this).siblings(".info_ptag").slideUp();
+                   $(this).siblings(".info_ptag").empty();
+                   $(this).removeClass("vali");
+                   if($(this).val() != $("#user_id").val()){
+                      $(this).css({
+                         "borderColor":"#009900"
+                      });
+                   }else{
+                      $(this).css({
+                         "borderColor":"black"
+                      });
+                      
+                   }
+               }
+         });
+		</script>
 </body>
 </html>

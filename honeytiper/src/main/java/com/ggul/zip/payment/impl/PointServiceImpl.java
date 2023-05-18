@@ -38,15 +38,12 @@ public class PointServiceImpl implements PointService {
 		return pointDAO.callTotalPoint(vo);
 	}
 
-	// 환불내역 point테이블에 insert
+	// 강사 포인트 정산하기
 	@Override
 	public void insertRefundPoint(PointVO vo) {
 		pointDAO.insertRefundPoint(vo);
 	}
 
-	// 강사 포인트 정산하기
-	@Override
-	public void honeyTakePoint(PointVO vo) {
-		pointDAO.honeyTakePoint(vo);
-	}
+
+	
 }

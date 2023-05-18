@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@page import="com.ggul.zip.tiper.TiperVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 int point = (int) request.getAttribute("user_point");
 TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
@@ -17,7 +18,7 @@ if (tiperVO.getTiper_cate2() == null) {
 
 } else {
 	cate2 = tiperVO.getTiper_cate2();
-	mobcate2 = " ," + tiperVO.getTiper_cate2();
+	mobcate2 = ", " + tiperVO.getTiper_cate2();
 }
 
 if (tiperVO.getTiper_cate3() == null) {
@@ -26,7 +27,7 @@ if (tiperVO.getTiper_cate3() == null) {
 
 } else {
 	cate3 = tiperVO.getTiper_cate3();
-	mobcate3 = " ," + tiperVO.getTiper_cate3();
+	mobcate3 = ", " + tiperVO.getTiper_cate3();
 
 }
 %>
@@ -45,6 +46,41 @@ if (tiperVO.getTiper_cate3() == null) {
 @media ( min-width : 769px) {
 	.container {
 		width: 65%;
+	}
+	#mytip_infospan{
+		font-size: 14px;
+	    background-color: inherit;
+	    border: none;
+	    text-align: center;
+	    white-space: pre-wrap;
+	}
+	.honey_pay{
+		font-weight: 500;
+	}
+	#mytip_point3{
+	    margin-bottom: 26px;
+    	display: inline-block;	
+    	font-weight: bold;
+	}
+	#mytip_pointspan{
+		font-weight: 500;
+	}
+	.tooltip_consult {
+		visibility: hidden;
+		width: auto;
+		background-color: #fff8e3;
+		color: black;
+		border-radius: 5px;
+		padding: 5px 0;
+		position: absolute;
+		z-index: 999;
+		display: flex;
+		border: 2px solid #FFD400;
+		padding: 10px;
+		font-size: smaller;
+	}
+	.consult:hover .tooltip_consult {
+		visibility: visible;
 	}
 	#mytip_sub1 {
 		font-size: 27px;
@@ -283,9 +319,14 @@ if (tiperVO.getTiper_cate3() == null) {
 	#myip_catesub {
 		font-weight: bold;
 		font-size: 14px;
+	    margin-top: -10%;
+  		display: block;
 	}
 	#mytip_point2 {
-		font-weight: bold;
+		font-weight: 500;
+		
+	    display: inline-block;
+    	margin-top:-5%;
 	}
 	#mytip_infosub {
 		font-weight: bold;
@@ -332,7 +373,7 @@ if (tiperVO.getTiper_cate3() == null) {
 		background-color: #FFD400;
 		border: 0;
 		border-radius: 10px;
-		width: 100px;
+		width: 150px;
 		height: 50px;
 		font-weight: bold;
 	}
@@ -350,6 +391,26 @@ if (tiperVO.getTiper_cate3() == null) {
 }
 
 @media ( max-width : 768px) {
+	.mytip_table_th{
+	    font-size: 13px;
+	}
+	.tooltip_consult {
+		visibility: hidden;
+		width: auto;
+		background-color: #fff8e3;
+		color: black;
+		border-radius: 5px;
+		padding: 5px 0;
+		position: absolute;
+		z-index: 999;
+		display: flex;
+		border: 2px solid #FFD400;
+		padding: 10px;
+		font-size: smaller;
+	}
+	.consult:hover .tooltip_consult {
+		visibility: visible;
+	}
 	#mytip_sub3 {
 		font-size: 18px;
 		font-weight: bold;
@@ -363,7 +424,7 @@ if (tiperVO.getTiper_cate3() == null) {
 		height: 20px;
 	}
 	.mytip_td1 {
-		text-align: left;
+		text-align: center;
 		font-size: 12px;
 	}
 	.mytip_td2 {
@@ -398,7 +459,7 @@ if (tiperVO.getTiper_cate3() == null) {
 		background-color: white;
 		position: relative;
 		width: 300px;
-		height: 500px;
+		height: 550px;
 		padding: 30px;
 		margin: auto;
 		margin-top: 20vh;
@@ -458,9 +519,11 @@ if (tiperVO.getTiper_cate3() == null) {
 	.btn_close {
 		background-color: #d8dee5;
 		border: 0;
-		border-radius: 10%;
+		border-radius: 10px;
 		width: 200px;
 		font-size: 14px;
+		height: 40px;
+		margin-top: 10px;
 	}
 	#tiper_info:hover {
 		background: rgb(235, 235, 235);
@@ -508,7 +571,7 @@ if (tiperVO.getTiper_cate3() == null) {
 		font-weight: bold;
 	}
 	#mytip_pointspan {
-		font-weight: bold;
+		font-weight: 500;
 	}
 	.mytip_td5 {
 		text-align: center;
@@ -556,10 +619,12 @@ if (tiperVO.getTiper_cate3() == null) {
 	#mob-cate-sub {
 		display: block;
 		margin-top: 5px;
+		font-weight: bold;
 	}
 	#mob-tiper-sub {
 		display: block;
 		margin-top: 5px;
+		font-weight: bold;
 	}
 	#mob-pro-tr2 {
 		height: 130px;
@@ -584,16 +649,24 @@ if (tiperVO.getTiper_cate3() == null) {
 	#mob-pro-td5 {
 		text-align: center;
 		vertical-align: middle;
-		background-color: rgb(247, 247, 247);
+		background-color: white;
 	}
 	#mob-cate-span {
-		font-weight: bold;
+		font-weight: 500;
 	}
 	#mob-point {
-		font-weight: bold;
+		font-weight: 500;
+	}
+	.mob-point2 {
+		font-weight: 500;
 	}
 	#mob-tiper-info {
-		font-weight: bold;
+		font-weight: 500;
+		font-size: 12px;
+	    text-align: center;
+	    border: none;
+	    background-color: inherit;
+	    white-space: pre-wrap;
 	}
 	#mytip_table1 {
 		width: 100%;
@@ -601,6 +674,7 @@ if (tiperVO.getTiper_cate3() == null) {
 	#mob-pay-sub {
 		display: block;
 		margin-top: 5px;
+		font-weight: bold;
 	}
 	#mob-btn-div {
 		text-align: center;
@@ -618,6 +692,7 @@ if (tiperVO.getTiper_cate3() == null) {
 	.leslist-img {
 		width: 50px;
 		height: 50px;
+		border-radius: 10px;
 	}
 	.mytip-leslist-title {
 		font-size: 12px;
@@ -666,6 +741,9 @@ if (tiperVO.getTiper_cate3() == null) {
 		font-size: 12px;
 		font-weight: bold;
 	}
+	#mytip_table1 td {
+    padding: 6px;
+	}
 }
 </style>
 <body>
@@ -677,17 +755,18 @@ if (tiperVO.getTiper_cate3() == null) {
 			<table id="mob-tab">
 				<tr id="mob-pro-tr1">
 					<td id="mob-pro-td1" rowspan="2"><img alt="프로필"
-						src="front/<%=tiperVO.getTiper_img()%>" id="mob-pro-img"></td>
+						src="front/profile/<%=tiperVO.getTiper_img()%>" id="mob-pro-img"
+						onerror="this.src='front/profile/tiper.png'"></td>
 					<td id="mob-pro-td2"><span id="mob-cate-sub">내 카테고리</span> <br>
 						<span id="mob-cate-span"><%=tiperVO.getTiper_cate1()%><%=mobcate2%><%=mobcate3%></span></td>
-					<td id="mob-pro-td3"><span id="mob-pay-sub">My허니페이&nbsp;<span
-							id="mob-point"><%=point%></span>point
+					<td id="mob-pro-td3"><span id="mob-pay-sub">My허니페이<br><br><span
+							id="mob-point"><fmt:formatNumber value="<%=point%>"/></span><span class="mob-point2">&nbsp;허니페이</span>
 					</span></td>
 				</tr>
 
 				<tr id="mob-pro-tr2">
 					<td id="mob-pro-td4"><span id="mob-tiper-sub">강사 정보</span> <br>
-						<span id="mob-tiper-info"><%=tiperVO.getTiper_info()%></span></td>
+						<pre id="mob-tiper-info"><%=tiperVO.getTiper_info()%></pre></td>
 					<td id="mob-pro-td5"><button type="button"
 							onclick="location.href='honeyTake'" id="mytip_btn2">허니페이
 							정산하기</button></td>
@@ -719,16 +798,18 @@ if (tiperVO.getTiper_cate3() == null) {
 						src="front/profile/<%=tiperVO.getTiper_img()%>" id="mytip_imgpro"></td>
 
 					<td id="mytip_tdpro3"><span id="myip_catesub">내 카테고리</span> <br>
-						<br> <span id="mytip_catespan"><%=tiperVO.getTiper_cate1()%><br>
-							<br><%=cate2%><br> <br><%=cate3%></span></td>
+						<br> <span id="mytip_catespan"><%=tiperVO.getTiper_cate1()%>
+							<br><%=cate2%><br> <%=cate3%></span></td>
 					<td id="mytip_tdpro2"><p id="mytip_point2">
-							<span id="mytip_point3">My허니페이 <span id="mytip_pointspan"><%=point%></span>point
-							</span>
-						</p> <br> <br> <br> <br>
-						<button type="button" onclick="location.href='honeyTake'"
+							<span id="mytip_point3">My허니페이<br><br><span id="mytip_pointspan"><fmt:formatNumber value="<%=point%>"/></span>
+							<span class="honey_pay"> 허니페이</span>
+							</span><br>
+							<button type="button" onclick="location.href='honeyTake'"
 							id="mytip_btn2">허니페이 정산하기</button></td>
+						</p>
+						
 					<td id="mytip_tdpro4"><span id="mytip_infosub">강사 소개</span> <br>
-						<span id="mytip_infospan"><%=tiperVO.getTiper_info()%></span></td>
+						<pre id="mytip_infospan"><%=tiperVO.getTiper_info()%></pre></td>
 				</tr>
 			</table>
 		</div>
@@ -745,26 +826,62 @@ if (tiperVO.getTiper_cate3() == null) {
 	<!-- 공통 작성 부분 -->
 	<div class="container">
 		<div id="mytip_sub2">
-			<span id="mytip_sub3">진행중인 꿀TIP</span><br>
+			<span id="mytip_sub3">꿀TIP 전수현황</span><br>
 		</div>
 		<br>
 		<table id="mytip_table1">
 			<c:forEach items="${lessonTiper}" var="lesson">
 				<tr class="mytip_tr1">
-					<td class="mytip_td1">${lesson.lesson_date}</td>
+					<c:choose>
+						<c:when test="${lesson.escrow_status == 0}">
+							<td class="mytip_td1"><span class="consult"
+								style="color: #B08C7E;">협의중<span
+									class="tooltip_consult">전수 거절은<br>관리자에게 문의해주세요!
+								</span> <svg xmlns="http://www.w3.org/2000/svg" font-size="16px"
+										color="#FFD400" width="16" height="16" fill="currentColor"
+										class="bi bi-exclamation-square" viewBox="0 0 16 16">
+					  <path
+											d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+					  <path
+											d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+					</svg></span></td>
+						</c:when>
+						<c:otherwise>
+							<td class="mytip_td1">전수 날짜<br>${lesson.escrow_start}</td>
+						</c:otherwise>
+					</c:choose>
 					<td class="mytip_td2">
-						<div>회원ID: ${lesson.lesson_info}</div>
+						<div>
+							전수받으실 <span class="tip_mypg_cos"> ${lesson.escrow_user_id}
+							</span>님
+						</div>
 					</td>
 					<td class="mytip_td3"><span>${lesson.lesson_title}</span></td>
-					<td class="mytip_td4"><span>가격 : ${lesson.lesson_cate}</span></td>
+					<c:choose>
+						<c:when test="${lesson.escrow_status == 0}">
+							<td class="mytip_td4"><span class="consult"
+								style="color: #B08C7E;">협의중<span
+									class="tooltip_consult">전수 거절은<br>관리자에게 문의해주세요!
+								</span> <svg xmlns="http://www.w3.org/2000/svg" font-size="16px"
+										color="#FFD400" width="16" height="16" fill="currentColor"
+										class="bi bi-exclamation-square" viewBox="0 0 16 16">
+					  <path
+											d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+					  <path
+											d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+					</svg></span></td>
+						</c:when>
+						<c:otherwise>
+							<td class="mytip_td4"><span>${lesson.escrow_price}
+									허니페이</span></td>
+						</c:otherwise>
+					</c:choose>
 					<td class="mytip_td5"><img src="front/siren.png" alt="신고"
 						class="filemodal1_singo ${lesson.lesson_num}"
-						onclick="hsh2(${lesson.lesson_num}, '${lesson.lesson_info}')"
+						onclick="hsh2(${lesson.lesson_num}, '${lesson.escrow_user_id}')"
 						id="mytip_singo"></td>
 				</tr>
-
 			</c:forEach>
-
 		</table>
 		<br> <br>
 	</div>
@@ -878,6 +995,13 @@ $myImage.on("mouseover", function() {
 
 $myImage.on("mouseout", function() {
   $(this).attr("src", originalSrc); // 마우스를 이미지 밖으로 빼면 원래 이미지로 돌아감
+});
+
+var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
+$(document).ready(function(){
+	if(isMobile) {
+		$('.bi-exclamation-square').attr('font-size','11px');
+	}
 });
     </script>
 	<%@include file="../main/footer.jsp"%>

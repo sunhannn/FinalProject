@@ -35,14 +35,9 @@ public class PointDAO {
 		mybatis.update("PointDAO.updateUserPoint", vo);
 	}
 
-	// 환불버튼눌렀을때 내역이 찍히게하는 dao
+	// 강사 포인트 정산하기
 	public void insertRefundPoint(PointVO vo) {
 		mybatis.insert("PointDAO.insertRefundPoint", vo);
 	}
 
-	// 강사 포인트 정산하기
-	public void honeyTakePoint(PointVO vo) {
-		mybatis.insert("PointDAO.honeyTakePoint", vo);
-
-	}
 }

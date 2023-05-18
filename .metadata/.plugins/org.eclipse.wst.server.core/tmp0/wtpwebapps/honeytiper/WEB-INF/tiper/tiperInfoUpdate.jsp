@@ -211,13 +211,24 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 	.tipup-img-td {
 		width: 180px;
 	}
+	.tipup_td5 {
+		width: 170px;
+	}
 	.tipup-td6 {
 		font-size: 15px;
 		font-weight: bold;
 		width: 220px;
+		text-align: center;
 	}
 	.tipup-review {
-		font-size: 15px;
+		text-align: right;
+	}
+	.tipup-delete-btn {
+		background-color: #FFD400;
+		border: 0;
+		border-radius: 10px;
+		width: 150px;
+		height: 50px;
 		font-weight: bold;
 	}
 }
@@ -240,10 +251,10 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 				<tr id="tipup_tr1">
 					<td id="tipup_td1"><input type="file" name="tiper_img"
 						id="tipimg" accept=".jpg,.jpeg,.png"
-						onchange="previewImage(event)" required="required"
+						onchange="previewImage(event)"  value="<%=tiperVO.getTiper_img()%>"
 						style="display: none;"> <br> <label for="tipimg"
 						id="tiperpreview-label"> <img id="tiperpreview"
-							src="front/<%=tiperVO.getTiper_img()%>" alt="프로필사진 없음"
+							src="front/profile/<%=tiperVO.getTiper_img()%>" alt="프로필사진 없음"
 							onmouseover="changeCursor(this)" title="이미지를 클릭해서 사진을 선택해주세요!">
 					</label></td>
 
@@ -270,7 +281,10 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 							onclick="location.href='getLessonDetail?lesson_num=${lesson.lesson_num}'"></td>
 						<td class="tipup_td4">${lesson.lesson_title }</td>
 						<td class="tipup-td6">수강자 수 ${lesson.lesson_onoff}</td>
-						<td class="tipup-review">평균 리뷰 평점 : ${lesson.lesson_info }</td>
+						<td class="tipup-review">
+							<button type="button" class="tipup-delete-btn"
+								onclick="deleteLesson(${lesson.lesson_num})">강의삭제</button>
+						</td>
 						<td class="tipup_td5"><button type="button"
 								class="tipup_btn1"
 								onclick="location.href='lessonUpdateGo?lesson_num=${lesson.lesson_num}'">강의수정하기</button></td>
@@ -338,6 +352,15 @@ TiperVO tiperVO = (TiperVO) request.getAttribute("tiperVO");
 				return false;
 			}
 		}
+		
+		 function deleteLesson(lessonNum) {
+	    	    if (confirm("정말로 강의를 삭제하시겠습니까?")) {
+	    	      // 확인 버튼을 클릭한 경우에만 삭제 동작을 수행
+	    	      location.href = 'lessonDelete?lesson_num=' + lessonNum;
+	    	    }
+	    	  }
+		
+		
 
 		// 마우스를 올리면 pointer로 바뀌는 함수
 		function changeCursor(img) {

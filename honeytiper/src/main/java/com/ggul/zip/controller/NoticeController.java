@@ -35,7 +35,7 @@ public class NoticeController {
 	//공지사항등록창으로이동	
 	@RequestMapping("/insertMovenotice")
 	public String insertMoveNotice(NoticeVO vo) {
-		return "notice/insertNotice";
+		return "queen/adminNoticeInsert";
 	}
 	
 	//공지사항등록

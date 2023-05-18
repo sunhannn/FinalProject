@@ -174,7 +174,17 @@ input[type=date]{
   width:30%
   }
 }
-
+#view-all-button{
+    border-style: none;
+    background: #FFD400;
+    color: #5c3b0c;
+    margin-bottom: 10px;
+    padding: 5px 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 12pt;
+    font-weight: bolder;
+}
 </style>
 </head>
 <body>
@@ -191,6 +201,7 @@ input[type=date]{
       <button class="warning" type="button"
          onclick="location.href='goPointCharge'">허니페이 충전하러가기 ></button>
       <br><br>
+      <button id="view-all-button" onclick="viewAllFnc()">전체목록보기</button><br>
       <div class="search-box">
       <label for="start-date">날짜</label>
 		<input type="date" id="start-date" name="startDate" >
@@ -364,6 +375,11 @@ $("#pagingul li a").click(function () {
    //페이징 표시 재호출
    paging(totalData, dataPerPage, pageCount, globalCurrentPage);
 });
+}
+
+//전체보기 버튼 클릭 이벤트
+function viewAllFnc() {
+    location.reload();
 }
 
 $('#search-button').click(function() {

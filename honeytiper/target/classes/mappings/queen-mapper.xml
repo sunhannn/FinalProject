@@ -62,6 +62,12 @@
 	</select>
 	
 	
+	<!-- 승희 -->
+	<update id="updateAdminInfo">
+		Update users set user_pw=#{user_pw}, user_email=#{user_email} where user_id=#{user_id}
+	</update>
+	
+	
 	
 	   <!-- 소연이부분 -->
    <update id="updateAdmin">

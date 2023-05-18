@@ -4,15 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Insert title here</title>
-   <link rel="stylesheet" media="screen and (min-width:769px)" href="front/user.css">
-   <link rel="stylesheet" media="screen and (max-width:768px)" href="front/userJoinMobile.css">
-   <style>
-   		.admin_login_body {
-   			height: 0;
-   		}
-   </style>
+   <link rel="stylesheet" href="front/user.css">
 </head>
 <%
 if(request.getParameter("error")!=null){
@@ -22,7 +15,9 @@ if(request.getParameter("error")!=null){
 }
 %>
 <body class="login_body admin_login_body">
+	<div class="admin_cover">
 	<div class="login_wrap admin_login_wrap">
+	<div class="agreement_logo admin_logo"><a href="/"><img src="${pageContext.request.contextPath}/front/ggulTiper.png" title="Logo"></a></div>
 		<div class="login_contents">
 			<h3 class="form-signin-heading">꿀 TIPer 관리자</h3>
 			<form class="form-signin" action="/adminLogin" method="post">
@@ -40,6 +35,7 @@ if(request.getParameter("error")!=null){
 			</div>
 		</form>
 		</div>
+	</div>
 	</div>
 
 </body>

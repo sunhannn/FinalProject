@@ -41,14 +41,13 @@ public interface UserService {
 	
 	
 	
+    //소연누나부분
+    UserVO getUserSY(UserVO vo);
+   
+    List<UserVO> getUserList(UserVO vo);
 	
-	//소연누나부분
-	public UserVO getUserSY(UserVO vo);
-	
-	List<UserVO> getUserList(UserVO vo);
 
-	ArrayList<UserVO> getUserListPostSearch(HashMap<String, Object> map);
-	
+
 	
 	//상현이부분
 
@@ -126,6 +125,7 @@ public interface UserService {
 	int isTiper(UserVO uvo);
 	int isTiperAgree(UserVO uvo);
 
+	void updateEscrowReportStatus(EscrowVO evo);
 	
 	
 }

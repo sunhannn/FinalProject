@@ -28,6 +28,7 @@ body {
 @media ( max-width : 768px) {
 	#sin_sub1 {
 		font-size: 22px;
+		font-weight: bold;
 	}
 	#sin_sub2 {
 		font-size: 15px;
@@ -85,7 +86,7 @@ body {
 		background-color: #FFD400;
 		border: 0;
 		width: 200px;
-		height: 30px;
+		height: 45px;
 		border-radius: 10px;
 		font-weight: bold;
 	}
@@ -95,11 +96,13 @@ body {
 	#tiperUppreview {
 		width: 140px;
 		height: 140px;
+		border-radius: 10px;
 	}
 	#sin-info-p {
 		text-align: center;
 		font-size: 15px;
 		font-weight: bold;
+		margin-bottom: 20px;
 	}
 	#sin_sel1 {
 		text-align: center;
@@ -112,16 +115,19 @@ body {
 		width: 180px;
 		height: 30px;
 		border: 1px solid #efefef;
+		border-radius: 10px;
 	}
 	#sin_addr1:focus {
 		outline: none;
 		border: 3px solid #FFD400;
+		border-radius: 10px;
 	}
 }
 
-@media ( min-width : 769px){
+@media ( min-width : 769px) {
 	#sin_sub1 {
 		font-size: 27px;
+		font-weight: bold;
 	}
 	#sin_sub2 {
 		font-size: 20px;
@@ -143,6 +149,7 @@ body {
 		border: 1px solid #efefef;
 		border-radius: 10px;
 		width: 500px;
+		margin-bottom: 30px;
 	}
 	#sin_info1:focus {
 		border: 3px solid #FFD400;
@@ -223,6 +230,7 @@ body {
 	#sin-info-p {
 		font-size: 20px;
 		font-weight: bold;
+		margin-top: 30px;
 	}
 }
 </style>

@@ -100,7 +100,14 @@ tr {
 	margin: 5px;
 	padding: 5px 18px;
 }
-
+.tdCenter1_btn3 {
+	border-style: none;
+	background: #E9E9E9;
+	color: #5c3b0c;
+	margin: 5px;
+	padding: 5px 18px;
+	cursor: pointer;
+}
 #top_bar {
 	width: 63vw;
 	margin: 0 auto;
@@ -110,7 +117,6 @@ tr {
 }
 
 #top_bar h3 {
-	/* 	margin : 0 auto; */
 	margin-left: 0 !important;
 	float: left;
 	font-size: 26px;
@@ -198,6 +204,57 @@ tr {
   background-color: #FFD400;
   color: #fff;
 }
+
+.rpt_modal1 {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: none;
+	background: rgba(0, 0, 0, 0.6);
+}
+#rpt_h3_title{
+	margin-right: -40px;
+}
+.rpt_modal1 .rpt_modal1-window {
+	background-color: white;
+	position: relative;
+	width: 600px;
+	height: 450px;
+/* 	padding: 30px; */
+	margin: auto;
+	margin-top: 20vh;
+	border-radius: 3%;
+	box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.3), -1px -1px 3px 3px rgba(0, 0, 0, 0.3);
+}
+
+#rpt_btn_close{
+	cursor: pointer;
+    margin-right: 20px;
+    margin-top: 9px;
+    font-size: 20px;
+    padding: 7px;
+}
+
+#rpt_modal1-content2-singo{
+	display: flex;
+	flex-direction: column;
+}
+
+#rpt_modal1-title-singo{
+	display: flex;
+	justify-content: space-between;
+	background: #FFD400;
+	border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#rpt_user_singo1{
+	margin: 30px;
+    text-align: justify;
+}
+
 }
 </style>
 <script
@@ -222,11 +279,10 @@ tr {
 				<thead class="btn-primary">
 					<tr class="cont1_th">
 						<th class="thCenter1">신고번호</th>
-						<th class="thCenter1">신고자아이디</th>
-						<th class="thCenter1">신고사유</th>
-						<th class="thCenter1">신고대상자 이름</th>
-						<th class="thCenter1">신고대상자 아이디</th>
+						<th class="thCenter1">신고자</th>
+						<th class="thCenter1">피신고자</th>
 						<th class="thCenter1">정지 처리</th>
+						<th class="thCenter1">신고사유</th>
 					</tr>
 				</thead>
 				<tbody id="dataTableBody8">
@@ -271,14 +327,51 @@ tr {
 			<ul id="pagingul9">
 			</ul>
 		</div>
+	<!-- 신고하기 모달창  -->
+			<div class="rpt_modal1" id="rpt_modal1Singo">
+				<div class="rpt_modal1-window">
 
+					<div class="rpt_modal1-content1" id="rpt_modal1-content2-singo">
+
+						<div id="rpt_modal1-title-singo">
+							<div></div>
+							<h3 id="rpt_h3_title">신고 사유</h3>
+							<div id="rpt_btn_close" style="cursor:pointer;"> ✖ </div>
+						</div>
+
+							<div id="rpt_user_singo1">
+							<span id="reportCont"></span>
+							</div>
+					</div>
+				</div>
+			</div>
 
 		<div id="footer">
 			<!--   	<button type="button" id="conWrite" class="btn btn-primary">글쓰기</button> -->
 		</div>
 	</div>
 </body>
+<script>
 
+const modal1 = document.querySelector('.rpt_modal1');
+const btnmodal1Close = document.querySelector('#rpt_btn_close');
+
+//모달창 함수
+function hsh(val1) {
+   modal1.style.display='block';
+     document.body.style.overflow = 'hidden';
+     document.getElementById("reportCont").innerHTML = val1;
+}
+
+// 신고창 닫기
+btnmodal1Close.addEventListener('click', () => {
+	   modal1.style.display='none';
+	   document.body.style.removeProperty('overflow');
+    });
+    
+    
+
+</script>
 
 <script>
     var totalData8; //총 데이터 수
@@ -286,6 +379,7 @@ tr {
 	var pageCount8 = 5; //페이징에 나타낼 페이지 수
     var globalCurrentPage8= 1; //현재 페이지
 	var dataList8; //표시하려하는 데이터 리스트
+	var strReport = "";
 	
 	$(document).ready(function () {
  //페이지 당 글 개수 
@@ -324,12 +418,11 @@ tr {
  			     chartHtml8 +=
  			    	'<tr><td class="tdCenter1">' + dataList8[i].report_num + '</td>'+
  			 	  '<td class="tdCenter1">' + dataList8[i].report_user_id + '</td>' +
- 			 	  '<td class="tdCenter1">' + dataList8[i].report_cont + '</td>' +
- 			 	  '<td class="tdCenter1">' + dataList8[i].report_reported_name + '</td>' +
- 			 	  '<td class="tdCenter1">' + dataList8[i].report_reported_id + '</td>' +
+ 			 	  '<td class="tdCenter1">' + dataList8[i].report_reported_name +'(' +dataList8[i].report_reported_id + ')' +  '</td>' +
  			 	  '<td class="tdCenter1">'+
  			 	  '<button type="button" class="tdcenter1_btn1" onclick="location.href=\'/updateReportUserRole?user_id='+dataList8[i].report_reported_id+'&report_num='+dataList8[i].report_num+'&report_lesson_num='+dataList8[i].report_lesson_num+'\'">계정 정지</button>'+
- 			 	  '<button type="button" class="tdcenter1_btn2" onclick="location.href=\'/updateReportReject?report_num='+dataList8[i].report_num+'\'">신고 반려</button></tr><hr>';
+ 			 	  '<button type="button" class="tdcenter1_btn2" onclick="location.href=\'/updateReportReject?report_num='+dataList8[i].report_num+'\'">신고 반려</button></td>'+
+ 			 	  '<td class="tdCenter1"><button type="button" class="tdcenter1_btn3" onclick="hsh(\'' + dataList8[i].report_cont +'\');">자세히보기</button>'+'</tr><hr>';
 			   } 
 			
 	  
@@ -340,15 +433,14 @@ tr {
       i < (currentPage8 - 1) * dataPerPage8 + dataPerPage8;
       i++
     ) {
- 	   chartHtml8 +=
- 			'<tr><td class="tdCenter1">' + dataList8[i].report_num + '</td>'+
-		 	  '<td class="tdCenter1">' + dataList8[i].report_user_id + '</td>' +
-		 	  '<td class="tdCenter1">' + dataList8[i].report_cont + '</td>' +
-		 	  '<td class="tdCenter1">' + dataList8[i].report_reported_name + '</td>' +
-		 	  '<td class="tdCenter1">' + dataList8[i].report_reported_id + '</td>' +
-		 	  '<td class="tdCenter1">'+
-		 	  '<button type="button" class="tdcenter1_btn1" onclick="location.href=\'/updateReportUserRole?user_id='+dataList8[i].report_reported_id+'&report_num='+dataList8[i].report_num+'&report_lesson_num='+dataList8[i].report_lesson_num+'\'">계정 정지</button>'+
-		 	  '<button type="button" class="tdcenter1_btn2" onclick="location.href=\'/updateReportReject?report_num='+dataList8[i].report_num+'\'">신고 반려</button></tr><hr>';
+		  chartHtml8 +=
+			  '<tr><td class="tdCenter1">' + dataList8[i].report_num + '</td>'+
+			 	  '<td class="tdCenter1">' + dataList8[i].report_user_id + '</td>' +
+			 	  '<td class="tdCenter1">' + dataList8[i].report_reported_name +'(' +dataList8[i].report_reported_id + ')' +  '</td>' +
+			 	  '<td class="tdCenter1">'+
+			 	  '<button type="button" class="tdcenter1_btn1" onclick="location.href=\'/updateReportUserRole?user_id='+dataList8[i].report_reported_id+'&report_num='+dataList8[i].report_num+'&report_lesson_num='+dataList8[i].report_lesson_num+'\'">계정 정지</button>'+
+			 	  '<button type="button" class="tdcenter1_btn2" onclick="location.href=\'/updateReportReject?report_num='+dataList8[i].report_num+'\'">신고 반려</button></td>'+
+			 	  '<td class="tdCenter1"><button type="button" class="tdcenter1_btn3" onclick="hsh(\'' + dataList8[i].report_cont +'\');">자세히보기</button>'+'</tr><hr>';
 		}    
  	}
    if( typeof chartHtml8 == "undefined" || chartHtml8 == ''){ chartHtml8 +=" <id='if_undefined'><span>처리할 신고가 없습니다.<span></div>"}

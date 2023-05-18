@@ -12,6 +12,7 @@
    src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
    <link rel="stylesheet" media="screen and (min-width:769px)" href="front/user.css">
    <link rel="stylesheet" media="screen and (max-width:768px)" href="front/userJoinMobile.css">
+   <script src="${pageContext.request.contextPath}/front/userCertification.js"></script>
 </head>
 <body>
    <script>
@@ -196,12 +197,13 @@
                      </div>
                      <div class="edit_tel edit_class">
                         <input name="user_tel" type="text" id="user_tel" placeholder="(- 제외)숫자만 입력해주세요" class="check required_edit_tel join_id_input">
-                        <button type="button" id="telCheck" onclick="smsSend()" disabled>인증번호받기</button>
+                        <button type="button" id="telCheck" class="btn_recive_num" onclick="smsSend()" disabled>인증번호받기</button>
                         <p class="info_ptag"></p>
-                        <div>
-                        <input type="text" id="certificationTel" name="certificationTel" class="check required_edit_tel join_id_input" placeholder="핸드폰 인증번호" readonly>
-                           <button type="button" id="telConfirmBtn" onclick="smsConfirm()">인증하기</button>
-                           <p class="info_ptag"></p>
+                        <div class="certification_cover">
+	                        <input type="text" id="certificationTel" name="certificationTel" class="check required_edit_tel join_id_input" placeholder="핸드폰 인증번호" readonly>
+	                        <span class="time"></span>
+							<button type="button" id="telConfirmBtn" class="btn_chk" onclick="smsConfirm()">인증하기</button>
+							<p class="info_ptag"></p>
                             <p class="telSubmit_info"></p>
                             <button type="button" class="no_edit" onclick="close_tel()">취소</button>
                         </div>
@@ -219,15 +221,18 @@
                      </div>
                      <div class="edit_email edit_class">
                         <input name="user_email" type="text" id="emailText" placeholder="(@)포함 주소" class="check required_edit_email join_id_input">
-                        <button type="button" id="emailCheck" onclick="emailSend()">인증번호받기</button>
+                        <button type="button" id="emailCheck" class="btn_recive_num" onclick="emailSend()">인증번호받기</button>
                         <p class="info_ptag"></p>
-                        <input type="text" id="certificationEmail" name="certificationEmail" class="check required_edit_email join_id_input" placeholder="이메일 인증번호">
-                           <button id="emailConfirmBtn" onclick="mailConfirm()">인증하기</button>
+                     	<div class="certification_cover">
+	                        <input type="text" id="certificationEmail" name="certificationEmail" class="check required_edit_email join_id_input" placeholder="이메일 인증번호">
+	                        <span class="time"></span>
+	                        <button type="button" id="emailConfirmBtn" class="btn_chk" onclick="mailConfirm()">인증하기</button>
                         <div>
                            <input type="hidden" id="checkEmail" value="false">
                         </div>
                         <p class="info_ptag"></p>
                         <button type="button" class="no_edit" onclick="close_email()">취소</button>
+	                    </div>
                      </div>
                   </td>
                </tr>
@@ -248,7 +253,7 @@
 		                     <input type="radio" name="user_cate" class="user_cate lifest" value="라이프스타일">라이프스타일
                   		</div>
                   		<div class="col-xs-4 col-md-4 coldiv" id="id_div">
-		                     <input type="radio" name="user_cate" class="user_cate IT" value="IT">IT
+		                     <input type="radio" name="user_cate" class="user_cate IT" value="IT">&nbspIT
                   		</div>
                   		<div class="col-xs-3 col-md-4 coldiv">
 		                     <input type="radio" name="user_cate" class="user_cate etc" value="기타">기타
@@ -359,6 +364,8 @@
 	                     	$(".telSubmit_info").html("인증되었습니다.");
 	                     	$(".edit_tel").removeClass("editRequired");
 	                     	alert("인증되었습니다.");
+	                     	clearInterval(timer);
+	                 		$(".time").html("");
 	                     	$("#certificationTel").attr("readonly", true);
                       }
                   } else {
@@ -381,7 +388,7 @@
 					url : "sendEmail",
 					async : false,
 					data : {
-						userEmail : clientEmail
+						"user_email" : clientEmail
 					},
 					success : function(data) {
 						console.log("data : ", data);
@@ -405,7 +412,7 @@
 	               url : "confirmNum",
 	               data: {
 	                  "confirmNum" : confirmNum,
-	                  "sendNum" : smsData
+	                  "sendNum" : sendNum
 	               },
 	               cache : false,
 	               success: function(data) {
@@ -419,6 +426,8 @@
 		                     	$(".telSubmit_info").html("인증되었습니다.");
 		                     	$(".edit_email").removeClass("editRequired");
 		                     	alert("인증되었습니다.");
+		                     	clearInterval(timer);
+		                 		$(".time").html("");
 		                     	$("#certificationEmail").attr("readonly", true);
 	                      }
 	                  } else {

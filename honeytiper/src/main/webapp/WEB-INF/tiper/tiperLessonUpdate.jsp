@@ -19,20 +19,23 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 <style type="text/css">
 @media ( max-width : 768px) {
 	#lesup_sub1 {
+		margin-top: 30px;
 		font-size: 22px;
 		font-weight: bold;
+		font-size: 22px;
 	}
 	#lesup_tab1 {
 		width: 100%;
 		margin: 0 auto;
 	}
 	#lesup_td1 {
-		font-size: 14px;
+		width: 120px;
 		height: 70px;
 		background-color: #efefef;
 		border-bottom: 8px solid white;
 		text-align: center;
 		vertical-align: middle;
+		height: 70px;
 	}
 	#lesup_td2 {
 		text-align: right;
@@ -100,7 +103,8 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		font-weight: bold;
 	}
 	.lesup_span {
-		font-size: 16px;
+		font-size: 13px;
+		font-weight: bold;
 	}
 }
 
@@ -115,13 +119,14 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		margin: 0 auto;
 	}
 	#lesup_td1 {
-		font-size: 18px;
+		font-size: 16px;
 		height: 70px;
 		vertical-align: middle;
 		width: 200px;
 		background-color: #efefef;
 		border-bottom: 10px solid white;
 		text-align: center;
+		font-weight: bold;
 	}
 	#lesup_td2 {
 		vertical-align: center;
@@ -166,13 +171,14 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 		border-radius: 10px;
 	}
 	#lesup_td3 {
-		font-size: 18px;
+		font-size: 16px;
 		vertical-align: middle;
 		background-color: #efefef;
 		border-bottom: 10px solid white;
 		height: 300px;
 		width: 200px;
 		text-align: center;
+		font-weight: bold;
 	}
 	#lesup_td4 {
 		text-align: center;
@@ -229,25 +235,25 @@ LessonVO vo = (LessonVO) request.getAttribute("lesson");
 				<tr id="lesup_tr3">
 					<td id="lesup_td5" colspan="2"><input type="file"
 						placeholder="수정할 사진" name="lesson_img" accept=".jpg,.jpeg,.png"
-						id="lesup_img" onchange="previewImage(event);" required="required"
-						style="display: none;"> <br> <label for="lesup_img"
-						id="lesup_preview_label"> <img src="front/lessonimg.png"
-							alt="강의 사진" id="lesup_preview" onmouseover="changeCursor(this)"
+						id="lesup_img" onchange="previewImage(event);"
+						value="<%=vo.getLesson_img()%>" style="display: none;"> <br>
+						<label for="lesup_img" id="lesup_preview_label"> <img
+							src="front/lesson/<%=vo.getLesson_img()%>" alt="강의 사진"
+							id="lesup_preview" onmouseover="changeCursor(this)"
 							title="이미지를 클릭해서 사진을 선택해주세요!"></label></td>
 				</tr>
 				<tr id="lesup_tr1">
 					<td id="lesup_td1"><span class="lesup_span">수정할 강의 제목</span><br></td>
 					<td id="lesup_td2"><input type="text"
-						placeholder="<%=vo.getLesson_title()%>" name="lesson_title"
-						id="lesup_input1" required="required"></td>
+						value="<%=vo.getLesson_title()%>" name="lesson_title"
+						id="lesup_input1"></td>
 				</tr>
 
 				<tr id="lesup_tr2">
 
 					<td id="lesup_td3"><span class="lesup_span">수정할 강의 내용</span>
 					<td id="lesup_td4"><textarea name="lesson_info"
-							id="lesup_info1" cols="30" rows="10"
-							placeholder="<%=vo.getLesson_info()%>" required="required"></textarea></td>
+							id="lesup_info1" cols="30" rows="10"><%=vo.getLesson_info()%></textarea></td>
 
 				</tr>
 

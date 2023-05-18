@@ -420,3 +420,24 @@ html, body {
    	#commandCell .editBtn_submit:hover {
    		background-color: #E6B800;
    	}
+
+   	
+   	
+   	
+   	.certification_cover {
+		position: relative;
+	}
+	
+	.certification_cover .time {
+		position: absolute; 
+		top: 16px; 
+		right: 45px; 
+		font-size: 12px; 
+		font-weight: bolder;
+	}
+	
+	.certification_cover .certi_time {
+		top: 17px; 
+		right: 148px; 
+	}
+   	
