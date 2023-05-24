@@ -1,0 +1,370 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@page import="com.ggul.zip.tiper.TiperVO"%>
+<%
+TiperVO tiperVO = (TiperVO) request.getAttribute("tiperGo");
+
+boolean cateCheck1 = true;
+boolean cateCheck2 = true;
+String style1 = null;
+String style2 = null;
+
+if (tiperVO.getTiper_cate2() == null) {
+	cateCheck1 = false;
+	if (tiperVO.getTiper_cate3() == null) {
+		cateCheck2 = false;
+	}
+}
+if (cateCheck1 == false) {
+
+	style1 = "display: none;";
+
+}
+
+if (cateCheck2 == false) {
+
+	style2 = "display: none;";
+
+}
+%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>강의 등록</title>
+<!-- <link rel="stylesheet" href="front/common.css"> -->
+<!-- <link rel="stylesheet" href="front/bootstrap.css"> -->
+<style type="text/css">
+@media ( max-width : 768px) {
+	#lesmake_sub1 {
+		font-size: 22px;
+		font-weight: bold;
+	}
+	#lesmake_tab {
+		width: 100%;
+	}
+	#lesmake_preview {
+		width: 150px;
+		height: 15 0px;
+		border-radius: 10px;
+	}
+	.lesmake_tr {
+		height: 60px;
+	}
+	#lesmake_info {
+		border: 0;
+		vertical-align: middle;
+		width: 200px;
+		height: 200px;
+		resize: none;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+	}
+	#lesmake_info:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	#lesmake_title {
+		width: 200px;
+		height: 35px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+	}
+	#lesmake_title:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	.lesmake_td1 {
+		font-size: 15px;
+		vertical-align: middle;
+		width: 130px;
+		font-weight: bold;
+		background-color: #efefef;
+		border-bottom: 8px solid white;
+		text-align: center;
+	}
+	.lesmake_td2 {
+		vertical-align: middle;
+		text-align: right;
+		width: 230px;
+	}
+	#lesmake_cate {
+		height: 40px;
+		border: 0;
+		width: 200px;
+		border: 0;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+	}
+	#lesmake_cate:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	#lesmake_btn1 {
+		background-color: #FFD400;
+		border-radius: 10px;
+		border: 0;
+		width: 120px;
+		height: 45px;
+		font-weight: bold;
+	}
+	#lesmake_div2 {
+		text-align: center;
+	}
+	#lesmake_divimg2 {
+		text-align: center;
+	}
+	#lesmake_imgdiv {
+		text-align: center;
+	}
+}
+
+@media ( min-width : 769px) {
+	#lesmake_sub1 {
+		font-size: 27px;
+		font-weight: bold;
+	}
+	#lesmake_tab {
+		width: 100%;
+	}
+	#lesmake_imgdiv {
+		
+	}
+	#lesmake_img {
+		width: 150px;
+	}
+	#lesmake_preview {
+		width: 200px;
+		height: 200px;
+		border-radius: 10%;
+	}
+	.lesmake_tr {
+		height: px;
+	}
+	#lesmake_info {
+		border: 0;
+		vertical-align: middle;
+		width: 450px;
+		height: 250px;
+		resize: none;
+		margin-left: 20px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+	}
+	#lesmake_info:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	#lesmake_title {
+		width: 450px;
+		height: 45px;
+		border: 0;
+		margin-left: 20px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+	}
+	#lesmake_title:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	.lesmake_td1 {
+		font-size: 16px;
+		width: 200px;
+		background-color: #efefef;
+		border-bottom: 10px solid white;
+		font-weight: bold;
+	}
+	.lesmake_td2 {
+		width: 500px;
+		text-align: left;
+	}
+	#lesmake_cate {
+		height: 40px;
+		border: 0;
+		width: 300px;
+		margin-left: 20px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+	}
+	#lesmake_cate:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	#lesmake_btn1 {
+		background-color: #FFD400;
+		border-radius: 10px;
+		border: 0;
+		width: 200px;
+		height: 55px;
+		font-weight: bold;
+	}
+	#lesmake_div2 {
+		text-align: center;
+	}
+	#lesmake_divimg2 {
+		text-align: center;
+		width: 768px;
+		margin: 0 auto;
+	}
+	#lesmake-div2 {
+		width: 768px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	#lesmake-tr1 {
+		height: 70px;
+	}
+	#lesmake-tr2 {
+		height: 300px;
+	}
+	#lesmake-tr3 {
+		height: 70px;
+	}
+	#lesmake-catetd {
+		border: 0px;
+	}
+}
+</style>
+</head>
+<body>
+	<%@include file="../main/header.jsp"%>
+
+	<br>
+	<br>
+	<div class="container" id="lesmake-div1">
+		<span id="lesmake_sub1">TIPer 강의 등록</span> <br>
+		<hr>
+	</div>
+	<div class="container" id="lesmake-div2">
+
+
+		<form action="lessonMakeAction" id="lesmake_form">
+			<div id="lesmake_imgdiv">
+				<input type="file" accept=".jpg,.jpeg,.png" name="lesson_img"
+					id="lesmake_img" onchange="previewImage(event)"
+					style="display: none;"> <label for="lesmake_img"
+					id="lesmake-label"> <img id="lesmake_preview"
+					src="front/lessonimg.png" alt="강의사진을 올려주세요"
+					onmouseover="changeCursor(this)" title="이미지를 클릭해서 사진을 선택해주세요!"></label>
+				<br> <br>
+			</div>
+			<table id="lesmake_tab1">
+				<tr class="lesmake_tr" id="lesmake-tr1">
+					<td class="lesmake_td1">강의 제목</td>
+					<td class="lesmake_td2"><input type="text" name="lesson_title"
+						placeholder="강의제목을 입력해주세요" id="lesmake_title" required="required"></td>
+				</tr>
+
+				<tr class="lesmake_tr" id="lesmake-tr2">
+					<td class="lesmake_td1">강의 내용</td>
+					<td class="lesmake_td2"><textarea name="lesson_info"
+							id="lesmake_info" cols="30" rows="10" placeholder="강의내용을 입력해주세요"
+							required="required"></textarea></td>
+				</tr>
+				<tr class="lesmake_tr" id="lesmake-tr3">
+					<td class="lesmake_td1">카테 고리</td>
+					<td class="lesmake_td2" id="lesmake-catetd"><select
+						name="lesson_cate" id="lesmake_cate" required="required">
+							<option selected disabled hidden>강의 카테고리 선택</option>
+							<option value="<%=tiperVO.getTiper_cate1()%>"><%=tiperVO.getTiper_cate1()%></option>
+							<option style="<%=style1%>" value="<%=tiperVO.getTiper_cate2()%>"><%=tiperVO.getTiper_cate2()%></option>
+							<option style="<%=style2%>" value="<%=tiperVO.getTiper_cate3()%>"><%=tiperVO.getTiper_cate3()%></option>
+
+					</select></td>
+
+				</tr>
+
+			</table>
+			<br> <br> <br>
+			<div id="lesmake_div2">
+				<button type="submit" id="lesmake_btn1">강의등록하기</button>
+			</div>
+		</form>
+
+	</div>
+	<br>
+	<script type="text/javascript">
+		function hsh(fparam) {
+
+			console.log($('#lesmake_img input[type=file]'), fparam);
+
+			let formData = new FormData();
+			formData.append('tiper_img', fparam);
+			$.ajax({
+				url : "/uploadLesson",
+				type : "post",
+				data : formData,
+				contentType : false,
+				processData : false,
+				cache : false,
+				success : function() {
+					console.log('success');
+				},
+				error : function() {
+					alert('error');
+				}
+			});
+		}
+
+		function selectProfileImage() {
+			document.getElementById('sin_img1').click();
+		}
+
+		function previewImage(event) {
+			var reader = new FileReader();
+			reader.onload = function() {
+				var output = document.getElementById('lesmake_preview');
+				output.src = reader.result;
+			}
+			reader.readAsDataURL(event.target.files[0]);
+			// 파일 선택 후 input 요소 숨기기
+			var input = document.getElementById('lesmake_img');
+			input.style.display = 'none';
+			hsh(event.target.files[0]);
+		}
+
+		function onLessonMakeSubmit(event) {
+			// 이미지를 선택하지 않았을 때 경고(alert) 표시
+			var imgInput = document.getElementById('lesmake_img');
+			if (imgInput.files.length === 0) {
+				event.preventDefault(); // submit 이벤트 중지
+				alert('이미지를 선택해주세요.');
+				return;
+			}
+
+			// 확인(confirm) 창을 띄웁니다.
+			if (confirm('강의를 정말 등록할까요?')) {
+				// 확인 버튼을 클릭한 경우 form을 submit합니다.
+				event.target.submit();
+			} else {
+				// 취소 버튼을 클릭한 경우 아무 작업도 하지 않습니다.
+				return false;
+			}
+		}
+		// 마우스를 올리면 pointer로 바뀌는 함수
+		function changeCursor(img) {
+			img.style.cursor = "pointer";
+		}
+		// form 요소를 선택합니다.
+		const form = document.querySelector("#lesmake_form");
+
+		// form submit 이벤트를 처리하는 함수를 등록합니다.
+		form.addEventListener("submit", onLessonMakeSubmit);
+
+		// img 요소를 클릭했을 때 파일 선택 창 활성화
+		document.getElementById('tiperpreview-label').addEventListener('click',
+				selectProfileImage);
+	</script>
+
+
+	<%@include file="../main/footer.jsp"%>
+</body>
+</html>

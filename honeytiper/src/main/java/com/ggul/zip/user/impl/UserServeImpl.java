@@ -56,8 +56,8 @@ public class UserServeImpl implements UserService {
 	}
 
 	@Override
-	public void findUser(UserVO vo, Model model) {
-		userDAO.findUser(vo, model);
+	public List<String> findUser(UserVO vo, Model model) {
+		return userDAO.findUser(vo, model);
 
 	}
 
@@ -109,6 +109,12 @@ public class UserServeImpl implements UserService {
 	
 	
 	// 상현이부분
+	
+	@Override
+	public void updateEscrowReportUser(EscrowVO evo) {
+		userDAO.updateEscrowReportUser(evo);
+	}
+	
 	@Override
 	public int delUser(UserVO vo) {
 		return userDAO.delUser(vo);
@@ -288,4 +294,14 @@ public class UserServeImpl implements UserService {
 	public void updateEscrowReportStatus(EscrowVO evo) {
 		userDAO.updateEscrowReportStatus(evo);
 	}
+	@Override
+	public void addProfitSales(UserVO vo) {
+		userDAO.addProfitSales(vo);
+	}
+	@Override
+	   public void updateTiperAgree10(UserVO vo) {
+	      userDAO.updateTiperAgree10(vo);
+	   }
+
+	
 }

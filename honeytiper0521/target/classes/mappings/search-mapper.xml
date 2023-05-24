@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SearchDAO">
+
+
+   <!-- 카테고리 검색 -->
+   <select id="getSearchCate" resultType="lesson">
+      SELECT
+      lesson.lesson_img,
+      lesson.lesson_cate,
+      lesson.lesson_title,
+      lesson.lesson_user_name,
+      lesson.lesson_num,
+      lesson.lesson_date,
+      ROUND(AVG(review.review_sugar),
+      2) AS review_score
+      FROM lesson
+      LEFT JOIN review ON lesson.lesson_num =
+      review.review_lesson_num
+      WHERE lesson.lesson_onoff = 1
+      and
+      lesson.lesson_cate = #{lesson_search}
+      GROUP BY
+      lesson.lesson_img,
+      lesson.lesson_cate,
+      lesson.lesson_title,
+      lesson.lesson_user_name,
+      lesson.lesson_num,
+      lesson.lesson_date
+      ORDER BY RAND()
+   </select>
+
+   <!-- 전체 리스트 -->
+   <select id="getSearchAll" resultType="lesson">
+      SELECT
+      lesson.lesson_img,
+      lesson.lesson_cate,
+      lesson.lesson_title,
+      lesson.lesson_user_name,
+      lesson.lesson_num,
+      lesson.lesson_date,
+      ROUND(AVG(review.review_sugar),
+      2) AS review_score
+      FROM lesson
+      LEFT JOIN review ON lesson.lesson_num =
+      review.review_lesson_num
+      WHERE lesson.lesson_onoff = 1
+      GROUP BY
+      lesson.lesson_img,
+      lesson.lesson_cate,
+      lesson.lesson_title,
+      lesson.lesson_user_name,
+      lesson.lesson_num,
+      lesson.lesson_date
+      ORDER BY
+      RAND()
+   </select>
+
+   <!-- 메인에서 검색 -->
+   <select id="getSearchList" resultType="lesson">
+      SELECT
+      lesson.lesson_img,
+      lesson.lesson_cate,
+      lesson.lesson_title,
+      lesson.lesson_user_name,
+      lesson.lesson_num,
+      lesson.lesson_date,
+      ROUND(AVG(review.review_sugar), 2) AS review_score
+      FROM lesson
+      INNER JOIN tiper ON lesson.lesson_tiper_code = tiper.tiper_code
+      LEFT JOIN review ON lesson.lesson_num = review.review_lesson_num
+      WHERE
+      lesson.lesson_onoff = 1
+      and (lesson.lesson_title LIKE CONCAT('%', #{lesson_search}, '%')
+      or
+      lesson.lesson_user_name LIKE CONCAT('%', #{lesson_search}, '%')
+      or
+      tiper.tiper_addr LIKE CONCAT('%', #{lesson_search}, '%'))
+      GROUP BY
+      lesson.lesson_img,
+      lesson.lesson_cate,
+      lesson.lesson_title,
+      lesson.lesson_user_name,
+      lesson.lesson_num,
+      lesson.lesson_date
+      ORDER BY RAND()
+   </select>
+
+   <!-- 상품메뉴에서 검색 -->
+   <select id="getPartSearchList" resultType="lesson">
+      SELECT
+      lesson.lesson_img,
+      lesson.lesson_cate,
+      lesson.lesson_title,
+      lesson.lesson_user_name,
+      lesson.lesson_num,
+      lesson.lesson_date,
+      ROUND(AVG(review.review_sugar), 2) AS review_score
+      FROM lesson
+      INNER JOIN tiper ON lesson.lesson_tiper_code = tiper.tiper_code
+      LEFT JOIN review ON lesson.lesson_num = review.review_lesson_num
+      WHERE
+      lesson.lesson_onoff = 1
+      AND lesson.lesson_cate = #{lesson_cate}
+      <if test="search_detail == 'lesson_title'">AND lesson.lesson_title LIKE CONCAT('%',
+         #{search_keyword}, '%')</if>
+      <if test="search_detail == 'lesson_user_name'">AND lesson.lesson_user_name LIKE CONCAT('%',
+         #{search_keyword}, '%')</if>
+      <if test="search_detail == 'tiper_addr'">AND tiper.tiper_addr LIKE CONCAT('%', #{search_keyword},
+         '%')</if>
+      GROUP BY
+      lesson.lesson_img,
+      lesson.lesson_cate,
+      lesson.lesson_title,
+      lesson.lesson_user_name,
+      lesson.lesson_num,
+      lesson.lesson_date
+      ORDER BY RAND()
+   </select>
+
+
+</mapper>

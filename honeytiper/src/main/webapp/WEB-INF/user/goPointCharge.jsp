@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>아임포트결제창</title>
+<title>꿀TIPer - 허니페이 충전</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -22,8 +22,8 @@
     function requestPay() {
        var amount = $("#amount").val();
        
-	if (amount == "" || amount == "0" || amount <= 100) {
-    alert("충전은 100원 이상부터 가능합니다!");
+	if (amount == "" || amount == "0" || amount < 100) {
+    alert("\uD83E\uDD14충전은 100원 이상부터 가능해요!");
     return;
      
     }
@@ -89,98 +89,7 @@
  }
  
 </script>
-<style>
-.allSize{
-	 width: 90%;
-	 margin: 0 auto;
-}
-.warning {
-	background-color: #ffd400;
-	border: none;
-	border-radius: 4px;
-	padding: 12px 15px;
-	cursor: pointer;
-	border-radius: 4px;
-   color: #5c3b0c;
-   cursor: pointer;
-   font-size:17px;
-   font-weight:bold;
-}
-.info-button{
-background-color: #ffd400;
-	border: none;
-	border-radius: 4px;
-	color: #5c3b0c;
-   cursor: pointer;
-   font-size:17px;
-   font-weight:bold;
-	padding: 12px 15px;
-	
-}
-.warning:hover {
-	background-color: #e7c310;
-	color:black;
-}
-
-#amount {
-    width: 50%;
-    padding: 10px;
-  }
-.end-hr{
-  margin-bottom: 230px;}
-input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
-	{
-	-webkit-appearance: none;
-	margin: 0;
-}
-.w3-modal {
-  z-index: 9999;
-}
-.w3-container{
-margin:30px 10px;
-
-}
-.w3-modal-content.w3-card-4 {
-    width: 40%;
-    border-radius: 4px;
-}
-.totalPay {
-
-   left: 15px;
-   color: #333333;
-   display: block;
-   font-size: 22px;
-	font-weight:bold;
-   magin: 0;
-}
-.form-group {
-  background-color: #f9f9f9; /* 배경색상 설정 */
-  border-radius: 4px; /* 테두리 모서리 둥글기 설정 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 테두리 그림자 설정 */
-  width:100%;
-  padding-top:100px;
-  padding-bottom:100px;
-  display: inline-block; /* 너비를 자식 요소에 맞추어주기 위해 inline-block 속성 부여 */
-}
-.w3-button:hover {
-    color: #000!important;
-    background-color: #e7c310!important;
-}
-
-@media (max-width: 768px) {
-  #amount {
-    width: 90%;
-    padding: 10px;
-  }
-  .warning {
-    display: block;
-    margin: 10px auto 0;
-  }
-  .end-hr{
-  margin-bottom: 50px;}
-}
-
-</style>
+<link href="${pageContext.request.contextPath}/front/goPointCharge.css" rel="stylesheet">
 </head>
 <body>
 	<%@include file="../main/header.jsp"%>
@@ -203,9 +112,9 @@ margin:30px 10px;
 <h4><b>티퍼와 고객 간 거래시 사용하는 결제수단입니다</b></h4>
 <br>
 <h5><b>결제금액 안전하게 보호</b></h5>
-<p>서비스가 완료될 때까지 꿀팁에서 안전하게 보호해요</p>
+<p>서비스가 완료될 때까지 꿀TIPer에서 안전하게 보호해요</p>
 <br>
-<h5><b>서비스 과정에서 문제가 생겼을 때 꿀팁이 도와드려요</b></h5>
+<h5><b>서비스 과정에서 문제가 생겼을 때 꿀TIPer가 도와드려요</b></h5>
 <br>
 <h5><b>원하는 방법으로 편하게 결제</b></h5>
 <p>카드 결제부터 간편결제까지 원하는 방법으로 결제가 가능해요</p>
@@ -217,13 +126,13 @@ margin:30px 10px;
 <h5><b>허니페이충전</b></h5>
 <p>서비스를 이용하기위해 허니페이를 충전합니다</p>
 <br>
-<h5><b>티퍼에게 강의를 신청하기</b></h5>
-<p>원하시는 서비스를 신청하기 버튼을 누르고 채팅을 통해 금액을 협의하세요</p>
-<p>금액을 확인후 서비스 확정을 누르시면 포인트를 사용하게됩니다</p>
+<h5><b>TIPer에게 꿀TIP을 신청하기</b></h5>
+<p>원하시는 서비스를 신청하기 버튼을 누르고 메세지를 통해 금액을 협의하세요.</p>
+<p>금액을 확인 후 견적서 수락버튼을 누르시면 허니페이를 사용하게 됩니다.</p>
 <br>
 <h5><b>거래확정</b></h5>
 <p>서비스가 모두 종료되어 거래를 확정한 상태로, </p>
-<p>티퍼에게 서비스 대금이 최종적으로 지급됩니다.</p>
+<p>TIPer에게 서비스 대금이 최종적으로 지급됩니다.</p>
       </div>
       <footer class="w3-container w3-teal">
       </footer>

@@ -225,20 +225,22 @@ public class UserController {
 	}
 
 	//전화번호로 id 찾기
-		@RequestMapping("/findUser")
-		@ResponseBody
-		public String findUser(UserVO vo, Model model) {
-			userService.findUser(vo, model);
-			
-			String user_role = (String)model.getAttribute("user_role");
-			
-			if(user_role.equals("3") || user_role.equals("4")) {
-				return "";
-			}else {
-				String user_id = (String)model.getAttribute("user_id");
-				return user_id;
-			}
-		}
+	   @RequestMapping("/findUser")
+	   @ResponseBody
+	   public List<String> findUser(UserVO vo, Model model) {
+	      List<String> user = userService.findUser(vo, model);
+	      
+	      boolean vali = (boolean)model.getAttribute("vali");
+	      
+	      if(vali) {
+	    	  System.out.println("user 출력 : " + user.isEmpty());
+	    	  return user;
+	    	  
+	      }else {
+	    	  System.out.println("user null값 반환 : ");
+	    	  return null;
+	      }
+	   }
 		
 		//전화번호, 아이디로 개인정보 가져오기
 		@RequestMapping("/findUserPW")
@@ -360,7 +362,22 @@ public class UserController {
 		return "redirect:/index";
 	}
 
-	
+	// 카카오 회원가입
+	   @RequestMapping(value = "/userJoinByKakao")
+	   public String userJoinByKakao(UserVO vo, HttpSession session) throws Exception {
+	      
+	      if (userService.getUser(vo) != null) {
+	         return "join.jsp?error=1";
+	      } else {
+	         String hashedPw = userService.hashedChk(vo.getUser_pw());
+	         vo.setUser_pw(hashedPw);
+	         userService.joinUser(vo);
+	         session.setAttribute("user_id", vo.getUser_id());
+	         session.setAttribute("user_name", vo.getUser_name());
+	         session.setAttribute("user_role", userService.getUser(vo).getUser_role());
+	      }
+	      return "redirect:/index";
+	   }
 	
 	
 		
@@ -391,10 +408,6 @@ public class UserController {
        return "queen/adminUserDetail";
     }
 		
-		
-		
-    
-    
     
     
 		//상현이 부분

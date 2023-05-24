@@ -5,7 +5,7 @@
 int check = (int) request.getAttribute("tiperCheck");
 if (check == 1) {
 	out.println("<script>");
-	out.println("alert('승인 대기중입니다!')");
+	out.println("alert('\uD83D\uDE0E승인 대기중이에요!')");
 	out.println("location.href='../index';");
 	out.println("</script>");
 }
@@ -15,225 +15,11 @@ if (check == 1) {
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tiper신청</title>
+<title>꿀TIPer - TIPer 신청</title>
 <!-- <link rel="stylesheet" href="front/common.css"> -->
 <!-- <link rel="stylesheet" href="front/bootstrap.css"> -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.js"></script>
-<style type="text/css">
-body {
-	padding: 0;
-	margin: 0 auto;
-}
-
-@media ( max-width : 768px) {
-	#sin_sub1 {
-		font-size: 22px;
-		font-weight: bold;
-	}
-	#sin_sub2 {
-		font-size: 15px;
-		font-weight: bold;
-		text-align: center;
-	}
-	#sin_div1 {
-		margin: 0 auto;
-		text-align: center;
-	}
-	#sin-div2 {
-		text-align: center;
-		border-bottom: 3px solid #efefef;
-	}
-	#sin-div3 {
-		padding: 0px;
-		text-align: center;
-	}
-	#sin-div4 {
-		text-align: center;
-	}
-	#sin_info1 {
-		width: 90%;
-		border: 1px solid #efefef;
-		border-radius: 10px;
-		resize: none;
-		margin-bottom: 30px;
-	}
-	#sin_info1:focus {
-		border: 3px solid #FFD400;
-		outline: none;
-	}
-	#sin_cate1, #sin_cate3, #sin_cate2 {
-		width: 115px;
-		border: 1px solid #efefef;
-		font-size: 12px;
-		height: 25px;
-		display: inline;
-		float: left;
-		border-radius: 10px;
-	}
-	#sin_cate1:focus {
-		border: 3px solid #FFD400;
-		outline: none;
-	}
-	#sin_cate2:focus {
-		border: 3px solid #FFD400;
-		outline: none;
-	}
-	#sin_cate3:focus {
-		border: 3px solid #FFD400;
-		outline: none;
-	}
-	#sin_btn1 {
-		background-color: #FFD400;
-		border: 0;
-		width: 200px;
-		height: 45px;
-		border-radius: 10px;
-		font-weight: bold;
-	}
-	#div_btn1 {
-		text-align: center;
-	}
-	#tiperUppreview {
-		width: 140px;
-		height: 140px;
-		border-radius: 10px;
-	}
-	#sin-info-p {
-		text-align: center;
-		font-size: 15px;
-		font-weight: bold;
-		margin-bottom: 20px;
-	}
-	#sin_sel1 {
-		text-align: center;
-	}
-	#sin_sub3 {
-		font-size: 15px;
-		font-weight: bold;
-	}
-	#sin_addr1 {
-		width: 180px;
-		height: 30px;
-		border: 1px solid #efefef;
-		border-radius: 10px;
-	}
-	#sin_addr1:focus {
-		outline: none;
-		border: 3px solid #FFD400;
-		border-radius: 10px;
-	}
-}
-
-@media ( min-width : 769px) {
-	#sin_sub1 {
-		font-size: 27px;
-		font-weight: bold;
-	}
-	#sin_sub2 {
-		font-size: 20px;
-		font-weight: bold;
-	}
-	#sin_img1 {
-		width: 300px;
-		height: 80px;
-	}
-	#sin_img1 {
-		width: 300px;
-		height: 50px;
-	}
-	#sin_info1 {
-		width: 65%;
-		height: 250px;
-		resize: none;
-		border: 0;
-		border: 1px solid #efefef;
-		border-radius: 10px;
-		width: 500px;
-		margin-bottom: 30px;
-	}
-	#sin_info1:focus {
-		border: 3px solid #FFD400;
-		outline: none;
-		border-radius: 10px;
-	}
-	#sin_cate1, #sin_cate2, #sin_cate3 {
-		width: 180px;
-		height: 40px;
-		border: 0;
-	}
-	#sin_cate1:focus {
-		border: 3px solid #FFD400;
-		outline: none;
-		border-radius: 10px;
-	}
-	#sin_cate2:focus {
-		border: 3px solid #FFD400;
-		outline: none;
-		border-radius: 10px;
-	}
-	#sin_cate3:focus {
-		border: 3px solid #FFD400;
-		outline: none;
-		border-radius: 10px;
-	}
-	#sin_btn1 {
-		background-color: #FFD400;
-		border: 0;
-		width: 300px;
-		height: 50px;
-		border-radius: 10px;
-		font-weight: bold;
-		font-size: 16px;
-	}
-	#div_btn1 {
-		text-align: center;
-	}
-	#sin_sub3 {
-		font-size: 20px;
-		font-weight: bold;
-	}
-	#sin_addr1 {
-		width: 300px;
-		height: 40px;
-		border: 0;
-		border: 1px solid #efefef;
-		border-radius: 10px;
-	}
-	#sin_addr1:focus {
-		border: 3px solid #FFD400;
-		outline: none;
-		border-radius: 10px
-	}
-	#tiperUppreview {
-		width: 200px;
-		height: 200px;
-		border-radius: 10px;
-	}
-	#sin-div1 {
-		width: 768px;
-		margin: 0 auto;
-	}
-	#sin-div2 {
-		width: 768px;
-		margin: 0 auto;
-		text-align: center;
-		border-bottom: 2px solid #efefef;
-	}
-	#sin-div3 {
-		width: 768px;
-		margin: 0 auto;
-	}
-	#sin-div4 {
-		width: 768px;
-		margin: 0 auto;
-	}
-	#sin-info-p {
-		font-size: 20px;
-		font-weight: bold;
-		margin-top: 30px;
-	}
-}
-</style>
+<link href="${pageContext.request.contextPath}/front/userTiperSignup.css" rel="stylesheet">
 </head>
 <body>
 	<%@include file="../main/header.jsp"%>
@@ -247,17 +33,17 @@ body {
 		<div class="container" id="sin-div2">
 			<div id="sin_div1">
 				<input type="file" id="sin_img1" accept=".jpg,.jpeg,.png"
-					placeholder="눌러서 강사에 대한 img등록" name="tiper_img" required="required"
+					placeholder="클릭하여 TIPer에 대한 이미지등록" name="tiper_img"
 					onchange="previewImage(event)" style="display: none;"> <label
-					for="sin_img1" id="sin_preview_label"> <img
-					id="tiperUppreview" src="front/lessonimg.png" alt="강의사진을 올려주세요"
+					for="sin_img1" id="sin_preview_label"> <img onerror="this.src='${pageContext.request.contextPath}/front/default.png'" 
+					id="tiperUppreview" src="front/lessonimg.png" alt="꿀TIP 사진을 올려주세요"
 					onmouseover="changeCursor(this)" title="이미지를 클릭해서 사진을 선택해주세요!"></label>
 			</div>
 			<br>
 			<p id="sin-info-p">무슨 꿀TIP을 가르쳐주실지 알려주세요!</p>
-			<textarea name="tiper_info" id="sin_info1" cols="30" rows="10"
-				placeholder="TIPer소개를 작성해주세요 (경력, 수상내역, 취득자격증 등등)"
-				required="required"></textarea>
+			<textarea name="tiper_info" id="sin_info1" cols="30" rows="10" maxlength="600"
+            placeholder="TIPer소개를 작성해주세요 (경력, 수상내역, 취득자격증 등등) 최대 600자"
+            required="required"></textarea>
 			<br>
 		</div>
 		<br> <br>
@@ -308,7 +94,7 @@ body {
 		</div>
 		<br> <br>
 		<div id="div_btn1">
-			<button type="submit" id="sin_btn1">TIPer등록 신청하기</button>
+			<button type="submit" id="sin_btn1">TIPer 신청하기</button>
 		</div>
 		<br> <br>
 	</form>
@@ -331,7 +117,7 @@ body {
 					console.log('success');
 				},
 				error : function() {
-					alert('error');
+					alert('\uD83E\uDD15error');
 				}
 			});
 		}
@@ -354,6 +140,10 @@ body {
 				var output = document.getElementById('tiperUppreview');
 				output.src = reader.result;
 			}
+			if (event.target.files.length === 0) {
+				alert("\uD83D\uDE0E이미지를 선택해주세요.");
+				return;
+			}
 			reader.readAsDataURL(event.target.files[0]);
 			// 파일 선택 후 input 요소 숨기기
 			var input = document.getElementById('sin_img1');
@@ -362,15 +152,20 @@ body {
 		}
 
 		function tiperInfoUpdateSubmit(event) {
-			// form submit 이벤트를 중지합니다.
-			event.preventDefault();
-			console.log("작동");
+			// 이미지를 선택하지 않았을 때 경고(alert) 표시
+			var imgInput = document.getElementById('sin_img1');
+			if (imgInput.files.length === 0) {
+				event.preventDefault(); // submit 이벤트 중지
+				alert('\uD83D\uDE0E이미지를 선택해주세요.');
+				return;
+			}
+
 			// 확인(confirm) 창을 띄웁니다.
-			if (confirm("이대로 강사 신청을 하시겠습니까?")) {
+			if (confirm('이대로 TIPer를 신청할까요?')) {
 				// 확인 버튼을 클릭한 경우 form을 submit합니다.
 				event.target.submit();
 			} else {
-				// 취소 버튼을 클릭한 경우 아무런 작업을 하지 않습니다.
+				// 취소 버튼을 클릭한 경우 아무 작업도 하지 않습니다.
 				return false;
 			}
 		}

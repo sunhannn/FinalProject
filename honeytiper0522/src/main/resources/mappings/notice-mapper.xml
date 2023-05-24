@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NoticeDAO">
+
+	<resultMap type="notice" id="noticeMap">
+		<id property="notice_num" column="notice_num" />
+		<result property="notice_title" column="notice_title"/>
+		<result property="notice_cont" column="notice_cont"/>
+		<result property="notice_date" column="notice_date"/>
+		<result property="notice_readcount" column="notice_readcount"/>
+		<result property="notice_pin" column="notice_pin"/>
+	</resultMap>
+
+	<select id="getNoticeList" resultType="notice">
+		select * from notice 
+		where 1=1 
+		<if test="notice_condition == 'title' ">and NOTICE_TITLE like concat('%', #{notice_search}, '%')</if>
+		<if test="notice_condition == 'content' ">and NOTICE_CONT like concat('%', #{notice_search}, '%')</if>
+		order by NOTICE_PIN desc, notice_num desc
+	</select>
+	
+	
+		<select id="adminNoticeList" resultType="notice">
+			select * from notice where 1=1 
+		 	<if test="notice_start != null and notice_start !='' ">
+        		<![CDATA[ AND notice_date >= ]]>#{notice_start}
+    		</if>
+    		<if test="notice_end != null and notice_end !='' ">
+       			<![CDATA[ AND notice_date <= ]]>DATE_ADD(#{notice_end}, INTERVAL 1 DAY)
+    		</if>
+			<if test="notice_search != null and notice_search !='' ">and NOTICE_TITLE like concat('%', #{notice_search}, '%') </if>
+			order by NOTICE_PIN desc, notice_num desc
+	</select>
+	
+	
+	
+	
+	
+
+	<insert id="insertNotice">
+		insert into notice values(
+			default, #{notice_title}, #{notice_cont}, default, 0, #{notice_pin} )
+	</insert>
+
+	<select id="getNotice" resultType="notice">
+		select * from notice where notice_num = #{notice_num}
+	</select>
+	
+	<update id="countUpNotice">
+		update notice set notice_readcount = notice_readcount+1 where notice_num= #{notice_num}
+	</update>
+	
+	<update id="updateNotice">
+		update notice set notice_title = #{notice_title}, notice_cont = #{notice_cont}, notice_date=curdate(), notice_pin=#{notice_pin}  where notice_num = #{notice_num}
+	</update>
+	
+	<delete id="deleteNotice">
+		delete from notice where notice_num = #{notice_num}
+	</delete>
+
+</mapper>

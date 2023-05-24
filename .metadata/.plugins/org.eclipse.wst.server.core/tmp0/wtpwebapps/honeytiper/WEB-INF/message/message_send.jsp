@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>꿀TIPer Message</title>
+<title>꿀TIPer - Message</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -14,7 +14,7 @@
 	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
 	crossorigin="anonymous">
 <!-- CSS File -->
-<link href="front/message.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/front/message.css" rel="stylesheet">
 <!-- <link href="./resources/css/navbar.css" rel="stylesheet"> -->
 
 <!-- 메세지 전송 아이콘(종이비행기) 때문에 필요 -->
@@ -43,7 +43,7 @@
 					<div class="headind_srch">
 						<div class="recent_heading">
 							<h4>Message</h4>
-							<img title="새로고침" alt="message reload" class="msg_list_reload" src="front/reload.png">
+							<img onerror="this.src='${pageContext.request.contextPath}/front/default.png'" title="새로고침" alt="message reload" class="msg_list_reload" src="${pageContext.request.contextPath}/front/reload.png">
 						</div>
 						<!-- 메세지 검색 -->
 						<div class="srch_bar">
@@ -337,6 +337,6 @@
 	
 	</script>
 	<!-- 외부 js -->
-	<script src="front/message.js"></script>
+	<script src="${pageContext.request.contextPath}/front/message.js"></script>
 </body>
 </html>

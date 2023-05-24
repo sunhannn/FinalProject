@@ -1,0 +1,203 @@
+@charset "UTF-8";
+
+@media ( max-width : 768px) {
+	#lesmake_sub1 {
+		font-size: 22px;
+		font-weight: bold;
+	}
+	#lesmake_tab {
+		width: 100%;
+	}
+	#lesmake_preview {
+		width: 150px;
+		height: 15 0px;
+		border-radius: 10px;
+	}
+	.lesmake_tr {
+		height: 60px;
+	}
+	#lesmake_info {
+		border: 0;
+		vertical-align: middle;
+		width: 200px;
+		height: 200px;
+		resize: none;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+	}
+	#lesmake_info:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	#lesmake_title {
+		width: 200px;
+		height: 35px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+	}
+	#lesmake_title:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	.lesmake_td1 {
+		font-size: 15px;
+		vertical-align: middle;
+		width: 130px;
+		font-weight: bold;
+		background-color: #efefef;
+		border-bottom: 8px solid white;
+		text-align: center;
+	}
+	.lesmake_td2 {
+		vertical-align: middle;
+		text-align: right;
+		width: 230px;
+	}
+	#lesmake_cate {
+		height: 40px;
+		border: 0;
+		width: 200px;
+		border: 0;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+	}
+	#lesmake_cate:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	#lesmake_btn1 {
+		background-color: #FFD400;
+		border-radius: 4px;
+		border: 0;
+		width: 120px;
+		height: 45px;
+		font-weight: bold;
+	}
+	#lesmake_btn1:hover{
+		background-color: #FFBB00;
+	}
+	#lesmake_div2 {
+		text-align: center;
+	}
+	#lesmake_divimg2 {
+		text-align: center;
+	}
+	#lesmake_imgdiv {
+		text-align: center;
+	}
+}
+
+@media ( min-width : 769px) {
+	#lesmake_sub1 {
+		font-size: 27px;
+		font-weight: bold;
+	}
+	#lesmake_tab {
+		width: 100%;
+	}
+	#lesmake_imgdiv {
+		
+	}
+	#lesmake_img {
+		width: 150px;
+	}
+	#lesmake_preview {
+		width: 200px;
+		height: 200px;
+		border-radius: 10%;
+	}
+	.lesmake_tr {
+		height: px;
+	}
+	#lesmake_info {
+		border: 0;
+		vertical-align: middle;
+		width: 450px;
+		height: 250px;
+		resize: none;
+		margin-left: 20px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+	}
+	#lesmake_info:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	#lesmake_title {
+		width: 450px;
+		height: 45px;
+		border: 0;
+		margin-left: 20px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+	}
+	#lesmake_title:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	.lesmake_td1 {
+		font-size: 16px;
+		width: 200px;
+		background-color: #efefef;
+		border-bottom: 10px solid white;
+		font-weight: bold;
+	}
+	.lesmake_td2 {
+		width: 500px;
+		text-align: left;
+	}
+	#lesmake_cate {
+		height: 40px;
+		border: 0;
+		width: 300px;
+		margin-left: 20px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+	}
+	#lesmake_cate:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	#lesmake_btn1 {
+		background-color: #FFD400;
+		border-radius: 4px;
+		border: 0;
+		width: 200px;
+		height: 55px;
+		font-weight: bold;
+	}
+	#lesmake_btn1:hover{
+		background-color: #FFBB00;
+	}
+	#lesmake_div2 {
+		text-align: center;
+	}
+	#lesmake_divimg2 {
+		text-align: center;
+		width: 768px;
+		margin: 0 auto;
+	}
+	#lesmake-div2 {
+		width: 768px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	#lesmake-tr1 {
+		height: 70px;
+	}
+	#lesmake-tr2 {
+		height: 300px;
+	}
+	#lesmake-tr3 {
+		height: 70px;
+	}
+	#lesmake-catetd {
+		border: 0px;
+	}
+}

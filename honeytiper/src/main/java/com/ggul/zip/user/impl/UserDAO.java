@@ -66,11 +66,16 @@ public class UserDAO {
 	}
 
 	// 전화번호, 이름으로 회원정보 가져오기
-	public void findUser(UserVO vo, Model model) {
-		UserVO user = mybatis.selectOne("UserDAO.findUser", vo);
-		model.addAttribute("user_id", user.getUser_id());
-		model.addAttribute("user_role", user.getUser_role());
-	}
+		public List<String> findUser(UserVO vo, Model model) {
+			List<String> user = mybatis.selectList("UserDAO.findUser", vo);
+			
+			if (user != null) {
+				model.addAttribute("vali", true);
+			}else {
+				model.addAttribute("vali", false);
+			}
+			return user;
+		}
 
 	// 아이디, 전화번호로 회원정보 가져오기
 	public boolean findUserPW(UserVO vo) {
@@ -249,6 +254,12 @@ public class UserDAO {
 	int delUser(UserVO vo) {
 		return mybatis.update("UserDAO.deleteUser", vo);
 	}
+	
+	public void updateEscrowReportUser(EscrowVO evo) {
+		System.out.println("===>mybatis로 updateEscrowReportUser() 기능처리");
+
+		mybatis.update("UserDAO.updateEscrowReportUser", evo);
+	}
 
 	// ===================================================================================
 	// 정성현 - 블랙리스트 관리, 승급관리 ========================================================
@@ -280,6 +291,14 @@ public class UserDAO {
 
 		mybatis.update("UserDAO.updateTiperReject", vo);
 	}
+	
+	// USER_ROLE을 1로 update
+    public void updateTiperAgree10(UserVO vo) {
+       System.out.println("===>mybatis로 updateTiperAgree10() 기능처리");
+
+       mybatis.update("UserDAO.updateTiperAgree10", vo);
+ }
+
 
 	// 신고당한 유저리스트
 	public List<ReportVO> getReportList(ReportVO vo) {
@@ -457,4 +476,11 @@ public class UserDAO {
 
 		mybatis.update("UserDAO.updateEscrowReportStatus", evo);
 	}
+	
+	// User_Point에 5% 차감된 포인트만큼 +update
+			public void addProfitSales(UserVO vo) {
+				System.out.println("===>mybatis로 addProfitSales() 기능처리");
+
+				mybatis.insert("UserDAO.addProfitSales", vo);
+			}
 }

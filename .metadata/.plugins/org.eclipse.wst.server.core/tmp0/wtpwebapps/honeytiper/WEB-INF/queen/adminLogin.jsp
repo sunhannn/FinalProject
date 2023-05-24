@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-   <link rel="stylesheet" href="front/user.css">
+<title>꿀TIPer 관리자 로그인</title>
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/front/user.css">
 </head>
 <%
 if(request.getParameter("error")!=null){
@@ -17,9 +17,9 @@ if(request.getParameter("error")!=null){
 <body class="login_body admin_login_body">
 	<div class="admin_cover">
 	<div class="login_wrap admin_login_wrap">
-	<div class="agreement_logo admin_logo"><a href="/"><img src="${pageContext.request.contextPath}/front/ggulTiper.png" title="Logo"></a></div>
+	<div class="agreement_logo admin_logo"><a href="/"><img onerror="this.src='${pageContext.request.contextPath}/front/default.png'" src="${pageContext.request.contextPath}/front/ggulTiper.png" title="Logo"></a></div>
 		<div class="login_contents">
-			<h3 class="form-signin-heading">꿀 TIPer 관리자</h3>
+			<h3 class="form-signin-heading">꿀TIPer 관리자</h3>
 			<form class="form-signin" action="/adminLogin" method="post">
 			<div class="form-input">
 				<input type="text" class="login_input" placeholder="ID" name="user_id" id="user_id" required autofocus>

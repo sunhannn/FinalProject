@@ -1,0 +1,226 @@
+@charset "UTF-8";
+
+@media ( max-width : 768px) {
+	#lesup_sub1 {
+		margin-top: 30px;
+		font-size: 22px;
+		font-weight: bold;
+		font-size: 22px;
+	}
+	#lesup_tab1 {
+		width: 100%;
+		margin: 0 auto;
+	}
+	#lesup_td1 {
+		width: 120px;
+		height: 70px;
+		background-color: #efefef;
+		border-bottom: 8px solid white;
+		text-align: center;
+		vertical-align: middle;
+		height: 70px;
+	}
+	#lesup_td2 {
+		text-align: right;
+	}
+	#lesup_td3 {
+		font-size: 14px;
+		vertical-align: middle;
+		text-align: center;
+		background-color: #efefef;
+	}
+	#lesup_td5 {
+		text-align: center;
+		vertical-align: top;
+	}
+	#lesup_input1 {
+		width: 200px;
+		height: 40px;
+		margin-left: 2px;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+	}
+	#lesup_input1:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	#lesup_tr2 {
+		height: 70px;
+	}
+	#lesup_tr3 {
+		height: 70px;
+	}
+	#lesup_info1 {
+		margin-left: 2px;
+		width: 200px;
+		border: 1px solid #efefef;
+		resize: none;
+		border-radius: 10px;
+	}
+	#lesup_info1:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	#lesup_preview {
+		width: 100px;
+		height: 100px;
+	}
+	#lesup_td5 {
+		vertical-align: top;
+		height: 150px;
+	}
+	#lesup_td4 {
+		text-align: right;
+	}
+	#lesup_div3 {
+		text-align: center;
+	}
+	#lesup_btn1 {
+		background-color: #FFD400;
+		border: 0;
+		border-radius: 4px;
+		width: 200px;
+		height: 40px;
+		font-weight: bold;
+	}
+	#lesup_btn2 {
+		background-color: #FFD400;
+		border: 0;
+		border-radius: 4px;
+		width: 200px;
+		height: 40px;
+		font-weight: bold;
+		margin-top: 10px;
+	}
+	#lesup_btn1:hover, #lesup_btn2:hover{
+		background-color: #FFBB00;
+	}
+	.lesup_span {
+		font-size: 13px;
+		font-weight: bold;
+	}
+}
+
+@media ( min-width : 769px) {
+	#lesup_sub1 {
+		font-size: 27px;
+		font-weight: bold;
+		margin: 40px 0;
+	}
+	#lesup_tab1 {
+		width: 100%;
+		margin: 0 auto;
+	}
+	#lesup_td1 {
+		font-size: 16px;
+		height: 70px;
+		vertical-align: middle;
+		width: 200px;
+		background-color: #efefef;
+		border-bottom: 10px solid white;
+		text-align: center;
+		font-weight: bold;
+	}
+	#lesup_td2 {
+		vertical-align: center;
+		text-align: center;
+	}
+	#lesup_input1 {
+		width: 450px;
+		height: 45px;
+		margin-left: 2px;
+		border: 0;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+	}
+	#lesup_input1:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	#lesup_tr2 {
+		height: 70px;
+	}
+	#lesup_tr3 {
+		font-size: 20px;
+		height: 80px;
+	}
+	#lesup_info1 {
+		margin-left: 2px;
+		width: 450px;
+		resize: none;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+		height: 250px;
+	}
+	#lesup_info1:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	#lesup_preview {
+		width: 200px;
+		height: 200px;
+		border-radius: 10px;
+	}
+	#lesup_td3 {
+		font-size: 16px;
+		vertical-align: middle;
+		background-color: #efefef;
+		border-bottom: 10px solid white;
+		height: 300px;
+		width: 200px;
+		text-align: center;
+		font-weight: bold;
+	}
+	#lesup_td4 {
+		text-align: center;
+	}
+	#lesup_td5 {
+		font-size: 18px;
+		height: 250px;
+		vertical-align: middle;
+		text-align: center;
+	}
+	#lesup_td6 {
+		vertical-align: center;
+		text-align: center;
+	}
+	#lesup_div3 {
+		text-align: center;
+	}
+	#lesup_btn1 {
+		background-color: #FFD400;
+		border: 0;
+		border-radius: 4px;
+		width: 200px;
+		height: 40px;
+		font-weight: bold;
+	}
+	#lesup_btn2 {
+		background-color: #FFD400;
+		border: 0;
+		border-radius: 4px;
+		width: 200px;
+		height: 40px;
+		font-weight: bold;
+	}
+	#lesup_btn1:hover, #lesup_btn2:hover{
+		background-color: #FFBB00;
+	}
+	#lesup_img {
+		width: 200px;
+	}
+	#lesmake_imgdiv {
+		margin: 0 auto;
+	}
+	#lesup-sub-div {
+		margin: 0 auto;
+		width: 768px;
+	}
+	#lesup-tab-div {
+		width: 768px;
+	}
+}

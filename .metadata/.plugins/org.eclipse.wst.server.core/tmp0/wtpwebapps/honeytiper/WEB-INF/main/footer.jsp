@@ -16,7 +16,7 @@
 	color: #black;
 	font-weight: bold;
 	text-align: center;
-	height: 200px;
+	height: 170px;
 	margin-top: 0;
 	padding-top: 15px;
 	margin-bottom: 0 !important;
@@ -53,9 +53,10 @@
 	<div class="flex-container">
 		<div class="foot_text">
 			<p>
-				장승무 오현민 김보영 양소연 이승희 정성현 한상현 해애언 <a style="color:#FFBB00;" href="adminLoginBtn">관리자로그인</a>
+				장승무 오현민 김보영 양소연 이승희 정성현 한상현 해애언 
 			</p>
 			<p class="texthv">현재 사이트는 교육용으로 제작된 웹 사이트로 실제로 사용 불가</p>
+			<a style="color:#fff8e3;" href="adminLoginBtn">관리자로그인</a>
 			<p>Copyright © 2023 honeytiper</p>
 		</div>
 	</div>
@@ -63,9 +64,10 @@
 	<div class="flex-container2">
 		<div class="foot_text">
 			<p>
-				장승무 오현민 김보영 양소연 이승희 <br> 정성현 한상현 해애언 <a style="color:#FFBB00;" href="adminLoginBtn">관리자로그인</a>
+				장승무 오현민 김보영 양소연 이승희 <br> 정성현 한상현 해애언 
 			</p>
 			<p class="texthv">교육용으로 제작된 웹 사이트로 실제 사용이 불가능</p>
+			<a style="color:#fff8e3;" href="adminLoginBtn">관리자로그인</a>
 			<p class="last_p">Copyright © 2023 honeytiper</p>
 		</div>
 	</div>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="LessonDAO">
+
+	<resultMap type="lessonDetail" id="lessonMap">
+		<id property="lesson_num" column="LESSON_NUM"/>
+		<result property="lesson_code_tiper" column="LESSON_CODE_TIPER"/>
+		<result property="lesson_title" column="LESSON_TITLE"/>
+		<result property="lesson_info" column="LESSON_INFO"/>
+		<result property="lesson_cate" column="LESSON_CATE"/>
+		<result property="lesson_img" column="LESSON_IMG"/>
+		<result property="lesson_sugar" column="LESSON_SUGAR"/>
+		<result property="lesson_onoff" column="LESSON_ONOFF"/>
+		<result property="lesson_date" column="LESSON_DATE"/>
+		<result property="tiper_addr" column="TIPER_ADDR"/>
+		<result property="tiper_img" column="TIPER_IMG"/>
+ 		<result property="tiper_user_id" column="TIPER_USER_ID"/>
+		<result property="user_name" column="USER_NAME"/>
+		<result property="user_email" column="USER_EMAIL"/>
+	</resultMap>
+	
+	<resultMap type="review" id="reviewMap">
+		<id property="review_num" column="REVIEW_NUM"/>
+		<result property="review_lesson_num" column="REVIEW_LESSON_NUM"/>
+		<result property="review_cont" column="REVIEW_CONT"/>
+		<result property="review_date" column="REVIEW_DATE"/>
+		<result property="review_writer" column="REVIEW_WRITER"/>
+		<result property="lesson_num" column="LESSON_NUM"/>
+	</resultMap>
+	
+
+	<select id="getLessonDetail" resultType="lessonDetail">
+	SELECT a.LESSON_NUM, a.LESSON_TITLE, b.TIPER_IMG, b.TIPER_CODE, b.TIPER_USER_ID, b.TIPER_ADDR, c.USER_NAME, c.USER_EMAIL, a.LESSON_CATE, a.LESSON_DATE, b.TIPER_INFO, a.LESSON_INFO FROM LESSON a INNER JOIN TIPER b ON a.LESSON_TIPER_CODE=b.TIPER_CODE INNER JOIN USERS c ON b.TIPER_USER_ID=c.USER_ID WHERE LESSON_NUM=#{lesson_num};
+	</select>
+
+	<select id="getReviewList" resultType="review">
+		SELECT * FROM REVIEW WHERE REVIEW_CODE_LESSON = #{lesson_num};
+	</select>
+
+	<select id="getLessonList" resultType="lessonDetail">
+		SELECT a.LESSON_NUM, a.LESSON_TITLE, b.TIPER_ADDR, c.USER_NAME FROM LESSON a INNER JOIN TIPER b ON a.LESSON_TIPER_CODE=b.TIPER_CODE INNER JOIN USERS c ON b.TIPER_USER_ID=c.USER_ID ORDER BY LESSON_NUM desc;
+	</select>
+	
+	<select id="getTotalReviewList" resultType="review">
+		SELECT * FROM REVIEW WHERE REVIEW_LESSON_NUM = #{lesson_num}
+		<if test="select_key == 'review_num' "> ORDER BY REVIEW_DATE desc;</if>
+		<if test="select_key == 'review_num_asc' "> ORDER BY REVIEW_DATE;</if>
+		<if test="select_key == null"> ORDER BY REVIEW_NUM desc;</if>
+		<if test="select_key == 'review_sugar' "> ORDER BY REVIEW_SUGAR desc;</if>
+		<if test="select_key == 'review_sugar_asc' "> ORDER BY REVIEW_SUGAR;</if>
+	</select>
+	
+	<select id="getSugarAvg" resultType="_double">
+		SELECT AVG(REVIEW_SUGAR) FROM REVIEW WHERE REVIEW_LESSON_NUM = #{lesson_num} GROUP BY REVIEW_LESSON_NUM; 
+	</select>
+
+	<insert id="insertEscrow">
+		INSERT INTO ESCROW (ESCROW_USER_ID, ESCROW_TIPER_CODE, ESCROW_LESSON_NUM) VALUES ('csBae', #{tiper_code} ,#{lesson_num});
+	</insert>
+	
+	<select id="isDupEscrowLesson" resultType="escrow">
+		SELECT ESCROW_NUM FROM
+		ESCROW WHERE ESCROW_USER_ID = #{escrow_user_id} AND ESCROW_LESSON_NUM
+		= #{escrow_lesson_num}
+	</select>
+
+</mapper>

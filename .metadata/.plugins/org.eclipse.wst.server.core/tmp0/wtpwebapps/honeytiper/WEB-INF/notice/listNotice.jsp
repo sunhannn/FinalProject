@@ -6,44 +6,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>부트스트랩 이용했음</title>
+        <title>꿀TIPer - 공지사항</title>
         <link rel="shortcut icon" href="data:image/x-icon" type="image/x-icon">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/front/notice.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
-<style>
-.theadColor{
-	background-color: #efefef;	
-}
-
-.noticeCont{
-	padding: 0;
-	width:65%;
-}
-
-.noticeTr:hover{
-	text-decoration: underline;
-	text-underline-offset: 5px;
-}
-
-@media ( max-width : 768px) {
-	.noticeCont{
-		padding: 7px;
-		width: 98%;
-	}
-	
-	.noticeTitle{
-		padding: 8px;
-	}
-	
-	#iptSearch{
-		width: 160px;
-	}
-	
-	
-}
-</style>
+<link href="${pageContext.request.contextPath}/front/listNotice.css" rel="stylesheet">
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.2/jquery.min.js"></script> -->
 <script src="${pageContext.request.contextPath}/front/jquery.js"></script>
 <%-- <jsp:include page="../main/header.jsp" /> --%>
@@ -229,7 +198,7 @@ function paging(totalData, dataPerPage, pageCount, currentPage) {
             </table>
             
 
-	<ul id="pagingul"></ul>
+	<ul id="pagingul" style="margin-bottom: 65px;"></ul>
             
 	</div>
 	<%@include file="../main/footer.jsp"%>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TiperDAO">
+
+<!-- 	<resultMap type="tiper" id="tiperMap"> -->
+<!-- 		<id property="tiper_code" column="tiper_code" /> -->
+<!-- 		<result property="tiper_user_id" column="tiper_user_id" /> -->
+<!-- 		<result property="tiper_info" column="tiper_info" /> -->
+<!-- 		<result property="tiper_date" column="tiper_date" /> -->
+<!-- 		<result property="tiper_cate1" column="tiper_cate1" /> -->
+<!-- 		<result property="tiper_cate2" column="tiper_cate2" /> -->
+<!-- 		<result property="tiper_cate3" column="tiper_cate3" /> -->
+<!-- 		<result property="tiper_img" column="tiper_img" /> -->
+<!-- 		<result property="tiper_addr" column="tiper_addr" /> -->
+<!-- 		<result property="tiper_cate1_stay" column="tiper_cate1_stay" /> -->
+<!-- 		<result property="tiper_cate2_stay" column="tiper_cate2_stay" /> -->
+<!-- 		<result property="tiper_cate3_stay" column="tiper_cate3_stay" /> -->
+<!-- 		<result property="tiper_agree" column="tiper_agree" /> -->
+<!-- 	</resultMap> -->
+
+	<insert id="tiperInsert">
+		insert into tiper(tiper_user_id, tiper_info,
+		tiper_date, tiper_cate1,
+		tiper_cate2, tiper_cate3, tiper_img,
+		tiper_addr) values(#{tiper_user_id}, #{tiper_info}, #{tiper_date},
+		#{tiper_cate1}, #{tiper_cate2}, #{tiper_cate3}, #{tiper_img},
+		#{tiper_addr})
+
+	</insert>
+	<select id="selectTiperInfo" resultType="tiper">
+		select * from tiper
+		where
+		tiper_user_id = #{tiper_user_id}
+
+	</select>
+	<select id="selectTiper" resultType="_int">
+		select count(*) from tiper
+		where tiper_user_id = #{tiper_user_id}
+
+	</select>
+
+	<update id="tiperUpdate">
+		update tiper set tiper_img = #{tiper_img}, tiper_info
+		= #{tiper_info} where
+		tiper_user_id = #{tiper_user_id}
+	</update>
+	
+	<update id="tiperInitialization">
+		update tiper set tiper_agree = 0 where
+		tiper_user_id =
+		#{tiper_user_id}
+	</update>
+
+
+
+
+</mapper>

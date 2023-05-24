@@ -5,78 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>꿀TIPer 관리자 - 공지사항 수정</title>
 </head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/front/bootstrap.css">
-<style>
-body {
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  margin: 0;
-  padding: 0;
-}
-.container{
-	width: 65%;
-}
-
-/* Style the title */
-#noticeName {
-  font-size: 24px;
-  font-weight: bold;
-  margin: 10px;
-}
-
-/* Style the table */
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-table td {
-  border: 1px solid #ccc;
-  padding: 10px;
-}
-
-table textarea {
-  width: 100%;
-  height: 70px;
-  font-size: 14px;
-}
-#contSpace{
-  width: 100%;
-  height: 600px;
-}
-
-/* Style the buttons */
-button {
-    border-style: none;
-    background: #FFD400;
-    color: #5c3b0c;
-    margin: 5px;
-    padding: 5px 18px;
-    cursor: pointer;
-	float:right;
-    font-size: 12pt;
-    font-weight: bolder;
-    border-radius: 5px;
-}
-
-button:hover {
-  background-color: #E6B800;
-}
-
-/* Style the radio buttons */
-input[type="radio"] {
-  margin-right: 10px;
-}
-
-/* Style the form */
-form {
-  margin: 10px;
-}
-
-</style>
+    <link href="${pageContext.request.contextPath}/front/updateNotice.css" rel="stylesheet">
 <script>
 	function btnDelete(){
 		location.href="deleteNotice?notice_num="+${getNotice.notice_num}

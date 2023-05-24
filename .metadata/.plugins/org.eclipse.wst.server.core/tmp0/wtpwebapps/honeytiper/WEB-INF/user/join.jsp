@@ -6,13 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Insert title here</title>
+<title>꿀TIPer - 회원가입</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-   <link rel="stylesheet" media="screen and (min-width:769px)" href="front/user.css">
-   <link rel="stylesheet" media="screen and (max-width:768px)" href="front/userJoinMobile.css">
+   <link rel="stylesheet" media="screen and (min-width:769px)" href="${pageContext.request.contextPath}/front/user.css">
+   <link rel="stylesheet" media="screen and (max-width:768px)" href="${pageContext.request.contextPath}/front/userJoinMobile.css">
    <script src="${pageContext.request.contextPath}/front/userCertification.js"></script>
 </head>
 <body>
@@ -358,40 +358,88 @@
                         break;
                         
                     case "user_pw":
-                       if(thisVal.length != 0 && passwordRegex.test(thisVal) == false) {
-                           checkText = "영문 대소문자, 숫자, 특수문자 포함 최소 8자를 입력해주세요.";
-                        }
-                        break;
-                        
-                     case "user_pw2":
-                       if(thisVal.length != 0 && $("#user_pw").val() != thisVal) {
-                           checkText = "비밀번호가 일치하지 않습니다.";
-                        }
-                        break;
+                        if(thisVal.length != 0 && passwordRegex.test(thisVal) == false) {
+                            checkText = "영문 대소문자, 숫자, 특수문자의 조합으로 최소 8자를 입력해주세요";
+                            if(!($(".edit_pw").hasClass("editRequired"))) {
+                               $(".edit_pw").addClass("editRequired");
+                            }
+                         }else if(thisVal.length == 0) {
+                            checkText = "비밀번호를 입력해주세요.";
+                            if(!($(".edit_pw").hasClass("editRequired"))) {
+                               $(".edit_pw").addClass("editRequired");
+                            }
+                         }else if(thisVal.length != 0 && $("#user_pw2").val() != thisVal){
+                         checkText = "비밀번호가 일치하지 않습니다.";
+                         if(!($(".edit_pw").hasClass("editRequired"))) {
+                                $(".edit_pw").addClass("editRequired");
+                         }else{
+                                $(".edit_pw").removeClass("editRequired");
+                         }
+                      }else{
+                            $(".edit_pw").removeClass("editRequired");
+                         }
+                         break;
+                         
+                      case "user_pw2":
+                         if(thisVal.length != 0 && $("#user_pw").val() != thisVal) {
+                              checkText = "비밀번호가 일치하지 않습니다.";
+                              if(!($(".edit_pw").hasClass("editRequired"))) {
+                                 $(".edit_pw").addClass("editRequired");
+                              }
+                              
+                        }else if(thisVal.length != 0 && passwordRegex.test(thisVal) == false) {
+                             checkText = "영문 대소문자, 숫자, 특수문자의 조합으로 최소 8자를 입력해주세요";
+                             if(!($(".edit_pw").hasClass("editRequired"))) {
+                                $(".edit_pw").addClass("editRequired");
+                             }
+                        }else if(thisVal.length == 0){
+                           checkText = "비밀번호를 입력해주세요.";
+                              if(!($(".edit_pw").hasClass("editRequired"))) {
+                                 $(".edit_pw").addClass("editRequired");
+                              }
+                     }else{
+                                 $(".edit_pw").removeClass("editRequired");
+                           }
+                         break;
                         
                  }
                  if(checkText != ""){
-                     $(this).siblings(".info_ptag").html(checkText);
-                     $(this).siblings(".info_ptag").addClass("vali");
-                     $(this).siblings(".info_ptag").slideDown();
-                      $(this).css({
-                         "borderColor":"red"
-                      });
+                	 if($(this).attr("id")=="user_pw"){
+               		  $("#user_pw2").siblings(".info_ptag").html(checkText);
+   	                  $("#user_pw2").addClass("vali");
+   	                  $("#user_pw2").siblings(".info_ptag").slideDown();
+   	                   $("#user_pw2").css({
+   	                      "borderColor":"red"
+   	                   });
+               	 	 }else{
+	                     $(this).siblings(".info_ptag").html(checkText);
+	                     $(this).siblings(".info_ptag").addClass("vali");
+	                     $(this).siblings(".info_ptag").slideDown();
+	                      $(this).css({
+	                         "borderColor":"red"
+	                      });
+               	 	 }
                  } else {
-                     $(this).siblings(".info_ptag").slideUp();
-                      $(this).siblings(".info_ptag").empty();
-                      $(this).removeClass("vali");
-                      if($(this).val() != $("#user_id").val()){
-                         $(this).css({
-                            "borderColor":"#009900"
-                         });
-                      }else{
-                         $(this).css({
-                            "borderColor":"black"
-                         });
-                         
-                      }
-                  }
+                	 if($(this).attr("id")=="user_pw"){
+ 						$("#user_pw2").siblings(".info_ptag").slideUp();
+ 						$("#user_pw2").siblings(".info_ptag").empty();
+ 						$("#user_pw2").removeClass("vali");
+             	  	}else{
+						$(this).siblings(".info_ptag").slideUp();
+						$(this).siblings(".info_ptag").empty();
+						$(this).removeClass("vali");
+						if($(this).val() != $("#user_id").val()){
+	                         $(this).css({
+	                            "borderColor":"#009900"
+	                         });
+						}else{
+	                         $(this).css({
+	                            "borderColor":"black"
+	                         });
+	                         
+	                      }
+	                  }
+                 }
             });
          </script>
       <%@include file="../main/footer.jsp"%>

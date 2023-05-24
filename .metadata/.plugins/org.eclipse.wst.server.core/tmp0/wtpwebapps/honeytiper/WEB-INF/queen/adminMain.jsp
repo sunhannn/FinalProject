@@ -1,65 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page import="com.ggul.zip.queen.QueenVO, java.util.*"%>
 <%@include file="adminNavbar.jsp"%>
+<%
+
+if(request.getParameter("suc")!=null){
+	out.print("<script>");
+	out.print("alert('수정이 완료되었습니다.');");
+	out.print("</script>");
+}
+
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>꿀TIPer 관리자 페이지</title>
 </head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-<style>
-.container{
-	width: 65%;
-	padding: 0;
-}
-#salesTableBody{
-	margin-top: 20px;
-	width:100%;
-}
-.chartBtn{
-	text-align: right;
-	margin:0 auto;
-}
-button{
-	border-style: none;
-    background: #FFD400;
-    color: #5c3b0c;
-    margin: 5px;
-    padding: 5px 18px;
-    cursor: pointer;
-    font-size: 12pt;
-    font-weight: bolder;
-    border-radius: 5px;
-    display: inline-block;
-}
-
-th, td{
-	padding:5px 15px;
-	height:38px;
-	border-bottom: 1px solid #efefef;
-}
-
-th{
-	background-color: #efefef;
-	text-align: center;
-}
-canvas{
-	width: 450px;
-	height: 300px;
-}
-.h2title{
-    display: block;
-    font-size: 24px;
-    margin-block-start: 0.83em;
-    margin-block-end: 0.83em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bolder;
-}
-</style>
+<link href="${pageContext.request.contextPath}/front/adminMain.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/front/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -131,15 +93,16 @@ function chart2(val){
 	<h2 class="h2title" style="margin:40px 0;">매출내역</h2>
 	<br><br>
 		<h4 style="text-align: center;  font-weight: bolder;">매출내역 - 차트</h4>
+		<br>
 		<div id="lineChart" style="float:left; width:49%; text-align: center;">
 			<canvas id="myChart"></canvas>
-			<button type="button" onclick="chart(this.value)" value="week" class="chartBtn">line주간차트보기</button>
-			<button type="button" onclick="chart(this.value)" value="month" class="chartBtn">line월간차트보기</button>
+			<button type="button" onclick="chart(this.value)" value="week" class="chartBtn">Week</button>
+			<button type="button" onclick="chart(this.value)" value="month" class="chartBtn">Month</button>
 		</div>
 		<div id="barChart" style="float:right;  width:49%;text-align: center;">
 			<canvas id="myChart2"></canvas>
-			<button type="button" onclick="chart2(this.value)" value="week" class="chartBtn">bar주간차트보기</button>
-			<button type="button" onclick="chart2(this.value)" value="month" class="chartBtn">bar월간차트보기</button>
+			<button type="button" onclick="chart2(this.value)" value="week" class="chartBtn">Week</button>
+			<button type="button" onclick="chart2(this.value)" value="month" class="chartBtn">Month</button>
 		</div>
 		<div style="margin-top:40px; float:left; width: 100%;">
 		<hr style="border:1px solid #efefef;">
@@ -147,7 +110,7 @@ function chart2(val){
 			<h4 style="text-align: center; font-weight: bolder;">매출내역 - 표</h4>
 				<table id="salesTableBody" >
 					<tr>
-						<th colspan="3" class="thTitle">주간</th>
+						<th colspan="3" class="thTitle" style="background-color: #fff8e3;">주간</th>
 					</tr>
 					<tr>
 						<td>주간최고매출</td><td>일평균매출</td><td>주간총매출</td>
@@ -158,7 +121,7 @@ function chart2(val){
 						<td>${sales.weektotal_sales}원</td>
 					</tr>
 					<tr>
-						<th colspan="3" class="thTitle">월간</th>
+						<th colspan="3" class="thTitle" style="background-color: #fff8e3;">월간</th>
 					</tr>
 					<tr>
 						<td>월간최고매출</td><td>일평균매출</tD><td>월간총매출</td>

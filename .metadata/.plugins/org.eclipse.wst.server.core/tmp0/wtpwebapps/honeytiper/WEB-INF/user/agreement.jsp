@@ -5,13 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Insert title here</title>
-<link rel="stylesheet" media="screen and (min-width:769px)" href="front/agreement.css">
-   <link rel="stylesheet" media="screen and (max-width:768px)" href="front/agreementMobile.css">
+<title>꿀TIPer - 회원가입</title>
+<link rel="stylesheet" media="screen and (min-width:769px)" href="${pageContext.request.contextPath}/front/agreement.css">
+<link rel="stylesheet" media="screen and (max-width:768px)" href="${pageContext.request.contextPath}/front/agreementMobile.css">
 </head>
 <body>
     <div class="wrap">
-      <div class="agreement_logo"><a href="/"><img src="${pageContext.request.contextPath}/front/ggulTiper.png" title="Logo"></a></div>
+      <div class="agreement_logo"><a href="/"><img onerror="this.src='${pageContext.request.contextPath}/front/default.png'" src="${pageContext.request.contextPath}/front/ggulTiper.png" title="Logo"></a></div>
       <div class="contents">
         <form action="/joinBtn" method="POST" id="form__wrap">
           <div class="terms__check__all">
@@ -25,16 +25,16 @@
             <li class="terms__box">
               <div class="input__check">
                 <input type="checkbox" name="agreement" id="termsOfService" value="termsOfService" required>
-                <label for="termsOfService" class="required">꿀Tiper 이용약관 동의</label
+                <label for="termsOfService" class="required">꿀TIPer 이용약관 동의</label
                 >
               </div>
               <div class="terms__content">
-                여러분을 환영합니다. 꿀Tiper 서비스 및 제품(이하 ‘서비스’)을 이용해
-                주셔서 감사합니다. 본 약관은 다양한 꿀Tiper 서비스의 이용과 관련하여
-                꿀Tiper 서비스를 제공하는 꿀Tiper 주식회사(이하 ‘꿀Tiper’)와 이를 이용하는
-                꿀Tiper 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며,
-                아울러 여러분의 꿀Tiper 서비스 이용에 도움이 될 수 있는 유익한
-                정보를 포함하고 있습니다. 꿀Tiper 서비스를 이용하시거나 꿀Tiper 서비스
+                여러분을 환영합니다. 꿀TIPer 서비스 및 제품(이하 ‘서비스’)을 이용해
+                주셔서 감사합니다. 본 약관은 다양한 꿀TIPer 서비스의 이용과 관련하여
+                꿀TIPer 서비스를 제공하는 꿀TIPer 주식회사(이하 ‘꿀TIPer’)와 이를 이용하는
+                꿀TIPer 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며,
+                아울러 여러분의 꿀TIPer 서비스 이용에 도움이 될 수 있는 유익한
+                정보를 포함하고 있습니다. 꿀TIPer 서비스를 이용하시거나 꿀TIPer 서비스
                 회원으로 가입하실 경우 여러분은 본 약관 및 관련 운영 정책을
                 확인하거나 동의하게 되므로, 잠시 시간을 내시어 주의 깊게 살펴봐
                 주시기 바랍니다.
@@ -46,7 +46,7 @@
                 <label for="privacyPolicy" class="required">개인정보 수집 및 이용 동의</label>
               </div>
               <div class="terms__content">
-                개인정보보호법에 따라 꿀Tiper에 회원가입 신청하시는 분께 수집하는
+                개인정보보호법에 따라 꿀TIPer에 회원가입 신청하시는 분께 수집하는
                 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및
                 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내
                 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.1. 수집하는
@@ -63,9 +63,9 @@
                 <label for="allowPromotions">프로모션 정보 수신 동의</label>
               </div>
               <div class="terms__content">
-                꿀Tiper에서 제공하는 이벤트/혜택 등 다양한 정보를 휴대전화(꿀Tiper앱
+                꿀TIPer에서 제공하는 이벤트/혜택 등 다양한 정보를 휴대전화(꿀TIPer앱
                 알림 또는 문자), 이메일로 받아보실 수 있습니다. 일부 서비스(별도
-                회원 체계로 운영하거나 꿀Tiper 가입 이후 추가 가입하여 이용하는
+                회원 체계로 운영하거나 꿀TIPer 가입 이후 추가 가입하여 이용하는
                 서비스 등)의 경우, 개별 서비스에 대해 별도 수신 동의를 받을 수
                 있으며, 이때에도 수신 동의에 대해 별도로 안내하고 동의를
                 받습니다.

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+	xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<context:component-scan
+		base-package="com.ggul.zip" />
+	<!-- @ResponseBody, @ControllerAdvice, @ExceptionHandler 객체생성관련 -->
+	<!-- context:component-scan 태그로 처리하지 못하는 어노테이션을 객체생성할 때 사용하는 태그 -->
+	<annotation-driven />
+
+	<!-- 파일업로드 객체 생성 5MB정도 1024KB = 1MB > 1024MB > 1GB -->
+	<!-- <bean id="multipartResolver" -->
+	<!-- class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> -->
+	<!-- <property name="maxUploadSize" value="5242880" /> -->
+	<!-- </bean> -->
+
+	<!-- /**은 폴더포함 파일까지라는 의미. *은 파일만 (폴더 제외) -->
+	<!-- mapping의=""은 Alias임 -->
+	<resources mapping="/front/**"
+		location="/resources/css/,/resources/js/,/resources/img/" />
+	<!-- <resources mapping="/web/**" location="/WEB-INF/commons/" /> -->
+	<!-- resources로 하지 않았기 때문에 소용없음 -->
+
+
+	<!-- ViewResolver -->
+	<beans:bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	<!-- 파일 업로드 객체 -->
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="52428800" /> <!-- 50MB -->
+		<beans:property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
+	</beans:bean>
+
+
+	<!-- 캐시삭제 인터셉터 (로그인-로그아웃-뒤로가기시 방지) -->
+	<beans:bean id="cacheControlInterceptor" class="com.ggul.zip.interceptor.CacheControlInterceptor" />
+	<interceptors>
+	    <interceptor>
+	        <mapping path="/**" />
+	        <exclude-mapping path="/resources/**" /> <!-- 리소스 경로 제외 -->
+	        <beans:ref bean="cacheControlInterceptor" />
+	    </interceptor>
+	</interceptors>
+
+
+
+
+
+</beans:beans>

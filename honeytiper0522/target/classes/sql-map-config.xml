@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!-- Alias(객체명) 설정 -->
+	<typeAliases>
+		<typeAlias type="com.ggul.zip.lesson.LessonVO" alias="lesson" />
+		<typeAlias type="com.ggul.zip.user.UserVO" alias="users" />
+		<typeAlias type="com.ggul.zip.user.ReportVO" alias="report" />
+		<typeAlias type="com.ggul.zip.notice.NoticeVO" alias="notice"/>
+		<typeAlias type="com.ggul.zip.faq.FaqVO" alias="faq"/>
+		<typeAlias type="com.ggul.zip.queen.QueenVO" alias="queen"/>
+		<typeAlias type="com.ggul.zip.message.MessageTO" alias="message" />
+		<typeAlias type="com.ggul.zip.lesson.LessonDetailVO" alias="lessonDetail" />
+		<typeAlias type="com.ggul.zip.lesson.ReviewVO" alias="review" />
+		<typeAlias type="com.ggul.zip.tiper.TiperVO" alias="tiper" />
+		<typeAlias type="com.ggul.zip.payment.PointVO" alias="point" />
+		<typeAlias type="com.ggul.zip.escrow.EscrowVO" alias="escrow" />
+	</typeAliases>
+
+<!-- Sql Mapper 설정 -->
+	<mappers>
+		<mapper resource="mappings/search-mapper.xml" />
+		<mapper resource="mappings/main-mapper.xml" />
+		<mapper resource="mappings/user-mapper.xml" />
+		<mapper resource="mappings/queen-mapper.xml" />
+		<mapper resource="mappings/notice-mapper.xml"/>
+		<mapper resource="mappings/faq-mapper.xml"/>
+		<mapper resource="mappings/message-mapper.xml" />
+		<mapper resource="mappings/lessonDetail-mapper.xml" />
+		<mapper resource="mappings/lesson-mapper.xml" />
+		<mapper resource="mappings/tiper-mapper.xml" />
+		<mapper resource="mappings/point-mapper.xml" />
+		<mapper resource="mappings/escrow-mapper.xml" />
+		<mapper resource="mappings/review-mapper.xml" />
+	</mappers>
+
+</configuration>

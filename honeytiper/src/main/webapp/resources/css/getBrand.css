@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+#map {
+	width: 600px;
+}
+
+div#map {
+	max-width: 100%;
+}
+
+element.style {
+	height: 350px;
+	position: relative;
+	overflow: hidden;
+	background: url(http://t1.daumcdn.net/mapjsapi/images/bg_tile.png);
+}
+
+#BrandImg {
+	max-width: 100%;
+}
+
+#main-navbar {
+	border-bottom: 1px solid #ddd;
+}
+
+.ImgDiv {
+	padding: 20px 0 70px 0;
+	background: #fff8e3;
+	position: relative;
+    bottom: -20px;
+}
+
+.map-li {
+	font-weight: bold;
+	font-size: 16px;
+	list-style: none;
+	border-left: 3px solid #212a30;
+	padding-left: 10px;
+	margin-top: 20px;
+}
+
+.last-map-li {
+	font-size: 25px !important;
+}
+
+.company_right_text {
+	padding-left: 0px;
+}
+
+@media ( min-width : 768px) {
+	.brand_intro1{
+		font-size: 45px;
+		font-weight: bold;
+		color: #212a30;
+		letter-spacing: -.5px;
+	}
+	
+	.brand_intro2{
+		font-size: 22px;
+		font-weight: bold;
+		color: #212a30;
+		letter-spacing: -.5px;"
+	}
+	
+	.brand_intro3{
+		letter-spacing: -.5px;
+		font-size: 16px;
+		color: #212a30;
+	}
+}
+
+@media ( max-width : 767px) {
+.brand_intro1{
+	font-size: 30px;
+	font-weight: bold;
+	color: #212a30;
+	letter-spacing: -.5px;
+}
+
+.brand_intro2{
+	font-size: 16px;
+	font-weight: bold;
+	color: #212a30;
+	letter-spacing: -.5px;"
+}
+
+.brand_intro3{
+	letter-spacing: -.5px;
+	font-size: 13px;
+	color: #212a30;
+}
+
+#map-li-s{
+	font-size: 13px;
+}
+}

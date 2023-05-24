@@ -36,14 +36,13 @@
 		like concat('%',?,'%') order by user_id
 	</select>
 
-	<select id="findUser" resultType="users">
-		SELECT * FROM users where
-		user_tel = #{user_tel} and user_name=#{user_name}
+	<select id="findUser" resultType="String">
+		select user_id from users where user_role not in (3, 4) and user_name=#{user_name} and user_tel=#{user_tel} and user_kakao="N"
 	</select>
 
 	<select id="findUserPW" resultType="users">
 		SELECT * FROM users where
-		user_tel = #{user_tel} and user_id=#{user_id}
+		user_email = #{user_email} and user_id=#{user_id}
 	</select>
 
 	<insert id="joinKakaoUser">
@@ -171,6 +170,10 @@
 		UPDATE REPORT SET REPORT_STATUS = 2 WHERE REPORT_NUM
 		= #{report_num};
 	</update>
+	
+	<update id="updateTiperAgree10">
+      UPDATE TIPER SET TIPER_AGREE = 0 WHERE TIPER_USER_ID = #{user_id}
+      </update>
 
 	<update id="updateReportStatus01">
 		UPDATE REPORT SET REPORT_STATUS = 1 WHERE REPORT_NUM
@@ -286,6 +289,10 @@
 		#{report_num} WHERE USER_ID = #{user_id}
 	</update> <!-- report_num에 userPoint*0.95값 set되어있음. -->
 
+	<insert id="addProfitSales">
+		INSERT INTO SALES VALUES (#{report_num}, default)
+	</insert>
+
 	<insert id="insertLessonPrice">
 		INSERT INTO POINT (POINT_ID, POINT_PRICE,
 		POINT_HISTORY, POINT_TIME) VALUES (#{user_id}, #{report_num},
@@ -304,6 +311,13 @@
 
 	<update id="updateEscrowReportStatus">
 		update ESCROW set ESCROW_REPORT_STATUS = 1 WHERE
+		ESCROW_USER_ID = #{escrow_user_id} AND ESCROW_LESSON_NUM =
+		#{escrow_lesson_num}
+	</update>
+	
+<!-- 	티퍼->유저신고 -->
+	<update id="updateEscrowReportUser">
+		update ESCROW set ESCROW_REPORT_USER = 1 WHERE
 		ESCROW_USER_ID = #{escrow_user_id} AND ESCROW_LESSON_NUM =
 		#{escrow_lesson_num}
 	</update>

@@ -15,366 +15,10 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.js"></script>
 
-<title>Insert title here</title>
+<title>🍯꿀TIPer: 꿀+TIP+er</title>
 <%@include file="main/header.jsp"%>
+<link href="${pageContext.request.contextPath}/front/index.css" rel="stylesheet">
 </head>
-<style>
-.cW {
-	width: 100%;
-}
-
-body {
-	width: 100%;
-}
-
-.mainLesson {
-	width: 95%;
-	margin: 0 auto;
-	text-align: center;
-}
-
-h4	{
-	font-weight: bold;
-}
-
-.newCarousel2 {
-	width: 80%;
-	max-width: 90%;
-	margin: 0 auto 50px auto;
-	text-align: center;
-}
-
-.h4mainNew2 {
-	width: 80%;
-	margin: 10px auto;
-}
-
-.whatImgBorder {
-	position: relative;
-	border: 1px solid #ddd;
-}
-
-.wahtImgCarousel2 {
-	border: 1px solid #ddd;
-}
-
-div.whatImg .show_text {
-	width: 250px;
-	max-width: 100%;
-	height: 60px;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	margin-bottom: 0;
-	color: #fff;
-	z-index: 20;
-	font-weight: 600;
-	font-size: 15px;
-	background-color: rgba(0, 0, 0, 0.5);
-	text-align: center;
-	padding-top: 10px;
-}
-
-div.whatImg {
-	box-sizing: border-box;
-	padding-bottom: 20px;
-}
-
-div.whatImg .col-sub, div.whatImg2 {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-s: center;
-	justify-content: center;
-}
-
-.container {
-	min-height: 100%;
-	position: relative;
-}
-
-.tooltiptext {
-	visibility: hidden;
-	width: auto;
-	background-color: #fff8e3;
-	color: black;
-	text-align: center;
-	border-radius: 5px;
-	padding: 5px 0;
-	position: absolute;
-	z-index: 999;
-	display: flex;
-	bottom: 100%;
-	border: 2px solid #FFD400;
-	padding: 10px;
-	font-size: smaller;
-}
-
-.random_tip:hover .tooltiptext {
-	visibility: visible;
-}
-
-.new_tip:hover .tooltiptext {
-	visibility: visible;
-}
-
-.hot_tip:hover .tooltiptext {
-	visibility: visible;
-}
-
-.like_tip:hover .tooltiptext {
-	visibility: visible;
-}
-
-@media ( min-width : 1400px) {
-	div.whatImg img {
-		width: 250px;
-		height: 250px;
-	}
-}
-
-@media ( max-width : 1400px) {
-	div.whatImg img {
-		width: 200px;
-		height: 200px;
-	}
-	
-}
-
-@media ( max-width : 1100px) {
-	div.whatImg img {
-		width: 165px;
-		height: 165px;
-	}
-}
-
-@media ( max-width : 500px) {
-	div.whatImg img {
-		width: 140px;
-		height: 140px;
-	}
-	
-}
-
-@media ( min-width : 768px) {
-	div.questionLession {
-		width: 80%;
-		max-width: 90%;
-		margin: 30px auto;
-	}
-	div.mainRecm {
-		width: 80%;
-		max-width: 90%;
-		margin: 30px auto;
-	}
-	div.mainPop {
-		width: 80%;
-		max-width: 90%;
-		margin: 30px auto;
-	}
-	div.mainNew {
-		width: 80%;
-		max-width: 90%;
-		margin: 30px auto;
-	}
-	.mainNew {
-		display: none;
-	}
-	.mainNew2 {
-		margin: 0 auto;
-		display: flex;
-		flex-direction: column;
-	}
-	
-}
-
-@media ( max-width : 768px) {
-	div.questionLession {
-		width: 100%;
-	}
-	div.mainRecm {
-		width: 100%;
-	}
-	div.mainPop {
-		width: 100%;
-	}
-	div.mainNew {
-		margin-bottom: 30px;
-		width: 100%;
-	}
-	.mainNew2 {
-		display: none;
-	}
-	.mainNew {
-		display: block;
-	}
-	div.whatImg .col-sub {
-		width: 100%;
-		height: 100%;
-		display: flex;
-		align-s: center;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
-	
-}
-
-.h4Title {text-align: left;}
-
-/* 여기서부터 소연언니 */
-.carousel-control.left, .carousel-control.right {
-	background-image: none
-}
-
-.ImgDiv {
-	padding: 50px 15px 70px 15px;
-	background: #fff8e3;
-	max-width: 100%;
-}
-
-#allSearch {
-	font-size: 15pt;
-	padding: 5px;
-	cursor: pointer;
-	color: gray;
-	font-weight: bold;
-	text-decoration: underline;
-}
-
-#allSearch:hover {
-	color: #382407;
-}
-
-.brand_idx {
-	font-weight: bold;
-}
-
-@media ( min-width : 768px) {
-	.brand_intro1 {
-		font-size: 45px;
-		font-weight: bold;
-		color: #212a30;
-		letter-spacing: -.5px;
-	}
-	.brand_intro2 {
-		font-size: 22px;
-		font-weight: bold;
-		color: #212a30;
-		letter-spacing: -.5px;
-		"
-	}
-	.brand_intro3 {
-		letter-spacing: -.5px;
-		font-size: 16px;
-		color: #212a30;
-	}
-	.search-containerC {
-		position: relative;
-		display: inline-block;
-		border-radius: 20px;
-		overflow: hidden;
-		max-width: 100%;
-	}
-	.search-inputC:active, .search-inputC:focus {
-		border: 4px solid #FFDF48;
-	}
-	.search-inputC {
-		padding: 10px;
-		border: 2px solid gray;
-		border-radius: 33px;
-		outline: none;
-		height: 70px;
-		width: 460px;
-		position: relative;
-	}
-	.search-buttonC {
-		position: absolute;
-		top: 50%;
-		right: 10px;
-		transform: translateY(-50%);
-		padding: 5px;
-		background-color: transparent;
-		border: none;
-		outline: none;
-		cursor: pointer;
-	}
-	.search-buttonC i {
-		font-size: 30px;
-	}
-	#myCarousel {
-		width: 450px;
-		height: 450px;
-		max-width: 95%;
-	}
-	#myCarousel-inner {
-		width: 450px;
-		height: 450px;
-		max-width: 95%;
-	}
-}
-
-@media ( max-width : 767px) {
-	.brand_intro1 {
-		font-size: 33px;
-		font-weight: bold;
-		color: #212a30;
-		letter-spacing: -.5px;
-	}
-	.brand_intro2 {
-		font-size: 17px;
-		font-weight: bold;
-		color: #212a30;
-		letter-spacing: -.5px;
-		"
-	}
-	.brand_intro3 {
-		letter-spacing: -.5px;
-		font-size: 14px;
-		color: #212a30;
-	}
-	.search-containerC {
-		position: relative;
-		display: inline-block;
-		border-radius: 20px;
-		overflow: hidden;
-	}
-	.search-inpuCt:active, .search-inputC:focus {
-		border: 2px solid #FFDF48;
-	}
-	.search-inputC {
-		padding: 10px;
-		border: 2px solid gray;
-		border-radius: 20px;
-		outline: none;
-		width: 300px;
-		position: relative;
-	}
-	.search-buttonC {
-		position: absolute;
-		top: 50%;
-		right: 10px;
-		transform: translateY(-50%);
-		padding: 5px;
-		background-color: transparent;
-		border: none;
-		outline: none;
-		cursor: pointer;
-	}
-	.search-buttonC i {
-		font-size: 20px;
-	}
-	#myCarousel {
-		width: 300px;
-		height: 300px;
-		max-width: 95%;
-	}
-	#myCarousel-inner {
-		width: 300px;
-		height: 300px;
-		max-width: 95%;
-	}
-}
-</style>
 
 <body>
 	<div class="container-fluid ImgDiv">
@@ -408,7 +52,7 @@ div.whatImg .col-sub, div.whatImg2 {
 						<form action="selectSearch" method="post" name="lesson_search">
 							<div class="search-containerC">
 								<input type="text" name="lesson_search" id="lesson_search"
-									class="search-inputC" placeholder=" 강의 강사 지역을 입력해보세요" />
+									class="search-inputC" placeholder=" 꿀TIP TIPer 지역을 입력해보세요!" />
 								<button type="submit" class="search-buttonC"
 									onclick="document.lesson_search.submit();">
 									<i class="fas fa-search"></i>
@@ -437,18 +81,18 @@ div.whatImg .col-sub, div.whatImg2 {
 						<div id="myCarousel-inner" class="carousel-inner"
 							style="margin: 0 auto;">
 							<div class="item active">
-								<img src="/front/lesson/animal.png" alt="img1"
-									class="d-block h-100 w-100 cW">
+								<a href="getLessonDetail?lesson_num=7"><img onerror="this.src='${pageContext.request.contextPath}/front/default.png'" src="/front/lesson/animal.png" alt="img1"
+									class="d-block h-100 w-100 cW"></a>
 							</div>
 
 							<div class="item">
-								<img src="/front/lesson/codingC.png" alt="img2"
-									class="d-block h-100 w-100  cW">
+								<a href="getLessonDetail?lesson_num=26"><img onerror="this.src='${pageContext.request.contextPath}/front/default.png'" src="/front/lesson/codingC.png" alt="img2"
+									class="d-block h-100 w-100  cW"></a>
 							</div>
 
 							<div class="item">
-								<img src="/front/lesson/report.png" alt="img3"
-									class="d-block h-100 w-100  cW">
+								<a href="getLessonDetail?lesson_num=1"><img onerror="this.src='${pageContext.request.contextPath}/front/default.png'" src="/front/lesson/report.png" alt="img3"
+									class="d-block h-100 w-100  cW"></a>
 							</div>
 						</div>
 
@@ -480,12 +124,12 @@ div.whatImg .col-sub, div.whatImg2 {
 			<c:when test='${user_id ne NULL}'>
 				<div class="container mainRecm">
 					<h4 class="like_tip h4Title">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+						&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 							fill="currentColor" class="bi bi-pin-angle-fill"
 							viewBox="0 0 16 16">
   <path
 								d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z" />
-&nbsp;&nbsp;</svg>
+</svg>
 						내가 좋아할 꿀TIP <span class="tooltiptext tooltip-top">관심있을 꿀TIP
 							추천!</span>
 					</h4>
@@ -495,7 +139,7 @@ div.whatImg .col-sub, div.whatImg2 {
 								<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 whatImg">
 									<div class="col-sub">
 										<div class="whatImgBorder">
-											<img
+											<img onerror="this.src='${pageContext.request.contextPath}/front/default.png'" 
 												src="${pageContext.request.contextPath}/front/lesson/${mainPg.lesson_img}"
 												alt="${mainPg.lesson_img}" title="${mainPg.lesson_title}">
 											<p class="show_text">
@@ -513,12 +157,12 @@ div.whatImg .col-sub, div.whatImg2 {
 			<c:otherwise>
 				<div class="container questionLession">
 					<h4 class="random_tip h4Title">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+						&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 							fill="currentColor" class="bi bi-pin-angle-fill"
 							viewBox="0 0 16 16">
   <path
 								d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z" />
-&nbsp;&nbsp;</svg>
+</svg>
 						이런건 어때요? <span class="tooltiptext tooltip-top"> 고민된다면 랜덤
 							추천! </span>
 					</h4>
@@ -528,7 +172,7 @@ div.whatImg .col-sub, div.whatImg2 {
 								<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 whatImg">
 									<div class="col-sub">
 										<div class="whatImgBorder">
-											<img
+											<img onerror="this.src='${pageContext.request.contextPath}/front/default.png'" 
 												src="${pageContext.request.contextPath}/front/lesson/${mainPg.lesson_img}"
 												alt="${mainPg.lesson_img}" title="${mainPg.lesson_title}">
 											<p class="show_text">
@@ -546,12 +190,12 @@ div.whatImg .col-sub, div.whatImg2 {
 		</c:choose>
 		<div class="container mainPop">
 			<h4 class="hot_tip h4Title">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+				&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 					fill="currentColor" class="bi bi-pin-angle-fill"
 					viewBox="0 0 16 16">
   <path
 						d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z" />
-&nbsp;&nbsp;</svg>
+</svg>
 				인기있는 꿀TIP <span class="tooltiptext tooltip-top">당도가 높은
 					꿀TIP들이에요!</span>
 			</h4>
@@ -561,7 +205,7 @@ div.whatImg .col-sub, div.whatImg2 {
 						<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 whatImg">
 							<div class="col-sub">
 								<div class="whatImgBorder">
-									<img
+									<img onerror="this.src='${pageContext.request.contextPath}/front/default.png'" 
 										src="${pageContext.request.contextPath}/front/lesson/${mainPg.lesson_img}"
 										alt="${mainPg.lesson_img}" title="${mainPg.lesson_title}">
 									<p class="show_text">
@@ -578,12 +222,12 @@ div.whatImg .col-sub, div.whatImg2 {
 		<!-- 앱 -->
 		<div class="container mainNew">
 			<h4 class="new_tip h4Title">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+				&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 					fill="currentColor" class="bi bi-pin-angle-fill"
 					viewBox="0 0 16 16">
   <path
 						d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z" />
-&nbsp;&nbsp;</svg>
+</svg>
 				떠오르는 꿀TIP <span class="tooltiptext tooltip-top">최근 4주이내에 새로
 					등록된<br>꿀TIP들이에요!
 				</span>
@@ -594,7 +238,7 @@ div.whatImg .col-sub, div.whatImg2 {
 						<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 whatImg">
 							<div class="col-sub">
 								<div class="whatImgBorder">
-									<img
+									<img onerror="this.src='${pageContext.request.contextPath}/front/default.png'" 
 										src="${pageContext.request.contextPath}/front/lesson/${mainPg.lesson_img}"
 										alt="${mainPg.lesson_img}" title="${mainPg.lesson_title}">
 									<p class="show_text">
@@ -613,11 +257,11 @@ div.whatImg .col-sub, div.whatImg2 {
 		data-ride="carousel">
 		<!-- Indicators -->
 		<h4 class="h4mainNew2 new_tip h4Title">
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+			&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 				fill="currentColor" class="bi bi-pin-angle-fill" viewBox="0 0 16 16">
   <path
 					d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z" />
-&nbsp;&nbsp;</svg>
+</svg>
 			떠오르는 꿀TIP <span class="tooltiptext tooltip-top">최근 4주이내에 새로
 				등록된 꿀TIP들이에요!</span>
 		</h4>
@@ -632,7 +276,7 @@ div.whatImg .col-sub, div.whatImg2 {
 					<div class="col-sm-3 whatImg">
 						<div class="col-sub">
 							<div class="whatImgBorder2">
-								<a href="getLessonDetail?lesson_num=${mainPg.lesson_num}"> <img
+								<a href="getLessonDetail?lesson_num=${mainPg.lesson_num}"> <img onerror="this.src='${pageContext.request.contextPath}/front/default.png'" 
 									class="wahtImgCarousel2"
 									src="${pageContext.request.contextPath}/front/lesson/${mainPg.lesson_img}"
 									alt="${mainPg.lesson_img}" title="${mainPg.lesson_title}">

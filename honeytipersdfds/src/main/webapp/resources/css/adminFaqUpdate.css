@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+	body {
+			margin: 0;
+			padding: 0;
+		}
+
+		h1 {
+			color: #333;
+			margin-top: 50px;
+			text-align: center;
+		}
+
+		form {
+			background-color: #FFF;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+			margin: 50px auto;
+			max-width: 700px;
+			padding: 20px;
+			
+		}
+
+		input[type="text"], textarea {
+			border-radius: 3px;
+			box-sizing: border-box;
+			margin-bottom: 10px;
+			padding: 10px;
+			width: 100%;
+			border: none;
+		}
+
+		textarea {
+			height: 100px;
+			font-size: 14px;
+			border: 1px solid #efefef;
+		}
+
+		input[type="submit"]{
+			background-color: #FFD400;
+			border: none;
+			border-radius: 3px;
+			box-shadow: 0 3px 0 #E6BF00;
+			color: #FFF;
+			cursor: pointer;
+			font-size: 16px;
+			font-weight: bold;
+			padding: 10px 20px;
+			transition: background-color 0.3s;
+			margin:10px;
+			float:right;
+		}
+		button{
+			background-color: #bbbbbb;
+			border: none;
+			border-radius: 3px;
+			box-shadow: 0 3px 0 #999999;
+			color: #FFF;
+			cursor: pointer;
+			font-size: 16px;
+			font-weight: bold;
+			padding: 10px 20px;
+			transition: background-color 0.3s;
+			margin:10px;
+			float:right;
+		}
+		button:hover{
+			background-color: #999999;
+		}
+		input[type="submit"]:hover{
+			background-color: #DBB600;
+		}
+		
+		#faqUpdate{
+			height: 400px;
+		}
+		
+		.txtarea{
+			border:2px solid #efefef;
+			outline: none;
+		}
+		
+		.txtarea:hover{
+			border:1px solid #FFD400;
+		}
+		
+		

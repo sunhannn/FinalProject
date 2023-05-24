@@ -8,122 +8,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>안전결제 내역</title>
+<title>꿀TIPer 관리자 - 안전결제 내역</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <%
 Date today = new Date();
 String formattedDate = String.format("%tF", today);
 %>
-<style>
-.container {
-	width: 65%;
-	margin: 0 auto;
-}
 
-tr {
-	height: 24px;
-	padding: 18px 0px;
-}
-
-.cont1_table {
-	width: 100%;
-	margin: 0 auto;
-	border-spacing: 0px !important;
-}
-
-.cont1_th {
-	background-color: #F0F0F0;
-}
-
-.thCenter1 {
-	margin: 10px 5px;
-	text-align: center;
-	padding: 12px 0;
-	border-bottom: 1px solid lightgray;
-	font-size: 0.85rem;
-}
-
-.tdCenter1 {
-	margin: 10px 5px;
-	text-align: center;
-	padding: 17px 0;
-	border-bottom: 1px solid lightgray;
-	font-size: 0.9rem;
-}
-
-#view-all-button{
-	 border-style: none;
-    background: #FFD400;
-    color: #5c3b0c;
-    margin-bottom: 10px;
-    padding: 5px 18px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 12pt;
-    font-weight: bolder;
-}
-#search-button {
- border-style: none;
-    background: #FFD400;
-    color: #5c3b0c;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 12pt;
-    font-weight: bolder;
-}
-#view-all-button:hover, #search-button:hover {
-	background-color: #E6B800;
-}
-
-.pagination-row {
-	background-color: #e8f0fe;
-}
-
-.pagination-row th {
-	font-size: 12pt;
-}
-
-#pagingul {
-	margin-top: 20px;
-	list-style: none;
-	display: flex;
-	justify-content: center;
-}
-
-#pagingul li {
-	margin-right: 5px;
-}
-
-#pagingul li a {
-	display: block;
-	padding: 5px 10px;
-	border: 1px solid #ddd;
-	background-color: #fff;
-	color: #333;
-	text-decoration: none;
-}
-
-#pagingul li.on a {
-	background-color: #FFD400;
-	color: #fff;
-}
-
-input[type=date] {
-	width: 170px;
-	height: 25px;
-	text-align: center;
-}
-
-#escrow-status-select {
-	width: 130px;
-	height: 30px;
-	text-align: center;
-	border-color: lightgray;
-	border-radius: 4px;
-	font-size: 14px;
-}
-</style>
+<link href="${pageContext.request.contextPath}/front/escrowList.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
@@ -381,12 +274,13 @@ function displayData(currentPage, dataPerPage, dataList) {
 			<thead>
 				<tr class="cont1_th">
 					<th class="thCenter1" style="width: 15%;">강의시작날짜</th>
-					<th class="thCenter1" style="width: 10%;">수강자</th>
-					<th class="thCenter1" style="width: 10%;">강사</th>
-					<th class="thCenter1" style="width: 20%;">강의이름</th>
-					<th class="thCenter1" style="width: 15%;">진행상황</th>
-					<th class="thCenter1" style="width: 15%;">완료날짜</th>
-					<th class="thCenter1" style="width: 15%;">금액</th>
+	               <th class="thCenter1" style="width: 10%;">수강회원</th>
+	               <th class="thCenter1" style="width: 10%;">강사회원</th>
+	               <th class="thCenter1" style="width: 20%;">강의명</th>
+	               <th class="thCenter1" style="width: 15%;">진행상황</th>
+	               <th class="thCenter1" style="width: 15%;">완료날짜</th>
+	               <th class="thCenter1" style="width: 15%;">금액</th>
+
 				</tr>
 			</thead>
 			<tbody id="dataTableBody"></tbody>

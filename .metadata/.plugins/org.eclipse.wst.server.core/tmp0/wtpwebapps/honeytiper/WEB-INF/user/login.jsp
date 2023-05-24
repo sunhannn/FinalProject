@@ -4,8 +4,9 @@
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <head>
-<link rel="stylesheet" media="screen and (min-width:769px)" href="front/user.css">
-   <link rel="stylesheet" media="screen and (max-width:768px)" href="front/userJoinMobile.css">
+<title>꿀TIPer - 로그인</title>
+<link rel="stylesheet" media="screen and (min-width:769px)" href="${pageContext.request.contextPath}/front/user.css">
+   <link rel="stylesheet" media="screen and (max-width:768px)" href="${pageContext.request.contextPath}/front/userJoinMobile.css">
    	<script>
    	$(function(){
    		
@@ -23,7 +24,6 @@
 	<div class="login_wrap">
 			<div class="login_contents">
 				<h3 class="form-signin-heading">로그인</h3>
-				
 				<form class="login_form__wrap" action="/login" method="post">
 					<div class="form-input">
 						<label for="user_id" class="sr-only">User Name</label> 

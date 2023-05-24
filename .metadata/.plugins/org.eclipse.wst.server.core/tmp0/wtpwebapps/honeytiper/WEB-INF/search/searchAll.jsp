@@ -9,155 +9,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<title>Insert title here</title>
+<title>꿀TIPer - 꿀TIP 살펴보기</title>
 <%@include file="../main/header.jsp"%>
 </head>
-<style>
-.pagination-row {
-	background-color: #e8f0fe;
-}
-
-.pagination-row th {
-	font-size: 12pt;
-}
-
-#pagingul {
-	margin-top: 20px;
-	list-style: none;
-	display: flex;
-	justify-content: center;
-}
-
-#pagingul li {
-	margin-right: 5px;
-}
-
-#pagingul li a {
-	display: block;
-	padding: 5px 10px;
-	border: 1px solid #ddd;
-	background-color: #fff;
-	color: #333;
-	text-decoration: none;
-}
-
-#pagingul li.on a {
-	background-color: #FFD400;
-	color: #fff;
-}
-
-.searchAll {
-	padding: 0;
-	width: 65%;
-	margin: 0 auto 50px auto;
-}
-
-#spnList {
-	font-size: 17pt;
-	font-weight: bolder;
-}
-
-#searchBox, #super_container {
-	width: 100%;
-}
-
-#searchBox {
-	display: flex;
-	justify-content: flex-end;
-}
-
-.cont1_table {
-	width: 100%;
-	margin: 0 auto;
-	border-spacing: 0px !important;
-}
-
-.cont1_th {
-	background-color: #F0F0F0;
-}
-
-.th1 {
-	width: 35%;
-}
-
-.th2 {
-	width: 40%;
-}
-
-.th3 {
-	width: 25%;
-}
-
-.thCenter1 {
-	margin: 10px 5px;
-	padding: 10px 0;
-	border-bottom: 1px solid lightgray;
-	color: #333;
-}
-
-.tdCenter1 {
-	margin: 10px 5px;
-	text-align: left;
-	border-bottom: 1px solid lightgray;
-	font-size: 15px;
-}
-
-.ImgBorder {
-	margin: 20px 0px;
-	width: 150px;
-	height: 150px;
-	border: 1px solid #ddd;
-}
-
-.lessonDetail {
-	border-style: none;
-	background: #FFD400;
-	color: #5c3b0c;
-	margin: 5px;
-	padding: 5px 18px;
-	cursor: pointer;
-	border-radius: 5px;
-	font-size: 12pt;
-	font-weight: bolder;
-}
-
-.searchForm1, .searchForm2, .searchForm3, .searchFormButton {
-	float: left;
-	margin-left: 5px;
-}
-
-#lesson_cate, #search_detail, #search_keyword {
-	height: 30px;
-	width: 100%;
-}
-
-@media ( max-width : 767px) {
-	.th3, .td3 {
-		display: none;
-	}
-	.searchAll {
-		width: 95%;
-		margin: 0 auto 30px auto;
-	}
-	.tdCenter1 {
-		text-align: center;
-	}
-	
- 	#spnList { 
- 		margin-left: 10px;
- 	}
- 	
- 	.searchBox {
- 		width: 100%;
- 	}
- 	
- 	.searchForm1, .searchForm2, .searchForm3, .searchFormButton {
-	margin-left: 0px;
-}
- 	
-}
-</style>
-
+<link href="${pageContext.request.contextPath}/front/searchAll.css" rel="stylesheet">
 <body>
 	<div class="container searchAll">
 		<br>
@@ -181,8 +36,8 @@
 				<label for="search_detail"></label> <select name="search_detail"
 					id="search_detail" required>
 					<option value="선택" disabled>선택</option>
-					<option value="lesson_title">강의</option>
-					<option value="user_name">강사</option>
+					<option value="lesson_title">꿀TIP</option>
+					<option value="lesson_user_name">TIPer</option>
 					<option value="tiper_addr">지역</option>
 				</select>
 			</div>
@@ -217,9 +72,9 @@
 			<table class="cont1_table">
 				<thead class="btn-primary">
 					<tr class="cont1_th">
-						<th class="thCenter1 th1">&nbsp;&nbsp;강의정보</th>
+						<th class="thCenter1 th1">&nbsp;&nbsp;꿀TIP 정보</th>
 						<th class="thCenter1 th2"></th>
-						<th class="thCenter1 th3">&nbsp;&nbsp;강의상세</th>
+						<th class="thCenter1 th3">&nbsp;&nbsp;꿀TIP 상세</th>
 					</tr>
 				</thead>
 				<tbody id="dataTableBody">
@@ -308,7 +163,7 @@
            '</style>';
       }    
     }
-   if( typeof chartHtml == "undefined" || chartHtml == ''){ chartHtml +="<tr><td colspan='3' style='text-align:center;' id='if_undefined'>찾고있는 꿀팁이 없어요.</td></tr>"}
+   if( typeof chartHtml == "undefined" || chartHtml == ''){ chartHtml +="<tr><td colspan='3' style='text-align:center;' id='if_undefined'>찾고있는 꿀TIP이 없어요.\uD83D\uDE22</td></tr>"}
  $("#dataTableBody").html(chartHtml);
  }
 
@@ -403,7 +258,7 @@
      		       //데이터 대입
      		       dataList=data;
 
-     		       if(typeof totalData == "undefined" || totalData == null || totalData == ""){ alert("검색결과가 없어요.");}
+     		       if(typeof totalData == "undefined" || totalData == null || totalData == ""){ alert("\uD83E\uDD14검색결과가 없어요.");}
      				 }
      		 });		
      		

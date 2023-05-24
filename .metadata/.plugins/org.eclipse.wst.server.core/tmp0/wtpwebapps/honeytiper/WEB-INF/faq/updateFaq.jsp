@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>꿀TIPer - FAQ</title>
 </head>
 <body>
 	<form action="updateFaq?faq_question_num=${faq.faq_question_num }" method="post">

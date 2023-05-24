@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+@media ( max-width : 768px) {
+	#honeyTake_sub1 {
+		font-size: 24px;
+		font-weight: bold;
+	}
+	#myhoney_span1 {
+		font-size: 17px;
+		margin-right: 100px;
+		font-weight: bold;
+	}
+	#honeyTake_point {
+		border: 1px solid #efefef;
+		border-radius: 10px;
+		width: 300px;
+		height: 45px;
+		border-radius: 10px;
+	}
+	#honeyTake_point:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	#honeyTake_btn {
+		background-color: #FFD400;
+		border: 0;
+		border-radius: 4px;
+		width: 150px;
+		height: 45px;
+		font-weight: bold;
+	}
+	#honeyTake_btn:hover{
+		background-color: #FFBB00;
+	}
+	#honeyTake_div2 {
+		width: 100%;
+		text-align: center;
+	}
+	#honeyTake_div3 {
+		text-align: center;
+	}
+}
+
+@media ( min-width : 769px) {
+	#honeyTake_sub1 {
+		font-size: 24px;
+		font-weight: bold;
+	}
+	#myhoney_span1 {
+		font-size: 20px;
+		width: 500px;
+		text-align: right;
+		font-weight: bold;
+		margin-left: 30px;
+	}
+	#honeyTake_point {
+		border: 1px solid #efefef;
+		border-radius: 10px;
+		width: 500px;
+		height: 50px;
+		border-radius: 10px;
+	}
+	#honeyTake_point:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 10px;
+	}
+	#honeyTake_btn {
+		background-color: #FFD400;
+		border: 0;
+		border-radius: 4px;
+		width: 250px;
+		height: 45px;
+		font-weight: bold;
+	}
+	#honeyTake_btn:hover{
+		background-color: #FFBB00;
+	}
+	#honeyTake_div2 {
+		width: 100%;
+		text-align: center;
+	}
+	#honeyTake_div3 {
+		text-align: center;
+	}
+}

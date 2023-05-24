@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="lessonDAO">
+
+	<resultMap type="lesson" id="lessonMap">
+		<id property="lesson_num" column="LESSON_NUM" />
+		<result property="lesson_tiper_code" column="LESSON_TIPER_CODE" />
+		<result property="lesson_user_id" column="LESSON_USER_ID" />
+		<result property="lesson_title" column="LESSON_TITLE" />
+		<result property="lesson_info" column="LESSON_INFO" />
+		<result property="lesson_cate" column="LESSON_CATE" />
+		<result property="lesson_img" column="LESSON_IMG" />
+		<result property="lesson_onoff" column="LESSON_ONOFF" />
+		<result property="lesson_date" column="LESSON_DATE" />
+		<result property="tiper_user_id" column="TIPER_USER_ID" />
+		<result property="tiper_info" column="TIPER_INFO" />
+		<result property="review_sugar" column="REVIEW_SUGAR" />
+	</resultMap>
+
+
+	<!-- 소연 부분 -->
+	<select id="getLesson" resultMap="lessonMap">
+		SELECT l.lesson_num,
+		l.lesson_title,
+		l.lesson_date, l.lesson_info, l.lesson_img,
+		t.tiper_user_id, t.tiper_info
+		FROM lesson l inner join tiper t on
+		l.lesson_tiper_code = t.tiper_code
+		WHERE
+		lesson_num=#{lesson_num}
+	</select>
+
+
+	<select id="getLessonList" resultType="lesson">
+		SELECT l.lesson_num, l.lesson_title,
+		l.lesson_date, l.lesson_info,
+		l.lesson_img, t.tiper_user_id, t.tiper_info
+		FROM lesson l inner join
+		tiper t on l.lesson_tiper_code = t.tiper_code
+		where 1=1
+		<if test="lesson_condition == 'lesson_title' ">AND LESSON_TITLE LIKE CONCAT('%', #{lesson_search}, '%')
+		</if>
+		<if test="lesson_condition == 'tiper_user_id' ">AND TIPER_USER_ID LIKE CONCAT('%', #{lesson_search}, '%')
+		</if>
+		ORDER BY
+		l.lesson_num
+	</select>
+
+
+	<delete id="deleteLesson">
+		delete from lesson where lesson_num = #{lesson_num}
+	</delete>
+
+
+	<!-- 상현이부분 -->
+	<select id="selectLessonTiper" resultType="lesson">
+		select
+		escrow.ESCROW_START, lesson.LESSON_TITLE, escrow.ESCROW_USER_ID,
+		FORMAT(escrow.ESCROW_PRICE, 0) AS escrow_price,
+		lesson.lesson_num,
+		escrow.ESCROW_STATUS, escrow.escrow_report_user as lesson_onoff
+		FROM
+		escrow, lesson
+		WHERE #{lesson_tiper_code} =
+		escrow.ESCROW_tiper_code AND
+		lesson.LESSON_NUM =
+		escrow.ESCROW_LESSON_NUM AND escrow.ESCROW_STATUS
+		&lt; 2 ORDER BY
+		escrow.ESCROW_STATUS, escrow.ESCROW_START
+	</select>
+
+	<select id="selectLessonNum" resultType="lesson">
+		select * from lesson
+		where lesson_num = #{lesson_num}
+	</select>
+
+	<select id="selectLessonName" resultType="lesson">
+		select * from lesson
+		where lesson_tiper_code = #{lesson_tiper_code}
+	</select>
+
+	<update id="lessonUpdate">
+		update lesson set lesson_title = #{lesson_title},
+		lesson_info =
+		#{lesson_info}, lesson_img = #{lesson_img} where
+		lesson_num = #{lesson_num}
+	</update>
+
+	<insert id="makeLesson">
+		insert into lesson(lesson_tiper_code, lesson_title,
+		lesson_info,
+		lesson_cate, lesson_img, lesson_user_name)
+		values(#{lesson_tiper_code},
+		#{lesson_title}, #{lesson_info},
+		#{lesson_cate}, #{lesson_img}, #{lesson_user_name})
+	</insert>
+	<select id="selectTiperInfoPage" resultType="lesson">
+		SELECT
+		(select
+		count(*)
+		from escrow where escrow_lesson_num = lesson_num) AS
+		lesson_onoff,
+		lesson_img, lesson_title, lesson_num
+		FROM lesson
+		WHERE
+		lesson_tiper_code = #{lesson_tiper_code}
+	</select>
+	<delete id="lessonDelete">
+		delete from lesson where lesson_num = #{lesson_num}
+	</delete>
+
+	<select id="selectLessonfromEscrow" resultType="_int">
+		select count(*)
+		from escrow where escrow_lesson_num = #{lesson_num} and
+		(escrow_status
+		= 1 or escrow_status = 0)
+	</select>
+	<select id="escrowCheck" resultType="_int"> <!-- 여기 3개 수정 -->
+		select count(*) from escrow
+		where escrow_lesson_num = #{lesson_num} and
+		escrow_status = 0 and escrow_user_id = #{lesson_user_id}
+	</select>
+	<select id="escrowCheckDelete" resultType="_int"> <!-- 여기 3개 수정 -->
+		select count(*) from escrow
+		where escrow_lesson_num = #{lesson_num} and
+		escrow_status = 0
+	</select>
+	<select id="selectEscrowStatus" resultType="_int">
+		select
+		escrow_report_user
+		as lesson_onoff from escrow where
+		escrow_lesson_num =
+		#{lesson_num} AND escrow_user_id= #{lesson_user_id}
+	</select>
+	<!-- 티퍼->유저신고 -->
+	<update id="updateEscrowReportUser">
+		update ESCROW set ESCROW_REPORT_USER = 1 WHERE
+		ESCROW_USER_ID = #{lesson_user_id} AND ESCROW_LESSON_NUM =
+		#{lesson_num}
+	</update>
+	<!-- 정성현 : 마이페이지======================================== -->
+	<select id="getUserLessonList" resultType="lesson">
+		select
+		lesson.LESSON_TITLE, lesson.LESSON_USER_NAME, lesson.LESSON_CATE,
+		escrow.ESCROW_LESSON_NUM, escrow.ESCROW_START,
+		escrow.ESCROW_REPORT_STATUS, lesson.LESSON_IMG, lesson.LESSON_NUM,
+		lesson.LESSON_USER_NAME
+		from lesson, escrow
+		where (select
+		user_id from
+		users WHERE user_id =#{lesson_info}) =
+		escrow.ESCROW_USER_ID
+		AND (SELECT
+		escrow_lesson_num WHERE
+		escrow_user_id = #{lesson_info}) =
+		lesson.LESSON_NUM AND escrow.ESCROW_STATUS = 1
+		ORDER BY ESCROW_NUM desc
+	</select>
+
+	<select id="getCompletedLessonList" resultType="lesson">
+		select
+		lesson.LESSON_TITLE, lesson.LESSON_USER_NAME, lesson.LESSON_CATE,
+		escrow.ESCROW_LESSON_NUM, escrow.ESCROW_START, escrow.ESCROW_USER_ID,
+		escrow.ESCROW_REPORT_STATUS, lesson.LESSON_IMG, lesson.LESSON_NUM,
+		lesson.LESSON_USER_NAME
+		from lesson, escrow
+		where (select
+		user_id from
+		users WHERE user_id =#{lesson_info}) =
+		escrow.ESCROW_USER_ID
+		AND (SELECT
+		escrow_lesson_num WHERE
+		escrow_user_id = #{lesson_info}) =
+		lesson.LESSON_NUM AND escrow.ESCROW_STATUS = 2
+		ORDER BY ESCROW_NUM desc
+	</select>
+
+	<select id="getPotentialLessonList" resultType="lesson">
+		select
+		lesson.LESSON_TITLE, lesson.LESSON_USER_NAME, lesson.LESSON_CATE,
+		escrow.ESCROW_LESSON_NUM, escrow.ESCROW_START, escrow.ESCROW_USER_ID,
+		lesson.LESSON_IMG, lesson.LESSON_NUM, lesson.LESSON_USER_NAME,
+		(SELECT
+		USER_ID FROM USERS u WHERE u.USER_ID = (SELECT tiper.TIPER_USER_ID
+		FROM tiper WHERE tiper.TIPER_CODE = escrow.ESCROW_TIPER_CODE)) AS
+		"TIPER_USER_ID"
+		from lesson, escrow
+		where (select
+		user_id from users
+		WHERE user_id =#{lesson_info}) =
+		escrow.ESCROW_USER_ID
+		AND (SELECT
+		escrow_lesson_num WHERE
+		escrow_user_id = #{lesson_info}) =
+		lesson.LESSON_NUM AND escrow.ESCROW_STATUS = 0
+		ORDER BY ESCROW_NUM desc
+	</select>
+
+	<delete id="deleteEscrowLesson">
+		DELETE FROM ESCROW
+		WHERE
+		ESCROW_USER_ID=#{escrow_user_id} AND
+		ESCROW_LESSON_NUM=#{escrow_lesson_num}
+	</delete>
+
+</mapper>

@@ -4,7 +4,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<script src="front/message_ajax_list.js"></script>
+<script src="${pageContext.request.contextPath}/front/message_ajax_list.js"></script>
 <c:forEach var="tmp" items="${list }">
 	<div class="chat_list_box${tmp.message_room } chat_list_box">
 		<div type="button" class="chat_list" message_room="${tmp.message_room }" other-user_id="${tmp.other_user_id }" user_role="${tmp.user_role }">
@@ -13,15 +13,18 @@
 				<div class="chat_img">
 					 <c:choose>
 					 	<c:when test="${tmp.other_user_id eq 'admin'}">
-							 	<img class="list_img" src="front/profile/admin.png" alt="관리자">
+							 	<img onerror="this.src='${pageContext.request.contextPath}/front/default.png'" class="list_img" src="${pageContext.request.contextPath}/front/profile/admin.png" alt="관리자">
+<!-- 							 	<img class="list_img" src="front/profile/admin.png" alt="관리자"> -->
 						</c:when>
 					 	<c:otherwise>
 							<div class="chat_img_div">
-						 		<img class="list_img" src="front/profile/${tmp.tiper_img}" alt="${tmp.other_user_id }">
+						 		<img onerror="this.src='${pageContext.request.contextPath}/front/default.png'" class="list_img" src="${pageContext.request.contextPath}/front/profile/${tmp.tiper_img}" alt="${tmp.other_user_id }">
+<%-- 						 		<img class="list_img" src="front/profile/${tmp.tiper_img}" alt="${tmp.other_user_id }"> --%>
 <!-- 							 	</a> -->
 								<div id="${tmp.other_user_id }" class="modal">
 								  <button class="modal_close" type="button"><i class="fa fa-close" aria-hidden="true"></i></button>
-								  <img class="modal_img" src="front/profile/${tmp.tiper_img}" alt="${tmp.other_user_id }">
+								  <img onerror="this.src='${pageContext.request.contextPath}/front/default.png'" class="modal_img" src="${pageContext.request.contextPath}/front/profile/${tmp.tiper_img}" alt="${tmp.other_user_id }">
+<%-- 								  <img class="modal_img" src="front/profile/${tmp.tiper_img}" alt="${tmp.other_user_id }"> --%>
 								</div>
 							</div>
 					 	</c:otherwise>

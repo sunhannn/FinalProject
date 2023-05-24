@@ -1,0 +1,231 @@
+@charset "UTF-8";
+
+@media ( max-width : 768px) {
+	#tipup_sub1 {
+		font-size: 23px;
+		font-weight: bold;
+	}
+	#tipup_sub2 {
+		font-size: 18px;
+		font-weight: bold;
+	}
+	#tipup_tab1 {
+		width: 100%;
+	}
+	#tipup_td1 {
+		width: 50%;
+		border-right: 1px solid #d8dee5;
+		vertical-align: top;
+		text-align: center;
+	}
+	#tipimg {
+		width: 120px;
+		margin-left: 30px;
+	}
+	#tipup_td2 {
+		text-align: right;
+		width: 50%;
+	}
+	#tipup_info1 {
+		border: 0;
+		width: 95%;
+		resize: none;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+	}
+	#tipup_info1:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 20px;
+	}
+	#tipup_sub3 {
+		font-size: 18px;
+		font-weight: bold;
+	}
+	#tipup_tab2 {
+		width: 100%;
+	}
+	.tipup_tr2 {
+		height: 100px;
+		border-bottom: 2px solid #d8dee5;
+	}
+	.tipup_td4 {
+		font-size: 16px;
+	}
+	.tipup_td5 {
+		text-align: right;
+	}
+	.tipup_btn1 {
+		background-color: #FFD400;
+		border-radius: 4px;
+		border: 0;
+		font-size: 12px;
+		width: 120px;
+		height: 30px;
+		font-weight: bold;
+		width: 100px;
+	}
+	.tipup_btn1:hover{
+		background-color: #FFBB00;
+	}
+	#tipup_btn_div1 {
+		text-align: center;
+	}
+	#tipup_btn2 {
+		background-color: #FFD400;
+		border-radius: 4px;
+		border: 0;
+		width: 120px;
+		height: 30px;
+		font-weight: bold;
+	}
+	#tipup_btn2:hover{
+		background-color: #FFBB00;
+	}
+	#tiperpreview {
+		width: 140px;
+		height: 140px;
+		border-radius: 10%;
+	}
+	.tipup-lesson-img {
+		width: 60px;
+		height: 60px;
+		border-radius: 10px;
+	}
+	.tipup_td4 {
+		font-size: 12px;
+		font-weight: bold;
+	}
+	.tipup-td6 {
+		font-size: 12px;
+		font-weight: bold;
+	}
+	.tipup-img-td {
+		width: 75px;
+	}
+	.tipup-review {
+		display: none;
+	}
+}
+
+@media ( min-width : 769px) {
+	.container {
+		width: 65%;
+	}
+	#tipup_sub1 {
+		font-size: 27px;
+		border: 0;
+		font-weight: bolder;
+	}
+	#tipup_sub2 {
+		font-size: 22px;
+		font-weight: bold;
+	}
+	#tipup_tab1 {
+		width: 100%;
+	}
+	#tipimg {
+		width: 150px;
+	}
+	#tipup_td1 {
+		text-align: center;
+		width: 50%;
+		border-right: 2px solid #d8dee5;
+	}
+	#tipup_td2 {
+		text-align: center;
+		width: 50%;
+	}
+	#tipup_info1:focus {
+		border: 3px solid #FFD400;
+		outline: none;
+		border-radius: 20px;
+	}
+	#tipup_info1 {
+		width: 90%;
+		border: 0;
+		resize: none;
+		border: 1px solid #efefef;
+		border-radius: 10px;
+	}
+	#tipup_sub3 {
+		font-size: 22px;
+		font-weight: bold;
+	}
+	#tipup_tab2 {
+		width: 100%;
+	}
+	.tipup_tr2 {
+		height: 130px;
+		border-bottom: 1px solid #d8dee5;
+	}
+	.tipup_td4 {
+		font-size: 15px;
+		font-weight: bold;
+	}
+	.tipup_td5 {
+		text-align: right;
+	}
+	.tipup_btn1 {
+		background-color: #FFD400;
+		border-radius: 4px;
+		border: 0;
+		width: 150px;
+		height: 50px;
+		font-weight: bold;
+	}
+	.tipup_btn1:hover{
+		background-color: #FFBB00;
+	}
+	#tipup_btn_div1 {
+		text-align: center;
+	}
+	#tipup_btn2 {
+		background-color: #FFD400;
+		border-radius: 4px;
+		border: 0;
+		width: 200px;
+		height: 50px;
+		font-weight: bold;
+	}
+	#tipup_btn2:hover{
+		background-color: #FFBB00;
+	}
+	#tiperpreview {
+		width: 200px;
+		height: 200px;
+		border-radius: 10%;
+	}
+	.tipup-lesson-img {
+		width: 100px;
+		height: 100px;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+	.tipup-img-td {
+		width: 180px;
+	}
+	.tipup_td5 {
+		width: 170px;
+	}
+	.tipup-td6 {
+		font-size: 15px;
+		font-weight: bold;
+		width: 220px;
+		text-align: center;
+	}
+	.tipup-review {
+		text-align: right;
+	}
+	.tipup-delete-btn {
+		background-color: #FFD400;
+		border: 0;
+		border-radius: 4px;
+		width: 150px;
+		height: 50px;
+		font-weight: bold;
+	}
+	.tipup-delete-btn:hover{
+		background-color: #FFBB00;
+	}
+}

@@ -179,6 +179,11 @@
 		WHERE user_id = #{escrow_user_id}
 	</update>
 
+	<insert id="insertSalesCommission">
+	  INSERT INTO SALES
+	  VALUES(FLOOR(#{escrow_price} * 0.05), default)
+   </insert>
+
 
 	<!-- 여기까지 보영 -->
 

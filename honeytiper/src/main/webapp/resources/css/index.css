@@ -1,0 +1,378 @@
+@charset "UTF-8";
+
+.Logo_img{
+   animation-name: logo-entrance;
+   animation-duration: 1s;
+   animation-fill-mode: forwards;
+}
+@keyframes logo-entrance {
+   0% {
+   transform: translateY(-100%);
+      opacity: 0;
+   }
+   50% {
+      transform: scale(1.2);
+   }
+   100% {
+      opacity: 1;
+   }
+}
+.cW {
+	width: 100%;
+}
+
+body {
+	width: 100%;
+}
+
+.mainLesson {
+	width: 95%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+h4	{
+	font-weight: bold;
+}
+
+.newCarousel2 {
+	width: 80%;
+	max-width: 90%;
+	margin: 0 auto 50px auto;
+	text-align: center;
+}
+
+.h4mainNew2 {
+	width: 80%;
+	margin: 10px auto;
+}
+
+.whatImgBorder {
+	position: relative;
+	border: 1px solid #ddd;
+}
+
+.wahtImgCarousel2 {
+	border: 1px solid #ddd;
+}
+
+div.whatImg .show_text {
+	width: 250px;
+	max-width: 100%;
+	height: 60px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	margin-bottom: 0;
+	color: #fff;
+	z-index: 20;
+	font-weight: 600;
+	font-size: 15px;
+	background-color: rgba(0, 0, 0, 0.5);
+	text-align: center;
+	padding-top: 10px;
+}
+
+div.whatImg {
+	box-sizing: border-box;
+	padding-bottom: 20px;
+	transition: all 0.2s linear;
+}
+div.whatImg:hover {
+	transform: scale(1.05);
+}
+
+div.whatImg .col-sub, div.whatImg2 {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-s: center;
+	justify-content: center;
+}
+
+.container {
+	min-height: 100%;
+	position: relative;
+}
+
+.tooltiptext {
+	visibility: hidden;
+	width: auto;
+	background-color: #fff8e3;
+	color: black;
+	text-align: center;
+	border-radius: 5px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 999;
+	display: flex;
+	bottom: 100%;
+	border: 2px solid #FFD400;
+	padding: 10px;
+	font-size: smaller;
+}
+
+.random_tip:hover .tooltiptext {
+	visibility: visible;
+}
+
+.new_tip:hover .tooltiptext {
+	visibility: visible;
+}
+
+.hot_tip:hover .tooltiptext {
+	visibility: visible;
+}
+
+.like_tip:hover .tooltiptext {
+	visibility: visible;
+}
+
+@media ( min-width : 1400px) {
+	div.whatImg img {
+		width: 250px;
+		height: 250px;
+	}
+}
+
+@media ( max-width : 1400px) {
+	div.whatImg img {
+		width: 200px;
+		height: 200px;
+	}
+	
+}
+
+@media ( max-width : 1100px) {
+	div.whatImg img {
+		width: 165px;
+		height: 165px;
+	}
+}
+
+@media ( max-width : 500px) {
+	div.whatImg img {
+		width: 140px;
+		height: 140px;
+	}
+	
+}
+
+@media ( min-width : 768px) {
+	div.questionLession {
+		width: 80%;
+		max-width: 90%;
+		margin: 30px auto;
+	}
+	div.mainRecm {
+		width: 80%;
+		max-width: 90%;
+		margin: 30px auto;
+	}
+	div.mainPop {
+		width: 80%;
+		max-width: 90%;
+		margin: 30px auto;
+	}
+	div.mainNew {
+		width: 80%;
+		max-width: 90%;
+		margin: 30px auto;
+	}
+	.mainNew {
+		display: none;
+	}
+	.mainNew2 {
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+	}
+	
+}
+
+@media ( max-width : 768px) {
+	div.questionLession {
+		width: 100%;
+	}
+	div.mainRecm {
+		width: 100%;
+	}
+	div.mainPop {
+		width: 100%;
+	}
+	div.mainNew {
+		margin-bottom: 30px;
+		width: 100%;
+	}
+	.mainNew2 {
+		display: none;
+	}
+	.mainNew {
+		display: block;
+	}
+	div.whatImg .col-sub {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-s: center;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+	
+}
+
+.h4Title {text-align: left;}
+
+/* 여기서부터 소연언니 */
+.carousel-control.left, .carousel-control.right {
+	background-image: none
+}
+
+.ImgDiv {
+	padding: 50px 15px 70px 15px;
+	background: #fff8e3;
+	max-width: 100%;
+}
+
+#allSearch {
+	font-size: 15pt;
+	padding: 5px;
+	cursor: pointer;
+	color: gray;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+#allSearch:hover {
+	color: #382407;
+}
+
+.brand_idx {
+	font-weight: bold;
+}
+
+@media ( min-width : 768px) {
+	.brand_intro1 {
+		font-size: 45px;
+		font-weight: bold;
+		color: #212a30;
+		letter-spacing: -.5px;
+	}
+	.brand_intro2 {
+		font-size: 22px;
+		font-weight: bold;
+		color: #212a30;
+		letter-spacing: -.5px;
+		"
+	}
+	.brand_intro3 {
+		letter-spacing: -.5px;
+		font-size: 16px;
+		color: #212a30;
+	}
+	.search-containerC {
+		position: relative;
+		display: inline-block;
+		border-radius: 20px;
+		overflow: hidden;
+		max-width: 100%;
+	}
+	.search-inputC:active, .search-inputC:focus {
+		border: 4px solid #FFDF48;
+	}
+	.search-inputC {
+		padding: 10px;
+		border: 2px solid gray;
+		border-radius: 33px;
+		outline: none;
+		height: 70px;
+		width: 460px;
+		position: relative;
+	}
+	.search-buttonC {
+		position: absolute;
+		top: 50%;
+		right: 10px;
+		transform: translateY(-50%);
+		padding: 5px;
+		background-color: transparent;
+		border: none;
+		outline: none;
+		cursor: pointer;
+	}
+	.search-buttonC i {
+		font-size: 30px;
+	}
+	#myCarousel {
+		width: 450px;
+		height: 450px;
+		max-width: 95%;
+	}
+	#myCarousel-inner {
+		width: 450px;
+		height: 450px;
+		max-width: 95%;
+	}
+}
+
+@media ( max-width : 767px) {
+	.brand_intro1 {
+		font-size: 33px;
+		font-weight: bold;
+		color: #212a30;
+		letter-spacing: -.5px;
+	}
+	.brand_intro2 {
+		font-size: 17px;
+		font-weight: bold;
+		color: #212a30;
+		letter-spacing: -.5px;
+		"
+	}
+	.brand_intro3 {
+		letter-spacing: -.5px;
+		font-size: 14px;
+		color: #212a30;
+	}
+	.search-containerC {
+		position: relative;
+		display: inline-block;
+		border-radius: 20px;
+		overflow: hidden;
+	}
+	.search-inpuCt:active, .search-inputC:focus {
+		border: 2px solid #FFDF48;
+	}
+	.search-inputC {
+		padding: 10px;
+		border: 2px solid gray;
+		border-radius: 20px;
+		outline: none;
+		width: 300px;
+		position: relative;
+	}
+	.search-buttonC {
+		position: absolute;
+		top: 50%;
+		right: 10px;
+		transform: translateY(-50%);
+		padding: 5px;
+		background-color: transparent;
+		border: none;
+		outline: none;
+		cursor: pointer;
+	}
+	.search-buttonC i {
+		font-size: 20px;
+	}
+	#myCarousel {
+		width: 300px;
+		height: 300px;
+		max-width: 95%;
+	}
+	#myCarousel-inner {
+		width: 300px;
+		height: 300px;
+		max-width: 95%;
+	}
+}

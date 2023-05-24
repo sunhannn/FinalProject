@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MainDAO">
+   
+   <!-- 맞춤강의 출력 -->
+   <select id="getMainRecm" resultType="lesson">
+      SELECT l.lesson_img, l.lesson_title, l.lesson_cate, l.lesson_num
+      FROM (SELECT * FROM users WHERE user_id= #{user_id}) u
+      JOIN lesson l 
+      ON u.user_cate = l.lesson_cate
+      WHERE l.lesson_onoff = 1
+      ORDER BY RAND()
+      LIMIT 4;
+   </select>
+   
+   <!-- 랜덤강의 출력 -->
+   <select id="getMainRecm2" resultType="lesson">
+   SELECT
+   lesson.lesson_img, lesson.lesson_cate, lesson.lesson_title, lesson.lesson_num
+   FROM lesson
+   WHERE lesson.lesson_onoff = 1
+   ORDER BY RAND()
+   LIMIT 4;
+   </select>
+   
+   <!-- 인기강의 출력 -->
+   <select id="getMainPop" resultType="lesson">
+      SELECT l.lesson_img, l.lesson_num,
+      l.lesson_title, ROUND(AVG(r.review_sugar), 2) AS
+      review_score
+      FROM
+      lesson l
+      JOIN review r ON l.lesson_num = r.review_lesson_num
+      WHERE
+      lesson_onoff = 1
+      GROUP BY l.lesson_img, l.lesson_title
+      ORDER BY
+      review_score DESC
+      LIMIT 4;
+   </select>
+
+   <!-- 신규강의 출력 웹 -->
+   <select id="getMainNew" resultType="lesson">
+      SELECT
+      lesson_img,
+      lesson_title,
+      lesson_date,
+      lesson_num
+      FROM lesson
+      WHERE lesson_onoff = 1
+      and
+      lesson_date >
+      adddate(DATE(SYSDATE()), INTERVAL -28 day)
+      ORDER BY RAND()
+   </select>
+   
+   <!-- 신규강의 출력 앱 -->
+   <select id="getMainNew2" resultType="lesson">
+      SELECT
+      lesson_img,
+      lesson_title,
+      lesson_date,
+      lesson_num
+      FROM lesson
+      WHERE lesson_onoff = 1
+      and
+      lesson_date >
+      adddate(DATE(SYSDATE()), INTERVAL -28 day)
+      ORDER BY RAND()
+      LIMIT 4;
+   </select>
+   
+
+</mapper>

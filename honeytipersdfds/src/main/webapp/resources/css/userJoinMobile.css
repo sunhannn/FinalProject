@@ -1,0 +1,443 @@
+@charset "UTF-8";
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+      height: 100%;
+      margin: 0px;
+   }
+
+.join_info_table .td_left {
+    text-align: left;
+    padding: 5px 25px;
+    width: 180px;
+    background-color: none;
+    border-radius: 5px;
+    font-weight: bolder;
+    color: #382407;
+    display: block;
+}
+
+.join_info_table {
+    border-spacing: 0 5px;
+}
+
+.join_info_table .td_right input {
+    margin: 5px 0;
+}
+
+.form_section_join input {
+    height: 40px;
+    width: 315px;
+    border: 2px solid #efefef;
+    border-radius: 3px;
+    padding: 0 10px;
+}
+
+.join_info_table .td_right {
+    padding: 0 15px 0 15px;
+    border-bottom: none; 
+    display: block;
+    text-align: center;
+}
+
+.join_info_table button {
+    background-color: #ffd400;
+}
+
+.join_info_table button:hover {
+      background-color: #E6B800;
+      cursor: pointer;
+   }
+
+.join_info_table .td_right #sample6_address {
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 5px;
+}
+
+.join_info_table .td_right #sample6_detailAddress {
+	display: block;
+	margin: 0 auto;
+}
+
+.form_section_join .join_info_table {
+	margin: 0 auto;
+}
+
+.form_section_join button {
+    width: 120px;
+    height: 38px;
+    border: none;
+    border-radius: 3px;
+    font-weight: bolder;
+    color: #382407;
+}
+
+.form_section_join .join_radio input {
+    height: 15px;
+    width: 15px;
+}
+
+.join_info_table .join_id_input {
+	width: 190px;
+}
+
+.form_section_join #commandCell button {
+	width: 100px;	
+	margin: 0 5px;
+}
+
+.form_section_join #commandCell {
+	text-align: center;
+	margin-bottom: 20px;	
+}
+
+.login_wrap {
+      max-width: 768px;
+      margin: 0 auto;
+      margin-top: 50px;
+   }
+   
+   .login_wrap .login_contents {
+      width: 85%;
+      margin: 0 auto;
+      text-align: center;
+      padding: 30px 0;
+      background-color: white;
+      border-radius: 7px;
+      box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+   }
+   
+   .form-input .login_input {
+      width: 210px;
+       height: 40px;
+       border: 2px solid #efefef;
+       border-radius: 5px;
+       margin: 3px 0;
+       padding: 0 15px;
+   }
+   
+   .form-input .login_input:focus {
+      border: 2px solid #ffd400;
+      outline: none;
+   }
+   
+   .loginBtn_section button {
+      width: 210px;
+      height: 40px;
+      margin: 3px 0;
+      border: none;
+      border-radius: 3px;
+      font-weight: bolder;
+   }
+   
+   .login_contents .login_find_user a {
+      padding: 0 5px;
+      color: gray;
+      font-size: 12px;
+   } 
+   
+   .login_contents .login_find_user {
+      margin-bottom: 15px;
+   }
+   
+   .login_contents .join_Btn_section {
+      margin: 10px 0;
+      font-weight: bolder;
+      font-size: 13px;
+   }
+   
+   .login_contents #user_pw {
+      margin-bottom: 12px;
+   }
+   
+   .login_contents .join_Btn_section a {
+      color: #382407;
+   }
+   
+   .loginBtn_section .kakaoLogin_login {
+      background-color: #fee500;
+      color: 
+   }
+   
+   .login_wrap h3 {
+      margin-bottom: 40px;
+   }
+   
+   .alert_loginError {
+   	color: red;
+   	font-size: 11px;
+   }
+   
+   
+   .findId_body .findId_cover {
+   		max-width: 768px;
+   		margin: 0 auto;
+   }
+   
+    .findId_body #findId_wrap {
+   		width: 85%;
+   		margin: 0 auto;
+   		text-align: center;
+   		padding: 50px 0;
+   		background-color: white;
+   }
+   
+   #findId_wrap .findId_input_content {
+		margin: 0 auto;
+   }
+   
+   #findId_wrap .findId_show_content {
+   		margin: 0 auto;
+   		margin-top: 20px;
+   }
+   
+   .findId_show_content .page_btn {
+   		margin: 10px auto;
+   }
+   
+   .findId_show_content .show_id_div {
+   		font-weight: bolder;
+   }
+   
+   .findId_show_content .check {
+   		width: 250px;
+   		height: 40px;
+   		border-radius: 3px;
+   		border: 2px solid #efefef;
+   		padding: 0 10px;
+   }
+   
+   .findId_show_content p {
+   		margin: 0;
+   		margin-bottom: 5px;
+   		text-align: left;
+   		font-weight: bolder;
+   }
+   
+   .findId_show_content {
+   		width: 250px;
+   }
+   
+   #findId_wrap .findId_input_content input {
+	    width: 250px;
+	    height: 40px;
+	    border: 2px solid #efefef;
+	    border-radius: 5px;
+	    margin: 3px 0;
+	    padding: 0 15px;
+   }
+   
+   #findId_wrap .findId_input_content input:focus {
+   		outline: none;
+   		border: 2px solid #ffd400;
+   }
+   
+   #findId_wrap button {
+   		width: 250px;
+		height: 40px;
+		border: none;
+		border-radius: 3px;
+		font-weight: bolder;
+		color: #382407;
+		background-color: #ffd400;
+   }
+   
+   #findId_wrap button:hover {
+		background-color: #E6B800;
+   }
+   
+   #findId_wrap .goBack_findId {
+   		margin-top: 10px;
+   		background-color: #efefef;
+   }
+   
+   #findId_wrap .goBack_findId:hover {
+   		background-color: #dcdcdc;
+   }
+   
+   .findId_input_content .login-input {
+   		width: 90%;
+   		margin: 0 auto;
+   		text-align: center;
+   }
+   
+   .findId_input_content .login-input p {
+   		margin: 0 auto;
+	    font-size: 16px;
+	    font-weight: bolder;
+	    width: 250px;
+	    text-align: left;
+   }
+   
+   .find_id_form_input .login-input {
+   		margin-bottom: 10px;
+   }
+   
+   #telcertification .findId_inputName {
+   		margin-bottom: 15px;
+   }
+   
+   .findId_input_content h3 {
+   		margin: 0 auto;
+	    margin-bottom: 40px;
+	    width: 90%;
+	    text-align: center;
+}
+   }
+   
+   
+   #commandCell button:hover {
+   		background-color: #dcdcdc;
+   }
+   
+   .userJoinBtn_join {
+   		background-color: #ffd400;
+   }
+   
+   #commandCell button:hover {
+   		background-color: #dcdcdc;
+   }
+   
+   #commandCell .userJoinBtn_join:hover {
+   		background-color: #E6B800;
+   }
+   
+   .login_Btn_admin {
+   		background-color: #ffd400;
+   }
+   
+   .admin_input_login button:hover {
+   		background-color: #dcdcdc;
+   }
+   
+   .loginBtn_section .loginPage_btn:hover {
+   		background-color: #dcdcdc;
+   }
+   
+   .loginBtn_section .kakaoLogin_login:hover {
+   		background-color: #E6B800;
+   }
+   
+   .loginBtn_section .login_Btn_admin:hover {
+   		background-color: #E6B800;
+   }
+   
+   
+   
+   
+   
+   
+   .password_check_edit {
+		max-width: 768px;
+		margin: 0 auto;
+		padding: 50px 0;
+	}
+	
+	.password_check_input {
+		width: 50%;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.password_check_input .pwChange_info {
+		color: gray;
+		font-size: 12px;
+	}
+	
+	.pwChange_info_div {
+		margin-bottom: 5px;
+	}
+	
+	.pwChange_form .pwChange_input {
+		height: 35px;
+		border-radius: 3px;
+		border: 2px solid #efefef;
+		padding-left: 5px;
+	}
+	
+	.pwChange_form .pwChange_input:focus {
+		border: 2px solid #ffd400;
+		outline: none;
+	}
+	
+	.pwChange_btn {
+		height: 35px;
+	    width: 70px;
+	    border: none;
+	    border-radius: 3px;
+	    font-weight: bolder;
+	    background-color: #ffd400;
+	}
+	
+	.pwChange_btn:hover {
+		background-color: #E6B800;
+	}
+   	
+   	.pwChange_info_div .pwChange_div {
+   		width: 300px;
+	    margin: 0 auto;
+	    margin-bottom: 10px;
+	    color: gray;
+   	}
+   	
+   	.edit_info_table .no_edit {
+   		width: 314px;
+   		background-color: #efefef;
+   	}
+   	
+   	.edit_info_table .no_edit:hover {
+   		background-color: #dcdcdc;
+   	}
+   	
+   	.edit_info_table .do_not_change {
+   		border: none;
+   		border-bottom: 2px solid #efefef;
+   		font-weight: bolder;
+   		text-align: center;
+   	}
+   	
+   	.edit_info_table {
+   		width: 360px;
+   		border-collapse: inherit;
+   		border-spacing: 0 10px;
+   	}
+   	
+   	.edit_info_table .editPwBtn_edit {
+   		width: 315px;
+   	}
+   	
+   	.join_info_table h3 {
+   		padding-left: 10px;
+   	}
+   	
+   	#commandCell .editBtn_submit {
+   		background-color: #ffd400;
+   	}
+   	
+   	#commandCell .editBtn_submit:hover {
+   		background-color: #E6B800;
+   	}
+
+   	
+   	
+   	
+   	.certification_cover {
+		position: relative;
+	}
+	
+	.certification_cover .time {
+		position: absolute; 
+		top: 16px; 
+		right: 45px; 
+		font-size: 12px; 
+		font-weight: bolder;
+	}
+	
+	.certification_cover .certi_time {
+		top: 17px; 
+		right: 148px; 
+	}
+   	

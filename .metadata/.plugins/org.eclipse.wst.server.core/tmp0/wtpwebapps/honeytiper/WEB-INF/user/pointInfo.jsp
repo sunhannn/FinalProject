@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>꿀TIPer - 허니페이</title>
 
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -17,175 +17,8 @@
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<style>
-.container {
-position: relative; /*이만큼이 전체사이즈이다 알려주려고 넣은것*/ */
-}
-<style>
-
-.container {
-  margin: 0 auto;
-}
-
-tr {
-	height: 24px;
-	padding: 18px 0px;
-}
-.allSize{
-	 width: 90%;
-	 margin: 0 auto;
-}
-.cont1_table {
-	width: 100%;
-	margin: 0 auto;
-	border-spacing: 0px !important;
-}
-
-.cont1_th {
-	background-color: #F0F0F0;
-}
-
-.thCenter1 {
-	margin: 10px 5px;
-	text-align: center;
-	padding: 12px 0;
-	border-bottom: 1px solid lightgray;
-	font-size: 14px;
-}
-.tdCenter1 {
-	margin: 10px 5px;
-	text-align: center;
-	padding: 12px 0;
-	border-bottom: 1px solid lightgray;
-	font-size: 13px;
-}
-
-.tdcenter1_btn1 {
-	border-style: none;
-	background: #FFD400;
-	color: #5c3b0c;
-	margin: 5px;
-	padding: 5px 18px;
-	cursor: pointer;
-}
-
-.tdcenter1_btn2 {
-	border-style: none;
-	background: #E9E9E9;
-	color: #5c3b0c;
-	margin: 5px;
-	padding: 5px 18px;
-	cursor: pointer;
-}
-
-.btn {
-   background-color: #c8c8c8;
-   display: block;
-   left: 15px;
-   border: none;
-   color: white;
-   padding: 12px 15px;
-   cursor: pointer;
-}
-
-.warning {
-   border-radius: 4px;
-   background-color: #ffd400;
-   display: block;
-   right: 15px;
-   border: none;
-   color: #5c3b0c;
-   padding: 12px 15px;
-   cursor: pointer;
-   font-size:17px;
-   font-weight:bold;
-}
-
-.warning:hover {
-   background: #e7c310;
-   color:black;
-}
-
-#pagingul {
-  margin-top: 20px;
-  list-style: none;
-  display: flex;
-  justify-content: center;
-}
-
-#pagingul li {
-  margin-right: 5px;
-}
-
-#pagingul li a {
-  display: block;
-  padding: 5px 10px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-  color: #333;
-  text-decoration: none;
-}
-
-#pagingul li.on a {
-  background-color: #FFD400;
-  color: #fff;
-}
- input[type=date]{
-    width: 160px;
-   height: 30px;
-   margin-bottom:10px;
-   text-align:center;
-  }
-  select{
-   	width: 104px;
-    height: 30px;
-  }
-  .totalPay {
-
-   left: 15px;
-   color: #333333;
-   display: block;
-   font-size: 22px;
-	font-weight:bold;
-   magin: 0;
-}
-input.search{
- width: 260px;
- height: 30px;
- margin-bottom:10px;
-}
-@media (max-width: 768px) {
-input[type=date]{
-    width: 35%;
-   height: 30px;
-   margin-bottom:10px;
-   text-align:center;
-  }
-  select{
-   	width: 20%;
-    height: 30px;
-  }
-  input.search{
- width: 55%;
- height: 30px;
- margin-bottom:10px;
-}
-  #sel1{
-  width:30%
-  }
-}
-#view-all-button{
-    border-style: none;
-    background: #FFD400;
-    color: #5c3b0c;
-    margin-bottom: 10px;
-    padding: 5px 18px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 12pt;
-    font-weight: bolder;
-}
-</style>
+   
+<link href="${pageContext.request.contextPath}/front/pointInfo.css" rel="stylesheet">
 </head>
 <body>
 <%@include file="../main/header.jsp" %>
@@ -197,7 +30,7 @@ input[type=date]{
       
       <br>
      
-      <p class="totalPay">잔여허니페이: <fmt:formatNumber value="${totalPoint.user_point}" groupingUsed="true" /> point</p>
+      <p class="totalPay">잔여 허니페이: <fmt:formatNumber value="${totalPoint.user_point}" groupingUsed="true" /> point</p>
       <button class="warning" type="button"
          onclick="location.href='goPointCharge'">허니페이 충전하러가기 ></button>
       <br><br>
@@ -220,10 +53,10 @@ input[type=date]{
 		    <input type="radio" name="price_type" value="all" checked> 전체
 		</label>
 		<label>
-		    <input type="radio" name="price_type" value="negative">포인트사용내역
+		    <input type="radio" name="price_type" value="negative">허니페이 사용내역
 		</label>
 		<label>
-		    <input type="radio" name="price_type" value="non-negative">포인트충전내역
+		    <input type="radio" name="price_type" value="non-negative">허니페이 충전내역
 		</label><br><hr style="margin-top:7px;">
 		 <span id="displayCount"></span>			
 	<table class="cont1_table">

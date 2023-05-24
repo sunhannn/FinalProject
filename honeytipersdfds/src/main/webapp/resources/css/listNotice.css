@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+.theadColor{
+	background-color: #efefef;	
+}
+
+.noticeCont{
+	padding: 0;
+	width:65%;
+}
+
+.noticeTr{
+	transition: all 0.2s linear;
+}
+
+.noticeTr:hover{
+	text-decoration: underline;
+	text-underline-offset: 5px;
+	transform: scale(1.01);
+}
+
+@media ( max-width : 768px) {
+	.noticeCont{
+		padding: 7px;
+		width: 98%;
+	}
+	
+	.noticeTitle{
+		padding: 8px;
+	}
+	
+	#iptSearch{
+		width: 160px;
+	}
+}

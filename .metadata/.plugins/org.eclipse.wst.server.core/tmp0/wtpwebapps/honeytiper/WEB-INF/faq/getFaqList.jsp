@@ -5,111 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>꿀TIPer - FAQ</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <%@include file="../main/header.jsp"%>
-<style>
-body{
-	font-family: none;
-}
-.faqCont{
-	width: 65%;
-}
-
-/* .panel-heading{ */
-/* 	background-image: url(''); */
-/* 	background-repeat: no-repeat; */
-/* 	background-color: white; */
-/* } */
-.panel{
-	-webkit-box-shadow : none;
-	box-shadow: 0em;
-}
-.panel-body{
-border:0;
-text-align: right;
-}
-.LBLquestion{
-	border-radius: 30px;
-	cursor: pointer;
-    font-size: 16px;
-    font-weight: bolder;
-    position: relative;
-}
-
-.LBLquestion em{
-	position: absolute;
-	top: 50%;
-	right: 10px;
-	width:30px;
-	height:30px;
-	margin-top: -15px;
-	display: inline-block;
-	background:url('front/down.png') 0 0 norepeat;
-}
-
-.LBLanswer{
-	display: none;
-	margin-top: 10px;
-}
-
-
-.panel-body{
-	border:0;
-}
-
-
-button.allSearch{
-	border-style: none;
-    background: #FFD400;
-    color: #5c3b0c;
-    margin: 5px;
-    padding: 5px 18px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-#searchFaq{
-	padding: 5px;
-	font-size: 14px;
-}
-
-
-.menu li{
-	list-style: none;
-	padding: 20px 5px;
-    border-bottom: 1px solid #efefef;
-}
-.menu{
-	padding: 0;
-	display: none;
-}
-
-a#topBtn { 
-	position: fixed; 
-	right: 5%; 
-	bottom: 15%; 
-	display: none; 
-	z-index: 9999; 
-}
-
-.toggleCheck{
-	opacity: 0;
-	width: 0;
-	height: 0;
-}
-
-@media ( max-width : 768px) {
-	.faqCont{
-		width:100%;
-	}
-}
-
-</style>
-
+<link href="${pageContext.request.contextPath}/front/getFaqList.css" rel="stylesheet">
 <script type="text/javascript">
     
 var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
@@ -177,16 +79,8 @@ var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userA
 		  <span style="font-size:17pt; font-weight: bolder;">자주찾는 도움말</span><br>
 		  <span>평소에 <strong>꿀티퍼에게 궁금한점이</strong> 있으시면 <strong>질문을 </strong>클릭해보세요.</span>
 			  <form action="faqList" style="float:right;">
-			  	<button type="button" class="allSearch" onclick="location.href='faqList'" 
-				  	style="	border-style: none;
-				    background: #FFD400;
-				    color: #5c3b0c;
-				    margin: 5px;
-				    padding: 5px 18px;
-				    cursor: pointer;
-				    border-radius: 5px;
-				    font-size: 12pt;
-    				font-weight: bolder;">전체보기
+			  	<button type="button" class="allSearch" onclick="location.href='faqList'" >
+    				전체보기
 				 </button>
 			  	<input type="text" name="faq_search" id="searchFaq" style="	padding: 5px; font-size: 14px; width: 200px;" placeholder="검색하실 제목을 입력하세요.">
 			  	<button type="submit" style="border:0; background:none;"><i class="fa fa-search" style="font-size:24px; color:#FFD400;"></i></button>
@@ -203,11 +97,11 @@ var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userA
      for(FaqVO faq : faqList){
   %>
 <ul class="menu">
-      <li>
+      <li class="transLi">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%=faq.getFaq_question_num() %>" aria-expanded="false">  
         	<span class="LBLquestion" style="cursor: pointer;"><%=faq.getFaq_question() %>
         		<span style="float:right;">
-        			<img src="front/down.png" style="width:40px; height: 40px;"> 
+        			<img src="${pageContext.request.contextPath}/front/down.png" style="width:40px; height: 40px;" onerror="this.src='${pageContext.request.contextPath}/front/default.png'"> 
         		</span>
         	</span>
 		</a>

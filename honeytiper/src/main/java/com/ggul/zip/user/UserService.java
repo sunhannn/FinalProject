@@ -27,7 +27,7 @@ public interface UserService {
 	
 	public boolean findUserPW(UserVO vo);
 	
-	public void findUser(UserVO vo, Model model);
+	public List<String> findUser(UserVO vo, Model model);
 	
 	public boolean updatePW(UserVO vo);
 	
@@ -73,7 +73,8 @@ public interface UserService {
 //
 //	public boolean updatePW(UserVO vo);
 
-
+    void updateEscrowReportUser(EscrowVO evo);
+    
 	int addUser(UserVO vo);
 
 	int delUser(UserVO vo);
@@ -126,6 +127,7 @@ public interface UserService {
 	int isTiperAgree(UserVO uvo);
 
 	void updateEscrowReportStatus(EscrowVO evo);
-	
+	void addProfitSales(UserVO uvo);
+	void updateTiperAgree10(UserVO uvo);
 	
 }
